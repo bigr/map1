@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+function download {	
+	URL="http://overpass-api.de/api/interpreter?data=[timeout:7200];"
+	LONSTEP=1
+	LATSTEP=1
+	for q in ${@:7}; do
+		for (( lon=$3; lon<$5; lon+=$LONSTEP )); do	
+			for (( lat=$4; lat<$6; lat+=$LATSTEP )); do	
+				if [[ "$2" == *rel* ]]; then
+					query="(rel(%lat1%,%lon1%,%lat2%,%lon2%)[$q];);(._;way(r););(._;node(w););"
+				fi
+				if [[ "$2" == *way* ]]; then
+					query=$query"(way(%lat1%,%lon1%,%lat2%,%lon2%)[$q];);(._;node(w););"
+				fi
+				if [[ "$2" == *node* ]]; then
+					query=$query"(node(%lat1%,%lon1%,%lat2%,%lon2%)[$q];);"
+				fi
+				query="$query out;"
+				query=${query//\%lon1\%/$lon}
+				query=${query//\%lat1\%/$lat}
+				query=${query//\%lon2\%/$((lon+LONSTEP))}
+				query=${query//\%lat2\%/$((lat+LATSTEP))}								
+				
+				echo $query;
+				
+				wget --timeout=7300 "$URL$query" -O - | ./osmconvert --out-o5m - > "~$1.$q-$lon-$lat.o5m"
+			done
+		done
+	done
+	
+	_TMP="./osmconvert --out-osm"
+	for f in "~$1.*.o5m"; do
+		_TMP="$_TMP $f"
+	done
+	echo $_TMP
+	$_TMP | bzip2 > "$1".osm.bz2
+	rm -f ~$1.*.o5m
+			
+}
+
+
+download highwaytest rel,way 15 49 16 51 'highway="service"'
+
+
+#28.11 9:30

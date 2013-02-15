@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<script src="jsdb.min.js"></script>
+	</head>
+	<body>
+		<script>
+			var db = new Jsdb()
+			db.insert('Železný Brod','pokus')
+			db.insert('Havlíčkův Brod','pokus2')
+			db.insert('Brod nad Lesy','pokus2')
+			db.insert('Železná Ruda','pokus2')
+			db.insert('lesy Havlíčkův','pokus2')
+			db.insert('brod','pokus2')
+			var test = db.like('ŽELEZ')
+			alert(test)
+		</script>
+	</body>
+</html>

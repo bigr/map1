@@ -1,0 +1,45 @@
+<h1 id="map1.eu---outdoorová-mapa-evropy"><a href="http://www.map1.eu">map1.eu</a> - Outdoorová mapa Evropy</h1>
+<p><em>Tento blog píšu k příležitosti spuštění první alfa verze <a href="http://www.map1.eu">map1.eu</a>.</em></p>
+<h2 id="motivace">Motivace</h2>
+<p>Online kartografické mapy použitelné na turistiku či cykloturistiku jsou velmi užitečným pomocníkem při plánování výletů či dovolené. Zatímco v Čechách je takových map hned několik (<a href="http://www.mapy.cz">mapy.cz</a>, <a href="http://amapy.centrum.cz">amapy.centrum.cz</a>, <a href="http://mapy.idnes.cz">mapy.idnes.cz</a>,...), situace v zahraničí je o poznání horší. Co se online map týče, jsme absolutní světová velmoc! Ve většině zemí jsou nejkvalitnějšími online mapami <a href="http://maps.google.com">google maps</a> a <a href="http://openstreetmaps.org">openstreetmaps</a>. Pokud chcete něco najít ve městě nebo jet autem z bodu A do bodu B jsou právě tyto mapy to pravé ořechové. Pro (cyklo)turistiku, orientaci v přírodě a tak podobně však už tak vhodné nejsou.</p>
+<p>Rozhodl jsem se pokusit tuto &quot;mezeru na trhu&quot; alespoň částečně zacelit a <strong>vytvořit online mapy použitelné i na (cyklo)turistiku pro celý náš kontinent, vytvořit mapy à la &quot;mapy.cz&quot; pro celou Evropu</strong>. Věřím, že takové mapy mohou být velmi užitečným pomocníkem nejen nám Čechům na cestách, ale do budoucna všem obyvatelům i návštěvníkům Evropy.</p>
+<h2 id="jak-na-to">Jak na to?</h2>
+<p>Musím se přiznat ke lži, kterou jsem spáchal v minulém odstavci. Jakou? Tuto: <em>&quot;openstreetmaps ...pro (cyklo)turistiku, orientaci v přírodě a tak podobně nejsou vhodné.&quot;</em> To totiž platí pouze pro mapu nacházející se na zmíněné adrese (<a href="http://openstreetmaps.org">openstreetmaps.org</a>). Openstreetmap je však mnohem víc než tato mapa. Openstreetmap je fenomén srovnatelný s Wikipedií. Openstreetmap jsou především svobodná gis data shromažďovaná mnoha tisíci (nejen) dobrovolníků, data, která se velmi rychle rozrůstají. A rozrostla se již tak, že podle mého názoru mohou na mnoha místech dobře posloužit jako podklad pro vykreslování turistických map.</p>
+<p><strong>Co je tedy cílem mého snažení? Zjednodušeně řečeno nový styl zobrazování openstreetmap dat. Nový stylesheet. Styl, který bude přehlednější a bude zobrazvat více informací než standardní styl, který je znám jako mapnik ze stránek openstreetmap.org. Dále chci tímto stylem renderované mapy poskytovat na adrese <a href="http://map1.eu">map1.eu</a> jako jednotnou službu přehledných map celé Evropy.</strong></p>
+<h2 id="čím-se-vzhled-map1.eu-odlišuje-od-standardního-vzhledu-openstreetmap.org">Čím se vzhled map1.eu odlišuje od standardního vzhledu openstreetmap.org?</h2>
+<p>Jak již bylo zmíněno map1.eu zobrazuje openstreetmap data. Styl jejich zobrazení je však zcela přepracován. Při jeho návrhu byl brán zřetel na tyto body:</p>
+<ul>
+<li><p><strong>Důraz na to, aby důležitější bylo výraznější</strong> — zejména v malých zvětšeních je openstreetmap (ale i google maps) velmi nepřehlednou mapou. Toto způsobuje zejména to, že např. města jsou kreslena stejně velkým písmem. Není příliš příhlíženo k jejich lidnatosti. Při tvorbě stylu jsem se snažil nejprve určit priority, tedy, jak moc je která informace na mapě důležitá a pak zvolit její příslušnou výraznost.</p></li>
+<li><p><strong>Rendering více vlastností</strong> — V datech openstreetmap je mnoho typů informací, které se ve standardnim stylu vůbec nerenderují, např. turistické značky.</p></li>
+<li><p><strong>Vrstevnice</strong> — Samotná openstreetmap data vrstevnice neobsahují, tyto informace však lze získat z jiných zdrojů (aster, srtm). Kromě vrstevnic je kreslen i hillshading, tedy stínování kopců.</p></li>
+<li><p><strong>Konzervativní vzhled</strong> — Snažím se, aby mapa připomínala tištěné mapy. Na nejmenších měřítkách mapy politické, ve středních měřítkách automapy a v největších kartografické/turistické mapy.</p></li>
+</ul>
+<h2 id="srovnání-s-jinými-mapami">Srovnání s jinými mapami</h2>
+<p>Tento blog píšu k příležitosti spuštění první alpha verze map. Následující seznam ukazuje odkazy na různé mapové servery s předvybranou oblastí a zvětšením. To proto, aby bylo možné snadno srovnat jiné online mapy s map1.eu.</p>
+<h3 id="malé-měřítko">Malé měřítko</h3>
+<ul>
+<li><a href="https://maps.google.com/?ll=49.898173,14.004822&amp;spn=1.67897,3.348083&amp;t=m&amp;z=9&amp;layer=t">Google maps</a></li>
+<li><a href="http://www.openstreetmap.org/?lat=50.041&amp;lon=14.299&amp;zoom=9&amp;layers=M">Standardni openstreetmap</a></li>
+<li><a href="files/01-map-9-mapquest.png">Map quest (verze osm)</a></li>
+<li><a href="http://amapy.centrum.cz/?c=49.8964,14.56512&amp;z=9&amp;mc=b">Amapy od centrumu</a></li>
+<li><a href="http://www.mapy.cz/#x=14.364365&amp;y=49.917323&amp;z=7&amp;l=16">Turistické mapy.cz</a></li>
+<li><a href="http://www.mapy.cz/#x=14.364365&amp;y=49.917323&amp;z=7">Mapy.cz</a></li>
+<li><strong><a href="http://www.map1.eu/#zoom=9&amp;lat=49.908&amp;lon=13.89302">map1.eu</a></strong></li>
+</ul>
+<h3 id="střední-měřítko">Střední měřítko</h3>
+<ul>
+<li><a href="https://maps.google.com/?ll=49.899389,14.468307&amp;spn=0.104933,0.209255&amp;t=m&amp;z=13&amp;layer=t">Google maps</a></li>
+<li><a href="https://maps.google.com/?ll=49.899389,14.468307&amp;spn=0.104933,0.209255&amp;t=p&amp;z=13">Google maps terén</a></li>
+<li><a href="http://www.openstreetmap.org/?lat=49.9033&amp;lon=14.4668&amp;zoom=13&amp;layers=M">Standardni openstreetmap</a></li>
+<li><a href="http://www.opencyclemap.org/?lat=49.9033&amp;lon=14.4668&amp;zoom=13&amp;layers=C">Opencyclemap (založeno na openstreetmap)</a></li>
+<li><a href="http://mapq.st/UGazXk">Map quest (založen na osm)</a></li>
+<li><a href="http://amapy.centrum.cz/?c=49.89718,14.46316&amp;z=13&amp;mc=b">Amapy od Centrumu</a></li>
+<li><a href="http://amapy.centrum.cz/?c=49.89718,14.46316&amp;z=13&amp;mc=trs">Amapy od Centrumu turistické</a></li>
+<li><a href="http://www.mapy.cz/#x=14.491619&amp;y=49.896796&amp;z=11">Mapy.cz</a></li>
+<li><a href="http://www.mapy.cz/#x=14.491619&amp;y=49.896796&amp;z=11&amp;l=16">Turistické mapy.cz</a></li>
+<li><a href="http://www.map1.eu/#zoom=13&amp;lat=49.89173&amp;lon=14.45607"><strong>map1.eu</strong></a></li>
+</ul>
+<h2 id="stav-projeku">Stav projeku</h2>
+<p>Právě byla spuštěna alfa verze. Ačkoliv budou mapy v budoucnu zobrazovat celou Evropu, nyní je celá Evropa vykreselena pouze v malém měřítku. Pro větší měřítka je vyrenderována pouze Evropa střední. Největší měřítka jsou zatím renderována pouze pro velká města. Pro evidenci chyb používám <a href="https://github.com/bigr/map1/issues">github</a>.</p>
+<h2 id="závěrem">Závěrem</h2>
+<p>Projekt map1.eu je ještě ve fázi vývoje. Budu vděčný za všechny podněty a přípomínky, za každou konstruktivní kritiku, která mi pomůže map1.eu zdokonalit.</p>

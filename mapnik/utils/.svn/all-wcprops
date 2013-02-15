@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/20441/applications/rendering/mapnik/utils
+END
+analyze_postgis_log.pl
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/20441/applications/rendering/mapnik/utils/analyze_postgis_log.pl
+END
+stylecheck.pl
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/18771/applications/rendering/mapnik/utils/stylecheck.pl
+END

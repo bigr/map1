@@ -1,0 +1,3 @@
+gdalwarp -srcnodata 255 -dstnodata 255 -cutline "PG:dbname=gis_hr" -csql "SELECT ST_Translate(ST_TransScale(way, -(ST_XMin(way)+ST_XMax(way))/2, -(ST_YMin(way)+ST_YMax(way))/2 ,2.00, 2.00),(ST_XMin(way)+ST_XMax(way))/2,(ST_YMin(way)+ST_YMax(way))/2) FROM planet_osm_polygon WHERE admin_level='2'" -crop_to_cutline -of GTiff hillshade.eu.900213.tif tmp.tif
+gdalwarp -srcnodata 255 -dstnodata 255 -cutline "PG:dbname=gis_hr" -csql "SELECT way FROM planet_osm_polygon WHERE admin_level='2'" -of GTiff tmp.tif hillshade.hr.tif
+unlink tmp.tif

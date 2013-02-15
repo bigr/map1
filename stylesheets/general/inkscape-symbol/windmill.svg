@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2520"
+   height="2520"
+   viewBox="0 0 26880 26880"
+   id="svg3064"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="windmill.svg">
+  <metadata
+     id="metadata3072">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3070" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="6"
+     gridtolerance="6"
+     guidetolerance="6"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1400"
+     inkscape:window-height="997"
+     id="namedview3068"
+     showgrid="true"
+     inkscape:snap-grids="false"
+     inkscape:zoom="0.35"
+     inkscape:cx="1330.4381"
+     inkscape:cy="1244.5652"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3064"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-to-guides="false"
+     inkscape:object-paths="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3074"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       dotted="false"
+       spacingx="315px"
+       spacingy="315px"
+       color="#00009b"
+       opacity="0.1372549"
+       empcolor="#00009b"
+       empopacity="0.29411765" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5379"
+       empspacing="3"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.11764706"
+       empcolor="#9b0000"
+       empopacity="0.39215686"
+       spacingx="280px"
+       spacingy="280px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5381"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="252px"
+       spacingy="252px"
+       empcolor="#009b00"
+       empopacity="0.23529412"
+       color="#009b00"
+       opacity="0.09803922" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5383"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="180px"
+       spacingy="180px"
+       color="#009b9b"
+       opacity="0.07843137"
+       empcolor="#009b9b"
+       empopacity="0.15686275" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3019"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.09803922"
+       empcolor="#0000ff"
+       empopacity="0"
+       dotted="true"
+       spacingx="140px"
+       spacingy="140px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3013"
+       empspacing="5"
+       visible="true"
+       enabled="false"
+       snapvisiblegridlinesonly="true"
+       spacingx="210px"
+       spacingy="210px"
+       color="#ff00ff"
+       opacity="0.29411765" />
+  </sodipodi:namedview>
+  <path
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1066.66666666999981317;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="M 629.1875 -2.375 L 587.21875 24.75 C 512.88512 72.792568 444.04627 128.48498 381.8125 190.71875 C 319.57877 252.95248 263.94698 321.73172 215.90625 396.0625 L 188.75 438.0625 L 230.75 465.21875 L 1090.5938 1020.9375 C 1084.361 1042.6627 1082.8636 1060.7139 1082.5 1069.25 L 1068.4688 1142.5625 L 230.75 1684 L 188.75 1711.125 L 215.90625 1753.125 C 311.9892 1901.7889 438.55488 2028.3546 587.21875 2124.4375 L 629.1875 2151.5625 L 656.34375 2109.5625 L 978.78125 1610.6562 L 816.59375 2457.3438 L 805.21875 2516.75 L 865.71875 2516.75 L 1665.7188 2516.75 L 1726.2188 2516.75 L 1714.8125 2457.3438 C 1714.8125 2457.3438 1627.6629 2002.5383 1552.5625 1610.5312 L 1875.0938 2109.5625 L 1902.2188 2151.5625 L 1944.2188 2124.4375 C 2092.8826 2028.3546 2219.4483 1901.7889 2315.5312 1753.125 L 2342.6875 1711.125 L 2300.6875 1684 L 1462.9375 1142.5 C 1459.4695 1124.3727 1455.8102 1105.3169 1453.4688 1093.0625 C 1451.8009 1084.3337 1450.4697 1077.3871 1449.5625 1072.625 C 1449.288 1071.184 1449.1322 1070.3685 1448.9375 1069.3438 C 1448.58 1060.8406 1447.0648 1042.7305 1440.8125 1020.9375 L 2300.6875 465.21875 L 2342.6875 438.0625 L 2315.5312 396.0625 C 2219.4483 247.39867 2092.8826 120.83296 1944.2188 24.75 L 1902.2188 -2.375 L 1875.0938 39.625 L 1320.2188 898.125 C 1303.5176 893.67258 1285.2704 891.25 1265.7188 891.25 C 1246.167 891.25 1227.8887 893.67259 1211.1875 898.125 L 656.34375 39.625 L 629.1875 -2.375 z "
+     transform="scale(10.666667,10.666667)"
+     id="path4733" />
+</svg>

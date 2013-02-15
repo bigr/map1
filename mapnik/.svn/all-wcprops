@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/!svn/ver/28366/applications/rendering/mapnik
+END
+generate_tiles.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/26276/applications/rendering/mapnik/generate_tiles.py
+END
+generate_xml.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/26275/applications/rendering/mapnik/generate_xml.py
+END
+generate_image.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/26276/applications/rendering/mapnik/generate_image.py
+END
+legend.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/13138/applications/rendering/mapnik/legend.py
+END
+zoom-to-scale.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/6130/applications/rendering/mapnik/zoom-to-scale.txt
+END
+generate_tiles_multiprocess.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/!svn/ver/26276/applications/rendering/mapnik/generate_tiles_multiprocess.py
+END
+get-coastlines.sh
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/27615/applications/rendering/mapnik/get-coastlines.sh
+END
+mkshield.pl
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/11614/applications/rendering/mapnik/mkshield.pl
+END
+polytiles.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/27164/applications/rendering/mapnik/polytiles.py
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/27225/applications/rendering/mapnik/README
+END
+osm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/28049/applications/rendering/mapnik/osm.xml
+END

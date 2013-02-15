@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+FROM_DIR=$1
+TO_DIR=$2
+
+cd $FROM_DIR;
+for jpg in `find -name "*.jpg"`; do
+	fromJpg=$FROM_DIR/${jpg:2}
+	toJpg=$TO_DIR/${jpg:2}
+	fromJs=${fromJpg%.*}.js.gz
+	toJs=${toJpg%.*}.js.gz
+	
+	fromJpgSize=$(stat -c%s "$fromJpg")
+	fromJsSize=$(stat -c%s "$fromJs")
+	
+	if [ -f $toJpg ]; then	
+		toJpgSize=$(stat -c%s "$toJpg")
+		toJsSize=$(stat -c%s "$toJs")
+	
+		if [ "$fromJpgSize" -le 1700 ]; then 
+			echo "Skiping $jpg"
+		elif [ "$toJpgSize" -le 1700 ]; then 
+			echo "Overwriting $jpg"
+			cp -f $fromJpg $toJpg
+			cp -f $fromJs $toJs
+		else			
+			
+			convert "$fromJpg" -fuzz 6% -transparent  "#f5f5f5" "$fromJpg.png"
+			convert "$toJpg" -fuzz 6% -transparent "#f5f5f5" "$toJpg.png"
+			if [ "$fromJpgSize" -ge "$toJpgSize" ]; then 
+				echo "Compositing $jpg to => from"
+				composite "$fromJpg.png" "$toJpg.png" "$toJpg.composite.png"
+				convert "$toJpg" -fuzz 25% +transparent "#000000" "$toJpg.black.png"
+				composite "$toJpg.black.png" "$toJpg.composite.png" "$toJpg.composite.png"
+				unlink "$toJpg.black.png"
+				cp -f $fromJs $toJs
+			else
+				echo "Compositing $jpg from => to"
+				composite "$toJpg.png" "$fromJpg.png" "$toJpg.composite.png"
+				convert "$fromJpg" -fuzz 25% +transparent "#000000" "$fromJpg.black.png"
+				composite "$fromJpg.black.png" "$toJpg.composite.png" "$toJpg.composite.png"
+				unlink "$fromJpg.black.png"
+			fi
+			unlink "$toJpg"
+			convert "$toJpg.composite.png" -background '#f5f5f5' -flatten "$toJpg"		
+			unlink "$toJpg.composite.png"
+			unlink "$toJpg.png"
+			unlink "$fromJpg.png"
+		fi
+	else
+		echo "Copying $jpg"
+		mkdir -p `dirname $toJpg`		
+		cp $fromJpg $toJpg
+		cp $fromJs $toJs
+	fi;	
+	
+		
+	
+done;

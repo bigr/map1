@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/4583/applications/rendering/mapnik/openstreetmap-mapnik-data/bin
+END
+install-db-osm-data-mapnik
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/!svn/ver/4583/applications/rendering/mapnik/openstreetmap-mapnik-data/bin/install-db-osm-data-mapnik
+END

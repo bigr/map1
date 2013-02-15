@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html>
+    <head>
+        <title>Mapa</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+        <script type="text/javascript" src="http://openlayers.org/api/2.11/OpenLayers.js"></script>
+        <script type="text/javascript" src="http://openlayers.org/api/2.11/OpenLayers.mobile.js"></script>
+        <script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+        
+        <script type="text/javascript">//<![CDATA[
+			function get_my_url (bounds) {
+				var res = this.map.getResolution();
+				var x = Math.round ((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+				var y = Math.round ((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+				var z = this.map.getZoom();
+
+				var path = z + "/" + x + "/" + y + "." + this.type; 
+				var url = this.url;
+				if (url instanceof Array) {
+					url = this.selectUrl(path, url);
+				}
+				return url + path;
+				
+			}
+				
+			function init() {
+				map = new OpenLayers.Map('map',{controls:[
+					new OpenLayers.Control.LayerSwitcher(),
+					new OpenLayers.Control.TouchNavigation({
+						dragPanOptions: {
+							enableKinetic: true
+						}
+					}),
+					new OpenLayers.Control.Zoom()
+				]});				
+				map.addLayer(new OpenLayers.Layer.OSM("Alpha", "tiles-alpha/", {
+					type: 'png', numZoomLevels: 15, getURL: get_my_url
+				}));
+				
+				var proj4326 = new OpenLayers.Projection("EPSG:4326");
+				var projmerc = new OpenLayers.Projection("EPSG:900913");
+				var lonlat = new OpenLayers.LonLat(15.0, 49.8);
+				lonlat.transform(proj4326, projmerc);
+							
+				map.setCenter(lonlat, 8);
+				/*
+				map.addLayer(new OpenLayers.Layer.OSM("Alpha", "tiles-alpha/", {
+					type: 'png', numZoomLevels: 15, getURL: get_my_url
+				}));
+				*/
+			}
+        //]]></script>
+    </head>
+    <body onload="init()">
+		<div id="map">
+			
+		</div>
+    </body>    
+</html>
+
+
+
+
+

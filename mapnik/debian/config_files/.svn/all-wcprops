@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/27615/applications/rendering/mapnik/debian/config_files
+END
+datasource-settings.xml.inc
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/!svn/ver/26798/applications/rendering/mapnik/debian/config_files/datasource-settings.xml.inc
+END
+fontset-settings.xml.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/!svn/ver/27615/applications/rendering/mapnik/debian/config_files/fontset-settings.xml.inc
+END
+settings.xml.inc
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/!svn/ver/27615/applications/rendering/mapnik/debian/config_files/settings.xml.inc
+END

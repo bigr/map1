@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+cd osm
+
+unlink slovakia.osm.bz2
+wget http://download.geofabrik.de/osm/europe/slovakia.osm.bz2
+
+/usr/bin/osm2pgsql \
+	-d gis_sk \
+	--style "/home/klinger/mymap/osm2pgsql/default.style" \
+	--create \
+	--slim --cache 30 \
+	slovakia.osm.bz2

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+INKSCAPE_SYMBOLS="./inkscape-symbol"
+SYMBOLS="./symbol"
+
+for f in $INKSCAPE_SYMBOLS/*.svg; do
+	f2=`basename "$f"`
+	echo '<?php $svg = <<<EOD' > "$SYMBOLS/$f2.tpl"
+	xsltproc filtersvg.xslt $f >> "$SYMBOLS/$f2.tpl"
+	echo "EOD;" >> "$SYMBOLS/$f2.tpl"
+done;	
+
+
+

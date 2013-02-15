@@ -1,0 +1,5 @@
+./import-contour.sh srtm.gis_hu.tif gis_hu
+./import-contour.sh srtm.gis_sl.tif gis_sl
+./import-contour.sh srtm.gis_hr.tif gis_hr
+./import-contour.sh srtm.gis_at.tif gis_at
+./import-contour.sh srtm.gis_pl.tif gis_pl

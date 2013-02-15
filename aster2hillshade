@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+LC_NUMERIC=C
+LC_COLLATE=C
+
+HILLSHADE_TILE_DIR="/home/klinger/current/projects/devel/my-map/hillshade"
+ASTER_DIR=/home/klinger/media/dem/aster
+TEMP=/tmp/_aster2hillshade
+
+lon1=-20
+lon2=-10
+lat1=25
+lat2=80 
+
+rm -rf "$TEMP"
+mkdir -p "$TEMP"
+
+for lon in $(eval echo {$lon1..$lon2}); do
+	if [ $lon -lt 0 ]; then
+		lon_str=$(printf "W%03d" $((-$lon)))
+	else
+		lon_str=$(printf "E%03d" $lon)
+	fi
+	for lat in $(eval echo {$lat1..$lat2}); do
+		if [ $lat -lt 0 ]; then
+			lat_str=$(printf "S%02d" $((-$lat)))
+		else
+			lat_str=$(printf "N%02d" $lat)
+		fi
+		file=$(printf "ASTGTM2_%s%s" $lat_str $lon_str)
+		unzip -jd "$TEMP" "$ASTER_DIR/$file.zip" "$file/"$file"_dem.tif"
+		gdal_translate -a_srs "EPSG:4326" -a_nodata -9999 "$TEMP/"$file"_dem.tif" "$TEMP/"$file"_dem.tif~"		
+		unlink "$TEMP/"$file"_dem.tif"
+		mv "$TEMP/"$file"_dem.tif~" "$TEMP/"$file"_dem.tif"
+		gdal_fillnodata.py -md 200 "$TEMP/"$file"_dem.tif"
+		gdalwarp -s_srs EPSG:4326 -t_srs EPSG:900913 -r bilinear "$TEMP/"$file"_dem.tif" "$TEMP/"$file"_dem.tif~"
+		unlink "$TEMP/"$file"_dem.tif"
+		mv "$TEMP/"$file"_dem.tif~" "$TEMP/"$file"_dem.tif"
+		mkdir -p "$HILLSHADE_TILE_DIR/$lon"
+		gdaldem hillshade -z 3 -alt 66 "$TEMP/"$file"_dem.tif" "$HILLSHADE_TILE_DIR/$lon/$lat.hillshade.tif"		
+		unlink "$TEMP/"$file"_dem.tif"
+		convert "$HILLSHADE_TILE_DIR/$lon/$lat.hillshade.tif" -filter Mitchell -sampling-factor 1x1 -quality 95 -resize 25% "$HILLSHADE_TILE_DIR/$lon/$lat.hillshade.jpg"
+		unlink "$HILLSHADE_TILE_DIR/$lon/$lat.hillshade.tif"
+	done;
+done;

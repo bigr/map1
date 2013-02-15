@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+DATA_TILE_DIR="/home/klinger/mymap/data/tiles"
+SQLITE_TILE_DIR="$DATA_TILE_DIR/sqlite"
+ASTER_TILE_DIR="$DATA_TILE_DIR/aster"
+
+SQLITE_DATA_CACHE_SIZE=10000000000 #10GB
+ASTER_DATA_CACHE_SIZE=10000000000 #10GB
+
+OVERPASS_SERVERS=( "http://overpass-api.de/api"  "http://overpass.osm.rambler.ru/cgi" )
+OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}
+
+MARGIN_LAT_SIZE=0.05
+MARGIN_LON_SIZE=0.05
+LAT_SUBTILE_COUNT=3
+LON_SUBTILE_COUNT=3
+
+LON_START=$(./extract-aster/x2lon $1 8)
+LON_START=$(bc -l <<< "$LON_START - $MARGIN_LON_SIZE")
+LAT_START=$(./extract-aster/y2lat $(($2 + 1)) 8)
+LAT_START=$(bc -l <<< "$LAT_START - $MARGIN_LAT_SIZE")
+
+LON_END=$(./extract-aster/x2lon $(($1 + 1)) 8)
+LON_END=$(bc -l <<< "$LON_END + $MARGIN_LON_SIZE")
+LAT_END=$(./extract-aster/y2lat $2 8)
+LAT_END=$(bc -l <<< "$LAT_END + $MARGIN_LAT_SIZE")
+
+LON_SIZE=$(bc -l <<< "$LON_END - $LON_START - 2*$MARGIN_LON_SIZE")
+LAT_SIZE=$(bc -l <<< "$LAT_END - $LAT_START - 2*$MARGIN_LON_SIZE")
+
+LON_STEP=$(bc -l <<< "($LON_SIZE + 2*$MARGIN_LON_SIZE) / $LON_SUBTILE_COUNT")
+LAT_STEP=$(bc -l <<< "($LAT_SIZE + 2*$MARGIN_LAT_SIZE) / $LAT_SUBTILE_COUNT")
+
+
+mkdir -p $SQLITE_TILE_DIR
+
+i=0
+
+find "$SQLITE_TILE_DIR" -type f -mtime +7 -exec rm {} \;
+
+while [ $(du -s "$SQLITE_TILE_DIR" | cut -f1) -gt "$SQLITE_DATA_CACHE_SIZE" ]; do
+	rm -f $(ls -tr $SQLITE_TILE_DIR  | head -n 1)
+done
+
+if [ ! -f "$SQLITE_TILE_DIR/$1.$2.db" ]; then		
+	for i_lat in $(eval echo "{1..$LAT_SUBTILE_COUNT}"); do
+		lat_to=$(bc -l <<< "$LAT_START + $i_lat * $LAT_STEP")
+		lat_from=$(bc -l <<< "$lat_to - $LAT_STEP")
+		for i_lon in $(eval echo "{1..$LON_SUBTILE_COUNT}"); do
+			lon_to=$(bc -l <<< "$LON_START + $i_lon * $LON_STEP")
+			lon_from=$(bc -l <<< "$lon_to - $LON_STEP")			
+			while true; do				
+				i=$(($i+1))
+				server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
+				wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];(node($lat_from,$lon_from,$lat_to,$lon_to);<;>;);out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > /tmp/~$1.$2.o5m
+				if [ $? -ne 0 ]; then continue; fi
+				o5m2sqlite $SQLITE_TILE_DIR/$1.$2.db /tmp/~$1.$2.o5m notfinal
+				if [ $? -ne 0 ]; then continue; fi
+				break
+			done
+			unlink /tmp/~$1.$2.o5m
+		done
+	done
+	echo "\
+		SELECT load_extension('libspatialite.so'); \
+		CREATE TABLE polygon AS \
+		SELECT id,geom,0 AS is_rel FROM way WHERE closed = 1 AND IsValid(geom) AND NOT IsEmpty(geom) AND NumPoints(geom) > 3 \
+		UNION \
+		SELECT * FROM ( \
+		SELECT rel_id,Collect(geom) AS geom,1 AS is_rel FROM \
+		(SELECT rel_id,LineMerge(Collect(geom)) AS geom,object FROM rel_outer RO \
+		JOIN way W ON W.id = RO.way_id AND IsValid(W.geom) AND NOT IsEmpty(W.geom) AND NumPoints(W.geom) > 1 \
+		GROUP BY rel_id, object \
+		ORDER BY segment) \
+		GROUP BY rel_id); \
+	" | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
+	php /home/klinger/mymap/stylesheets/general/prepare-db/get-sql-sqlite.php | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
+fi
+
+mkdir -p $ASTER_TILE_DIR
+
+while [ $(du -s "$ASTER_TILE_DIR" | cut -f1) -gt "$ASTER_DATA_CACHE_SIZE" ]; do
+	rm -f $(ls -tr $ASTER_TILE_DIR/*.contours.shp  | head -n 1)
+	rm -f $(ls -tr $ASTER_TILE_DIR/*.contours.shx  | head -n 1)
+	rm -f $(ls -tr $ASTER_TILE_DIR/*.contours.prj  | head -n 1)
+	rm -f $(ls -tr $ASTER_TILE_DIR/*.contours.dbf  | head -n 1)
+	rm -f $(ls -tr $ASTER_TILE_DIR/*.hillshade.tif  | head -n 1)
+done
+
+if [ ! -f "$ASTER_TILE_DIR/~$1.$2.contours.shp" ]; then		
+
+	bunzip2 -ck "$ASTER_TILE_DIR/$1.$2.tif.bz2" > /tmp/~$1.$2.aster.tif
+	gdal_translate -a_srs EPSG:4326 -a_nodata -9999 /tmp/~$1.$2.aster.tif /tmp/~$1.$2.aster.tif~
+	unlink /tmp/~$1.$2.aster.tif
+	mv /tmp/~$1.$2.aster.tif~ /tmp/~$1.$2.aster.tif
+	gdal_fillnodata.py -md 200 /tmp/~$1.$2.aster.tif
+	gdalwarp -s_srs EPSG:4326 -t_srs EPSG:900913 -r bilinear /tmp/~$1.$2.aster.tif /tmp/~$1.$2.aster.tif~
+	unlink /tmp/~$1.$2.aster.tif
+	mv /tmp/~$1.$2.aster.tif~ /tmp/~$1.$2.aster.tif
+	gdaldem hillshade -z 3 -alt 66 /tmp/~$1.$2.aster.tif "$ASTER_TILE_DIR/~$1.$2.hillshade.tif"
+	gdal_contour -snodata -9999 -a ele -i 10 /tmp/~$1.$2.aster.tif "$ASTER_TILE_DIR/~$1.$2.contours.shp"
+fi
+
+#echo $LON_START $LAT_START $LON_END $LAT_END
+
+php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
+
+python /home/klinger/mymap/relations2lines/relations2lines5.py gis_eu $LON_START $LAT_START $LON_END $LAT_END
+

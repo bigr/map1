@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+
+from sys import argv
+
+lon_deg=float(argv[1])
+zoom=int(argv[2])
+n = 2.0 ** zoom
+print "%d" % int((lon_deg + 180.0) / 360.0 * n)

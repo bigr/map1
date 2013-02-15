@@ -1,0 +1,6 @@
+<FilesMatch "\\.js.gz$">
+  ForceType application/json
+  Header set Content-Encoding: gzip
+  SetEnv no-gzip 1
+</FilesMatch>
+

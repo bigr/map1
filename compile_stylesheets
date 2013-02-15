@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+DIR_STYLESHEETS="/home/klinger/mymap/stylesheets"
+STYLESHEET="cz"
+
+
+ALL_ZOOMS="8,9,10,11,12,13,14,15,16,17"
+SYMBOLS="no"
+
+echo "Usage: compile_stylesheets [options]"
+echo "OPTIONS:"
+echo " -z zooms       Coma delimited zooms to render"
+echo " -c             Stylehsheet"
+echo " -s             Regenerate symbols"
+echo " -t             Tile xxx.yyy"
+echo ""
+
+
+while getopts "sz:c:t:" OPT; do
+	case $OPT in		
+		s)
+			SYMBOLS="yes"
+		;;
+		c)
+			STYLESHEET=$OPTARG
+		;;	
+		t)
+			TILE=$OPTARG
+		;;
+		z)
+			ALL_ZOOMS=$OPTARG
+		;;	
+		\?)
+			exit 1
+		;;
+	esac	
+done
+
+DIR_BACKUP=`pwd`
+
+export TILE
+
+for ZOOMS in ${ALL_ZOOMS//,/ }; do
+
+	export ZOOMS
+	
+	
+	if [ $ZOOMS -ge 9 ]; then
+		#OUTPUT_LAYERS="landcover countryfill hillshade building boundary way,contour,fishnet,route,symbol text,countrytext gridinfo"		
+		#OUTPUT_LAYERS="landcover countryfill hillshade building boundary way,contour,fishnet,symbol text gridinfo"		
+		OUTPUT_LAYERS="landcover countryfill hillshade building boundary route way contour fishnet symbol text"		
+		#OUTPUT_LAYERS="route"
+		#OUTPUT_LAYERS="hillshade contour text"
+		#OUTPUT_LAYERS="building"
+		#OUTPUT_LAYERS="fishnet"
+		#OUTPUT_LAYERS="text"		
+	else
+		OUTPUT_LAYERS="landcover countryfill hillshade boundary way,fishnet,symbol text,countrytext gridinfo"
+		#OUTPUT_LAYERS="text"
+		#OUTPUT_LAYERS="fishnet"
+		#OUTPUT_LAYERS="way"		
+	fi
+		
+		
+	for f in $DIR_STYLESHEETS/general/style/*.mss.php; do	
+		f=`basename "$f"`		
+		f2=${f%.*}
+		echo "Creating: \"~$f2\""		
+		mkdir -p "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/style"
+		php "$DIR_STYLESHEETS/$STYLESHEET/style.php" $f > "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/style/~$f2"
+	done;
+	if [ $SYMBOLS = "yes" ]; then	
+		for f in $DIR_STYLESHEETS/general/shield/*.svgs.php; do		
+			echo "Executing: \"~$f\""
+			php $f
+		done;
+		for f in $DIR_STYLESHEETS/general/pattern/*.svgs.php; do		
+			echo "Executing: \"~$f\""
+			php $f
+		done;
+	
+		for f in $DIR_STYLESHEETS/general/symbol/*.svgs.php; do		
+			echo "Executing: \"~$f\""
+			php $f
+		done;
+	fi;
+		
+	_FIRST="1"
+	for LAYER in $OUTPUT_LAYERS; do
+	
+		RENDER_LAYER=$LAYER
+		export RENDER_LAYER	
+	
+		mkdir -p "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS"
+		php "$DIR_STYLESHEETS/$STYLESHEET/map.mml.php" > "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.mml"
+		time carto "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.mml" | grep -v "^\\[millstone\\]" > "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.xml" 
+
+		sed -i "s/'\\\\a'/'\n'/g"  "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.xml" 
+		#if [ $_FIRST = "0" ]; then
+			sed -i "s/background-color=\"#[A-Fa-f0-9]*\"/background-color=\"transparent\"/g"  "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.xml" 		
+		#fi
+		_FIRST="0"
+	done	
+
+done
+
+cd $DIR_BACKUP

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/27615/applications/rendering/mapnik/debian
+END
+control
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/27615/applications/rendering/mapnik/debian/control
+END
+dirs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/26798/applications/rendering/mapnik/debian/dirs
+END
+compat
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/26798/applications/rendering/mapnik/debian/compat
+END
+openstreetmap-mapnik-stylesheet-data.postinst
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/!svn/ver/27615/applications/rendering/mapnik/debian/openstreetmap-mapnik-stylesheet-data.postinst
+END
+config
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/26798/applications/rendering/mapnik/debian/config
+END
+openstreetmap-mapnik-stylesheet-data.config
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/!svn/ver/26798/applications/rendering/mapnik/debian/openstreetmap-mapnik-stylesheet-data.config
+END
+openstreetmap-mapnik-stylesheet-data.install
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/!svn/ver/26798/applications/rendering/mapnik/debian/openstreetmap-mapnik-stylesheet-data.install
+END
+changelog
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/27615/applications/rendering/mapnik/debian/changelog
+END
+copyright
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/26798/applications/rendering/mapnik/debian/copyright
+END
+rules
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/26798/applications/rendering/mapnik/debian/rules
+END
+openstreetmap-mapnik-stylesheet-data.templates
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/!svn/ver/26798/applications/rendering/mapnik/debian/openstreetmap-mapnik-stylesheet-data.templates
+END

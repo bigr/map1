@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+cat tmp|\
+while read line; do
+    if [ -z "$line" ]; then
+	continue
+    fi
+    
+    osmId=$(echo $line | cut -d'|' -f 1)
+    osmId="${osmId#"${osmId%%[![:space:]]*}"}"
+    osmId="${osmId%"${osmId##*[![:space:]]}"}"
+    name=$(echo $line | cut -d'|' -f 2)
+    name="${name#"${name%%[![:space:]]*}"}"
+    name="${name%"${name##*[![:space:]]}"}"
+    type=$(echo $line | cut -d'|' -f 3)
+    type="${type#"${type%%[![:space:]]*}"}"
+    type="${type%"${type##*[![:space:]]}"}"
+    subtype=$(echo $line | cut -d'|' -f 4)
+    subtype="${subtype#"${subtype%%[![:space:]]*}"}"
+    subtype="${subtype%"${subtype##*[![:space:]]}"}"
+    
+    query="\"$name\""
+    if [ $type = "museum" ]; then
+	query="$query Muzeum"    
+    elif [ $type = "zoo" ]; then
+	query="$query \"Zoologická zahrada\""
+    elif [ $type = "tower" ]; then
+	query="$query Rozhledna"
+    elif [ $type = "watermill" ]; then
+	query="$query Mlýn"    
+    elif [ $type = "theatre" ]; then
+	query="$query Divadlo"
+    elif [ $type = "ruins" ]; then
+	query="$query Zřícenina"
+    elif [ $type = "monument" ]; then
+	query="$query Monument"
+    elif [ $type = "cave_entrance" ]; then
+	query="$query Jeskyně"  
+    elif [ $type = "artwork" ]; then
+	query="$query Socha Umělecké dílo"
+    elif [ $type = "castle" ]; then
+	if [ $subtype = "defensive" ]; then
+	    query="$query Hrad"   
+	elif [ $subtype = "stately" ]; then
+	    query="$query Zámek"
+	fi
+    fi
+    query="$query Česká republika"   
+    query=${query//"\\"/"\\\\"}
+    query=${query//"'"/"\'"}            
+
+    count=$(wget -O - -q -U "Mozilla/5.0 (X11; Linux i686; rv:12.0) Gecko/20100101 Firefox/12.0" "http://www.google.com/search?q=$query" | xsltproc --html --novalid test.xslt - 2> /dev/null | iconv -f utf8 -t ascii//TRANSLIT | tr -d [:space:])
+    insertQuery="INSERT INTO google_count (osm_id,count) VALUES ('$osmId','$count');"
+    echo $insertQuery
+    
+    sleep 3
+done
+
+
+
+
+

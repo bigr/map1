@@ -1,0 +1,19 @@
+#DBS=( gis gis_sk gis_pl gis_at gis_hr gis_hu gis_sl )
+
+DBS=( gis )
+
+for DB in "${DBS[@]}"; do  
+    COUNTRY=${DB#gis_}
+    if [ "$COUNTRY" = 'gis' ]; then COUNTRY=cz; fi
+    #gdalwarp -dstnodata 32767 -cutline "PG:dbname=$DB" -csql "SELECT ST_Envelope(ST_Translate(ST_TransScale(way, -(ST_XMin(way)+ST_XMax(way))/2, -(ST_YMin(way)+ST_YMax(way))/2 ,2.00, 2.00),(ST_XMin(way)+ST_XMax(way))/2,(ST_YMin(way)+ST_YMax(way))/2)) FROM planet_osm_polygon WHERE admin_level='2'" -crop_to_cutline -of GTiff srtm.eu.900913.tif tmp.tif
+    gdalwarp -dstnodata 32767 -cutline "PG:dbname=$DB" -csql "SELECT way FROM planet_osm_polygon WHERE admin_level='2'" -crop_to_cutline -of GTiff srtm.eu.900913.tif "srtm.$COUNTRY.tif"
+        
+    #unlink tmp.tif
+    
+    #gdaldem hillshade -of gtiff -z 4 -alt 60 "srtm.$COUNTRY.tif" tmp.tif
+    #gdalwarp -srcnodata 0 -dstnodata 221 tmp.tif "hillshade.$COUNTRY.tif"
+    
+    #unlink tmp.tif
+    
+done
+ 

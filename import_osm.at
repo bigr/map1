@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+cd osm
+
+unlink austria.osm.bz2
+wget http://download.geofabrik.de/osm/europe/austria.osm.bz2
+
+/usr/bin/osm2pgsql \
+	-d gis_at \
+	--style "/home/klinger/mymap/osm2pgsql/default.style" \
+	--create \
+	--slim --cache 30 \
+	austria.osm.bz2

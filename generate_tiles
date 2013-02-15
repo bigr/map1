@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+DIR_MAPNIK="/home/klinger/mymap/mapnik"
+DIR_STYLESHEETS="/home/klinger/mymap/stylesheets"
+
+
+#OUTPUT_LAYERS="landcover gridinfo"
+
+#LAYER_OPTIONS='{}'
+
+#OUTPUT_LAYERS="fishnet"
+
+ALL_ZOOMS="5,6,7,8,9,10,11,12,13,14,15,16,17"
+REGIONS="Czech republic"
+MODE="overwrite"
+
+echo "Usage: generate_tiles [options]"
+echo "OPTIONS:"
+echo " -z zooms       Coma delimited zooms to render"
+echo " -r regions     Coma delimited regions to render"
+echo " -m             Writing mode ('overwrite','remove','continue')"
+echo ""
+
+
+while getopts "z:r:m:l:" OPT; do
+	case $OPT in
+		z)
+			ALL_ZOOMS=$OPTARG
+		;;
+		r)
+			REGIONS=$OPTARG
+		;;
+		m)
+			MODE=$OPTARG
+			if echo $MODE | grep -Eqv "^(overwrite|remove|continue)$"; then
+				echo "Invalid mode, possible values are ('overwrite','remove','continue')\n"
+				exit 1
+			fi
+		;;
+		l)
+			RENDER_LAYER=$OPTARG			
+		;;
+		\?)
+			exit 1
+		;;
+	esac	
+done
+
+MAPNIK_TILE_DIR="../map/tiles/"
+
+export MAPNIK_TILE_DIR
+export REGIONS
+export MODE
+
+
+
+
+DIR_BACKUP=`pwd`
+
+for ZOOMS in ${ALL_ZOOMS//,/ }; do
+	export ZOOMS		
+	
+	if [ $ZOOMS -ge 9 ]; then
+		#OUTPUT_LAYERS="countryfill landcover hillshade building boundary way,contour,fishnet,route,symbol text,countrytext gridinfo"
+		OUTPUT_LAYERS="countryfill landcover hillshade building boundary way,contour,fishnet,symbol text gridinfo"
+		OUTPUT_LAYERS="countryfill landcover hillshade building boundary way,contour,fishnet,symbol text"
+		#OUTPUT_LAYERS="landcover"
+		
+		LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"4":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'	
+		#LAYER_OPTIONS='{"1":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"6":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'	
+	else
+		OUTPUT_LAYERS="countryfill landcover hillshade boundary way,fishnet,symbol text,countrytext gridinfo"
+		#OUTPUT_LAYERS="way"
+		LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"3":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
+		#LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"3":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
+	fi
+	
+	export OUTPUT_LAYERS
+	export LAYER_OPTIONS
+				
+	MAPNIK_MAP_FILES=""	
+	for LAYER in $OUTPUT_LAYERS; do		
+		export LAYER_OPTIONS
+		if [ $ZOOMS -ge 20 ]; then
+			MAPNIK_MAP_FILES="$MAPNIK_MAP_FILES;$DIR_STYLESHEETS/%(country)s/%(zooms)s/~map-$LAYER.xml"
+		elif [ $ZOOMS -ge 9 ]; then
+			MAPNIK_MAP_FILES="$MAPNIK_MAP_FILES;$DIR_STYLESHEETS/eu_100/%(zooms)s/~map-$LAYER.xml"
+		else
+			MAPNIK_MAP_FILES="$MAPNIK_MAP_FILES;$DIR_STYLESHEETS/eu_1000/%(zooms)s/~map-$LAYER.xml"
+		fi
+	done	
+
+	cd $DIR_MAPNIK
+	
+	
+	export MAPNIK_MAP_FILES
+
+	if [ $MODE = "remove" ]; then
+		rm -rf "../map/tiles"
+		mkdir "../map/tiles"
+	fi
+	
+	time ./generate_tiles.py
+
+done
+
+#unlink "$DIR_STYLESHEETS/$STYLESHEET/~map.xml"
+
+cd $DIR_BACKUP

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/18932/applications/rendering/mapnik/archive
+END
+convert
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/18932/applications/rendering/mapnik/archive/convert
+END
+convert-fontset
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/!svn/ver/18932/applications/rendering/mapnik/archive/convert-fontset
+END
+setup_z_order.sql
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/!svn/ver/18932/applications/rendering/mapnik/archive/setup_z_order.sql
+END
+install.txt
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/18932/applications/rendering/mapnik/archive/install.txt
+END
+osm-template-fontset.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/!svn/ver/18932/applications/rendering/mapnik/archive/osm-template-fontset.xml
+END
+osm-template.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/18932/applications/rendering/mapnik/archive/osm-template.xml
+END
+convert-template
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/18932/applications/rendering/mapnik/archive/convert-template
+END
+customize-mapnik-map
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/18932/applications/rendering/mapnik/archive/customize-mapnik-map
+END
+osm2pgsl.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/18932/applications/rendering/mapnik/archive/osm2pgsl.py
+END
+uncustomize-mapnik-map
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/!svn/ver/18932/applications/rendering/mapnik/archive/uncustomize-mapnik-map
+END
+set-mapnik-env
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/18932/applications/rendering/mapnik/archive/set-mapnik-env
+END

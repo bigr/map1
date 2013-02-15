@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+FROM=( "/home/klinger/mymap/map/tiles-cz/$1" "/home/klinger/mymap/map/tiles-sk/$1" "/home/klinger/mymap/map/tiles-at/$1" "/home/klinger/mymap/map/tiles-pl/$1" "/home/klinger/mymap/map/tiles-sl/$1" "/home/klinger/mymap/map/tiles-hu/$1" "/home/klinger/mymap/map/tiles-hr/$1"  )
+TO="/home/klinger/mymap/map/tiles/$1"
+
+rm -rf $TO
+mkdir $TO
+
+for FR in "${FROM[@]}"; do
+	./copy-tiles $FR $TO
+done

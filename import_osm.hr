@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+cd osm
+
+unlink croatia.osm.bz2
+wget http://download.geofabrik.de/osm/europe/croatia.osm.bz2
+unlink croatia.coastline.osm.bz2
+wget http://downloads.cloudmade.com/europe/southern_europe/croatia/croatia.coastline.osm.bz2
+
+bunzip2 croatia.coastline.osm.bz2
+
+
+
+/usr/bin/osm2pgsql \
+	-d gis_hr \
+	--style "/home/klinger/mymap/osm2pgsql/default.style" \
+	--create \	
+	--slim --cache 30 \
+	croatia.osm.bz2

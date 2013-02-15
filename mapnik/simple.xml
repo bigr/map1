@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "inc/entities.xml.inc">
+%entities;
+]>
+<Map background-color="#ffffff" srs="&srs900913;" minimum-version="2.0.0">
+  &fontset-settings;
+
+<Style name="highway">
+<Rule>
+      &maxscale_zoom8;
+      &minscale_zoom18;
+      <Filter>[h]</Filter>
+      <LineSymbolizer stroke="#000" stroke-width="8"/>
+    </Rule>    
+</Style>
+
+
+<Layer name="highway" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>highway</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (SELECT way,highway AS h,surface AS s,smoothness AS sm,ref AS r,int_ref AS ri FROM planet_osm_line WHERE highway IN ('motorway','trunk','primary','secondary','tertiary','minor','unclassified')) AS road 
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+</Map>

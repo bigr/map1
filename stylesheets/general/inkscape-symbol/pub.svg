@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2520"
+   height="2520"
+   viewBox="0 0 26880 26880"
+   id="svg3064"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="parking.svg">
+  <metadata
+     id="metadata3072">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3070" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="6"
+     gridtolerance="6"
+     guidetolerance="6"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     id="namedview3068"
+     showgrid="true"
+     inkscape:snap-grids="true"
+     inkscape:zoom="0.2"
+     inkscape:cx="257.80879"
+     inkscape:cy="827.90909"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3064"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-to-guides="false"
+     inkscape:object-paths="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3074"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       dotted="false"
+       spacingx="315px"
+       spacingy="315px"
+       color="#00009b"
+       opacity="0.1372549"
+       empcolor="#00009b"
+       empopacity="0.29411765" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5379"
+       empspacing="3"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.11764706"
+       empcolor="#9b0000"
+       empopacity="0.39215686"
+       spacingx="280px"
+       spacingy="280px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5381"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="252px"
+       spacingy="252px"
+       empcolor="#009b00"
+       empopacity="0.23529412"
+       color="#009b00"
+       opacity="0.09803922" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5383"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="180px"
+       spacingy="180px"
+       color="#009b9b"
+       opacity="0.07843137"
+       empcolor="#009b9b"
+       empopacity="0.15686275" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3019"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.09803922"
+       empcolor="#0000ff"
+       empopacity="0"
+       dotted="true"
+       spacingx="140px"
+       spacingy="140px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3013"
+       empspacing="5"
+       visible="true"
+       enabled="false"
+       snapvisiblegridlinesonly="true"
+       spacingx="210px"
+       spacingy="210px"
+       color="#ff00ff"
+       opacity="0.29411765" />
+  </sodipodi:namedview>
+  <g
+     transform="scale(10.666667,10.666667)"
+     style="font-size:900px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Sans"
+     id="text2998" />
+  <path
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:10.82101727px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 9865.486,0 C 994.02255,0 2338.1835,3359.3876 2338.1835,3359.3876 l 15054.6065,0 C 17392.79,3359.3876 18898.248,0 9865.486,0 z M 1920,4300.2121 c -3763.6513,11289.8939 0,22579.7889 0,22579.7889 l 15807.336,0 c 0,0 779.882,-2228.27 1300.289,-5694.649 567.014,674.563 1216.215,1551.062 2608.746,1658.344 967.626,74.547 1778.986,-344.704 2385.933,-820.072 606.948,-475.369 1065.912,-1038.713 1426.724,-1559.99 1103.586,-1594.388 1399.224,-3508.715 1430.972,-5189.586 29.968,-1586.749 -189.617,-3394.194 -1162.747,-4948.079 -376.843,-601.7411 -861.391,-1271.2493 -1511.341,-1845.5979 -629.638,-556.4 -1474.291,-1061.7461 -2499.299,-1055.2775 -33.067,0.2088 -66.207,1.1614 -99.645,2.4501 -1432.919,55.2247 -2069.557,962.5308 -2638.477,1610.742 -2.434,2.7739 -4.76,5.627 -7.189,8.4002 -276.19,-1561.0525 -676.45,-3153.7209 -1233.966,-4746.4738 l -15807.336,0 z m 19906.841,6278.4639 c 117.512,33.417 291.63,122.226 516.52,320.959 316.035,279.273 668.312,734.639 943.201,1173.58 469.044,748.966 689.203,1951.314 666.806,3137.132 -24.388,1291.306 -306.729,2592.131 -855.969,3385.638 -237.447,343.047 -543.695,693.156 -802.716,896.023 -162.349,127.155 -283.778,183.933 -360.357,207.906 1.513,-64.292 -467.099,-303.139 -796.182,-689.868 -406.964,-478.255 -710.911,-962.175 -710.911,-962.175 a 1463.7885,1568.1977 0 0 0 -1004.621,-697.219 c 79.792,-1433.751 88.174,-2974.339 -16.335,-4581.969 a 1463.7885,1568.1977 0 0 0 1010.175,-682.518 c 0,0 294.719,-455.475 684.448,-899.523 311.422,-354.825 749.597,-550.785 725.941,-607.966 z"
+     id="path3800"
+     inkscape:connector-curvature="0" />
+</svg>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densitydpi=209">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+	
+        <title>map1 eu</title>
+	<link rel="stylesheet" type="text/css" href="css/smartSuggest.css" />
+        <link rel="stylesheet" href="http://openlayers.org/api/theme/default/style.css" type="text/css">
+        <link rel="stylesheet" href="css/map.css" type="text/css">
+	
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	
+    </head>
+    <body>
+		
+        <div id="map"></div>
+	<div id="button-start" class="panel">
+	    <img src="image/start-icon.png" id="start-icon" />
+	    <img src="image/logo18.png" id="logo" />
+	</div>	
+	<div id="panel-search" class="panel">
+	    <div id="wayPoints"></div>	    
+	    <div id="routeInfo"></div>
+	</div>
+	
+	<div id="sidebar" class="panel">
+	    <div id="zoom">
+		<img src="image/plus.png" class="plus" onclick="map.zoomIn()"/>
+		<img src="image/minus.png" class="minus" onclick="map.zoomOut()"/>
+	    </div>
+	    <img src="image/print.png" class="button-print" />
+	    <!--<img src="image/routing.svg" class="button-navigation" />-->
+	    <img src="image/about.png" class="button-about" />
+	</div>
+	
+	
+	
+	<script id="featureinfo" type="text/html">
+	    {{#highway}}
+		<img data-i18n-src=""src="{{photo}}" style="float: right; margin-left: 10px;"/>
+		<h2><span data-i18n="">highway_{{highway}}_{{grade}}</span> {{name}}</h2>		
+		<p>
+		    {{#ref}}
+		    <span data-i18n="">Highway_ref</span>: <strong>{{ref}}</strong><br/>
+		    {{/ref}}
+		    {{#int_ref}}
+		    <span data-i18n="">Highway_int_ref</span>: <strong>{{int_ref}}</strong><br/>
+		    {{/int_ref}}
+		    <span data-i18n="">Highway_surface</span>: <span data-i18n="">Surface_{{surface}}</span><br/>			    
+		</p>
+	    {{/highway}}
+	    {{symbol_name}}
+		<h2>{{symbol_name}}</h2>
+	    {{/symbol_name}}
+	</script>
+	
+	
+	<script id="searchitem" type="text/html">
+	    <form action="" method="get" class="search">
+		<div class="query">
+		    <img src="image/number1.png" class="number" />
+		    <input type="text" name="query" class="searchQuery" autocomplete="off" />
+		    <div class="info"></div>
+		    <input type="image" class="submit" value="search" src="image/search.png" />
+		</div>
+		<div class="searchResult"></div>
+		<div class="vehicle">
+		    <input type="image" class="submit dosearch" value="search" src="image/search.png" />
+		    <ul>
+		       <li data-vehicle="motorcar"><img src="image/route-motorcar.png"/></li> 
+		       <li data-vehicle="bicycle"><img src="image/route-bicycle.png"/></li> 
+		       <li data-vehicle="foot"><img src="image/route-foot.png"/></li>		   
+		    </ul>
+		</div>
+		
+		<input type="image" class="submit add" value="search" src="image/add.png" />
+		<input type="image" class="submit close" value="search" src="image/close.png" />
+	    </form>
+	</script>
+	
+	<script id="searchresult" type="text/html">
+	    <ul>
+		 {{#result}}
+		 <li>
+		    <a href="">
+			<img src="image/search/{{type}}.png"/>
+			<span>{{key}}{{#location}}, {{location}}{{/location}}</span>
+		    </a>
+		</li>		
+		{{/result}}
+	    </ul>
+	</script>
+	
+	<script id="routeinfo" type="text/html">	    
+	    {{#distance}}
+	    <div class="distance">
+		<span class="title">distance</span><br/>{{distance}}<span>km</span>
+	    </div>
+	    <div class="time">
+		<span class="title">estimatet time</span><br/>
+		{{hours}}<span>hod</span> {{minutes}}<span>min</span>
+	    </div>
+	    {{/distance}}
+	</script>
+	
+	<div id="dialog-print" class="dialog dialog-print">
+	    <div class="header">
+		<img src="image/print.png" class="icon" />
+		<h2 data-i18n="">Print the map</h2>
+		<h3 data-i18n="">(Select bounding box)</h3>
+		<span class="close" data-i18n="">X</span>
+	    </div>
+	    <div class="content">
+		<p>
+		    <img src="image/ctrl_mouse.png"/> 
+		    <span data-i18n="">print-dialog-1.text</span> 		    
+		</p>
+	    </div>
+	    <div class="footer">		
+		<span class="next button" data-i18n="">Select print format</span>
+	    </div>	    
+	</div>
+	
+	<div id="dialog-print-2" class="dialog dialog-print">
+	    <div class="header">
+		<img src="image/print.png" class="icon" />
+		<h2 data-i18n="">Print the map</h2>
+		<h3 data-i18n="">(Select print format)</h3>
+		<span class="close" data-i18n="">X</span>
+	    </div>
+	    <div class="content">
+		<p data-i18n="">print-dialog-2.text</p>
+		<form>
+		    <label for="print-measure" data-i18n="">Map measure:</label>
+		    <select id="print-measure">
+			<option value="20000">1:20 000</option>
+			<option value="50000">1:50 000</option>
+			<option value="100000">1:100 000</option>
+			<option value="200000" selected="1">1:200 000</option>
+			<option value="400000">1:400 000</option>
+			<option value="800000">1:800 000</option>
+			<option value="1500000">1:1 500 000</option>
+		    </select>
+		    <label for="print-paper-format" data-i18n="">Paper format:</label>
+		    <select id="print-paper-format">			    
+			<option value="A3" data-i18n="">A3</option>
+			<option value="A4" selected="1" data-i18n="">A4</option>
+			<option value="A5" data-i18n="">A5</option>
+			<option value="letter" data-i18n="">letter</option>
+			<option value="lega1" data-i18n="">lega1</option>
+		    </select>
+		    <label for="print-paper-orientation" data-i18n="">Orientation:</label>
+		    <select id="print-paper-orientation">			    
+			<option value="landscape" data-i18n="">landscape</option>
+			<option value="portrait" selected="1" data-i18n="">portrait</option>			    
+		    </select>
+		</form>		
+	    </div>
+	    <div class="footer">
+		<span class="prev button" data-i18n="">Select bounding box</span>
+		<span class="finish button" data-i18n="">Prepare pdf</span>
+	    </div>	    
+	</div>
+	
+	<div id="dialog-print-3" class="dialog dialog-print">
+	    <div class="header">
+		<img src="image/print.png" class="icon" />
+		<h2 data-i18n="">Print the map</h2>
+		<h3 data-i18n="">(print completed)</h3>
+		<span class="close" data-i18n="">X</span>
+	    </div>
+	    <div class="content">
+		<p data-i18n="">print-dialog-3.text</p>			
+	    </div>
+	    <div class="footer">
+		<span class="prev button" data-i18n="">Select print format</span>
+		<span class="close button" data-i18n="">Finish</span>
+	    </div>	    
+	</div>
+	
+	<div id="dialog-about" class="dialog">
+	    <div class="header">
+		<img src="image/about.png" class="icon"/>
+		<h2 data-i18n="">About map1.eu</h2>
+		<span class="close" data-i18n="">X</span>
+	    </div>
+	    <div class="content">		
+		<h3>Licence</h3>
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/"><img alt="Creative Commons License" style="border-width:0; float: right; margin: 5px;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png" /></a>
+		<h4>Tiles licence</h4>
+		<p>
+		    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">map1.eu tiles</span> by Pavel Klinger are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://map1.eu" rel="dct:source">map1.eu</a>.
+		</p>
+		<h4>Map data © OpenStreetMap contributors</h4>
+		<h3>More information</h3>
+		<p>
+		    * Bug tracking and more on <a href="https://github.com/bigr/map1">github</a><br />
+		    * Please follow us on <a href="https://twitter.com/map1eu">twitter</a><br />
+		    * And visit our <a href="https://facebook.com/Map1eu">facebook page</a><br />
+		</p>
+		
+	    </div>
+	    <div class="footer">		
+		<span class="close button" data-i18n="">Close</span
+	    </div>
+	</div>
+		
+    </body>
+</html>

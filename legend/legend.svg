@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+ 
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768">
+	<style type="text/css" ><![CDATA[
+		svg {
+			background: #eee;
+		}
+        line {			
+			fill:   none;
+        }
+        text {
+			dominant-baseline: middle;
+        }
+        
+        
+        .motorway-casing-9 {
+			stroke: #880000;
+			stroke-width: 7px;
+        }
+        .motorway-fill-9 {
+			stroke: #ffeeaa;
+			stroke-width: 5px;
+        }
+        .motorway-middle-9 {
+			stroke: #880000;
+			stroke-width: 0.6px;
+        }
+        .motorway-casing-10 {
+			stroke: #550000;
+			stroke-width: 8.5px;
+        }
+        .motorway-fill-10 {
+			stroke: #ffeeaa;
+			stroke-width: 6.0px;
+        }
+        .motorway-middle-10 {
+			stroke: #550000;
+			stroke-width: 0.8px;
+        }
+        .motorway-casing-11 {
+			stroke: #220000;
+			stroke-width: 10.0px;
+        }
+        .motorway-fill-11 {
+			stroke: #ffeeaa;
+			stroke-width: 7.2px;
+        }
+        .motorway-middle-11 {
+			stroke: #220000;
+			stroke-width: 1.0px;
+        }
+        .motorway-casing-12 {
+			stroke: #000000;
+			stroke-width: 10px;
+        }
+        .motorway-fill-12 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .motorway-middle-12 {
+			stroke: #000000;
+			stroke-width: 1px;
+        }
+        .motorway-casing-13 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .motorway-fill-13 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .motorway-middle-13 {
+			stroke: #880000;
+			stroke-width: 1px;
+        }
+        
+        
+        .primary-casing-9 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .primary-fill-9 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .primary-casing-10 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .primary-fill-10 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .primary-casing-11 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .primary-fill-11 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .primary-casing-12 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .primary-fill-12 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+         .primary-casing-13 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .primary-fill-13 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        
+        
+        .secondary-casing-9 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .secondary-fill-9 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .secondary-casing-10 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .secondary-fill-10 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .secondary-casing-11 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .secondary-fill-11 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .secondary-casing-12 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .secondary-fill-12 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+         .secondary-casing-13 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .secondary-fill-13 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        
+        
+        .tertiary-casing-9 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .tertiary-fill-9 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .tertiary-casing-10 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .tertiary-fill-10 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .tertiary-casing-11 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .tertiary-fill-11 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .tertiary-casing-12 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .tertiary-fill-12 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .tertiary-casing-13 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .tertiary-fill-13 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        
+        
+        .minor-casing-9 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .minor-fill-9 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .minor-casing-10 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .minor-fill-10 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .minor-casing-11 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .minor-fill-11 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .minor-casing-12 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .minor-fill-12 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+        .minor-casing-13 {
+			stroke: #880000;
+			stroke-width: 10px;
+        }
+        .minor-fill-13 {
+			stroke: #ffee00;
+			stroke-width: 8px;
+        }
+
+	]]></style>
+	
+	
+	<line x1="15" y1="15" x2="70" y2="15" class="motorway-casing-9"/>
+	<line x1="15" y1="15" x2="70" y2="15" class="motorway-fill-9"/>
+	<line x1="15" y1="15" x2="70" y2="15" class="motorway-middle-9"/>
+	<text x="85" y="15">Motorway Z9</text> 
+	
+	<line x1="215" y1="15" x2="270" y2="15" class="motorway-casing-10"/>
+	<line x1="215" y1="15" x2="270" y2="15" class="motorway-fill-10"/>
+	<line x1="215" y1="15" x2="270" y2="15" class="motorway-middle-10"/>
+	<text x="285" y="15">Motorway Z10</text> 
+	
+	<line x1="415" y1="15" x2="470" y2="15" class="motorway-casing-11"/>
+	<line x1="415" y1="15" x2="470" y2="15" class="motorway-fill-11"/>
+	<line x1="415" y1="15" x2="470" y2="15" class="motorway-middle-11"/>
+	<text x="485" y="15">Motorway Z11</text> 
+	
+	<line x1="615" y1="15" x2="670" y2="15" class="motorway-casing-12"/>
+	<line x1="615" y1="15" x2="670" y2="15" class="motorway-fill-12"/>
+	<line x1="615" y1="15" x2="670" y2="15" class="motorway-middle-12"/>
+	<text x="685" y="15">Motorway Z12</text> 
+	
+	<line x1="815" y1="15" x2="870" y2="15" class="motorway-casing-13"/>
+	<line x1="815" y1="15" x2="870" y2="15" class="motorway-fill-13"/>
+	<line x1="815" y1="15" x2="870" y2="15" class="motorway-middle-13"/>
+	<text x="885" y="15">Motorway Z13</text> 
+	
+	
+	<line x1="15" y1="45" x2="70" y2="45" class="primary-casing-9"/>
+	<line x1="15" y1="45" x2="70" y2="45" class="primary-fill-9"/>
+	<text x="85" y="45">primary Z9</text> 
+	
+	<line x1="215" y1="45" x2="270" y2="45" class="primary-casing-10"/>
+	<line x1="215" y1="45" x2="270" y2="45" class="primary-fill-10"/>
+	<text x="285" y="45">primary Z10</text> 
+	
+	<line x1="415" y1="45" x2="470" y2="45" class="primary-casing-11"/>
+	<line x1="415" y1="45" x2="470" y2="45" class="primary-fill-11"/>
+	<text x="485" y="45">primary Z11</text> 
+	
+	<line x1="615" y1="45" x2="670" y2="45" class="primary-casing-12"/>
+	<line x1="615" y1="45" x2="670" y2="45" class="primary-fill-12"/>
+	<text x="685" y="45">primary Z12</text> 
+	
+	<line x1="815" y1="45" x2="870" y2="45" class="primary-casing-13"/>
+	<line x1="815" y1="45" x2="870" y2="45" class="primary-fill-13"/>
+	<text x="885" y="45">primary Z13</text> 
+	
+	
+	<line x1="15" y1="75" x2="70" y2="75" class="secondary-casing-9"/>
+	<line x1="15" y1="75" x2="70" y2="75" class="secondary-fill-9"/>
+	<text x="85" y="75">secondary Z9</text> 
+	
+	<line x1="215" y1="75" x2="270" y2="75" class="secondary-casing-10"/>
+	<line x1="215" y1="75" x2="270" y2="75" class="secondary-fill-10"/>
+	<text x="285" y="75">secondary Z10</text> 
+	
+	<line x1="415" y1="75" x2="470" y2="75" class="secondary-casing-11"/>
+	<line x1="415" y1="75" x2="470" y2="75" class="secondary-fill-11"/>
+	<text x="485" y="75">secondary Z11</text> 
+	
+	<line x1="615" y1="75" x2="670" y2="75" class="secondary-casing-12"/>
+	<line x1="615" y1="75" x2="670" y2="75" class="secondary-fill-12"/>
+	<text x="685" y="75">secondary Z12</text> 
+	
+	<line x1="815" y1="75" x2="870" y2="75" class="secondary-casing-13"/>
+	<line x1="815" y1="75" x2="870" y2="75" class="secondary-fill-13"/>
+	<text x="885" y="75">secondary Z13</text> 
+		
+	
+	<line x1="15" y1="105" x2="70" y2="105" class="tertiary-casing-9"/>
+	<line x1="15" y1="105" x2="70" y2="105" class="tertiary-fill-9"/>
+	<text x="85" y="105">tertiary Z9</text> 
+	
+	<line x1="215" y1="105" x2="270" y2="105" class="tertiary-casing-10"/>
+	<line x1="215" y1="105" x2="270" y2="105" class="tertiary-fill-10"/>
+	<text x="285" y="105">tertiary Z10</text> 
+	
+	<line x1="415" y1="105" x2="470" y2="105" class="tertiary-casing-11"/>
+	<line x1="415" y1="105" x2="470" y2="105" class="tertiary-fill-11"/>
+	<text x="485" y="105">tertiary Z11</text> 
+	
+	<line x1="615" y1="105" x2="670" y2="105" class="tertiary-casing-12"/>
+	<line x1="615" y1="105" x2="670" y2="105" class="tertiary-fill-12"/>
+	<text x="685" y="105">tertiary Z12</text> 
+	
+	<line x1="815" y1="105" x2="870" y2="105" class="tertiary-casing-13"/>
+	<line x1="815" y1="105" x2="870" y2="105" class="tertiary-fill-13"/>
+	<text x="885" y="105">tertiary Z13</text> 
+	
+	
+	
+	<line x1="15" y1="135" x2="70" y2="135" class="minor-casing-9"/>
+	<line x1="15" y1="135" x2="70" y2="135" class="minor-fill-9"/>
+	<text x="85" y="135">minor Z9</text> 
+	
+	<line x1="215" y1="135" x2="270" y2="135" class="minor-casing-10"/>
+	<line x1="215" y1="135" x2="270" y2="135" class="minor-fill-10"/>
+	<text x="285" y="135">minor Z10</text> 
+	
+	<line x1="415" y1="135" x2="470" y2="135" class="minor-casing-11"/>
+	<line x1="415" y1="135" x2="470" y2="135" class="minor-fill-11"/>
+	<text x="485" y="135">minor Z11</text> 
+	
+	<line x1="615" y1="135" x2="670" y2="135" class="minor-casing-12"/>
+	<line x1="615" y1="135" x2="670" y2="135" class="minor-fill-12"/>
+	<text x="685" y="135">minor Z12</text> 
+	
+	<line x1="815" y1="135" x2="870" y2="135" class="minor-casing-13"/>
+	<line x1="815" y1="135" x2="870" y2="135" class="minor-fill-13"/>
+	<text x="885" y="135">minor Z13</text> 
+	
+</svg>

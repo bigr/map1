@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for r in $(cat generate_region | grep ^[A-Za-z]*\) | rev | cut -c 2- | rev); do
+	./generate_region $r
+done

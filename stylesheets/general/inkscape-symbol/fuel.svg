@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2520"
+   height="2520"
+   viewBox="0 0 26880 26880"
+   id="svg3064"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="waterwell.svg">
+  <metadata
+     id="metadata3072">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3070" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="6"
+     gridtolerance="6"
+     guidetolerance="6"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     id="namedview3068"
+     showgrid="true"
+     inkscape:snap-grids="false"
+     inkscape:zoom="0.2"
+     inkscape:cx="906.56025"
+     inkscape:cy="1009.7388"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3064"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-to-guides="false"
+     inkscape:object-paths="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3074"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       dotted="false"
+       spacingx="315px"
+       spacingy="315px"
+       color="#00009b"
+       opacity="0.1372549"
+       empcolor="#00009b"
+       empopacity="0.29411765" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5379"
+       empspacing="3"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.11764706"
+       empcolor="#9b0000"
+       empopacity="0.39215686"
+       spacingx="280px"
+       spacingy="280px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5381"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="252px"
+       spacingy="252px"
+       empcolor="#009b00"
+       empopacity="0.23529412"
+       color="#009b00"
+       opacity="0.09803922" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5383"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="180px"
+       spacingy="180px"
+       color="#009b9b"
+       opacity="0.07843137"
+       empcolor="#009b9b"
+       empopacity="0.15686275" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3019"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.09803922"
+       empcolor="#0000ff"
+       empopacity="0"
+       dotted="true"
+       spacingx="140px"
+       spacingy="140px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3013"
+       empspacing="5"
+       visible="true"
+       enabled="false"
+       snapvisiblegridlinesonly="true"
+       spacingx="210px"
+       spacingy="210px"
+       color="#ff00ff"
+       opacity="0.29411765" />
+  </sodipodi:namedview>
+  <path
+     inkscape:connector-curvature="0"
+     style="opacity:0.99537036000000001;fill:#000000;fill-opacity:1;stroke:none;display:inline;enable-background:new"
+     d="m 2719.4535,-18.417181 0,9015.052781 0,3066.9964 278.6571,0 929.3883,11803.217 -1208.2187,0 0,2974.063 1487.049,0 14870.2138,0 1487.013,0 0,-2974.063 -1208.218,0 185.898,-2974.029 c 735.001,17.845 1703.51,-66.044 2881.097,-464.695 1021.385,-345.877 2180.504,-933.407 2974.029,-2044.674 793.56,-1111.233 1211.44,-2698.11 1115.287,-4553.976 -81.497,-1574.54 -495.742,-2787.921 -1022.356,-3810.519 l 557.662,-650.5582 -5483.399,-5018.7038 0,-4368.111181 -17844.2758,0 z m 2974.0286,3066.960581 11896.1849,0 0,5948.0922 -11896.1849,0 0,-5948.0922 z M 20563.696,9554.2618 c 271.83,66.6318 589.053,88.9467 929.387,278.6916 886.874,494.0786 1898.591,1362.8286 2044.676,4182.2476 69.89,1348.413 -199.585,2100.808 -557.661,2602.267 -358.075,501.457 -889.886,820.101 -1487.015,1022.355 -564.348,191.199 -1184.205,255.164 -1672.877,278.656 l 464.693,-5855.16 278.657,0 0,-2509.3349 z"
+     id="path6313" />
+</svg>

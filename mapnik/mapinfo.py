@@ -1,0 +1,1 @@
+/home/klinger/mymap/mapinfo/mapinfo.py

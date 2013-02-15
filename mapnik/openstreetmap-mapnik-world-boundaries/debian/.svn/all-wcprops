@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/!svn/ver/17758/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian
+END
+update_svn_revision.sh
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/update_svn_revision.sh
+END
+control
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/control
+END
+dirs
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/dirs
+END
+files
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/files
+END
+compat
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/compat
+END
+changelog
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/!svn/ver/16662/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/changelog
+END
+copyright
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/copyright
+END
+rules
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/!svn/ver/17758/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/rules
+END
+pth
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/pth
+END
+update_world_boundaries_dir.sh
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/!svn/ver/7750/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/update_world_boundaries_dir.sh
+END
+substvars
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/!svn/ver/4767/applications/rendering/mapnik/openstreetmap-mapnik-world-boundaries/debian/substvars
+END

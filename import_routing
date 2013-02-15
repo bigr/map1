@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+cd osm
+
+#unlink czech_republic.osm.bz2
+#unlink czech_republic.osm
+#wget http://download.geofabrik.de/osm/europe/czech_republic.osm.bz2
+
+#bunzip2 czech_republic.osm.bz2
+
+osm2pgrouting -file "czech_republic.osm" \
+			  -conf "/usr/share/osm2pgrouting/mapconfig.xml" \
+			  -dbname routing \
+			  -user klinger \
+			  -clean
