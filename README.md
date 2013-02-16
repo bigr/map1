@@ -6,4 +6,4 @@ The aim of Map1.eu is to provide an all-purpose map of the whole Europe in a qua
 
 Project status
 ---------------
-Current version is alpha 1. For more info see the [develpment plan](/bigr/map1/wiki/Development-plan).
+Current version is alpha 1. For more info see the [develpment plan](https://github.com/bigr/map1/wiki/Development-plan).
