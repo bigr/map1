@@ -38,3 +38,15 @@
 /osm/osmconvert32
 /shp
 /mapnik/world_boundaries
+*.pydevproject
+.project
+.metadata
+.cproject
+.buildpath
+.classpath
+.settings/
+.loadpath
+local.properties
+*.launch
+/stdout
+/stderr
