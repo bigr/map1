@@ -8,7 +8,7 @@
 *.pyc
 *.bak
 ~*
-/map/tiles/
+/map/tiles
 /map/tiles_old
 /stylesheets/general/prepare-db/*.sql
 /stylesheets/general/prepare-db/out*
@@ -35,6 +35,10 @@
 /o5m-reader
 /o5m2sqlite
 /stylesheet
-/osm/osmconvert32
+osmconvert32
+osmconvert
+
 /shp
 /mapnik/world_boundaries
+stderr.txt
+stdout.txt
