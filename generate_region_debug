@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+LC_NUMERIC=C
+LC_COLLATE=C
+
+ZOOM=8
+
+case "$1" in
+
+OkoliTurnova)	
+	X1=14.9590694
+	Y1=50.3987186
+	X2=15.6006272
+	Y2=50.8716425
+	;;	
+*)
+	echo "========="
+	echo $1
+	echo "========="
+	X1=$1
+	Y1=$2
+	X2=$3
+	Y2=$4
+	;;
+esac
+
+Z1=8
+Z2=15
+
+x1=$(./extract-aster/lon2x $X1 $ZOOM)
+y1=$(./extract-aster/lat2y $Y1 $ZOOM)
+x2=$(./extract-aster/lon2x $X2 $ZOOM)
+y2=$(./extract-aster/lat2y $Y2 $ZOOM)
+
+for x in $(eval echo {$x1..$x2}); do		
+	for y in $(eval echo {$y1..$y2}); do
+		echo "./get-data $x $y" >> _queue
+		for z in $(eval echo {$Z1..$Z2}); do			
+			echo "./compile_stylesheets -sc eu -z $z -t $x.$y" >> _queue
+			echo "./generate_metatile $x $y $z $X1,$Y1,$X2,$Y2" >> _queue
+			
+		done;
+	done;
+done;
