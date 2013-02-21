@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+LC_NUMERIC=C
+LC_COLLATE=C
+
+ASTER_DIR=/home/klinger/media/dem/aster
+TEMP=/tmp/_tiles
+
+ZOOM=8
+ASTER_TILES=/home/klinger/media/dem/aster-tiles-$ZOOM
+
+mkdir -p $ASTER_TILES
+
+LON_MARGIN=0.05
+LAT_MARGIN=0.05
+
+
+
+x1=$(./lon2x $1 $ZOOM)
+y1=$(./lat2y $2 $ZOOM)
+x2=$(./lon2x $3 $ZOOM)
+y2=$(./lat2y $4 $ZOOM)
+
+rm -rf "$TEMP"
+mkdir -v "$TEMP"
+
+for x in $(eval echo {$x1..$x2}); do	
+	lon1=$(./x2lon $x $ZOOM)
+	lon1=$(bc <<< "$lon1 - $LON_MARGIN")
+	lon2=$(./x2lon $((x+1)) $ZOOM)
+	lon2=$(bc <<< "$lon2 + $LON_MARGIN")
+	for y in $(eval echo {$y1..$y2}); do			
+		lat1=$(./y2lat $((y+1)) $ZOOM)
+		lat1=$(bc <<< "$lat1 - $LAT_MARGIN")
+		lat2=$(./y2lat $y $ZOOM)		
+		lat2=$(bc <<< "$lat2 + $LAT_MARGIN")
+		./extract-aster-error-region $lon1 $lat1 $lon2 $lat2 "$ASTER_TILES/$x.$y.num.tif"
+		bzip2 "$ASTER_TILES/$x.$y.num.tif"
+		#printf "%f %f %f %f\n" $lon1 $lat1 $lon2 $lat2
+	done;
+done;

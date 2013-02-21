@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+LC_NUMERIC=C
+LC_COLLATE=C
+
+SRTM_DIR=/home/klinger/media/dem/srtm
+TEMP=/tmp/_extract_srtm
+
+A1=$(python -c "from math import floor; print int(floor(37 + ($1)/5)) ")
+B1=$(python -c "from math import floor; print int(floor(13 - ($2)/5)) ")
+A2=$(python -c "from math import floor; print int(floor(37 + ($3)/5)) ")
+B2=$(python -c "from math import floor; print int(floor(13 - ($4)/5)) ")
+
+rm -rf "$TEMP"
+mkdir -p "$TEMP"
+
+for lon in $(eval echo {$A1..$A2}); do	
+	for lat in $(eval echo {$B1..$B2}); do			
+		file=$(printf "srtm_%02d_%02d" $lon $lat)		
+		
+		unzip -jd "$TEMP" "$SRTM_DIR/$file.zip" "$file".tif
+		gdal_translate -a_srs "EPSG:4326" -a_nodata -32768 "$TEMP/$file".tif "$TEMP/$file".tif~
+		unlink "$TEMP/$file".tif
+		mv "$TEMP/$file".tif~ "$TEMP/$file".tif
+	done;
+done;
+
+unlink "$5"
+
+gdal_merge.py -a_nodata -9999 -ul_lr $1 $4 $3 $2 -o "$5" "$TEMP"/*.tif

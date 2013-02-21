@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+LC_NUMERIC=C
+LC_COLLATE=C
+
+ASTER_DIR=/home/klinger/media/dem/aster
+TEMP=/tmp/_extract_aster
+
+lon1=$(python -c "from math import floor; print int(floor($1))")
+lat1=$(python -c "from math import floor; print int(floor($2))")
+lon2=$(python -c "from math import floor; print int(floor($3))")
+lat2=$(python -c "from math import floor; print int(floor($4))")
+
+rm -rf "$TEMP"
+mkdir -p "$TEMP"
+
+for lon in $(eval echo {$lon1..$lon2}); do
+	if [ $lon -lt 0 ]; then
+		lon_str=$(printf "W%03d" $((-$lon)))
+	else
+		lon_str=$(printf "E%03d" $lon)
+	fi
+	for lat in $(eval echo {$lat1..$lat2}); do	
+		if [ $lat -lt 0 ]; then
+			lat_str=$(printf "S%02d" $((-$lat)))
+		else
+			lat_str=$(printf "N%02d" $lat)
+		fi
+		file=$(printf "ASTGTM2_%s%s" $lat_str $lon_str)
+		unzip -jd "$TEMP" "$ASTER_DIR/$file.zip" "$file/"$file"_num.tif"
+		gdal_translate -a_srs "EPSG:4326" -a_nodata -9999 "$TEMP/"$file"_num.tif" "$TEMP/"$file"_num.tif~"
+		unlink "$TEMP/"$file"_dem.tif"
+		mv "$TEMP/"$file"_num.tif~" "$TEMP/"$file"_num.tif"
+	done;
+done;
+
+unlink "$5"
+gdal_merge.py -a_nodata -9999 -ul_lr $1 $4 $3 $2 -o "$5" $TEMP/ASTGTM2_*_num.tif
