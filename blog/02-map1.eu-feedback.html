@@ -1,0 +1,32 @@
+<h1 id="map1.eu---ohlasy-a-další-plány"><a href="http://www.map1.eu">map1.eu</a> - Ohlasy a další plány</h1>
+<p>Reakcí, které vyvolalo <a href="http://map1.blog.root.cz/2013/02/14/map1-eu/">spuštění první alfa verze</a> <a href="http://www.map1.eu">map1.eu</a>, bylo nad má očekávání. Předem bych chtěl poděkovat všem, kteří se zapojili do diskuzí o projektu, ať to bylo zde na mém blogu nebo na stránkách <a href="http://www.abclinuxu.cz/zpravicky/map1.eu-nova-mapa-evropy">abclinuxu</a>. Tímto článkem bych chtěl shrnout, co se vám (<strong>ne</strong>)líbilo, jaké byly nejčastější připomínky a jaké mám plány v nejbližších týdnech.</p>
+<h2 id="shrnutí-hlášených-problémů">Shrnutí hlášených problémů</h2>
+<h3 id="vrstevnice">Vrstevnice</h3>
+<p>Rohodně nejvíce připomínek se týkalo vrstevnic. To, že jsem se nakonec rozhodl použít ASTER se ukázalo jako jednoznačná chyba. Na základě vašich stížností jsem procházel chybové soubory, které jsou distribuované společně s DEM a zjistil jsem, že nepřesnost se hodně mění (asi v závislosti na tom, jaký byl pokryv mraků při měření). Moje prvotní myšlenka skombinovat ASTER a SRTM se ukázalo jako příliš oportunistická. <strong>A proto jsem se rozhodl použít SRTM</strong>, ostatně tato data používají i jiné projekty.</p>
+<h3 id="přenadpisovanost">&quot;Přenadpisovanost&quot;</h3>
+<p>Hodně vám vadilo (a já se nedivím), že ve městech je mnoho nadpisů různých hotelů a tak dále. Je to způsobeno tím, že se snažím zobrazovat co nejvíce informací na venkově, kde je existence hospody či ubytování důležitou informací. Každopádně si zkusím pohrát s minimálními vzdálenostmi mezi zobrazovanými symboly daného druhu a tuto neřest odstranit.</p>
+<p>Další <em>přenadpisovanost</em> se objevila u popisků vodních toků. Je to chyba, která vznikla při optimalizace těchto textů na menších měřítkách, kde se doslova musely hledat díry, kam název napsat. Rozhodně to v další verzi bude odstraněno.</p>
+<h3 id="chybějící-prvky-na-mapě">Chybějící prvky na mapě</h3>
+<p>Ještě nevykresluju mnoho &quot;<em>map features</em>&quot;. Není to úmysl. Ale prostě jsem to nestihl naimplementovat. Asi nejvíce vás pobouřilo nevykreslování letišt, národních párků a vojenských prostorů a mnoho dalších. Nahlašené chybějící prvky eviduju a snažím se jich co nejvíce začlenit již do příští verze.</p>
+<h3 id="gui">GUI</h3>
+<p>Kromě stížností na kvalitu plánování tras, které zatím považuji za irelevantní, protože používám službu posklytovanou třetí stranou, byla nejčastější stížnost na to, že se při kliku rovnou začně plánovat trasa. Toto bude rozhodně odstraněno.</p>
+<p>Dále jste si stěžovali na nevyladěnost v Chrome, přiliš citlivé kolečko myši, chybějící zvětšování dvoujklikem, či Ctrl+Drag. Zatím je mojí prioritou vyladit renderování mapy samotné. GUI je na druhé koleji, ale nejpalčivější problémy chci řešit co nejdříve. (Naplánováno na Alpha 3).</p>
+<h3 id="použití-map-v-gps-a-tak-podobně">Použití map v GPS a tak podobně</h3>
+<p>Toto zatím vůbec neřeším, ale všem, které to zajímá, chci říct, že dlaždice jsou uvolněné pod cc-by-nc-nd licencí, tedy pro nekomerční účely je lze použit. Věřím, že na internetu je mnoho návodů jak tak učinit.</p>
+<p>K nahlašování chyb chci ještě říct, že se všechny snažím evidovat na <strong><a href="https://github.com/bigr/map1/issues?state=open">github</a></strong>. Zmiňuji to proto, že se začínají množit duplicity a náhledem do buglistu je možné snadno zjistit, jestli vámi objevený problém je již evidován či nikoliv a případně si ušetřit práci se sepisováním chyby, která je již známá. Každopádně děkuji za všechny připomínky a jsem za ně velmi rád.</p>
+<h2 id="plány-v-nejbližších-týdnech">Plány v nejbližších týdnech</h2>
+<p>Moje plány můžete sledovat na <a href="https://github.com/bigr/map1/wiki/Development-plan">wikipedii githubu</a>.</p>
+<p>Zde uvádím překlad výše uvedené stránky:</p>
+<h3 id="součastnost---nyní-pracuji-na...">Součastnost - nyní pracuji na...</h3>
+<h4 id="verze-alfa-0.2">Verze alfa 0.2</h4>
+<p>Hlavním cílem je vylepšit vykreslování vrstevnic a vyladit kreslení popisků; mnoho textu ve městech, časté opakovaní popisků vodních toků. Hlavní novou funkcionalitou by mělo být kreslení OSMC symbolů u turistických cest. Záměrem je také opravit co nejvíce chyb a doplnit vykreslování co nejvíce prvků. Nestihlé se přesune do alfa 0.4. <a href="https://github.com/bigr/map1/issues?milestone=2">Seznam problémů v0.2</a>.</p>
+<h3 id="budoucnost">Budoucnost</h3>
+<h4 id="verze-alfa-0.3">Verze alfa 0.3</h4>
+<p>Tato verze je zaměřena na GUI. <a href="https://github.com/bigr/map1/issues?milestone=3">Seznam problémů v0.3</a>.</p>
+<h4 id="verze-alfa-0.4">Verze alfa 0.4</h4>
+<p>Měla by se řešit integrace wiki dat a zobrazovíní informačního boxu (za pomoci utfgrid). Dále nestihnuté z verze 0.2. <a href="https://github.com/bigr/map1/issues?milestone=4">Seznam problémů v0.4</a>.</p>
+<h2 id="závěrem">Závěrem</h2>
+<p>Ještě jednou děkuji za projevený zájem. A zvláště těm, kteří mi nabídli pomoc. Ale o tom někdy příště.</p>
+<p>Pokud vám to není odporné (jako mně) &quot;<em>lajkujte</em>&quot; map1.eu na <a href="https://facebook.com/Map1eu">facebooku</a> a &quot;<em>foloujte</em>&quot; na <a href="https://twitter.com/map1eu">twitteru</a>.</p>
+<h2 id="ps-horká-novinka-na-záver">PS: Horká novinka na záver</h2>
+<p><strong>Map1.eu právě rozšíříla oblast, kterou zobrazuje ve středních a podrobných měřítkách.</strong> Nově je vykreslena část jižní Evropy. K dipozici je Chorvatsko, Itálie po Řím, jihovýchodní Francie a další.</p>
