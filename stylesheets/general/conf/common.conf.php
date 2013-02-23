@@ -124,6 +124,15 @@ $RENDER_PLACESCOVER = true;
  */
 $RENDER_STD_LANDCOVER = true;
 
+/**
+ * Enable/Disable line landcover rendering
+ */
+$RENDER_LINE_LANDCOVER = true;
+
+/**
+* Enable/Disable point landcover rendering
+*/
+$RENDER_POINT_LANDCOVER = true;
 
 //
 // WAY RENDERING SUBITEMS
@@ -156,6 +165,16 @@ $RENDER_WATERWAY = true;
 $RENDER_WATERAREA = true;
 
 
+/**
+ * Enable/Disable aeroway rendering
+ */
+$RENDER_AEROWAY = true;
+
+/**
+ * Enable/Disable pisteway rendering
+ */
+$RENDER_PISTEWAY = true;
+
 // RAILWAYS
 
 /**
@@ -178,6 +197,7 @@ $RENDER_POWER = true;
  * Enable/Disable aerialway rendering
  */
 $RENDER_AERIALWAY = true;
+
 
 //
 // TEXT RENDERING SUBITEMS
@@ -225,10 +245,10 @@ $RENDER_TEXT_CONTOUR = true;
 /**
  * Minimal rendered area in given zoom in pixels^2
  */
-$_MINIMAL_AREA = array(5 => 100, 9 => 100, 13 => 0);
+$_MINIMAL_AREA = array(5 => 80, 9 => 90, 13 => 0);
 
 
-$_CONTOUR_COLOR = array(12=>'#331100');
+$_CONTOUR_COLOR = array(12=>'#553322');
 
 $__zooms = getenv('ZOOMS');
 if ( !empty($__zooms) ) {

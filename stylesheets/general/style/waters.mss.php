@@ -26,16 +26,21 @@
 						}
 					<?php endif;?>
 					<?php if ( !empty($a['pattern-zooms']) && in_array($zoom,$a['pattern-zooms']) ): ?>
+							
 						<?php echo $selector?>::level<?php echo $a['level']?> {
-							polygon-pattern-file: url('<?php echo
-								getPatternFile($a['pattern'],
-									exponential($a['pattern-size'],$zoom),
-									linear($a['pattern-rotation'],$zoom),
-									linear($a['pattern-opacity'],$zoom),
-									linear($a['pattern-color'],$zoom),
-									exponential($a['pattern-stroke'],$zoom)
-								)
-							?>');
+							<?php if ( !empty($a['pattern-file']) ): ?>
+								polygon-pattern-file: url('../../general/pattern/~<?php echo $a['pattern-file']?>-<?php echo $zoom?>.png');
+							<?php else: ?>
+								polygon-pattern-file: url('<?php echo
+									getPatternFile($a['pattern'],
+										exponential($a['pattern-size'],$zoom),
+										linear($a['pattern-rotation'],$zoom),
+										linear($a['pattern-opacity'],$zoom),
+										linear($a['pattern-color'],$zoom),
+										exponential($a['pattern-stroke'],$zoom)
+									)
+								?>');
+							<?php endif; ?>
 						}
 					<?php endif; ?>
 				<?php endforeach; ?>

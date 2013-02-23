@@ -7,7 +7,7 @@
 	<?php foreach ( range(0,35) as $grade ):?>
 		<?php $priority = waterway_name_priorities($zoom,$grade); if ( $priority === false ) continue; ?>
 		
-		<?php foreach ( array(1,-1) as $dySign ): ?>
+		<?php foreach ( $zoom < 11 ? array(1,-1) : array(1) as $dySign ): ?>
 		.textWaterway.priority<?php echo $priority?>.dy<?php echo $dySign == -1 ? '2' : ''?>[zoom = <?php echo $zoom?>][grade = <?php echo $grade?>]::name {			
 			
 			text-face-name: "<?php echo FONT_BOOK_SANS ?>";
@@ -31,7 +31,7 @@
 	<?php endforeach;?>
 	
 	<?php foreach( pixelarea2selector($WATERAREA_NAME_PRIORITIES[$zoom],$zoom) as $selector => $priority ): ?>  
-	/*
+
 		.textWaterarea.priority<?php echo $priority?>[zoom = <?php echo $zoom?>]<?php echo $selector?> {
 			text-face-name: "<?php echo FONT_BOOK_SANS ?>";
 			text-name: "[name]";
@@ -46,7 +46,7 @@
 				}
 			<?php endforeach;?>			
 		}
-		*/
+
 	<?php endforeach;?>
 <?php endforeach;?>
 

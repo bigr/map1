@@ -112,6 +112,8 @@ function getPropertyWhereQuery($conf, $ignoreList = array()) {
 			$item = rtrim($item,']');
 			$subarray = explode('][',$item);
 			foreach( $subarray as $subitem ) {
+				if ( $subitem[0] == '.' )
+					continue;
 				if ( !preg_match('/[\"]?([\w:]+)[\"]?(=|\!=|\<|\>)[\']?([^\']+)[\']?/',$subitem, $matches) ) {
 					throw new Exception("Error during parsint properties: $subitem");
 				}

@@ -10,7 +10,7 @@ $_SYMBOL_ATTRACTIVE_COLOR = array(12 => '#aa00aa');
  */
 $SYMBOL = array(	
 	"[historic='castle'][castle_type='no'][ruins='no'][grade<4.5],[historic='castle'][castle_type='stately'][ruins='no'][grade<4.5],[historic='castle'][castle_type='schloss'][ruins='no'][grade<4.5],[historic='castle'][castle_type='burg;schloss'][ruins='no'][grade<4.5]" => array(
-			'zooms' => range(14,18),
+			'zooms' => range(13,18),
 			'symbol-file' => 'castle-stately',
 			'symbol-size' => array(13=>10,15=>25),
 		),
@@ -61,9 +61,9 @@ $SYMBOL = array(
 		),
 	
 	"[building='church'][grade<4.5],[amenity='place_of_worship'][historic!='no'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade<4.5]" => array(
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'church',
-			'symbol-size' => array(14=>17,15=>20),
+			'symbol-size' => array(13=>15,15=>20),
 		),	
 	"[building='church'][grade>4.5][grade<6.0],[amenity='place_of_worship'][historic!='no'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade>4.5][grade<6.0]" => array(
 			'zooms' => range( 13,18),
@@ -79,9 +79,9 @@ $SYMBOL = array(
 	
 		
 	"[building='chapel'],[\"place_of_worship:type\"='chapel'],[place_of_worship='chapel']"=> array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'chapel',
-			'symbol-size' => array(14=>12,15=>16),
+			'symbol-size' => array(13=>12,15=>16),
 		),	
 	"[historic='monastery'][grade<4.5],[\"place_of_worship:type\"='monastery'][grade<4.5],[place_of_worship='monastery'][grade<4.5]"=> array(			
 			'zooms' => range( 13,18),
@@ -101,15 +101,15 @@ $SYMBOL = array(
 		),	
 	
 	"[historic='monument'][grade<4.5]" => array(			
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'monument',
-			'symbol-size' => array(15=>13, 17 => 16),
+			'symbol-size' => array(13=>12, 17 => 16),
 		),
 	"[historic='monument'][grade>4.5][grade<6.0]" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'monument',
 			'symbol-color' => array(12 => '#ff0000'),
-			'symbol-size' => array(14=>15,15=>21),
+			'symbol-size' => array(13=>15,15=>21),
 		),
 	"[historic='monument'][grade<6.0]" => array(			
 			'zooms' => range( 13,18),
@@ -118,30 +118,30 @@ $SYMBOL = array(
 			'symbol-size' => array(13=>15,15=>25),
 		),
 	"[historic='memorial']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'memorial',
-			'symbol-size' => array(15=>12,17=>13),
+			'symbol-size' => array(13=>11,17=>13),
 		),
 	"[historic='wayside_cross'],[amenity='place_of_worship'][historic='no'][building='no']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'waysidecross',
-			'symbol-size' => array(14=>10,15=>10),
+			'symbol-size' => array(13=>10,16=>12),
 		),
 	"[historic='wayside_shrine']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'waysideshrine',
-			'symbol-size' => array(14=>10,15=>10),
+			'symbol-size' => array(14=>10,16=>12),
 		),
 		
 	"[man_made='tower'][\"tower:type\"='observation'][grade<4.5],[man_made='tower'][tourism='attraction'][grade<4.5]" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'tower-observation',
-			'symbol-size' => array(14=>16,15=>25),
+			'symbol-size' => array(13=>14,15=>25),
 		),
 	"[man_made='tower'][\"tower:type\"='observation'][grade>4.5][grade<6.0],[man_made='tower'][tourism='attraction'][grade>4.5][grade<6.0]" => array(			
 			'zooms' => range( 13,18),
 			'symbol-file' => 'tower-observation',			
-			'symbol-size' => array(13=>20,15=>35),
+			'symbol-size' => array(13=>18,15=>35),
 		),
 	"[man_made='tower'][\"tower:type\"='observation'][grade>6.0],[man_made='tower'][tourism='attraction'][grade>6.0]" => array(			
 			'zooms' => range( 13,18),
@@ -150,30 +150,30 @@ $SYMBOL = array(
 			'symbol-size' => array(13=>22,15=>40),
 		),
 	"[man_made='tower'][\"tower:type\"='communication']" => array(
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'tower-comunication',
-			'symbol-size' => array(14=>15,15=>16),
+			'symbol-size' => array(13=>12,15=>16),
 		),	
 	"[man_made='water_tower']" => array(
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'tower-water',
-			'symbol-size' => array(14=>14,15=>16),
+			'symbol-size' => array(13=>12,15=>16),
 		),
 	"[tourism='viewpoint']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'viewpoint',
 			'symbol-color' => array('#CC0000'),
-			'symbol-size' => array(14=>14,15=>16),
+			'symbol-size' => array(13=>12,15=>16),
 		),	
 	"[tourism='museum'][grade<4.5]" => array(			
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'museum',			
-			'symbol-size' => array(15=>14,15=>16),
+			'symbol-size' => array(13=>12,15=>16),
 		),
 	"[tourism='museum'][grade>4.5][grade<6.0]" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'museum',			
-			'symbol-size' => array(14=>14,15=>20),
+			'symbol-size' => array(12=>13,15=>20),
 		),
 	"[tourism='museum'][grade>6.0]" => array(			
 			'zooms' => range( 13,18),
@@ -182,14 +182,14 @@ $SYMBOL = array(
 		),
 		
 	"[tourism='zoo'][grade<4.5]" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'zoo',			
-			'symbol-size' => array(14=>14,15=>16),
+			'symbol-size' => array(13=>12,15=>16),
 		),
 	"[tourism='zoo'][grade>4.5][grade<6.0]" => array(			
 			'zooms' => range( 13,18),
 			'symbol-file' => 'zoo',
-			'symbol-size' => array(13=>15,15=>21),
+			'symbol-size' => array(13=>14,15=>21),
 		),
 	"[tourism='zoo'][grade>6.0]" => array(			
 			'zooms' => range( 12,18),
@@ -205,49 +205,49 @@ $SYMBOL = array(
 			'symbol-size' => array(12=>14,15=>24),
 		),	
 	"[tourism='information'][information='guidepost']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'information-guidepost',
-			'symbol-size' => array(14=>16,15=>16),
+			'symbol-size' => array(13=>14,15=>18),
 		),	
 	"[tourism='information'][information='board']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'information-board',
-			'symbol-size' => array(14=>16,15=>16),
+			'symbol-size' => array(13=>14,15=>16),
 		),	
 	"[tourism='information'][information='map']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'information-map',
-			'symbol-size' => array(14=>16,15=>16),
+			'symbol-size' => array(13=>14,15=>16),
 		),	
 	"[tourism='information'][information='office']" => array(			
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'information-office',
-			'symbol-size' => array(14=>16,15=>16),
+			'symbol-size' => array(13=>15,15=>16),
 		),	
 	"[tourism='artwork']" => array(			
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'artwork-statue',
-			'symbol-size' => array(15=>18),
+			'symbol-size' => array(13=>14,15=>16),
 		),
 	"[amenity='atm']" => array(			
-			'zooms' => range( 15,18),
+			'zooms' => range( 14,18),
 			'symbol-file' => 'atm',
 			'symbol-size' => array(14=>12,17=>14),
 		),
 	"[amenity='bank']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 14,18),
 			'symbol-file' => 'bank',
 			'symbol-size' => array(15=>16,17=>18),
 		),
 	"[amenity='bench']" => array(
-			'zooms' => range( 17,18),
+			'zooms' => range( 15,18),
 			'symbol-file' => 'bench',
-			'symbol-size' => array(17=>14,17=>14),
+			'symbol-size' => array(15=>11,17=>14),
 		),
 	"[natural='cave_entrance'][grade<4.5]" => array(
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'cave',
-			'symbol-size' => array(14=>14,15=>20),
+			'symbol-size' => array(13=>15,15=>20),
 		),
 	"[natural='cave_entrance'][grade>4.5]" => array(
 			'zooms' => range( 13,18),
@@ -259,56 +259,51 @@ $SYMBOL = array(
 			'zooms' => range( 14,18),
 			'symbol-file' => 'doctors',
 			'symbol-color' => array(12 => '#ff0000'),
-			'symbol-size' => array(16=>14,15=>16),
+			'symbol-size' => array(14=>12,15=>16),
 		),
 	"[amenity='hospital']" => array(
 			'zooms' => range( 14,18),
 			'symbol-file' => 'hospital',
 			'symbol-color' => array(12 => '#ff0000'),
-			'symbol-size' => array(15=>16,17=>20),
+			'symbol-size' => array(14=>14,17=>20),
 		),
 	"[amenity='clinic']" => array(
 			'zooms' => range( 14,18),
 			'symbol-file' => 'hospital',
 			'symbol-color' => array(12 => '#ff0000'),
-			'symbol-size' => array(16=>18,17=>18),
+			'symbol-size' => array(14=>14,17=>18),
 		),
 	"[amenity='drinking_water']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'drinking-water',
-			'symbol-size' => array(15=>14),
+			'symbol-size' => array(13=>11,15=>16),
 		),
 	"[amenity='fuel']" => array(
 			'zooms' => range( 12,18),
 			'symbol-file' => 'fuel',
-			'symbol-size' => array(12=>14,15=>14),
+			'symbol-size' => array(12=>13,15=>14),
 		),
 	"[tourism='guest_house'],[tourism='hostel'],[tourism='motel'],[tourism='hut'],[tourism='alpine_hut']" => array(
 			'zooms' => range( 13,18),
 			'symbol-file' => 'guest-house',
-			'symbol-size' => array(13=>12,15=>14),
+			'symbol-size' => array(13=>10,15=>12),
 		),
 	"[tourism='hotel']" => array(
 			'zooms' => range( 13,18),
 			'symbol-file' => 'hotel',
-			'symbol-size' => array(13=>12,15=>14),
+			'symbol-size' => array(13=>11,15=>14),
 		),
 		
-	"[man_made='hunting_stand']" => array(
-			'zooms' => range( 15,18),
-			'symbol-file' => 'hunting-stand',
-			'symbol-size' => array(15=>16),
-		),
 	"[man_made='hunting_stand'],[amenity='hunting_stand']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'hunting-stand',
-			'symbol-size' => array(15=>18),
-		),
+			'symbol-size' => array(13=>14,15=>18),
+		),	
 	"[amenity='parking']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 14,18),
 			'symbol-file' => 'parking',
 			'symbol-color' => array(14 => '#0044DD'),
-			'symbol-size' => array(15=>14,17=>14),
+			'symbol-size' => array(14=>12,17=>14),
 			'symbol-opacity' => array(14=>0.8),
 		),
 	"[amenity='pharmacy']" => array(
@@ -318,19 +313,19 @@ $SYMBOL = array(
 			'symbol-size' => array(14=>14,15=>14),
 		),
 	"[tourism='picnic_site'],[leisure='picnic_table']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'picnic',			
-			'symbol-size' => array(15=>16),
+			'symbol-size' => array(13=>12,15=>18),
 		),
 	"[amenity='post_box']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 14,18),
 			'symbol-file' => 'postbox',			
-			'symbol-size' => array(15=>10),
+			'symbol-size' => array(14=>10,15=>12),
 		),
 	"[amenity='post_office']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'postoffice',			
-			'symbol-size' => array(15=>16),
+			'symbol-size' => array(13=>14,15=>18),
 		),
 	"[amenity='pub'],[amenity='bar']" => array(
 			'zooms' => range( 15,18),
@@ -343,25 +338,25 @@ $SYMBOL = array(
 			'symbol-size' => array(16=>18),
 		),
 	"[amenity='shelter']" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 14,18),
 			'symbol-file' => 'shelter',			
-			'symbol-size' => array(15=>18),
+			'symbol-size' => array(14=>16,15=>18),
 		),
 	"[natural='spring']" => array(
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'spring',		
 			'symbol-color' => $_WATER_COLOR,	
-			'symbol-size' => array(14=>14,15 => 16),
+			'symbol-size' => array(13=>14,15 => 18),
 		),
 	"[amenity='theatre'][grade<4.5]" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'theatre',		
-			'symbol-size' => array(15 => 16,17 => 20),
+			'symbol-size' => array(13 => 14,17 => 20),
 		),
 	"[amenity='theatre'][grade>4.5][grade<6.0]" => array(
-			'zooms' => range( 14,18),
+			'zooms' => range( 13,18),
 			'symbol-file' => 'theatre',	
-			'symbol-size' => array(14=>16,17 => 28),
+			'symbol-size' => array(13=>15,17 => 28),
 		),
 	"[amenity='theatre'][grade>6.0]" => array(
 			'zooms' => range( 13,18),
@@ -385,9 +380,9 @@ $SYMBOL = array(
 			'symbol-size' => array(13=>14,15 => 20),
 		),	
 	"[amenity='fountain'][grade<6.0]" => array(
-			'zooms' => range( 15,18),
+			'zooms' => range( 14,18),
 			'symbol-file' => 'fontain',		
-			'symbol-size' => array(15 => 18),
+			'symbol-size' => array(14=>16,15 => 18),
 		),
 	"[amenity='fountain'][grade>6.0]" => array(
 			'zooms' => range( 13,18),

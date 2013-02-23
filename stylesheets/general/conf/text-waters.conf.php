@@ -119,7 +119,7 @@ function waterway_name_halo_fill($grade) {
 	return 'rgba(255,255,255,0.4)';
 }
 
-$WATERWAY_NAME_SPACING = array(8 => 7, 12 => 10);
+$WATERWAY_NAME_SPACING = array(8 => 7, 11 => 15, 13 => 30, 18 => 100);
 
 
 /**

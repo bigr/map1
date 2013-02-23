@@ -37,16 +37,61 @@ $definitions = array (
 		'table' => 'way'		
 	),
 	'landcover' => array(
-		'filter' => array('natural','landuse','leisure','amenity','sport'),
+		'filter' => array('natural','landuse','leisure','amenity','place'),
+		'tags' => array (
+			'natural'  => 'text',
+			'place'    => 'text',
+			'landuse'  => 'text',
+			'leisure'  => 'text',
+			'amenity'  => 'text',
+			'sport'    => 'text',
+			'name'     => 'text',
+			'wood'     => 'text',
+			'type'     => 'text',
+			'religion' => 'text',
+			'building' => 'text',
+		),
+		'table' => 'polygon'
+	),
+	'landcover_line' => array(
+		'filter' => array('natural','landuse','leisure','amenity'),
 		'tags' => array (
 			'natural' => 'text',
 			'landuse' => 'text',
 			'leisure' => 'text',
 			'amenity' => 'text',
-			'sport'   => 'text',			
+			'sport'   => 'text',
+			'name'    => 'text',
+			'wood'    => 'text',
+			'type'    => 'text',
+		),
+		'table' => 'way'
+	),
+	'landcover_point' => array(
+		'filter' => array('natural','landuse','leisure','amenity'),
+		'tags' => array (
+			'natural' => 'text',
+			'landuse' => 'text',
+			'leisure' => 'text',
+			'amenity' => 'text',
+			'sport'   => 'text',
+			'name'    => 'text',
+			'wood'    => 'text',
+			'type'    => 'text',
+		),
+		'table' => 'node'
+	),
+	'paboundary' => array(
+		'filter' => array('boundary','landuse','military'),
+		'tags' => array(
+			'boundary' => 'text',
+			'landuse' => 'text',
+			'military' => 'text',
+			'protect_class' => 'integer',
+			'name' => 'text',			
 		),
 		'table' => 'polygon'
-	),
+	),	
 	'waterarea' => array(
 		'filter' => array('waterway','landuse','natural'),
 		'tags' => array (
@@ -86,12 +131,37 @@ $definitions = array (
 		),
 		'table' => 'way'
 	),
+	'aeroway' => array(
+		'filter' => array('aeroway'),
+		'tags' => array(
+			'aeroway'   => 'text',
+			'surface'   => 'text',
+			'layer'     => 'integer',
+			'name'      => 'text',
+			'bridge'    => 'text',
+			'tunnel'    => 'text',
+		),
+		'table' => 'way'
+	),
+	'aeroarea' => array(
+		'filter' => array('aeroway'),
+		'tags' => array(
+			'aeroway'   => 'text',
+			'surface'   => 'text',
+			'layer'     => 'integer',
+			'name'      => 'text',		
+			'bridge'    => 'text',
+			'tunnel'    => 'text',
+		),
+		'table' => 'polygon'
+	),
 	'aerialway' => array(
 		'filter' => array('aerialway'),
 		'tags' => array (
 			'aerialway'    => 'text',
-			'"piste:lift"' => 'text',
+			'piste:lift'   => 'text',
 			'layer'        => 'integer',
+			'name'         => 'text',
 			'bridge'       => 'text',
 			'tunnel'       => 'text',
 		),
@@ -101,12 +171,38 @@ $definitions = array (
 		'filter' => array('aerialway'),
 		'tags' => array (
 			'aerialway'    => 'text',
-			'"piste:lift"' => 'text',
+			'piste:lift' => 'text',
 			'layer'        => 'integer',
 			'bridge'       => 'text',
 			'tunnel'       => 'text',
 		),
 		'table' => 'node'
+	),
+	'pisteway' => array(
+		'filter' => array('piste:type'),
+		'tags' => array (
+			'piste:type'       => 'text',
+			'piste:difficulty' => 'text',
+			'piste:grooming'   => 'integer',
+			'piste:name'       => 'text',	
+			'layer'              => 'integer',
+			'bridge'             => 'text',
+			'tunnel'             => 'text',
+		),
+		'table' => 'way'
+	),
+	'pistearea' => array(
+		'filter' => array('piste:type'),
+		'tags' => array (
+			'piste:type'       => 'text',
+			'piste:difficulty' => 'text',
+			'piste:grooming'   => 'integer',
+			'piste:name'       => 'text',
+			'layer'              => 'integer',
+			'bridge'             => 'text',			
+			'tunnel'             => 'text',
+		),
+		'table' => 'polygon'
 	),
 	'barrier' => array(
 		'filter' => array('barrier'),
@@ -123,6 +219,7 @@ $definitions = array (
 		'tags' => array (
 			'admin_level'  => 'integer',			
 			'layer'        => 'integer',
+			'name'         => 'text',
 		),
 		'table' => 'way'
 	),
@@ -156,7 +253,7 @@ $definitions = array (
 			'layer'        => 'integer',
 		),
 		'table' => 'way'
-	),
+	),	
 );
 
 ?>
@@ -173,7 +270,7 @@ SELECT
 	N.id AS osm_id,
 	N.geom AS way
 	<?php foreach ( $def['tags'] as $tag => $type ): ?>
-		,CAST((SELECT v FROM ntag NT2 WHERE NT2.id = N.id AND NT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS <?php echo $tag ?>
+		,CAST((SELECT v FROM ntag NT2 WHERE NT2.id = N.id AND NT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS "<?php echo $tag ?>"
 	<?php endforeach; ?>
 FROM <?php echo $def['table']?> N
 JOIN ntag NT ON NT.id = N.id AND NT.k IN
@@ -198,9 +295,9 @@ SELECT
 					(SELECT v FROM rtag RT2 WHERE RT2.id = RW.rel_id AND RT2.k = '<?php echo $tag ?>' LIMIT 1),
 					(SELECT v FROM wtag WT2 WHERE WT2.id = W.id AND WT2.k = '<?php echo $tag ?>' LIMIT 1)
 				)
-			AS <?php echo $type ?>) AS <?php echo $tag ?> 		
+			AS <?php echo $type ?>) AS "<?php echo $tag ?>"
 		<?php else:	?>
-			,CAST((SELECT v FROM wtag WT2 WHERE WT2.id = W.id AND WT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS <?php echo $tag ?>
+			,CAST((SELECT v FROM wtag WT2 WHERE WT2.id = W.id AND WT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS "<?php echo $tag ?>"
 		<?php endif; ?>
 	<?php endforeach; ?>
 <?php if ( $def['table'] == 'rel' ): ?>		
@@ -225,7 +322,7 @@ SELECT * FROM
 	P.geom AS way,	
 	Area(Transform(BuildArea(P.geom),900913)) AS way_area	
 	<?php foreach ( $def['tags'] as $tag => $type ): ?>
-		,CAST((SELECT v FROM rtag RT2 WHERE RT2.id = P.id AND RT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS <?php echo $tag ?> 
+		,CAST((SELECT v FROM rtag RT2 WHERE RT2.id = P.id AND RT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS "<?php echo $tag ?>"
 	<?php endforeach; ?>
 FROM polygon P
 JOIN rtag RT ON RT.id = P.id AND RT.k IN 

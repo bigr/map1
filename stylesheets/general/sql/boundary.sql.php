@@ -31,3 +31,26 @@ EOD;
 function sql_boundary_short($level) {	
 	return "SELECT * FROM adminboundaries WHERE admin_level=$level";			
 }
+
+function sql_boundary_pa($cols = '0',$where = '1 = 1') {	
+	return <<<EOD
+	SELECT
+		way,			
+		(CASE
+			WHEN protect_class IS NOT NULL THEN protect_class
+			WHEN boundary = 'national_park' THEN 2
+			WHEN military IS NOT NULL THEN 25 
+			ELSE 0			
+		END) AS protect_class,
+		name,
+		osm_id,		
+		$cols
+	FROM paboundary
+	WHERE
+		(boundary IN ('protected_area','national_park') OR
+		landuse='military' OR
+		boundary='national_park' OR
+		military IS NOT NULL) AND	
+		($where)			
+EOD;
+}

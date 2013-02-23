@@ -41,20 +41,26 @@ function waterway_width($zoom,$grade) {
  * Zoom x landcover visibillity maping
  */
 $WATERAREA = array(
-	"[landuse='basin'],[landuse='reservoir'],[natural='water'],[waterway='dock'],[waterway='riverbank'],[waterway='dam']" => array(
+	"[landuse='basin'],[landuse='reservoir'],[natural='water'],[waterway='dock'],[waterway='riverbank']" => array(
 			'level' => 1,
 			'zooms' => range( 7,18),
 			'color' => $_WATER_COLOR,
+			'smooth' => 1,
+		),
+	"[waterway='dam']" => array(
+			'level' => 1,
+			'zooms' => range(12,18),
+			'color' => array(13 => '#eeeeee'),
 		),
 	"[natural='wetland'],[natural='marsh']" => array(
-			'level'            => 1,
-			'pattern-zooms'    => range(8,18),
-			'pattern'          => 'hatch',
-			'pattern-size'     => array(14 => 9),
-			'pattern-rotation' => array(14 => 45),
-			'pattern-opacity'  => array(14 => 0.5),
-			'pattern-color'    => $_WATER_COLOR,
-			'pattern-stroke'   => array(14 => 1),
+			'level'           => 1,
+			'pattern-zooms'   => range(10,18),
+			'pattern-file'    => 'landuse-wetland',
+			'pattern-size'    => array(13 => 18, 15 => 24),
+			'pattern-margin'  => array(14 => 1.0),
+			'pattern-opacity' => array(14 => 1.0),
+			'pattern-color'   => $_WATER_COLOR,
+			'smooth' => 1,
 		),		
 );
 

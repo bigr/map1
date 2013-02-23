@@ -36,8 +36,8 @@ function urb_name_opacity($zoom,$grade) {
 
 $URB_NAME_UPPERCASE_SIZE = array(5 => 25, 13 => 30);
 
-$URB_NAME_SIZE_ZOOM_EXPEX = array(4 => 1.72,5 => 1.30, 8 => 1.40, 9 => 1.45, 12 => 1.45,13 => 1.45);
-$URB_NAME_SIZE_GRADE_EXPEX = array(5 => 1.112,8 => 1.105, 12 => 1.08,30 => 1.10);
+$URB_NAME_SIZE_ZOOM_EXPEX = array(4 => 1.72,5 => 1.30, 8 => 1.40, 9 => 1.45, 12 => 1.45,13 => 1.4);
+$URB_NAME_SIZE_GRADE_EXPEX = array(5 => 1.105,8 => 1.09, 15 => 1.075,30 => 1.065);
 
 /**
  * Urb name text size grade x zoom maping
@@ -67,7 +67,7 @@ function urb_name_dy($zoom,$grade) {
  * Urb name wrap width grade x zoom maping
  */
 function urb_name_wrap_width($zoom,$grade) {
-	return urb_name_size($zoom,$grade) * 5;
+	return urb_name_size($zoom,$grade) * 4;
 }
 
 /**

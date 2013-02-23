@@ -51,6 +51,7 @@ return <<<EOD
 		landuse,
 		"natural",			
 		way_area,
+		osm_id,
 		$cols
 	FROM waterarea_text
 	WHERE

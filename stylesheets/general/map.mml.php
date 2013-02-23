@@ -42,6 +42,12 @@
 			<?php if ( $RENDER_WATERS ): ?>
 				,"style/~waters.mss"
 			<?php endif; ?>
+			<?php if ( $RENDER_AEROWAY ): ?>
+				,"style/~aeroway.mss"
+			<?php endif; ?>
+			<?php if ( $RENDER_PISTEWAY ): ?>
+				,"style/~pisteway.mss"
+			<?php endif; ?>
 			<?php if ( $RENDER_HIGHWAY ): ?>
 				,"style/~highway.mss"
 			<?php endif; ?>
@@ -56,7 +62,7 @@
 			<?php endif; ?>
 			<?php if ( $RENDER_AERIALWAY ): ?>
 				,"style/~aerialway.mss"
-			<?php endif; ?>
+			<?php endif; ?>			
 		<?php endif; ?>
 		<?php if ( $RENDER_CONTOUR ): ?>
 			,"style/~contour.mss"
@@ -139,6 +145,14 @@
 					if ( $RENDER_WATERS ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/waters.mml.php";
+					}
+					if ( $RENDER_PISTEWAY ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/pisteway.mml.php";
+					}
+					if ( $RENDER_AEROWAY ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/aeroway.mml.php";
 					}					
 					if ( $RENDER_HIGHWAY ) {
 						if ( !$first ) echo ','; $first = false;

@@ -75,7 +75,7 @@ function sql_waterarea($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	$waterwayCol = _getWaterwayColSql();	
 	$propertyWhereQuery = getPropertyWhereQuery($WATERAREA);
 return <<<EOD
-	SELECT
+	SELECT	    
 	    way,				
 		(CASE
 			WHEN waterway IN ('dock','dam') or landuse IN ('basin','reservoir') THEN CAST('yes' AS text)

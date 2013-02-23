@@ -16,7 +16,7 @@
 		    <?php if ( !empty($a['zooms']) &&  in_array($zoom,$a['zooms']) ):?>
 			<?php echo $selector?>::level<?php echo $a['level']?> {					
 			    polygon-fill: <?php echo linear($a['color'],$zoom)?>;
-			    polygon-smooth: 1;
+			    polygon-smooth: <?php echo !empty($a['smooth']) ? $a['smooth'] : 0  ?>;
 			}
 		    <?php endif;?>
 		    <?php if ( !empty($a['pattern-zooms']) && in_array($zoom,$a['pattern-zooms']) ): ?>
@@ -34,11 +34,38 @@
 					)
 				?>');
 			    <?php endif; ?>
-			    polygon-smooth: 1;
+			    polygon-pattern-smooth: <?php echo !empty($a['smooth']) ? $a['smooth'] : 0  ?>;
 			}
 		    <?php endif; ?>
 		<?php endforeach; ?>
 	}
+	
+	.landcover_line[zoom = <?php echo $zoom?>] {
+	<?php foreach ( $LANDCOVER_LINE AS $selector => $a ): ?>	    
+	    <?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
+		<?php echo $selector?> {
+		    <?php if ( !empty($a['pattern-file']) ): ?>			
+			line-pattern-file: url('../../general/pattern/~<?php echo $a['pattern-file']?>-<?php echo $zoom?>.png');
+		    <?php endif; ?>		    
+		    line-color: <?php echo empty($a['color']) ? '#000000' : linear($a['color'],$zoom)?>;
+		    line-width: <?php echo empty($a['width']) ? 1.0 : linear($a['width'],$zoom)?>;
+		    line-opacity: <?php echo empty($a['opacity']) ? 1.0 : linear($a['opacity'],$zoom)?>;		    
+         }
+	    <?php endif; ?>
+	<?php endforeach; ?>
+    }
+    
+    .landcover_point[zoom = <?php echo $zoom?>] {
+	<?php foreach ( $LANDCOVER_POINT AS $selector => $a ): ?>	    
+	    <?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
+		<?php echo $selector?> {
+		    <?php if ( !empty($a['symbol-file']) ): ?>
+                         point-file: url('../../general/symbol/~<?php echo $a['symbol-file']?>-<?php echo $zoom?>-<?php echo empty($a['symbol-color']) ? '#000000' : linear($a['symbol-color'],$zoom)?>.png');			 
+		    <?php endif; ?>
+                }
+	    <?php endif; ?>
+	<?php endforeach; ?>
+    }    
 	
 	<?php if ( in_array($zoom, $RESIDENTIALCOVER_HACK_ZOOMS) ):?>
 	.residentialcoverhack[zoom = <?php echo $zoom?>] {
