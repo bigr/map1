@@ -221,6 +221,50 @@ html,body,input,textarea {
 	bottom: 13px;
 }
 
+
+.dialog.donation {
+	display: block;
+	left: 0;
+	margin: 20px;
+}
+
+.dialog.donation .header img {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	margin: 0px;	
+}
+
+.dialog.donation .header h1 {
+	margin-left: 50px;
+}
+
+
+.dialog.donation .content p {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	font-size: 1.3em;
+	line-height: 1.5em;
+}
+
+.dialog.donation .content form {
+	display: block;
+	text-align: center;	
+	width: 96%;		
+}
+
+
+.dialog.donation .content form input {		
+	background: transparent;
+	float: none;
+}
+
+.dialog.donation .footer {
+	background: rgba(0,0,0,0.5);	
+	text-align: center;
+	padding: 16px 0px;
+}
+
 #button-start {
 	top: -24px;
 	left: -24px;			
