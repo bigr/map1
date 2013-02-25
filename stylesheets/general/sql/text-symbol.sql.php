@@ -7,7 +7,9 @@ require_once "sql/symbol.sql.php";
 
 function sql_text_symbol_short($priority = null) {
     return "
-	SELECT * FROM text_symbol
+	SELECT * FROM text_symbol TS
+	JOIN symbol_density D ON TS.osm_id = D.osm_id
+	ORDER BY grade DESC
     ";
 }
 

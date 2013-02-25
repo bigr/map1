@@ -6,12 +6,12 @@ function download {
     OVERPASS_SERVERS=( "http://overpass-api.de/api"  "http://overpass.osm.rambler.ru/cgi" )
     OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}
     DB=gis_eu
-    LAT_START=45 #30
-    LON_START=10 #-20
-    LAT_END=55 #80
-    LON_END=20 #52
-    LAT_STEP=10
-    LON_STEP=10
+    LAT_START=49 #30
+    LON_START=12 #-20
+    LAT_END=51 #80
+    LON_END=18 #52
+    LAT_STEP=2
+    LON_STEP=6
     i=0
     str=""
     #qs="${1}" 
@@ -42,7 +42,7 @@ function download {
 		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
 		done			
 		if [ -f "/tmp/$2.o5m" ]; then
-		    ./osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
+		    /home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
 		    FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
 		    FS2=$(stat -c%s "/tmp/~$2.o5m")
 		    if [ $FS1 -ge $FS2 ]; then
@@ -64,6 +64,10 @@ function download {
     case "$3" in
 
 	point)
+	    echo "DROP TABLE $2; DROP INDEX $2_point_pkey,$2_point_index;" | psql -d $DB
+	    ;;
+
+	pointex)
 	    echo "DROP TABLE $2; DROP INDEX $2_point_pkey,$2_point_index;" | psql -d $DB
 	    ;;
 
@@ -92,7 +96,9 @@ function download {
 	point)
 	    echo "ALTER TABLE $2_point RENAME TO $2; DROP TABLE $2_polygon; DROP TABLE $2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
 	    ;;
-
+	pointex)
+	    echo "CREATE TABLE $2 AS $4; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB	    
+	    ;;
 	line)
 	    echo "ALTER TABLE $2_line RENAME TO $2; DROP TABLE $2_polygon; DROP TABLE $2_point,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
 	    ;;
@@ -116,7 +122,7 @@ q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"river|stream|ditch|canal\"];);
 #download q waterway line
 
 q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[boundary=\"administrative\"];);(._;way(r););(._;node(w);)" )
-download q adminboundary polygon
+#download q adminboundary polygon
 
 q=(
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[historic]"
@@ -127,7 +133,9 @@ q=(
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"]"
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);)"
 )
-#download q symbol point
+download q symbol pointex \
+    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
+
 
 
 

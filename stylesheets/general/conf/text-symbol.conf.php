@@ -1,6 +1,9 @@
 <?php
 require_once "conf/text.conf.php";
 require_once "conf/symbol.conf.php";
+
+$TEXT_SYMBOL_DENSITY = array(12 => 12,13 => 60, 14 => 220, 15 => 900,16 => 50000);
+
 $TEXT_SYMBOL = array(
 	"[tourism='information'][information='guidepost']" => array(
 			'zooms' => array(13 => 4, 14 => 4, 15 => 3,16 => 3, 17 => 3, 18 => 3),

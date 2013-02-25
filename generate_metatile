@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
-MAPNIK_MAP_FILES="countryfill;landcover;hillshade;building;boundary;route;way;contour;fishnet;symbol;text"
-LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"4":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
+MAPNIK_MAP_FILES="countryfill;landcover;hillshade;contour;building;route;way;boundary;fishnet;symbol;text"
+LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"7":{"colorToAlpha": [255,255,255,255], "opacity": 1.0}}'
 MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$3"
 TILE_PATH="/home/klinger/mymap/map/tiles"
 
-#MAPNIK_MAP_FILES="route"
+#LAYER_OPTIONS='{"0":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"1":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
+#MAPNIK_MAP_FILES="hillshade;boundary;contour"
+
+
+#MAPNIK_MAP_FILES="symbol;text"
+#LAYER_OPTIONS='{}'
 
 export MAPNIK_MAP_FILES
 export LAYER_OPTIONS
@@ -29,6 +34,12 @@ Jizerky)
 	;;
 Tatry)
 	BB="19.594,48.88,20.629,49.478"	
+	;;
+OkoliTurnova)	
+	BB="14.9590694,50.3987186,15.6006272,50.8716425"	
+	;;
+PecPodSnezkou)
+	BB="15.6851092,50.6206644,15.8456919,50.6989886"
 	;;
 *)
 	BB=$4

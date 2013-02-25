@@ -11,7 +11,7 @@ function waterway_grade2dist($grade) {
  */
 function waterway_grades($zoom,$grade) {	
 	if ( $zoom < 7 ) return false;
-	return  waterway_width($zoom,$grade) > linear(array(7 => 0.5, 9 => 1.0, 11 => 0.35, 12 => 0.25),$zoom);
+	return  waterway_width($zoom,$grade) > linear(array(7 => 0.5, 9 => 1.0, 11 => 0.35, 12 => 0.25, 13 => 0),$zoom);
 }
 
 $_WATER_COLOR = array( 7 => '#5195cd', 10 => '#0066bb');

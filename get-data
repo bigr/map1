@@ -2,7 +2,7 @@
 
 DATA_TILE_DIR="/home/klinger/mymap/data/tiles"
 SQLITE_TILE_DIR="$DATA_TILE_DIR/sqlite"
-ASTER_TILE_DIR="$DATA_TILE_DIR/aster"
+ASTER_TILE_DIR="$DATA_TILE_DIR/srtm"
 
 SQLITE_DATA_CACHE_SIZE=10000000000 #10GB
 ASTER_DATA_CACHE_SIZE=10000000000 #10GB
@@ -52,7 +52,7 @@ if [ ! -f "$SQLITE_TILE_DIR/$1.$2.db" ]; then
 			while true; do				
 				i=$(($i+1))
 				server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-				wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];(node($lat_from,$lon_from,$lat_to,$lon_to);<;>;);out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > /tmp/~$1.$2.o5m
+				wget -q -T 86400 -O - "$server/interpreter?data=[timeout:86400];(node($lat_from,$lon_from,$lat_to,$lon_to);<;>;);out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > /tmp/~$1.$2.o5m
 				if [ $? -ne 0 ]; then continue; fi
 				o5m2sqlite $SQLITE_TILE_DIR/$1.$2.db /tmp/~$1.$2.o5m notfinal
 				if [ $? -ne 0 ]; then continue; fi
@@ -101,9 +101,11 @@ if [ ! -f "$ASTER_TILE_DIR/~$1.$2.contours.shp" ]; then
 	gdal_contour -snodata -9999 -a ele -i 10 /tmp/~$1.$2.aster.tif "$ASTER_TILE_DIR/~$1.$2.contours.shp"
 fi
 
-#echo $LON_START $LAT_START $LON_END $LAT_END
+echo $LON_START $LAT_START $LON_END $LAT_END
 
 php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
+
+python /home/klinger/mymap/generate_osmcsymbols.py gis_eu
 
 python /home/klinger/mymap/relations2lines/relations2lines5.py gis_eu $LON_START $LAT_START $LON_END $LAT_END
 

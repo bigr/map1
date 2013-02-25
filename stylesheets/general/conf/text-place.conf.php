@@ -8,12 +8,12 @@ require_once "conf/text.conf.php";
  */
 function urb_priorities($zoom,$grade) {		
 	$sz = urb_name_size($zoom,$grade);
-	$factor = linear(array(11 => 1, 12 => 1.3),$zoom);
-	if ( $sz > 120*$factor ) return -1;
-	if ( $sz > 40*$factor ) return 0;
-	if ( $sz > 30*$factor ) return 1;
-	if ( $sz > 25*$factor) return 2;
-	if ( $sz > 9.5 ) return 3;
+	$factor = linear(array(5 => 0.7, 8 => 0.8, 11 => 1, 12 => 1.3, 15 => 1.0),$zoom);
+	if ( $sz > 125*$factor ) return -1;
+	if ( $sz > 30*$factor ) return 0;
+	if ( $sz > 22*$factor ) return 1;
+	if ( $sz > 11*$factor) return 2;
+	if ( $sz > 9 ) return 3;
 	if ( $sz > 0.8 ) return 4;		
 	return false;
 }
@@ -96,12 +96,12 @@ $URB_NAME_COLUMN = array(
 function suburb_priorities($zoom,$grade) {	
 	$sz = suburb_name_size($zoom,$grade);
 	$factor = linear(array(11 => 1, 12 => 1.3),$zoom);
-	if ( $sz > 100*$factor ) return -1;
-	if ( $sz > 50*$factor ) return 0;
-	if ( $sz > 40*$factor ) return 1;
-	if ( $sz > 30*$factor) return 2;
-	if ( $sz > 15 ) return 3;
-	if ( $sz > 1.0 ) return 4;		
+	if ( $sz > 110*$factor ) return -1;
+	if ( $sz > 40*$factor ) return 0;
+	if ( $sz > 25*$factor ) return 1;
+	if ( $sz > 18*$factor) return 2;
+	if ( $sz > 11*$factor ) return 3;
+	if ( $sz > 1.0*$factor ) return 4;		
 	return false;
 }
  

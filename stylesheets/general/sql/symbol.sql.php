@@ -28,7 +28,7 @@ function getSymbolGradeSQl() {
 		WHEN $historic='castle' AND ($castle_type IN ('stately','schloss','burg;schloss') OR $castle_type IS NULL) AND $ruins = 'no' THEN 2.0
 		WHEN $historic='castle' AND ($castle_type IN ('defensive','burg','fortress')) AND $ruins='yes' THEN 1.8
 		WHEN $historic='ruins' OR $ruins='yes' THEN 1.3
-		WHEN T.building='church' OR ($amenity='place_of_worship' AND COALESCE($place_of_worship,$place_of_worship_type,T.building,$historic) NOT IN ('chapel','monastery','wayside_shrine','wayside_cross')) THEN 1.0
+		WHEN T.building='church' OR ($amenity='place_of_worship' AND COALESCE($place_of_worship,$place_of_worship_type,T.building,$historic,'church') NOT IN ('chapel','monastery','wayside_shrine','wayside_cross')) THEN 1.0
 		WHEN COALESCE($place_of_worship_type,$place_of_worship,$historic)='monastery' THEN 2.0
 		WHEN $amenity = 'theatre' THEN 0.5
 		WHEN $tourism = 'museum' THEN 0.8
@@ -47,7 +47,9 @@ function getSymbolGradeSQl() {
 
 function sql_symbol_short() {
     return "
-	SELECT * FROM symbols
+	SELECT * FROM symbols S
+	JOIN symbol_density D ON S.osm_id = D.osm_id
+	ORDER BY grade DESC
     ";
 }
 

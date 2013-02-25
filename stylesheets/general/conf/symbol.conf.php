@@ -5,6 +5,8 @@ require_once "conf/waters.conf.php";
 
 $_SYMBOL_ATTRACTIVE_COLOR = array(12 => '#aa00aa');
 
+$SYMBOL_DENSITY = array(11 => 5, 12 => 20,13 => 80, 14 => 300, 15 => 1000,16 => 20000);
+
 /**
  * Zoom x symbol look maping
  */
@@ -60,17 +62,17 @@ $SYMBOL = array(
 			'symbol-size' => array(12=>14,15=>30),
 		),
 	
-	"[building='church'][grade<4.5],[amenity='place_of_worship'][historic!='no'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade<4.5]" => array(
+	"[building='church'][grade<4.5],[amenity='place_of_worship'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade<4.5]" => array(
 			'zooms' => range( 13,18),
 			'symbol-file' => 'church',
 			'symbol-size' => array(13=>15,15=>20),
 		),	
-	"[building='church'][grade>4.5][grade<6.0],[amenity='place_of_worship'][historic!='no'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade>4.5][grade<6.0]" => array(
+	"[building='church'][grade>4.5][grade<6.0],[amenity='place_of_worship'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade>4.5][grade<6.0]" => array(
 			'zooms' => range( 13,18),
 			'symbol-file' => 'church',			
 			'symbol-size' => array(13=>17,15=>25),
 		),	
-	"[building='church'][grade>6.0],[amenity='place_of_worship'][historic!='no'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade>6.0]" => array(
+	"[building='church'][grade>6.0],[amenity='place_of_worship'][historic!='monastery'][historic!='wayside_shrine'][historic!='wayside_cross'][building!='chapel'][\"place_of_worship:type\"!='chapel'][place_of_worship!='chapel'][\"place_of_worship:type\"!='monastery'][place_of_worship!='monastery'][grade>6.0]" => array(
 			'zooms' => range( 12,18),
 			'symbol-file' => 'church',
 			'symbol-color' => $_SYMBOL_ATTRACTIVE_COLOR,

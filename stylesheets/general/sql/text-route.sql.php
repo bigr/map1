@@ -46,3 +46,15 @@ return <<<EOD
 	ORDER BY $order
 EOD;
 }
+
+
+function sql_text_osmcsymbol($priority, $cols = '0',$where = '1 = 1',$order = 'ST_LENGTH(way) DESC') {
+return <<<EOD
+    SELECT
+	way,
+	file
+    FROM routes R
+    JOIN osmcsymbols O ON O.osm_id = R.osm_id
+    ORDER BY $order
+EOD;
+}

@@ -13,7 +13,7 @@
 					line-width: <?php echo exponential($ROUTE_HIKING_WIDTH,$zoom)?>;
 					line-opacity: <?php echo linear($ROUTE_HIKING_OPACITY,$zoom)?>;
 					
-					<?php foreach( range(0,12) as $highway_grade ):?>
+					<?php foreach( range(0,13) as $highway_grade ):?>
 						<?php foreach( array(-1,1) as $offsetside ): ?>
 							[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>] {
 								line-offset: <?php echo $offsetside * (exponential($ROUTE_HIKING_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0) ?>;

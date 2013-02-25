@@ -53,3 +53,4 @@ local.properties
 /stderr
 stderr.txt
 stdout.txt
+/osmcsymbol/generated

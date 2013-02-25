@@ -3,7 +3,7 @@
 ?>
 
 <?php foreach ( $RENDER_ZOOMS as $zoom ):?>
-    .symbol[zoom = <?php echo $zoom?>] {
+    .symbol[zoom = <?php echo $zoom?>][count < <?=linear($SYMBOL_DENSITY,$zoom)?>] {
 	<?php foreach ( $SYMBOL AS $selector => $a ): ?>	    
 	    <?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
 		<?php echo $selector?> {

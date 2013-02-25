@@ -170,3 +170,74 @@ ROUTE_HIKING_LOCAL   => array(13 => 12, 15 => 14),
 ROUTE_HIKING_RUIN    => array(14 => 12, 15 => 13),
 ROUTE_HIKING_UNKNOWN => array(14 => 12, 15 => 13),
 );
+
+
+/**
+ * Route ref text size grade x zoom maping
+ */
+$ROUTE_NAME_SIZE = array(
+ROUTE_HIKING_MAJOR   => array(13 => 12, 15 => 15),
+ROUTE_HIKING_LOCAL   => array(13 => 12, 15 => 14),
+ROUTE_HIKING_RUIN    => array(14 => 12, 15 => 13),
+ROUTE_HIKING_UNKNOWN => array(14 => 12, 15 => 13),
+);
+
+
+
+
+
+/**
+ * Zoom -> grade -> route name visibility/render priority maping
+ */
+$ROUTE_OSMCSYMBOL_PRIORITIES = array (
+13 => 4,		
+14 => 4,	
+15 => 3,
+16 => 3,
+17 => 2,
+18 => 2,
+);
+
+
+
+/**
+ * Route osmcsymbol text size grade x zoom maping
+ */
+$ROUTE_OSMCSYMBOL_SIZE = array(13 => 12);
+
+$ROUTE_REF_MINIMUM_DISTANCE  = array(
+ROUTE_BICYCLE_ICN => array(15 => 150),
+ROUTE_BICYCLE_NCN => array(15 => 150),
+ROUTE_BICYCLE_RCN => array(15 => 150),
+ROUTE_BICYCLE_LCN => array(15 => 150),
+);
+/**
+ * Height of the route ref shield
+ */
+$ROUTE_REF_SHIELD_HEIGHT = array(
+ROUTE_BICYCLE_ICN => array(13 => 12.5),
+ROUTE_BICYCLE_NCN => array(13 => 12.5),
+ROUTE_BICYCLE_RCN => array(13 => 12.5),
+ROUTE_BICYCLE_LCN => array(13 => 12.5),
+);
+
+/**
+ * Width of the one letter in route ref shield
+ */
+$ROUTE_REF_SHIELD_LETTER_WIDTH = array(
+ROUTE_BICYCLE_ICN => array(13 =>  6),
+ROUTE_BICYCLE_NCN => array(13 =>  6),
+ROUTE_BICYCLE_RCN => array(13 =>  6),
+ROUTE_BICYCLE_LCN => array(13 =>  6),
+);
+
+/**
+ * Width padding of the route ref shield
+ */
+$ROUTE_REF_SHIELD_PADDING_WIDTH = $ROUTE_REF_SHIELD_LETTER_WIDTH;
+
+/**
+ * Background color of the route ref shield
+ */
+$ROUTE_OSMCSYMBOL_MINDISTANCE = array(13=>15);
+
