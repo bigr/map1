@@ -16,6 +16,7 @@ function _getRailwayGradeSql() {
 				WHEN service IN ('siding','spur','yeard') THEN 4
 				ELSE 2
 			END) 
+			WHEN $railwayCol IN ('preserved','preserved_rail') THEN 4
 			WHEN $railwayCol = 'light_rail' THEN 3
 			WHEN $railwayCol = 'disused' THEN 5
 		END)
@@ -62,11 +63,14 @@ return <<<EOD
 			is_construction,
 			$layerSql AS layer,
 			$cols,
-			osm_id
+			osm_id,
+			ST_Length(Transform(way,900913)) AS
+			    way_length
 		FROM railway
 		WHERE
 				    railway IS NOT NULL
 			    AND osm_id > 0			    
-			    AND ($where)		
+			    AND ($where)
+		ORDER BY ($railwayGradeSql), osm_id DESC
 EOD;
 }

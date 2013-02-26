@@ -148,7 +148,7 @@ return <<<EOD
 	    osm_id,
 		COALESCE(int_ref,CAST('no' AS text)) AS
 	    int_ref,
-		ST_Length(way) AS
+		ST_Length(Transform(way,900913)) AS
 	    way_length,
 	    $cols			
     FROM highway

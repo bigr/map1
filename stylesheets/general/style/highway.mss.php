@@ -63,11 +63,11 @@
 				[is_bridge = 'no'][layer = 0] {															
 					line-cap: round;
 				}
-				[is_tunnel = 'yes'][way_length > <?php echo $MIN_TUNNEL_SIZE*getPixelSize($zoom)?>] {
-					line-color: lighten(desaturate(<?php echo linear($ROAD_STROKE_COLOR[$grade],$zoom)?>,30),15);
+				[is_tunnel = 'yes'][is_construction = 'no'][way_length > <?php echo $MIN_TUNNEL_SIZE*getPixelSize($zoom)?>] {
+					line-color: lighten(desaturate(<?php echo linear($ROAD_STROKE_COLOR[$grade],$zoom)?>,50),15);
 				}	
 				[is_construction = 'yes'] {
-					line-color: lighten(desaturate(<?php echo linear($ROAD_STROKE_COLOR[$grade],$zoom)?>,60),35);
+					line-color: lighten(desaturate(<?php echo linear($ROAD_STROKE_COLOR[$grade],$zoom)?>,70),45);
 				}							
 			}
 			<?php endif;?>		
@@ -88,13 +88,13 @@
 				line-cap: round; 
 				line-join: round;
 				
-				[is_tunnel = 'yes'][way_length > <?php echo $MIN_TUNNEL_SIZE*getPixelSize($zoom)?>] {
-					line-color: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,30),15);
+				[is_tunnel = 'yes'][is_construction = 'no'][way_length > <?php echo $MIN_TUNNEL_SIZE*getPixelSize($zoom)?>] {
+					line-color: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,50),15);
 				}
 				
 				
 				[is_construction = 'yes'] {
-					line-color: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,60),35);
+					line-color: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,70),35);
 				}
 				
 				

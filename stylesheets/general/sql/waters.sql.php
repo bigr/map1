@@ -52,6 +52,8 @@ return <<<EOD
 				END) AS 
 			is_tunnel,				
 			$layerSql AS layer,
+			    ST_Length(Transform(way,900913)) AS
+			way_length,
 			$cols
 		FROM waterway L
 		LEFT JOIN stream S ON S.osm_id = L.osm_id

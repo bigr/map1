@@ -33,14 +33,16 @@
 			text-dy: 8;
 		}*/
 	<?php endforeach;?>
-	<?php $priority = $ROUTE_OSMCSYMBOL_PRIORITIES[$zoom];?>
-	.textOsmcsymbol.priority<?php echo $priority?>[zoom = <?php echo $zoom?>] {			
-		shield-face-name: "<?php echo FONT_BOOK_SANS ?>";		
-		shield-placement: line;
-		shield-opacity: 0.9;
-		shield-min-distance: <?php echo round(exponential($ROUTE_OSMCSYMBOL_MINDISTANCE,$zoom))?>;
-		shield-spacing: 300;			
-		shield-file: url('../../../osmcsymbol/generated/[file].png');
-	}
+	<?php if ( !empty($ROUTE_OSMCSYMBOL_PRIORITIES[$zoom]) ): ?>
+		<?php $priority = $ROUTE_OSMCSYMBOL_PRIORITIES[$zoom];?>
+		.textOsmcsymbol.priority<?php echo $priority?>[zoom = <?php echo $zoom?>] {			
+			shield-face-name: "<?php echo FONT_BOOK_SANS ?>";		
+			shield-placement: line;
+			shield-opacity: 0.9;
+			shield-min-distance: <?php echo round(exponential($ROUTE_OSMCSYMBOL_MINDISTANCE,$zoom))?>;
+			shield-spacing: 300;			
+			shield-file: url('../../../osmcsymbol/generated/[file].png');
+		}
+	<?php endif; ?>
 <?php endforeach;?>
 

@@ -1,5 +1,6 @@
 <?php
 	require_once "sql/railway.sql.php";
+	require_once "conf/sqlite.php";	
 ?>
 {
 	"id": "railway-layer<?php echo $layer?>",

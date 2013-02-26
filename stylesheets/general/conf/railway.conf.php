@@ -60,11 +60,11 @@ RAILWAY_DISUSED => array( 13 => '#888888', 13 => '#888888', 17 => '#888888'),
  * Railway width grade x zoom maping
  */
 $RAILWAY_WIDTH = array(
-RAILWAY_MAIN    => array(  9 => 3.0, 13 => 4.5, 17 => 6.0),
-RAILWAY_BRANCH  => array( 10 => 3.0, 13 => 4.0, 17 => 5.0),
-RAILWAY_LIGHT   => array( 11 => 3.0, 13 => 3.5, 17 => 4.2),
-RAILWAY_SIDING  => array( 12 => 3.0, 13 => 3.0, 17 => 3.5),
-RAILWAY_DISUSED => array( 13 => 3.0, 13 => 3.0, 17 => 3.0),
+RAILWAY_MAIN    => array(  9 => 3.0, 13 => 5.5, 18 => 8.0),
+RAILWAY_BRANCH  => array( 10 => 3.0, 13 => 5.0, 18 => 7.0),
+RAILWAY_LIGHT   => array( 11 => 3.0, 13 => 4.5, 18 => 6.2),
+RAILWAY_SIDING  => array( 12 => 3.0, 13 => 4.0, 18 => 5.5),
+RAILWAY_DISUSED => array( 13 => 3.0, 13 => 3.5, 18 => 4.0),
 );
 
 
@@ -83,9 +83,9 @@ RAILWAY_DISUSED => array(            13 => 0.5, 17 => 0.5),
  * Railway fill dash grade x zoom maping
  */
 $RAILWAY_FILL_DASH = array(
-RAILWAY_MAIN    => array(  9 => array(2,4), 13 => array(6,12), 17 => array(6,12)),
-RAILWAY_BRANCH  => array( 10 => array(2,4), 13 => array(5,10), 17 => array(5,10)),
-RAILWAY_LIGHT   => array( 11 => array(2,4), 13 => array(4,8), 17 => array(4,8)),
-RAILWAY_SIDING  => array( 12 => array(2,4), 13 => array(3,6), 17 => array(3,6)),
-RAILWAY_DISUSED => array(                   13 => array(2,2), 17 => array(2,2)),
+RAILWAY_MAIN    => array(  9 => array(2,4), 13 => array(7,14), 17 => array(8,16)),
+RAILWAY_BRANCH  => array( 10 => array(2,4), 13 => array(6,12), 17 => array(7,14)),
+RAILWAY_LIGHT   => array( 11 => array(2,4), 13 => array(5,10), 17 => array(6,12)),
+RAILWAY_SIDING  => array( 12 => array(2,4), 13 => array(4,8), 17 => array(5,10)),
+RAILWAY_DISUSED => array(                   13 => array(3,3), 17 => array(4,4)),
 );
