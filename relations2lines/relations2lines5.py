@@ -17,7 +17,7 @@ def main():
     print "  Searching RelationIDs and Lines in route..."
     # Create connection to DB server.
 
-    connection = connect("dbname='" + sys.argv[1] + "' user='klinger' password='' port=5432 host='/tmp/'");
+    connection = connect("dbname='" + sys.argv[1] + "' user='klinger' password='' port=5432");
     relationCursor = connection.cursor()
     auxiliaryCursor = connection.cursor()
     wayCursor = connection.cursor()

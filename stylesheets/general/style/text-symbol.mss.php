@@ -3,7 +3,7 @@
 ?>
 
 <?php foreach ( $RENDER_ZOOMS as $zoom ):?>
-    .textSymbol[zoom = <?php echo $zoom?>][count < <?=linear($TEXT_SYMBOL_DENSITY,$zoom)?>] {
+    .textSymbol[zoom = <?php echo $zoom?>][count < <?php echo linear($TEXT_SYMBOL_DENSITY,$zoom)?>] {
 	<?php foreach ( $TEXT_SYMBOL as $selector => $a ): ?>
 	    <?php if ( !empty($a['zooms']) && array_key_exists($zoom, $a['zooms']) ): ?>
 		.priority<?php echo $a['zooms'][$zoom] ?><?php echo $selector?> {

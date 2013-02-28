@@ -8,7 +8,7 @@
 	"class": "contour",
 	"srs": "<?php echo SRS900913?>",
 	<?php if ( $TILE ): ?>	
-	<?php echo ds_shapefile_raw("/home/klinger/mymap/data/tiles/aster/~$TILE.contours.shp");?>
+	<?php echo ds_shapefile_raw("/home/klinger/mymap/data/tiles/srtm/~$TILE.contours.shp");?>
 	<?php else: ?>
 	<?php echo ds_pgis(sql_contour());?>
 	<?php endif; ?>

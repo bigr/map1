@@ -64,7 +64,7 @@ return <<<EOD
 			$layerSql AS layer,
 			$cols,
 			osm_id,
-			ST_Length(Transform(way,900913)) AS
+			ST_Length(ST_Transform(way,900913)) AS
 			    way_length
 		FROM railway
 		WHERE

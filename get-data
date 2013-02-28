@@ -103,6 +103,8 @@ fi
 
 echo $LON_START $LAT_START $LON_END $LAT_END
 
+./get_data_pgis_rect $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
+
 php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
 
 python /home/klinger/mymap/generate_osmcsymbols.py gis_eu

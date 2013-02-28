@@ -52,7 +52,7 @@ return <<<EOD
 				END) AS 
 			is_tunnel,				
 			$layerSql AS layer,
-			    ST_Length(Transform(way,900913)) AS
+			    ST_Length(ST_Transform(way,900913)) AS
 			way_length,
 			$cols
 		FROM waterway L

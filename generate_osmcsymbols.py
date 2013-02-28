@@ -2,6 +2,12 @@ from psycopg2 import *
 import sys
 from PIL import Image, ImageMath,ImageChops,ImageDraw
 import os.path
+import os
+import shutil
+
+if os.path.isdir("osmcsymbol/generated"):
+    shutil.rmtree("osmcsymbol/generated")
+os.makedirs("osmcsymbol/generated")
 
 COLORS = {
 	'white': '#ffffff',

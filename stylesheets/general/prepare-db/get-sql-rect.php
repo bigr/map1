@@ -1,9 +1,9 @@
 <?php
 
-    $LON_START = $argv[1];
-    $LAT_START = $argv[2];
-    $LON_END = $argv[3];
-    $LAT_END = $argv[4];
+    $LON_START = $argv[1] - ($argv[3] - $argv[1]) * 0.15;
+    $LAT_START = $argv[2] - ($argv[4] - $argv[2]) * 0.05;
+    $LON_END = $argv[3] + ($argv[3] - $argv[1]) * 0.15;
+    $LAT_END = $argv[4] + ($argv[4] - $argv[2]) * 0.05;
 
     if ( !defined('ROOT') ) {
         define('ROOT',dirname(dirname(dirname(__FILE__))));
@@ -17,7 +17,7 @@
     $sqls = array(
         array('symbol','symbols',sql_symbol),
         array('text-symbol','text_symbol',sql_text_symbol),
-        array('shield-peak','peak',sql_shieldPeak),
+        //array('shield-peak','peak',sql_shieldPeak),
         array('text-place','place',sql_text_place),        
         array('waters','waterways',sql_waterway),
         array('boundary','adminboundaries',sql_boundary),

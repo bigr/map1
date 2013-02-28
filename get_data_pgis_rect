@@ -1,17 +1,31 @@
 #!/usr/bin/env bash
 
+MARGIN_LAT_SIZE=0.05
+MARGIN_LON_SIZE=0.15
 
+LON_START=$1
+
+LAT_START=$2
+
+LON_END=$3
+
+LAT_END=$4
+
+
+LON_START=$(bc -l <<< "$LON_START-($LON_END - $LON_START)*$MARGIN_LON_SIZE")
+LAT_START=$(bc -l <<< "$LAT_START-($LAT_END - $LAT_START)*$MARGIN_LAT_SIZE")
+LON_END=$(bc -l <<< "$LON_END + ($LON_END - $LON_START)*$MARGIN_LON_SIZE")
+LAT_END=$(bc -l <<< "$LAT_END + ($LAT_END - $LAT_START)*$MARGIN_LAT_SIZE")
 
 function download {
     OVERPASS_SERVERS=( "http://overpass-api.de/api"  "http://overpass.osm.rambler.ru/cgi" )
     OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}
     DB=gis_eu
-    LAT_START=30
-    LON_START=-20
-    LAT_END=80
-    LON_END=52
+   
     LAT_STEP=2
-    LON_STEP=6
+    LON_STEP=2
+    LAT_STEP2=$(python <<< "print ($LAT_END - $LAT_START)*(1+2*$MARGIN_LAT_SIZE)/$LAT_STEP")
+    LON_STEP2=$(python <<< "print ($LON_END - $LON_START)*(1+2*$MARGIN_LON_SIZE)/$LON_STEP")
     i=0
     str=""
     #qs="${1}" 
@@ -22,47 +36,51 @@ function download {
     IFS=$OLD_IFS 
     #echo $qs2 
     #qs=("raz" "dva" "tri" )   
-    #for qq in "${qs[@]}"; do	
-	#for i_lat in $(eval echo "{$LAT_START..$LAT_END..$LAT_STEP}"); do
-	    #lat_from=$i_lat
-	    #lat_to=$(python <<< "print min($LAT_END,$i_lat+$LAT_STEP)")	    
-	    #for i_lon in $(eval echo "{$LON_START..$LON_END..$LON_STEP}"); do
-		#lon_from=$i_lon
-		#lon_to=$(python <<< "print min($LON_END,$i_lon+$LON_STEP)")
-		#q=${qq//%lon1%/$lon_from}
-		#q=${q//%lon2%/$lon_to}
-		#q=${q//%lat1%/$lat_from}
-		#q=${q//%lat2%/$lat_to}		
-		#i=$(($i+1))
-		#server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		#wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
-		#while [ $? -ne 0 ]; do
-		    #i=$(($i+1))
-		    #server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		    #wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
-		#done			
-		#if [ -f "/tmp/$2.o5m" ]; then
-		    #/home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
-		    #FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
-		    #FS2=$(stat -c%s "/tmp/~$2.o5m")
-		    #if [ $FS1 -ge $FS2 ]; then
-			#unlink "/tmp/~$2.o5m"
-		    #else			    
-			#unlink "/tmp/$2.o5m"
-			#mv "/tmp/~$2.o5m" "/tmp/$2.o5m"
-		    #fi
-		    #unlink "/tmp/~$2.$i_lon.$i_lat.o5m" 
-		#else
-		    #mv "/tmp/~$2.$i_lon.$i_lat.o5m" "/tmp/$2.o5m"
-		#fi
-	    #done
-	#done
-    #done
-    #/home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
-    #unlink "/tmp/$2.o5m"    
+    for qq in "${qs[@]}"; do	
+	for i_lat_index in $(eval echo "{1..$LAT_STEP}"); do
+	    i_lat=$(bc -l <<< "$LAT_START+($i_lat_index-1)*$LAT_STEP2")
+	    echo $i_lat
+	    lat_from=$i_lat
+	    lat_to=$(python <<< "print min($LAT_END,$i_lat+$LAT_STEP2)")	    
+	    for i_lon_index in $(eval echo "{1..$LON_STEP}"); do
+		i_lon=$(bc -l <<< "$LON_START+($i_lon_index-1)*$LON_STEP2")
+		echo $i_lon
+		lon_from=$i_lon
+		lon_to=$(python <<< "print min($LON_END,$i_lon+$LON_STEP2)")
+		q=${qq//%lon1%/$lon_from}
+		q=${q//%lon2%/$lon_to}
+		q=${q//%lat1%/$lat_from}
+		q=${q//%lat2%/$lat_to}		
+		i=$(($i+1))
+		server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
+		wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
+		while [ $? -ne 0 ]; do
+		    i=$(($i+1))
+		    server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
+		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
+		done			
+		if [ -f "/tmp/$2.o5m" ]; then
+		    /home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
+		    FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
+		    FS2=$(stat -c%s "/tmp/~$2.o5m")
+		    if [ $FS1 -ge $FS2 ]; then
+			unlink "/tmp/~$2.o5m"
+		    else			    
+			unlink "/tmp/$2.o5m"
+			mv "/tmp/~$2.o5m" "/tmp/$2.o5m"
+		    fi
+		    unlink "/tmp/~$2.$i_lon.$i_lat.o5m" 
+		else
+		    mv "/tmp/~$2.$i_lon.$i_lat.o5m" "/tmp/$2.o5m"
+		fi
+	    done
+	done
+    done
+    /home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
+    unlink "/tmp/$2.o5m"    
     
     case "$3" in
-    
+
 	point)
 	    echo "DROP TABLE $2; DROP INDEX $2_point_pkey,$2_point_index;" | psql -d $DB
 	    ;;
@@ -89,7 +107,7 @@ function download {
 	--slim --cache 30 \
 	--prefix $2 \
 	/tmp/$2.osm.bz2
-    #unlink /tmp/$2.osm.bz2
+    unlink /tmp/$2.osm.bz2
     
     case "$3" in
 
@@ -112,17 +130,15 @@ function download {
     
 }
 
+
+
+
+    
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[place~\"city|town|village|hamlet|isolated_dwelling|farm|suburb|neighbourhood|locality|island|islet\"]" )
-#download q places point
+download q places point
 
-q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"peak\"]" )
-download q peaks point
+    
 
-q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"river|stream|ditch|canal\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"river|stream|ditch|canal\"];);(._;node(w);)" )
-download q waterway line
-
-q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[boundary=\"administrative\"];);(._;way(r););(._;node(w);)" )
-#download q adminboundary polygon
 
 q=(
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[historic]"
@@ -133,14 +149,13 @@ q=(
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"]"
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);)"
 )
-#download q symbol pointex \
+download q symbol pointex \
     "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
-
-
-
 
 q=(
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)"
 )
+
+
 
 #download q route route
