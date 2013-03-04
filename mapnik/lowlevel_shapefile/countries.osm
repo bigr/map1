@@ -791,7 +791,7 @@
     <nd ref='-5389' />
     <nd ref='-2048' />
     <tag k='size' v='4' />
-    <tag k='text' v='Deutchland' />
+    <tag k='text' v='Deutschland' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-1528' action='modify' visible='true'>
