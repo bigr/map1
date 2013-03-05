@@ -12,10 +12,12 @@ LON_END=$3
 LAT_END=$4
 
 
-LON_START=$(bc -l <<< "$LON_START-($LON_END - $LON_START)*$MARGIN_LON_SIZE")
-LAT_START=$(bc -l <<< "$LAT_START-($LAT_END - $LAT_START)*$MARGIN_LAT_SIZE")
-LON_END=$(bc -l <<< "$LON_END + ($LON_END - $LON_START)*$MARGIN_LON_SIZE")
-LAT_END=$(bc -l <<< "$LAT_END + ($LAT_END - $LAT_START)*$MARGIN_LAT_SIZE")
+LON_START_TMP=$LON_START
+LON_START=$(bc -l <<< "$LON_START-($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
+LAT_START_TMP=$LAT_START
+LAT_START=$(bc -l <<< "$LAT_START-($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
+LON_END=$(bc -l <<< "$LON_END + ($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
+LAT_END=$(bc -l <<< "$LAT_END + ($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
 
 function download {
     OVERPASS_SERVERS=( "http://overpass-api.de/api"  "http://overpass.osm.rambler.ru/cgi" )

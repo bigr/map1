@@ -9,7 +9,7 @@ TILE_PATH="/home/klinger/mymap/map/tiles"
 #MAPNIK_MAP_FILES="hillshade;boundary;contour"
 
 
-#MAPNIK_MAP_FILES="symbol;text"
+#MAPNIK_MAP_FILES="text"
 #LAYER_OPTIONS='{}'
 
 export MAPNIK_MAP_FILES

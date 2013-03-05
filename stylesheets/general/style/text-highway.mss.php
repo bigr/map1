@@ -11,17 +11,21 @@
 			text-size: <?php echo round(exponential($ROAD_NAME_SIZE[$grade],$zoom))?>;
 			
 			text-halo-radius: <?php echo exponential($ROAD_NAME_HALO_RADIUS[$grade],$zoom)?>;
-			[is_construction = 'no'] {
+			[is_construction = 'no'][is_tunnel = 'no'] {
 				text-fill: <?php echo linear($ROAD_NAME_COLOR[$grade],$zoom)?>;
 				text-halo-fill: <?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>;
 			}
 			text-placement: line;
 			text-dy: 1;
 			text-label-position-tolerance: 100;
+			[is_tunnel = 'yes'][is_construction = 'no'] {
+				text-halo-fill: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,50),15);
+				text-fill: lighten(desaturate(<?php echo linear($ROAD_NAME_COLOR[$grade],$zoom)?>,50),15);
+			}									
+			
 			[is_construction = 'yes'] {
-				line-opacity: 0.3;
-				text-halo-fill: #777777;
-				text-fill: #ffffff;
+				text-halo-fill: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,70),35);
+				text-fill: lighten(desaturate(<?php echo linear($ROAD_NAME_COLOR[$grade],$zoom)?>,70),45);
 			}
 		}
 	<?php endforeach;?>

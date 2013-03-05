@@ -240,9 +240,9 @@ $LANDCOVER_LINE = array(
 		'opacity' => array(12 => 0.5, 15 => 0.8),
 	),
 	"[natural='rock']" => array(
-		'zooms' => range(12,18),
+		'zooms' => range(13,18),
 		'pattern-file' => 'rock',
-		'pattern-size' => array(13=>14,18=>32),
+		'pattern-size' => array(13=>13,18=>28),
 		'pattern-spacing' => array(14=>20),
 		'width' => array(14 => 0.0),
 		'color' => $_CONTOUR_COLOR,

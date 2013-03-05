@@ -16,21 +16,22 @@ LAT_SUBTILE_COUNT=4
 LON_SUBTILE_COUNT=4
 
 LON_START=$(./extract-aster/x2lon $1 8)
-LON_START=$(bc -l <<< "$LON_START - $MARGIN_LON_SIZE")
 LAT_START=$(./extract-aster/y2lat $(($2 + 1)) 8)
-LAT_START=$(bc -l <<< "$LAT_START - $MARGIN_LAT_SIZE")
-
 LON_END=$(./extract-aster/x2lon $(($1 + 1)) 8)
-LON_END=$(bc -l <<< "$LON_END + $MARGIN_LON_SIZE")
 LAT_END=$(./extract-aster/y2lat $2 8)
-LAT_END=$(bc -l <<< "$LAT_END + $MARGIN_LAT_SIZE")
 
-LON_SIZE=$(bc -l <<< "$LON_END - $LON_START - 2*$MARGIN_LON_SIZE")
-LAT_SIZE=$(bc -l <<< "$LAT_END - $LAT_START - 2*$MARGIN_LON_SIZE")
+LON_START_TMP=$LON_START
+LON_START=$(bc -l <<< "$LON_START-($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
+LAT_START_TMP=$LAT_START
+LAT_START=$(bc -l <<< "$LAT_START-($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
+LON_END=$(bc -l <<< "$LON_END + ($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
+LAT_END=$(bc -l <<< "$LAT_END + ($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
 
-LON_STEP=$(bc -l <<< "($LON_SIZE + 2*$MARGIN_LON_SIZE) / $LON_SUBTILE_COUNT")
-LAT_STEP=$(bc -l <<< "($LAT_SIZE + 2*$MARGIN_LAT_SIZE) / $LAT_SUBTILE_COUNT")
+LON_SIZE=$(bc -l <<< "$LON_END - $LON_START")
+LAT_SIZE=$(bc -l <<< "$LAT_END - $LAT_START")
 
+LON_STEP=$(bc -l <<< "$LON_SIZE / $LON_SUBTILE_COUNT")
+LAT_STEP=$(bc -l <<< "$LAT_SIZE / $LAT_SUBTILE_COUNT")
 
 mkdir -p $SQLITE_TILE_DIR
 
@@ -107,7 +108,6 @@ echo $LON_START $LAT_START $LON_END $LAT_END
 
 php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
 
-python /home/klinger/mymap/generate_osmcsymbols.py gis_eu
-
 python /home/klinger/mymap/relations2lines/relations2lines5.py gis_eu $LON_START $LAT_START $LON_END $LAT_END
 
+python /home/klinger/mymap/generate_osmcsymbols.py gis_eu

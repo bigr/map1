@@ -14,6 +14,7 @@ return <<<EOD
 		    CHAR_LENGTH(COALESCE(ncn_ref,rcn_ref,lcn_ref,ref)) AS
 		ref_length,
 		route,
+		ST_LENGTH(way) AS way_length,
 		$cols			
 	FROM route
 	WHERE
@@ -37,6 +38,7 @@ return <<<EOD
 		color,		    
 		name,		    
 		route,
+		ST_LENGTH(way) AS way_length,
 		$cols			
 	FROM route
 	WHERE
