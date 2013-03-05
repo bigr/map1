@@ -19,7 +19,7 @@ map1.Search = $class({
     search: function(query, i) {
         var self = this       
         $.ajax({            
-            url:"nominatim/search?q="+query+"&polygon=0&addressdetails=1&format=json",
+            url:"/nominatim/search?q="+query+"&polygon=0&addressdetails=1&format=json",
             success: function(data) {                
                     
                 var loc = new OpenLayers.LonLat(data[0].lon,data[0].lat).transform(
@@ -157,7 +157,7 @@ map1.Search = $class({
             )        
             language = window.navigator.userLanguage || window.navigator.language
             $.ajax({            
-                url:"nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
+                url:"/nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                
                     var nm = self._parseDisplayName(data['address'])
                     $('#panel-search .search').eq(-2).find('input[name="query"]').val(nm[0])
@@ -183,7 +183,7 @@ map1.Search = $class({
             )
             language = window.navigator.userLanguage || window.navigator.language     
             $.ajax({                
-                url:"nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
+                url:"/nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                        
                     var nm = self._parseDisplayName(data['address'])                
                     $('#panel-search .search:eq('+ (i+1) + ') input[name="query"]').val(nm[0])
@@ -213,7 +213,7 @@ map1.Search = $class({
         if ( updateInput == undefined || updateInput == true ) {  
             language = window.navigator.userLanguage || window.navigator.language
             $.ajax({                      
-                url:"nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
+                url:"/nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                         
                     var nm = self._parseDisplayName(data['address'])                                
                     $('#panel-search .search:eq('+i+') input[name="query"]').val(nm[0])
@@ -310,7 +310,7 @@ map1.Search = $class({
         }
         $('#panel-search .search:eq('+ (i) + ') .searchResult').html('<div class="loader"><img src="image/loader_light.gif"/></div>')
         this.whisperXhr = $.ajax({
-            url:"nominatim/search?q="+query+"&addressdetails=1&format=json",
+            url:"/nominatim/search?q="+query+"&addressdetails=1&format=json",
             success: function(data) {                
                 if ( !self.whisperActive[i] ) return
                 result = []                
