@@ -27,20 +27,18 @@ map1.Search = $class({
                     self._map.getProjectionObject()
                 )
                 
-                var name = self._parseDisplayName(data[0]['address'])
-                
-                
+                var nm = self._parseDisplayName(data[0]['address'])                                
                 
                 self._map.setCenter(loc)
                 if ( undefined === i  ) {
-                    $('#panel-search .search').eq(-1).find('input[name="query"]').val(name[0])
-                    $('#panel-search #wayPoints .search').eq(-1).find('.info').html(name[1]) 
+                    $('#panel-search .search').eq(-1).find('input[name="query"]').val(nm[0])
+                    $('#panel-search #wayPoints .search').eq(-1).find('.info').html(nm[1]) 
                     self._map.routing.appendWayPoint(loc,false)
                    
                 }
                 else {
-                    $('#panel-search .search:eq('+i+') input[name="query"]').val(name[0])
-                    $('#panel-search .search:eq('+i+') .info').html(name[1])
+                    $('#panel-search .search:eq('+i+') input[name="query"]').val(nm[0])
+                    $('#panel-search .search:eq('+i+') .info').html(nm[1])
                     self._map.routing.moveWayPoint(i,loc,false)                   
                 }
             }
@@ -161,9 +159,9 @@ map1.Search = $class({
             $.ajax({            
                 url:"nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                
-                    var name = self._parseDisplayName(data['address'])
-                    $('#panel-search .search').eq(-2).find('input[name="query"]').val(name[0])
-                    $('#panel-search #wayPoints .search').eq(-2).find('.info').html(name[1])                                
+                    var nm = self._parseDisplayName(data['address'])
+                    $('#panel-search .search').eq(-2).find('input[name="query"]').val(nm[0])
+                    $('#panel-search #wayPoints .search').eq(-2).find('.info').html(nm[1])                                
                 }
             })
         }
@@ -187,10 +185,10 @@ map1.Search = $class({
             $.ajax({                
                 url:"nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                        
-                    var name = self._parseDisplayName(data['address'])                
-                    $('#panel-search .search:eq('+ (i+1) + ') input[name="query"]').val(name[0])
+                    var nm = self._parseDisplayName(data['address'])                
+                    $('#panel-search .search:eq('+ (i+1) + ') input[name="query"]').val(nm[0])
                     $('#panel-search .search:eq('+ (i+1) + ') input[name="query"]').select()
-                    $('#panel-search .search:eq('+ (i+1) + ') .info').html(name[1])
+                    $('#panel-search .search:eq('+ (i+1) + ') .info').html(nm[1])
                 }
             })
         }
@@ -217,9 +215,9 @@ map1.Search = $class({
             $.ajax({                      
                 url:"nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                         
-                    var name = self._parseDisplayName(data['address'])                                
-                    $('#panel-search .search:eq('+i+') input[name="query"]').val(name[0])
-                    $('#panel-search .search:eq('+i+') .info').html(name[1])
+                    var nm = self._parseDisplayName(data['address'])                                
+                    $('#panel-search .search:eq('+i+') input[name="query"]').val(nm[0])
+                    $('#panel-search .search:eq('+i+') .info').html(nm[1])
                 }
             })
             this.updateRouteInfo()
@@ -339,11 +337,11 @@ map1.Search = $class({
                     }
                     
                     
-                    name = self._parseDisplayName(data[k].address)
+                    nm = self._parseDisplayName(data[k].address)                                                                               
                     
                     result.push({
-                        key: name[0],
-                        locality: name[1],
+                        key: nm[0],
+                        locality: nm[1],
                         type: data[k].type,
                         loc: new OpenLayers.LonLat(data[k].lon,data[k].lat).transform(
                             new OpenLayers.Projection("EPSG:4326"),
@@ -424,15 +422,15 @@ map1.Search = $class({
             return true
         }
         else {  
-            var name = [this.searchResult[i][j].key,this.searchResult[i][j].locality]          
+            var nm = [this.searchResult[i][j].key,this.searchResult[i][j].locality]          
             if ( i == $('#panel-search .search').length - 1 ) {
-                $('#panel-search .search').eq(-1).find('input[name="query"]').val(name[0])
-                $('#panel-search #wayPoints .search').eq(-1).find('.info').html(name[1]) 
+                $('#panel-search .search').eq(-1).find('input[name="query"]').val(nm[0])
+                $('#panel-search #wayPoints .search').eq(-1).find('.info').html(nm[1]) 
                 this._map.routing.appendWayPoint(this.searchResult[i][j].loc,false)
             }
             else {
-                $('#panel-search .search:eq('+i+') input[name="query"]').val(name[0])
-                $('#panel-search .search:eq('+i+') .info').html(name[1])
+                $('#panel-search .search:eq('+i+') input[name="query"]').val(nm[0])
+                $('#panel-search .search:eq('+i+') .info').html(nm[1])
                 this._map.routing.moveWayPoint(i,this.searchResult[i][j].loc,false)
             }
             this._removeWhisper(i)
@@ -652,7 +650,8 @@ map1.Search = $class({
         else {            
             name = locality
             desc = address['country']
-        }
-        return [name,desc];
+        }        
+        
+        return [name,desc]
      }
 });

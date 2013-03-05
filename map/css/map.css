@@ -463,8 +463,10 @@ html,body,input,textarea {
 	top: 1px;
 	left: 39px;
 	font-size: 20px;
-	width: 189px;	
-	
+	width: 255px;	
+	width:    -moz-calc(100% - 41px);
+    width: -webkit-calc(100% - 41px);
+    width:         calc(100% - 41px);	
 }
 
 #panel-search #wayPoints form.search .query .info {
