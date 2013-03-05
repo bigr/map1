@@ -315,8 +315,10 @@ html,body,input,textarea {
 	left: 64px;	
 	border-bottom-right-radius: 8px;	
 	min-height: 64px;
-	width: 320px;
-	max-width: 100%;
+	width: 384px;
+	max-width:    -moz-calc(100% - 64px - 16px);
+    max-width: -webkit-calc(100% - 64px - 16px);
+    max-width:         calc(100% - 64px - 16px);
 	padding: 0 8px 8px 8px;
 	z-index: 20001;	
 }
@@ -411,8 +413,11 @@ html,body,input,textarea {
 	display: block;
 }
 
-#panel-search #wayPoints form.search .query {	
-	width: 230px;
+#panel-search #wayPoints form.search .query {
+	width: 296px;
+	width:    -moz-calc(100% - 88px);
+    width: -webkit-calc(100% - 88px);
+    width:         calc(100% - 88px);
 	height: 40px;
 	background: rgba(255,255,255,1.0);
 	border-bottom-right-radius: 8px;
@@ -467,7 +472,7 @@ html,body,input,textarea {
 	bottom: 1px;
 	left: 39px;
 	font-size: 14px;
-	color: #000;
+	color: #444444;
 	width: 100%;
 	height: 14px;
 }
@@ -487,11 +492,20 @@ html,body,input,textarea {
 	color: #000;
 	left: 0px;
 	top: 40px;
-	width: 71%;
+	width: 100%;
 	border-bottom-right-radius: 8px;
-	border: 1px solid #bbb;	
+	border: 1px solid #aaa;	
 	display: none;
-	opacity: 1.0;
+	opacity: 0.9;
+	     -o-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
+	   -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
+	        box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
+}
+
+#panel-search #wayPoints form.search .searchResult .loader {
+	text-align: center;
+	margin: 5px;
 }
 
 #panel-search #wayPoints form.search input.add {
@@ -500,7 +514,7 @@ html,body,input,textarea {
 }
 
 #panel-search #wayPoints .searchResult ul {
-	font-size: 14px;
+	font-size: 16px;
 	list-style-type: none;
 	padding: 0;	
 	margin: 0;
@@ -512,11 +526,10 @@ html,body,input,textarea {
 #panel-search #wayPoints .searchResult li {
 	color: #222;
 	list-style-type: none;
-	padding: 8px;
+	padding: 2px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);		
 	border-bottom-right-radius: 8px;
 	margin: 0;
-	min-height: 32px;	
 }
 
 #panel-search #wayPoints .searchResult li.selected {
@@ -535,12 +548,20 @@ html,body,input,textarea {
 	margin-top: 2px;
 	margin-bottom: 2px;
 	margin-right: 4px;	
+	display: none;
 }
 
-#panel-search #wayPoints .searchResult li span {
-	margin-top: 12px;	
-	display: block;
-	margin-left: 48px;	
+#panel-search #wayPoints .searchResult li span {	
+	display: block;	
+}
+
+#panel-search #wayPoints .searchResult li span.name {	
+	font-weight: bold;	
+}
+
+#panel-search #wayPoints .searchResult li span.desc {	
+	font-size: 0.8em;	
+	color: #444444;
 }
 
 #panel-search #routeInfo {

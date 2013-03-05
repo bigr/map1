@@ -5,8 +5,9 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
          
         var self = this
          
-        var MAP_TILE_URLS = [
-            "tiles/${z}/${x}/${y}.jpg"    
+        var MAP_TILE_URLS = [            
+            "tiles/${z}/${x}/${y}.jpg",
+           
         ];
 
         var DATA_TILE_URLS = 
@@ -46,12 +47,23 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
         });        
         this.addLayer(this.layerMap)
         
-        this.zoomTo(5)
+        this.renderedLayerMap = new OpenLayers.Layer.XYZ("map", ["rendered_tiles/${z}/${x}/${y}.png"], {
+            transitionEffect: "resize", 
+            buffer: 2, 
+            sphericalMercator: true, 
+            
+            isBaseLayer: false      
+        });        
+        this.addLayer(this.renderedLayerMap)
         
-        //this.layerUtfgrid = new map1.utfgrid.Layer({
-        //    url: DATA_TILE_URLS            
-        //});
-        //this.addLayer(this.layerUtfgrid)
+        
+        
+        this.zoomTo(8)
+        
+        this.layerUtfgrid = new map1.utfgrid.Layer({
+            url: DATA_TILE_URLS            
+        });
+        this.addLayer(this.layerUtfgrid)
         
         this.controlNavigation = new OpenLayers.Control.Navigation({
             dragPanOptions: {

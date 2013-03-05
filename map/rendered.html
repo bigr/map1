@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="http://openlayers.org/api/theme/default/style.css" type="text/css">
         <link rel="stylesheet" href="css/map.css" type="text/css">
 	
-	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap-rendered.js"></script>
 	
     </head>
     <body>
@@ -85,9 +85,9 @@
 	    <ul>
 		 {{#result}}
 		 <li>
-		    <a href="">			
-			<span class="name">{{key}}</span>
-			<span class="desc">{{locality}}</span>
+		    <a href="">
+			<img src="image/search/{{type}}.png"/>
+			<span>{{key}}{{#location}}, {{location}}{{/location}}</span>
 		    </a>
 		</li>		
 		{{/result}}

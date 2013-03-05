@@ -5,6 +5,8 @@ map1.routing.Route = $class({
 	constructor: function(map) {
 	    var self = this
 	    
+	    this.activate = false
+	    
 	    this._locked = 0
 	    this.map = map
 	    
@@ -142,12 +144,12 @@ map1.routing.Route = $class({
 	    
 	    
 	    
-	    this.drawFeature.activate() 
+	    if ( this.active ) this.drawFeature.activate() 
 	    this.selectFeature.activate() 
 	    this.dragFeature.activate()  
 	},
 	
-	appendWayPoint: function(location) {	    
+	appendWayPoint: function(location, updateInput) {	    
 	    var self = this
 	    if ( location instanceof OpenLayers.LonLat ) {
 		var f = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(location.lon,location.lat))
@@ -164,7 +166,7 @@ map1.routing.Route = $class({
 			location = new OpenLayers.LonLat(f.geometry.x,f.geometry.y)
 		    }
 			
-		    self.map.search.appendItem(location)
+		    self.map.search.appendItem(location,updateInput)
 		}		
 	    }
 	    
@@ -188,7 +190,7 @@ map1.routing.Route = $class({
 
 	},
 	
-	insertWayPoint: function(i,location) {
+	insertWayPoint: function(i,location, updateInput) {
 	    var self = this
 	    
 	    if ( undefined === location ) {
@@ -220,7 +222,7 @@ map1.routing.Route = $class({
 	    self.__insertWayPointLast__ = false
 	    var callback = function() {
 		if ( undefined !== self.map.search && true === self.__insertWayPointLast__ ) {			    
-		    self.map.search.insertItem(i,location)
+		    self.map.search.insertItem(i,location,updateInput)
 		    self.__insertWayPointLast__ = false
 		    self.vector.redraw();
 		}
@@ -276,7 +278,7 @@ map1.routing.Route = $class({
 	    
 	},
 	
-	moveWayPoint: function(i,location) {
+	moveWayPoint: function(i,location,updateInput) {
 	    var self = this
 	    
 	    loc = location.clone()
@@ -289,7 +291,7 @@ map1.routing.Route = $class({
 	    self.__moveWayPointLast__ = false
 	    var callback = function() {
 		if ( undefined !== this.map.search && true === self.__moveWayPointLast__ ) {
-		    self.map.search.modifyItem(i,location)
+		    self.map.search.modifyItem(i,location,updateInput)
 		    self.__moveWayPointLast__ = false
 		}
 		else {
@@ -402,7 +404,7 @@ map1.routing.Route = $class({
 	    }
 	    
 	    if ( 0 == this._locked++ ) {
-		this.drawFeature.deactivate() 
+		if ( this.active ) this.drawFeature.deactivate()
 		this.selectFeature.deactivate() 
 		this.dragFeature.deactivate()  
 		if ( undefined !== this.map.search )
@@ -414,13 +416,29 @@ map1.routing.Route = $class({
 	},
 	
 	unlock: function() {
+	    if ( 0 == this._locked )
+		return
 	    if ( 0 == --this._locked ) {	    
-		this.drawFeature.activate() 
+		if ( this.active ) this.drawFeature.activate() 
 		this.selectFeature.activate() 
 		this.dragFeature.activate()
 		if ( undefined !== this.map.search )
 		    this.map.search.unlock()
 		this.map.unlock()
+	    }
+	},
+	
+	activate: function() {
+	    if ( !this.active ) {
+		this.drawFeature.activate()
+		this.active = true
+	    }
+	},
+	
+	deactivate: function() {
+	    if ( this.active ) {
+		this.drawFeature.deactivate()
+		this.active = false
 	    }
 	},
 	
