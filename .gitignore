@@ -10,6 +10,7 @@
 ~*
 /map/tiles
 /map/tiles_old
+/map/rendered_tiles
 /stylesheets/general/prepare-db/*.sql
 /stylesheets/general/prepare-db/out*
 /stylesheets/*/1/

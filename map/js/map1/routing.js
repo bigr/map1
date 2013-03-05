@@ -20,8 +20,10 @@ map1.routing.Route = $class({
 		    graphicYOffset: "-${size}",
 		    externalGraphic: "${externalGraphics}",
 		    strokeWidth: "${radius}",
-		    strokeColor: "#aa7733",
+		    strokeColor: "#000000",
 		    strokeOpacity: "${opacity}",
+		    strokeLinecap: "butt",
+		    strokeDashstyle: "${dasharray}",
 		    graphicZIndex: "$(zindex)"
 		    
 		},
@@ -31,16 +33,24 @@ map1.routing.Route = $class({
 			    var zoom = self.map.getZoom()
 			    
 			    return zoom > 8
-				? 3 * (zoom - 8) + 4
-				: 4;
+				? 2.5 * (zoom - 8) + 8
+				: 8;
 				
 			},
-			opacity: function() {
+			dasharray: function() {	
+			    var zoom = self.map.getZoom()
+			    
+			    radius = zoom > 8
+				? 2.5 * (zoom - 8) + 8
+				: 8;				
+			    return radius*1 + ' ' + radius*1
+			},
+			opacity: function() {			    
 			    var zoom = self.map.getZoom()
 			    
 			    return zoom > 8
-				? (zoom < 14 ? (14 - zoom)/20 + 0.3 : 0.3)
-				: 0.7
+				? (zoom < 14 ? (14 - zoom)/20 + 0.5 : 0.5)
+				: 0.9
 			},
 			zindex: function(f) {
 			    return f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point'
@@ -57,8 +67,8 @@ map1.routing.Route = $class({
 			    var zoom = self.map.getZoom()
 			    
 			    return zoom > 8
-				? (zoom < 14 ? 3 * (zoom - 8) + 30 : 48) 
-				: 30;
+				? (zoom < 16 ? 2 * (zoom - 8) + 48 : 64) 
+				: 48;
 			}					    
 		    },
 		    
