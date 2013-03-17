@@ -119,7 +119,7 @@ map1.PdfMapMaker = function(map,orientation,format,downloadifyId) {
 				var tile = page.tiles[url]				
 				//if ( tile.sy + tile.sheight != 256) alert(tile.sy + tile.sheight)			
 				images.push({
-					url: '/tiles-alpha/'+url+'.jpg',
+					url: '/tiles/'+url+'.jpg',
 					x1: tile.x*25.4/DPI,
 					y1: tile.y*25.4/DPI,
 					x2: (tile.x + tile.width)*25.4/DPI,
