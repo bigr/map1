@@ -355,7 +355,6 @@ var map = new OpenLayers.Map({
             url:"http://www.yournavigation.org/api/1.0/gosmore.php?flat=50.079606659709796&flon=14.453787603219034&tlat=49.774388547862486&tlon=18.22339493294614&format=kml&v=motorcar&fast=1&layer=mapnik&instructions=1&tessellate=1",
             timeout: 1000*1000,
             success: function(data) {
-                alert('tu');
                 data = $.parseJSON(data)  
                 vector_layer.addFeatures(geojson_format.read(data));
                 

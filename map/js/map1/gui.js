@@ -7,7 +7,7 @@ map1.gui.SideBar = $class({
 		
 		this.hideDelay = 200
 		this.down = down
-	
+		
 		this._bar = $(id)
 		this._handle = $(id_handle)
 		
@@ -15,19 +15,28 @@ map1.gui.SideBar = $class({
 	
 		this._bar.hide()
 		
+		this._lockShow = false
 		this._mouseIn = false		
-		this._handleMouseIn = false
-						
-		this._handle.hover(function() {self._handleMouseIn = true; self.showBar(); }, function() {self._handleMouseIn = false;})	
-		this._handle.focusin(function() { self.showBar(); })
+		this._handleMouseIn = false		
+		
+		var is_touch_device = 'ontouchstart' in document.documentElement;
+        
+        if ( is_touch_device ) {            
+        }
+        else {        
+            this._handle.hover(function() {self._handleMouseIn = true; self.showBar(); }, function() {self._handleMouseIn = false;})		
+        }
+		
+		this._handle.focusin(function() { self.showBar(); })				
+		
 		this._bar.hover(function() {self._mouseIn = true;}, function() {self._mouseIn = false;})
 		this._bar.focusin(function() { self.showBar(); })	
 	},		
 	
 	_hideBar: function(_doHide) {		
-		var self = this
+		var self = this				
 		
-		if ( !this._isActive() ) {					
+		if ( !this._lockShow && !this._isActive() ) {
 			if (_doHide ) {
 				this._handle.removeClass('active-'+this._bar.attr('id'))
 				this._bar.hide();
@@ -42,7 +51,7 @@ map1.gui.SideBar = $class({
 	
 	_isActive: function() {		
 		return    this._mouseIn
-			   || this._handleMouseIn
+			   || this._handleMouseIn			   
 			   || $(this._bar).find(':focus').length > 0
 		       || $(this._handle).find(':focus').length > 0		      
 	},
@@ -63,12 +72,25 @@ map1.gui.SideBar = $class({
 		setTimeout(function() { self._hideBar() },50)
 	},		
 	
+	toggleLockShow: function() {
+		this._lockShow = !this._lockShow;
+		if ( this._lockShow ) {
+			this.showBar();
+		}
+		else {
+			this._handleMouseIn = false
+			this._mouseIn = false
+			$(this._bar).find(':focus').blur()
+			$(this._handle).find(':focus').blur()
+		}
+	},
+	
 	openDialog: function(dialog) {		
 		dialog.open()
 	}
 });
 
-map1.gui.Dialog = $class({
+map1.gui.Dialog = $class({	
 	constructor: function(id,id_handle,id_close,id_next,id_prev,id_finish) {
 		var self = this				
 		
@@ -111,23 +133,31 @@ map1.gui.Dialog = $class({
 	onClose: function() {},
 	onPageOpen: function(pageNum) {},
 	onPageClose: function(pageNum) {},
-	onFinish: function() {},
+	onFinish: function() {},		
 	
 	open: function() {
 		var self = this
+		
 		this._dialog[0].show()
-		this._handle.addClass('active')
-		this._prev.addClass('disabled')
-		this._prev.css('cursor','auto')	
-		this.onOpen()
-		this.onPageOpen(this._curr)	
-		$(document).bind('keyup', 'esc', function() { self.close() })
-		$(document).bind('keyup', 'return', function() { self.next() })
-		$(document).bind('keyup', 'backspace', function() { self.prev() })
+		if ( this._active ) {
+			this.close();			
+		}
+		else {
+			this._active = true
+			this._handle.addClass('active')
+			this._prev.addClass('disabled')
+			this._prev.css('cursor','auto')	
+			this.onOpen()
+			this.onPageOpen(this._curr)	
+			$(document).bind('keyup', 'esc', function() { self.close() })
+			$(document).bind('keyup', 'return', function() { self.next() })
+			$(document).bind('keyup', 'backspace', function() { self.prev() })
+		}
 	},						
 	
 	close: function() {
 		var self = this
+		this._active = false
 		$(document).unbind('keyup', 'esc', function() { self.close() })
 		$(document).unbind('keyup', 'return', function() { self.next() })
 		$(document).unbind('keyup', 'backspace', function() { self.prev() })
@@ -177,5 +207,7 @@ map1.gui.Dialog = $class({
 	
 	finish: function() {
 		this.onFinish()
-	}		
+	},
+	
+	_active: false
 });

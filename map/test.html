@@ -1,9 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
+    <script type="text/javascript" src="js/downloadify.min.js" ></script>
+    <script type="text/javascript" src="js/jspdf.min.js" ></script>
+    <script type="text/javascript" src="js/map1/PdfTileHelper.js" ></script>
+    <script type="text/javascript" src="js/map1/PdfMapMaker.js" ></script>
+    <script type="text/javascript" src="js/map1/PdfMaker.js" ></script>
+    <script type="text/javascript" src="js/swfobject.js"></script>
+    
 </head>
 <body>
-    http://www.musikland-tirol.at/html/html/musikedition/komponisten/stadlmayr/DivKomp/03_Dies_est_laetitia.htm
+    <div id="downloadify" class="panel">
+        <img src="image/loader.gif" />	
+    </div>
+    <script>            
+        pdfMapMaker = new map1.PdfMapMaker("portrait","A4","downloadify")        
+        pdfMapMaker.render()
+    </script>
 </body>
 </html> 

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densitydpi=209">
+        <meta name="viewport" id="metaViewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
         <meta name="apple-mobile-web-app-capable" content="yes">
 	
         <title>map1 eu</title>
@@ -15,7 +15,7 @@
 	
     </head>
     <body>
-		
+	<img src="image/marker1.svg" id="cursor" />		
         <div id="map"></div>
 	<div id="button-start" class="panel">
 	    <img src="image/start-icon.png" id="start-icon" />
@@ -23,7 +23,7 @@
 	</div>	
 	<div id="panel-search" class="panel">
 	    <div id="wayPoints"></div>	    
-	    <div id="routeInfo"></div>
+	    <div id="routeInfo"></div>	    
 	</div>
 	
 	<div id="sidebar" class="panel">
@@ -31,16 +31,17 @@
 		<img src="image/plus.png" class="plus" onclick="map.zoomIn()"/>
 		<img src="image/minus.png" class="minus" onclick="map.zoomOut()"/>
 	    </div>
-	    <img src="image/print.png" class="button-print" />
-	    <!--<img src="image/routing.svg" class="button-navigation" />-->
-	    <img src="image/about.png" class="button-about" />
+	    <img src="image/navigation.svg" id="button-navigation" />
+	    <img src="image/print.svg" class="button-print" />	    
+	    <img src="image/about.svg" class="button-about" />
+	    <a href="/donation.html" target="_blank"><img src="image/donation.svg" class="button-donation" /></a>
 	</div>
 	
 	
 	
 	<script id="featureinfo" type="text/html">
 	    {{#highway}}
-		<img data-i18n-src=""src="{{photo}}" style="float: right; margin-left: 10px;"/>
+		<img data-i18n-src="" src="{{photo}}" style="float: right; margin-left: 10px;"/>
 		<h2><span data-i18n="">highway_{{highway}}_{{grade}}</span> {{name}}</h2>		
 		<p>
 		    {{#ref}}
@@ -54,7 +55,7 @@
 	    {{/highway}}
 	    {{symbol_name}}
 		<h2>{{symbol_name}}</h2>
-	    {{/symbol_name}}
+	    {{/symbol_name}}    
 	</script>
 	
 	
@@ -99,12 +100,31 @@
 	    <div class="distance">
 		<span class="title">distance</span><br/>{{distance}}<span>km</span>
 	    </div>
+	    <div data-i18n="" class="button-directions" onclick="map.directionsDialog.open()">Instructions</div>
 	    <div class="time">
 		<span class="title">estimatet time</span><br/>
 		{{hours}}<span>hod</span> {{minutes}}<span>min</span>
 	    </div>
+	    
 	    {{/distance}}
 	</script>
+	
+	
+	<script id="directions" type="text/html">	    
+	    <ul>
+		{{#directions}}
+		    <li>
+			<h3><img src="image/number{{from}}.png" alt="{{from}}" /> => <img src="image/number{{to}}.png" alt="{{to}}" /></h3>
+			<ol>
+			{{#instructions}}
+			    <li>{{.}}</li>
+			{{/instructions}}
+			</ol>		    
+		    </li>
+		{{/directions}}
+	    </ul>
+	</script>
+	
 	
 	<div id="dialog-print" class="dialog dialog-print">
 	    <div class="header">
@@ -136,21 +156,22 @@
 		<form>
 		    <label for="print-measure" data-i18n="">Map measure:</label>
 		    <select id="print-measure">
-			<option value="20000">1:20 000</option>
+			<option value="12500">1:12 500</option>
+			<option value="25000">1:25 000</option>
 			<option value="50000">1:50 000</option>
 			<option value="100000">1:100 000</option>
-			<option value="200000" selected="1">1:200 000</option>
+			<option value="200000" selected="1">1:200 000</option>			
 			<option value="400000">1:400 000</option>
 			<option value="800000">1:800 000</option>
-			<option value="1500000">1:1 500 000</option>
+			<option value="1600000">1:1 600 000</option>
+			<option value="3200000">1:3 200 000</option>
+			<option value="6400000">1:6 400 000</option>
 		    </select>
 		    <label for="print-paper-format" data-i18n="">Paper format:</label>
 		    <select id="print-paper-format">			    
 			<option value="A3" data-i18n="">A3</option>
 			<option value="A4" selected="1" data-i18n="">A4</option>
-			<option value="A5" data-i18n="">A5</option>
-			<option value="letter" data-i18n="">letter</option>
-			<option value="lega1" data-i18n="">lega1</option>
+			<option value="A5" data-i18n="">A5</option>			
 		    </select>
 		    <label for="print-paper-orientation" data-i18n="">Orientation:</label>
 		    <select id="print-paper-orientation">			    
@@ -183,7 +204,7 @@
 	
 	<div id="dialog-about" class="dialog">
 	    <div class="header">
-		<img src="image/about.png" class="icon"/>
+		<img src="image/about.svg" class="icon"/>
 		<h2 data-i18n="">About map1.eu</h2>
 		<span class="close" data-i18n="">X</span>
 	    </div>
@@ -194,19 +215,43 @@
 		<p>
 		    <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">map1.eu tiles</span> by Pavel Klinger are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://map1.eu" rel="dct:source">map1.eu</a>.
 		</p>
-		<h4>Map data © OpenStreetMap contributors</h4>
-		<h3>More information</h3>
+		<h4>Map data</h4>
+		<p>
+		    <a href="http://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>
+		</p>		
+		<h3>Map1.eu elsewhere</h3>
 		<p>
 		    * Bug tracking and more on <a href="https://github.com/bigr/map1">github</a><br />
 		    * Please follow us on <a href="https://twitter.com/map1eu">twitter</a><br />
 		    * And visit our <a href="https://facebook.com/Map1eu">facebook page</a><br />
 		</p>
+		<h3>Donations</h3>
+		<p>
+		    <a href="donation.html"><strong>Please help Map1.eu come to life and donate now.</strong></a>
+		</p>
 		
 	    </div>
 	    <div class="footer">		
-		<span class="close button" data-i18n="">Close</span
+		<span class="close button" data-i18n="">Close</span>
 	    </div>
 	</div>
+	
+	
+	<div id="dialog-directions" class="dialog">
+	    <div class="header">
+		<img src="image/navigation.svg" class="icon"/>
+		<h2 data-i18n="">Instructions</h2>
+		<span class="close" data-i18n="">X</span>
+	    </div>
+	    <div class="content">		
 		
+		
+	    </div>
+	    <div class="footer">		
+		<span class="close button" data-i18n="">Close</span>
+	    </div>
+	</div>
+	
+	
     </body>
 </html>

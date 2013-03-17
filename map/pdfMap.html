@@ -5,13 +5,17 @@
       <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
       <script type="text/javascript" src="js/jspdf.min.js"></script>
       <script type="text/javascript" src="js/downloadify.min.js"></script>
-      <script type="text/javascript" src="js/swfobject.js"></script>
-      <script type="text/javascript" src="js/mappdf.js"></script>    
+      <script type="text/javascript" src="js/swfobject.js"></script>     
+      <script type="text/javascript" src="js/map1/PdfTileHelper.js" ></script>
+      <script type="text/javascript" src="js/map1/PdfMapMaker.js" ></script>
+      <script type="text/javascript" src="js/map1/PdfMaker.js" ></script>
+     
   </head>      
   <body style="margin: 0; padding: 0;">
     <div id="downloadify" class="panel">
 	<img src="image/loader.gif" />	
     </div>
+    
     <script>
 	var urlParams = {};
 	    (function () {
@@ -26,18 +30,22 @@
 	})();
 
 	
-	var M = parseFloat(urlParams['M'])
+	var scale = parseFloat(urlParams['scale'])
 	var ll0 = [parseFloat(urlParams['x1']),parseFloat(urlParams['y1'])]
 	var ll1 = [parseFloat(urlParams['x2']),parseFloat(urlParams['y2'])]
-	var marginX = parseFloat(urlParams['marginX'])
-	var marginY = parseFloat(urlParams['marginY'])
+	var overlapX = parseFloat(urlParams['overlapX'])
+	var overlapY = parseFloat(urlParams['overlapY'])
 	var minDPI = parseFloat(urlParams['minDPI']);
 	var orientation = urlParams['o']
 	var format = urlParams['f']		
 	
-	mapPdf = new MapPdf(opener !== null ? opener.map : undefined);	
-	mapPdf.render(M,ll0,ll1,'downloadify',marginX,marginY,minDPI,orientation,format)
+	pdfMapMaker = new map1.PdfMapMaker(opener !== null ? opener.map : undefined,orientation,format,"downloadify")        
+        pdfMapMaker.render(scale,ll0,ll1,overlapX,overlapY,minDPI)
+	
+	//mapPdf = new MapPdf(opener !== null ? opener.map : undefined);	
+	//mapPdf.render(M,ll0,ll1,'downloadify',marginX,marginY,minDPI,orientation,format)
     </script>
+    
     <div id="vector_layer"></div>
   </body>
 </html>

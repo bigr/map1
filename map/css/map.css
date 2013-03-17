@@ -39,6 +39,12 @@ html,body,input,textarea {
 	background: -moz-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(50,50,50,0.9) 15px, rgba(30,30,30,0.9) 64px);	
 	background: -webkit-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(70,70,70,0.8) 15px, rgba(60,60,60,0.9) 64px);
 	background: -ms-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(70,70,70,0.8) 15px, rgba(60,60,60,0.9) 64px);	
+	background: rgba(60,60,60,0.9);
+	background: linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(70,70,70,0.9) 15px, rgba(60,60,60,0.9) 64px);
+	background: -o-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(70,70,70,0.9) 15px, rgba(60,60,60,0.9) 64px);
+	background: -moz-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(50,50,50,0.9) 15px, rgba(30,30,30,0.9) 64px);	
+	background: -webkit-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(70,70,70,0.8) 15px, rgba(60,60,60,0.9) 64px);
+	background: -ms-linear-gradient(top, rgba(150,150,150,0.9) 0px, rgba(70,70,70,0.8) 15px, rgba(60,60,60,0.9) 64px);	
 	     -o-box-shadow: 16px 16px 20px 0px rgba(0,0,0,0.5);
 	   -moz-box-shadow: 16px 16px 20px 0px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 16px 16px 20px 0px rgba(0,0,0,0.5);
@@ -50,11 +56,14 @@ html,body,input,textarea {
 
 .dialog {
 	width: 600px;
-	max-width: 100%;	
+	max-width: 100%;
+	max-height: 100%;
+	overflow: auto;
+	overflow-x: hidden;
 	top: 0;
 	right: 0;
 	display: none;	
-	
+	z-index: 25000;
 }
 
 .dialog .header img.icon {
@@ -66,6 +75,10 @@ html,body,input,textarea {
 
 .dialog .header {
 	width: 540px;
+	max-width: 80%;
+	max-width:    -moz-calc(100% - 60px);
+    max-width: -webkit-calc(100% - 60px);
+    max-width:         calc(100% - 60px);
 	float: left;
 	border-bottom: 1px solid rgba(0,0,0,0.6);	
 	vertical-align: center;
@@ -108,6 +121,9 @@ html,body,input,textarea {
 .dialog .content {
 	min-height: 32px;
 	width: 600px;
+	max-width: 100%;	
+	overflow: auto;
+	overflow-x: hidden;
 	float: left;
 	position: relative;
 	font-size: 13px;	
@@ -166,6 +182,7 @@ html,body,input,textarea {
 	border-top: 1px solid rgba(255,255,255,0.3);	
 	min-height: 48px;
 	width: 600px;
+	max-width: 100%;	
 	float: left;
 	position: relative;
 }
@@ -265,12 +282,63 @@ html,body,input,textarea {
 	padding: 16px 0px;
 }
 
+#dialog-directions {
+	width: 450px;
+}
+
+#dialog-directions .content ul li h3 img {
+	width: 24px;
+}
+
+#dialog-directions .content ul li h3 {
+	margin-left: -20px;
+}
+
+#dialog-directions .content h3, #dialog-directions .content h3 img {
+	vertical-align: middle;
+	margin: 0;	
+}
+
+#dialog-directions .content ul {
+	margin-right: 10px;
+}
+
+#dialog-directions .content ul > li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;	
+}
+
+#dialog-directions .content ul li ol li,#dialog-directions .content ul li ol  {
+	font-size: 11px;
+	margin: 0;
+	padding: 1px 0;
+}
+
+#dialog-directions .content ul li ol li:nth-child(odd) {
+	background: rgba(255,255,255,0.05)	
+}
+
+#dialog-directions .content ul li ol li:nth-child(even) {
+	background: rgba(0,0,0,0.4)	
+}
+
 #button-start {
 	top: -24px;
 	left: -24px;			
 	border-bottom-right-radius: 8px;
 	width: 64px;
 	height: 64px;	
+}
+
+#button-start.locked {
+	background: rgba(60,60,60,0.9);
+	background: linear-gradient(top, rgba(80,80,80,0.9) 0px, rgba(70,70,70,0.9) 15px, rgba(60,60,60,0.9) 64px);
+	background: -o-linear-gradient(top, rgba(80,80,80,0.9) 0px, rgba(70,70,70,0.9) 15px, rgba(60,60,60,0.9) 64px);
+	background: -moz-linear-gradient(top, rgba(80,80,80,0.9) 0px, rgba(50,50,50,0.9) 15px, rgba(30,30,30,0.9) 64px);	
+	background: -webkit-linear-gradient(top, rgba(80,80,80,0.9) 0px, rgba(70,70,70,0.8) 15px, rgba(60,60,60,0.9) 64px);
+	background: -ms-linear-gradient(top, rgba(80,80,80,0.9) 0px, rgba(70,70,70,0.8) 15px, rgba(60,60,60,0.9) 64px);	
+
 }
 
 #button-start:hover, #button-start.active-sidebar {
@@ -287,6 +355,7 @@ html,body,input,textarea {
 	margin-top:  32px;
 	margin-left: 32px;
 	opacity: 0.75;
+	display: block;
 }
 
 #button-start:hover img#start-icon, #button-start.active-sidebar img#start-icon {
@@ -579,8 +648,6 @@ html,body,input,textarea {
 
 
 
-
-
 #panel-search #routeInfo .distance {
 	font-size: 32px;
 	float: left;
@@ -606,6 +673,24 @@ html,body,input,textarea {
 	color: #fff;
 }
 
+#panel-search #routeInfo .button-directions {
+	color: #fff;
+	font-size: 18px;
+	float: right;
+	padding: 4px;
+	margin-top: 16px;
+	margin-right: 0px;
+	line-height: 24px;
+	background: rgba(119,170,51,0.9);
+	border-top-left-radius: 8px;
+	border-bottom-right-radius: 8px;	
+	cursor: pointer;
+}
+
+#panel-search #routeInfo .button-directions:hover {
+	background: rgba(119,170,51,1.0);
+}
+
 #sidebar {
 	top: 64px;
 	left: 0px;
@@ -618,7 +703,7 @@ html,body,input,textarea {
 }
 
 #sidebar img {
-	width: 60px;	
+	width: 64px;	
 	opacity: 0.75;
 	cursor: pointer;
 	margin: 2px 0;	
@@ -632,9 +717,18 @@ html,body,input,textarea {
 #sidebar img:hover {
 	border-top: 1px solid rgba(255,255,255,0.3);
 	border-bottom: 1px solid rgba(0,0,0,0.6);
-	background: rgba(119,170,51,0.9);
+	background: rgba(170,170,170,0.9);
 	opacity: 1.0;
 	
+}
+
+#sidebar img.active {
+	background: rgba(119,170,51,0.9);
+	opacity: 1.0;
+}
+
+#sidebar img.active:hover {	
+	background: rgba(170,102,51,0.9);
 }
 
 #zoom {
@@ -717,6 +811,16 @@ html,body,input,textarea {
 	height: 32px;
 	text-align: center;	
 	padding: 24px;	
+}
+
+#cursor {
+	height: 24px;
+	width: 24px;
+	top: 100px;
+	left: 100px;
+	position: absolute;
+	z-index: 30000;
+	display: none;	
 }
 
 .olImageLoadError { 

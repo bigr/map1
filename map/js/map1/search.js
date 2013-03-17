@@ -155,7 +155,7 @@ map1.Search = $class({
                 this._map.getProjectionObject(),
                 new OpenLayers.Projection("EPSG:4326")
             )        
-            language = window.navigator.userLanguage || window.navigator.language
+            var language = window.navigator.userLanguage || window.navigator.language
             $.ajax({            
                 url:"/nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                
@@ -181,7 +181,7 @@ map1.Search = $class({
                 this._map.getProjectionObject(),
                 new OpenLayers.Projection("EPSG:4326")
             )
-            language = window.navigator.userLanguage || window.navigator.language     
+            var language = window.navigator.userLanguage || window.navigator.language
             $.ajax({                
                 url:"/nominatim/reverse?lat="+loc.lat+"&lon="+loc.lon+"&format=json&accept-language="+language,
                 success: function(data) {                        

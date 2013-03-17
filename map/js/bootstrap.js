@@ -22,7 +22,8 @@ includeJs("js/map1/print.js");
 includeJs("js/map1/map.js");
 includeJs("js/map1/routing.js");
 includeJs("js/map1/about.js");
-includeJs("js/mappdf.js");
+includeJs("js/map1/directions.js");
+//includeJs("js/mappdf.js");
 
 
 includeJs("js/application.js");

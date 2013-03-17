@@ -13,6 +13,9 @@ map1.routing.Route = $class({
 	    this.way = []
 	    this.vehicle = 'motorcar'
 	    
+	    
+	    this._insertWay = false
+	    
 	    var style = new OpenLayers.Style(
 		{
 		    graphicWidth: "${size}",
@@ -52,7 +55,7 @@ map1.routing.Route = $class({
 				? (zoom < 14 ? (14 - zoom)/20 + 0.5 : 0.5)
 				: 0.9
 			},
-			zindex: function(f) {
+			zindex: function(f) {			    
 			    return f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point'
 				? 10 : -10
 			},
@@ -60,8 +63,14 @@ map1.routing.Route = $class({
 			    var i = self.wayPoints.indexOf(f);
 			    if ( i == -1 )
 				i = self.wayPoints.length
+			    if ( self._insertWay ) {
+				self._insertWay = false
+				return 'image/marker_empty.svg'
+			    }
+			    else {
+				return "image/marker" + (i+1) + '.svg'	
+			    }
 			    
-			    return "image/marker" + (i+1) + '.png'	
 			},
 			size: function() {
 			    var zoom = self.map.getZoom()
@@ -81,6 +90,7 @@ map1.routing.Route = $class({
 		    {
 			'default': style,
 			'select': style,
+			'temporary': style,
 		    }
 		),		
 		rendererOptions: { zIndexing: true }
@@ -106,23 +116,65 @@ map1.routing.Route = $class({
 	    this.map.addControl(this.drawFeature)
 	    
 	    this.selectFeature = new OpenLayers.Control.SelectFeature(
-		this.vector, {}
+		this.vector,
+		{}
 	    )
 	    
-	    this.vector.events.on({featureselected: function(event) {
-		if ( event.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point' ) {
-		    
-		    var i = self.wayPoints.indexOf(event.feature)
-		    self.removeWayPoint(i)
-		}
-		else {
-		    var pixel = self.selectFeature.handlers.feature.evt.xy
-		    var i = self.way.indexOf(event.feature)
-		    var location = self.map.getLonLatFromPixel(pixel)
-		    self.insertWayPoint(i,location)
-		}
-
-	    }});
+	    this.vector.events.on({
+		featureselected: function(event) {
+		    if ( event.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point' ) {
+			
+			//var i = self.wayPoints.indexOf(event.feature)
+			//self.removeWayPoint(i)		
+		    }
+		    else {
+			var pixel = self.selectFeature.handlers.feature.evt.xy
+			var i = self.way.indexOf(event.feature)
+			var location = self.map.getLonLatFromPixel(pixel)
+			self._insertWay = true
+			self.insertWayPoint(i,location)
+		    }
+		},
+	    });
+	    
+	    this.highlightFeature = new OpenLayers.Control.SelectFeature(this.vector, {
+                hover: true,
+                highlightOnly: true,
+                renderIntent: "default",  
+		eventListeners: {                   
+                    featurehighlighted: function(event) {						
+			
+			if ( event.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point' ) {	
+			    $('#cursor').css({		       
+			       visibility: "hidden"
+			    });			    
+			}
+			else {
+			    $('#map').css({		       
+			       cursor: "pointer"
+			    });
+			    $('#cursor').attr('src','image/add.svg');
+			}
+			
+			
+		    },
+                    featureunhighlighted: function(event) {			
+			
+			if ( event.feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point' ) {	
+			    $('#cursor').css({		       
+			       visibility: "visible"
+			    });				   
+			}
+			else {
+			    $('#map').css({		       
+			       cursor: "default"
+			    });
+			    $('#cursor').attr('src','image/marker'+(self.wayPoints.length+1)+'.svg');
+			}
+		    }
+                }              
+            });	    	    	    
+	    
 	    
 	    this.dragFeature = new OpenLayers.Control.DragFeature(this.vector,{
 		
@@ -145,8 +197,10 @@ map1.routing.Route = $class({
 	    this.dragFeature.handlers['feature'].stopUp = false
 	    this.dragFeature.handlers['feature'].stopClick = false
 	   
+	    this.map.addControl(this.highlightFeature)
 	    this.map.addControl(this.selectFeature)
 	    this.map.addControl(this.dragFeature)
+	    
 	   
 	    
 	    //this.map.addLayer(this.vector_layer);  
@@ -155,8 +209,34 @@ map1.routing.Route = $class({
 	    
 	    
 	    if ( this.active ) this.drawFeature.activate() 
-	    this.selectFeature.activate() 
+	    this.highlightFeature.activate() 
+	    this.selectFeature.activate() 	    
 	    this.dragFeature.activate()  
+	    
+	    
+	    $('#map').bind('mousein',function(){
+		if ( self.active ) {
+		    $('#cursor').css({
+			display: "block",
+		    })
+		}
+	    });
+	    $('#map').bind('mouseout',function(){
+		if ( self.active ) {
+		    $('#cursor').css({
+			display: "none",
+		    })
+		}
+	    });
+	    $('#map').bind('mousemove', function(e){
+		if ( self.active ) {
+		    $('#cursor').css({
+		       left:  e.pageX+12,
+		       top:   e.pageY+12,
+		       display: "block",
+		    });
+		}
+	    }); 
 	},
 	
 	appendWayPoint: function(location, updateInput) {	    
@@ -198,10 +278,12 @@ map1.routing.Route = $class({
 		callback()
 	    }
 
+	    $('#cursor').attr('src','image/marker'+(this.wayPoints.length+1)+'.svg');
+
 	},
 	
 	insertWayPoint: function(i,location, updateInput) {
-	    var self = this
+	    var self = this	    	    
 	    
 	    if ( undefined === location ) {
 		location = this.way[i].geometry.getBounds().getCenterLonLat()		
@@ -243,6 +325,7 @@ map1.routing.Route = $class({
 	    this.makeRoute(bounds1.left,bounds1.top,loc.lon,loc.lat,i,callback)
 	    this.makeRoute(loc.lon,loc.lat,bounds2.left,bounds2.top,i+1,callback)	    	    	    
 	    
+	    $('#cursor').attr('src','image/marker'+(this.wayPoints.length+1)+'.svg');
 	},
 	
 	removeWayPoint: function(i) {
@@ -262,6 +345,7 @@ map1.routing.Route = $class({
 	    this.vector.removeFeatures([this.wayPoints[i]])
 	    this.way.splice(i, 1)
 	    this.wayPoints.splice(i, 1)
+	    this.directions.splice(i,1)
 	    
 	    var callback = function() {
 		if ( undefined !== wf ) {
@@ -285,7 +369,7 @@ map1.routing.Route = $class({
 
 	    this.vector.redraw()
 	    
-	    
+	    $('#cursor').attr('src','image/marker'+(this.wayPoints.length+1)+'.svg');
 	},
 	
 	moveWayPoint: function(i,location,updateInput) {
@@ -343,11 +427,13 @@ map1.routing.Route = $class({
 	    
 	},
 	
+	
 	makeRoute: function(flon,flat,tlon,tlat,index,callback) {
 	    var self = this  	    
 	    this.lock()
+	    var language = window.navigator.userLanguage || window.navigator.language	    
 	    $.ajax({
-		url: '/yournavigation?format=geojson&flat='+flat+'&flon='+flon+'&tlat='+tlat+'&tlon='+tlon+'&v='+self.vehicle+'&fast=1&layer=mapnik',
+		url: '/yournavigation?format=geojson&flat='+flat+'&flon='+flon+'&tlat='+tlat+'&tlon='+tlon+'&v='+self.vehicle+'&fast=1&layer=mapnik&instructions=1&lang='+language,
 		success: function(json) {
 		    if ( undefined !== self.way[index] ) {
 			self.vector.removeFeatures([self.way[index]])
@@ -363,6 +449,19 @@ map1.routing.Route = $class({
 		    
 		    self.distances[index] = json.properties.distance
 		    self.travelTimes[index] = json.properties.traveltime
+		    self.directions[index] = {
+			'from': index+1,
+			'to': index+2,
+			'instructions': json.properties.description.split("<br>")
+		    }
+		    
+		    self.directions[index]['instructions'].pop()
+		    
+		    var content = ich.directions({
+			directions: self.directions,			
+		    })
+		    
+		    $('#dialog-directions .content').html(content)
 
 		    self.way[index] = new OpenLayers.Feature.Vector(geometry);
 		    
@@ -414,7 +513,12 @@ map1.routing.Route = $class({
 	    }
 	    
 	    if ( 0 == this._locked++ ) {
-		if ( this.active ) this.drawFeature.deactivate()
+		if ( this.active ) {
+		    this.drawFeature.deactivate()
+		    $('#cursor').css({		       
+		       display: "none"
+		    });
+		}
 		this.selectFeature.deactivate() 
 		this.dragFeature.deactivate()  
 		if ( undefined !== this.map.search )
@@ -429,7 +533,14 @@ map1.routing.Route = $class({
 	    if ( 0 == this._locked )
 		return
 	    if ( 0 == --this._locked ) {	    
-		if ( this.active ) this.drawFeature.activate() 
+		if ( this.active ) {
+		    this.drawFeature.activate()		
+		    $('#cursor').attr('src','image/marker'+(this.wayPoints.length+1)+'.svg');
+		    $('#cursor').css({
+			display: "block",
+			left: -1000
+		    })
+		}
 		this.selectFeature.activate() 
 		this.dragFeature.activate()
 		if ( undefined !== this.map.search )
@@ -438,21 +549,27 @@ map1.routing.Route = $class({
 	    }
 	},
 	
-	activate: function() {
-	    if ( !this.active ) {
-		this.drawFeature.activate()
-		this.active = true
-	    }
-	},
-	
-	deactivate: function() {
+	toggleActivate: function() {
 	    if ( this.active ) {
 		this.drawFeature.deactivate()
 		this.active = false
+		$('#cursor').css({		       
+		   display: "none"
+		});
+	    }
+	    else {
+		this.drawFeature.activate()
+		this.active = true
+		$('#cursor').attr('src','image/marker'+(this.wayPoints.length+1)+'.svg');
+		$('#cursor').css({
+		    display: "block",
+		    left: -1000
+		})				
 	    }
 	},
 	
 	wayPoints: [],
 	distances: [],
-	travelTimes: []	
+	travelTimes: [],
+	directions: [],
 })

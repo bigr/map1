@@ -103,6 +103,6 @@ map1.PrintDialog = $class({
         var format = $('#print-paper-format').val();
         var orientation = $('#print-paper-orientation').val();
                      
-        window.open('pdfMap.html?M='+measure+'&x1='+bounds[0]+'&x2='+bounds[2]+'&y1='+bounds[1]+'&y2='+bounds[3]+'&marginX='+15+'&marginY='+15+'&minDPI='+150+'&o='+orientation+'&f='+format,'print',"width=300,height=150,menubar=no,resizable=no,location=no,status=no,toolbar=no,directories=no,scrollbars=no")
+        window.open('pdfMap.html?scale='+measure+'&x1='+bounds[0]+'&x2='+bounds[2]+'&y1='+bounds[1]+'&y2='+bounds[3]+'&overlapX='+15+'&overlapY='+15+'&minDPI='+150+'&o='+orientation+'&f='+format,'print',"width=300,height=150,menubar=no,resizable=no,location=no,status=no,toolbar=no,directories=no,scrollbars=no")
     }
 });

@@ -11,8 +11,9 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
 
         var DATA_TILE_URLS = 
             "tiles/${z}/${x}/${y}.js.gz"    
-        ;
- 
+        ; 
+                
+        self.devicePixelRatio = undefined == window.devicePixelRatio  ? 1 : window.devicePixelRatio;
         
         var options = {
             div: "map",
@@ -27,7 +28,8 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
                 new OpenLayers.Projection("EPSG:4326"),
                 new OpenLayers.Projection("EPSG:900913")
             ), 
-            zoom: 8,           
+            zoom: 8,  
+            tileSize: new OpenLayers.Size(256/self.devicePixelRatio, 256/self.devicePixelRatio)
         }
         OpenLayers.Map.prototype.initialize.apply(this, [options]);
         
@@ -76,15 +78,29 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
         this.sideBar = new map1.gui.SideBar('#sidebar','#button-start, #panel-search',true)
         
                 
-        this.printDialog = new map1.PrintDialog(
-            this,
-            ['#dialog-print','#dialog-print-2','#dialog-print-3'],
-            '.button-print',
-            '.dialog-print > .header > .close,.dialog-print > .footer > .close',
-            '.dialog-print > .footer > .next',
-            '.dialog-print > .footer > .prev',
-            '.dialog-print > .footer > .finish'
-        );
+        var is_touch_device = 'ontouchstart' in document.documentElement;
+        
+        if ( is_touch_device ) {
+            $('#button-start').bind('touchstart',function() { self.sideBar.toggleLockShow(); self.searchPanel.toggleLockShow(); });
+        }
+        else {        
+            $('#button-start').click(function() { self.sideBar.toggleLockShow(); self.searchPanel.toggleLockShow(); $('#button-start').toggleClass('locked'); });           
+        }
+        
+        if ( !is_touch_device ) {
+            this.printDialog = new map1.PrintDialog(
+                this,
+                ['#dialog-print','#dialog-print-2','#dialog-print-3'],
+                '.button-print',
+                '.dialog-print > .header > .close,.dialog-print > .footer > .close',
+                '.dialog-print > .footer > .next',
+                '.dialog-print > .footer > .prev',
+                '.dialog-print > .footer > .finish'
+            );
+        }
+        else {
+           $(".button-print").hide()
+        }
         
         this.aboutDialog = new map1.AboutDialog(
             '#dialog-about',
@@ -94,8 +110,26 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
             null,
             null
         );
+        
+        this.directionsDialog = new map1.DirectionsDialog(
+            '#dialog-directions',
+            '#button-directions',
+            '#dialog-directions > .header > .close,#dialog-directions > .footer > .close',
+            null,
+            null,
+            null
+        );
+        
                         
         this.routing = new map1.routing.Route(this)                
+        
+        if ( is_touch_device ) {            
+        }
+        else {        
+            $('#button-navigation').click(function() { self.routing.toggleActivate(); $(this).toggleClass('active'); });
+        }
+               
+         
         
         $(document).bind('keydown', 'ctrl+p', function() {
             self.printDialog.open()
@@ -124,6 +158,11 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
         
         $(document).bind('keydown', 'down', function() {
             self.pan(0,300)
+        });
+        $(document).bind('keydown', 'esc', function() {            
+            if ( self.routing.active ) {
+                $("#button-navigation").click()
+            }
         });
         
     },
