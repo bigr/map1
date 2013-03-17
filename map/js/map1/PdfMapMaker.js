@@ -455,7 +455,7 @@ map1.PdfMapMaker = function(map,orientation,format,downloadifyId) {
 		do {
 			overviewScale /= 2
 			var pageCount = self.getPageCount(ll0,ll1,overviewScale,10,50,-10,-10,0,0)			
-		} while ( pageCount == 1 || overviewScale <= scale )
+		} while ( pageCount == 1 && overviewScale > scale )
 		overviewScale *= 2					
 		
 		var pages = self.drawMap(ll0,ll1,overviewScale,0,10,50,-10,-10,0,0)
