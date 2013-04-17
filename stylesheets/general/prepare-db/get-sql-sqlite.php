@@ -11,7 +11,7 @@ require_once "conf/common.conf.php";
 ?>
 SELECT load_extension('libspatialite.so');
 <?php
-    include(dirname(__FILE__) . '/sqlite-views.php'); 
+    #include(dirname(__FILE__) . '/sqlite-views.php'); 
     
     $sqls = array(
         array('highway','highways',sql_highway,'VIEW'),

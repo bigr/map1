@@ -62,19 +62,21 @@ if [ ! -f "$SQLITE_TILE_DIR/$1.$2.db" ]; then
 			unlink /tmp/~$1.$2.o5m
 		done
 	done
-	echo "\
-		SELECT load_extension('libspatialite.so'); \
-		CREATE TABLE polygon AS \
-		SELECT id,geom,0 AS is_rel FROM way WHERE closed = 1 AND IsValid(geom) AND NOT IsEmpty(geom) AND NumPoints(geom) > 3 \
-		UNION \
-		SELECT * FROM ( \
-		SELECT rel_id,Collect(geom) AS geom,1 AS is_rel FROM \
-		(SELECT rel_id,LineMerge(Collect(geom)) AS geom,object FROM rel_outer RO \
-		JOIN way W ON W.id = RO.way_id AND IsValid(W.geom) AND NOT IsEmpty(W.geom) AND NumPoints(W.geom) > 1 \
-		GROUP BY rel_id, object \
-		ORDER BY segment) \
-		GROUP BY rel_id); \
-	" | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
+	#echo "\
+	#	SELECT load_extension('libspatialite.so'); \
+	#	CREATE TABLE polygon AS \
+	#	SELECT id,geom,0 AS is_rel FROM way WHERE closed = 1 AND IsValid(geom) AND NOT IsEmpty(geom) AND NumPoints(geom) > 3 \
+	#	UNION \
+	#	SELECT * FROM ( \
+	#	SELECT rel_id,Collect(geom) AS geom,1 AS is_rel FROM \
+	#	(SELECT rel_id,LineMerge(Collect(geom)) AS geom,object FROM rel_outer RO \
+	#	JOIN way W ON W.id = RO.way_id AND IsValid(W.geom) AND NOT IsEmpty(W.geom) AND NumPoints(W.geom) > 1 \
+	#	GROUP BY rel_id, object \
+	#	ORDER BY segment) \
+	#	GROUP BY rel_id); \
+	#" | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
+	php /home/klinger/mymap/stylesheets/general/prepare-db/sqlite-views.php | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
+	python /home/klinger/mymap/generate_highway_access.py gis_eu
 	php /home/klinger/mymap/stylesheets/general/prepare-db/get-sql-sqlite.php | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
 fi
 
@@ -102,7 +104,7 @@ if [ ! -f "$ASTER_TILE_DIR/~$1.$2.contours.shp" ]; then
 	gdal_contour -snodata -32768 -a ele -i 10 /tmp/~$1.$2.aster.tif "$ASTER_TILE_DIR/~$1.$2.contours.shp"
 fi
 
-echo $LON_START $LAT_START $LON_END $LAT_END
+#echo $LON_START $LAT_START $LON_END $LAT_END
 
 ./get_data_pgis_rect $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
 
@@ -111,5 +113,6 @@ php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_E
 python /home/klinger/mymap/relations2lines/relations2lines5.py gis_eu $LON_START $LAT_START $LON_END $LAT_END
 
 python /home/klinger/mymap/generate_osmcsymbols.py gis_eu
-python /home/klinger/mymap/generate_highway_access.py gis_eu
+
+
 
