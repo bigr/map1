@@ -76,7 +76,7 @@ if [ ! -f "$SQLITE_TILE_DIR/$1.$2.db" ]; then
 	#	GROUP BY rel_id); \
 	#" | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
 	php /home/klinger/mymap/stylesheets/general/prepare-db/sqlite-views.php | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
-	python /home/klinger/mymap/generate_highway_access.py gis_eu
+	python /home/klinger/mymap/generate_highway_access.py $1 $2
 	php /home/klinger/mymap/stylesheets/general/prepare-db/get-sql-sqlite.php | sqlite3 $SQLITE_TILE_DIR/$1.$2.db
 fi
 
