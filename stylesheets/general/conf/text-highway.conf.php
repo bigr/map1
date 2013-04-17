@@ -17,52 +17,52 @@ $ROAD_NAME_PRIORITIES = array (
 12 => array(),
 13 => array(),
 14 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 
-		HIGHWAY_UNCLASSIFIED => 2,
+		HIGHWAY_MOTORWAY     => 3,
+		HIGHWAY_TRUNK        => 3,
+		HIGHWAY_PRIMARY      => 3,
+		HIGHWAY_SECONDARY    => 3,
+		HIGHWAY_TERTIARY     => 3, 
+		HIGHWAY_UNCLASSIFIED => 3,
 	),
 15 => array(
-		HIGHWAY_MOTORWAY     => 1,
-		HIGHWAY_TRUNK        => 1,
-		HIGHWAY_PRIMARY      => 1,
-		HIGHWAY_SECONDARY    => 1,
-		HIGHWAY_TERTIARY     => 1, 
-		HIGHWAY_UNCLASSIFIED => 1,
-		HIGHWAY_SERVICE      => 2,
-		HIGHWAY_RESIDENTIAL  => 2,
+		HIGHWAY_MOTORWAY     => 3,
+		HIGHWAY_TRUNK        => 3,
+		HIGHWAY_PRIMARY      => 3,
+		HIGHWAY_SECONDARY    => 3,
+		HIGHWAY_TERTIARY     => 3, 
+		HIGHWAY_UNCLASSIFIED => 3,
+		HIGHWAY_SERVICE      => 3,
+		HIGHWAY_RESIDENTIAL  => 3,
 	),
 16 => array(
-		HIGHWAY_MOTORWAY     => 1,
-		HIGHWAY_TRUNK        => 1,
-		HIGHWAY_PRIMARY      => 1,
-		HIGHWAY_SECONDARY    => 1,
-		HIGHWAY_TERTIARY     => 1, 
-		HIGHWAY_UNCLASSIFIED => 1,
-		HIGHWAY_SERVICE      => 2,
-		HIGHWAY_RESIDENTIAL  => 2,
+		HIGHWAY_MOTORWAY     => 3,
+		HIGHWAY_TRUNK        => 3,
+		HIGHWAY_PRIMARY      => 3,
+		HIGHWAY_SECONDARY    => 3,
+		HIGHWAY_TERTIARY     => 3, 
+		HIGHWAY_UNCLASSIFIED => 3,
+		HIGHWAY_SERVICE      => 3,
+		HIGHWAY_RESIDENTIAL  => 3,
 	),
 17 => array(
-		HIGHWAY_MOTORWAY     => 1,
-		HIGHWAY_TRUNK        => 1,
-		HIGHWAY_PRIMARY      => 1,
-		HIGHWAY_SECONDARY    => 1,
-		HIGHWAY_TERTIARY     => 1, 
-		HIGHWAY_UNCLASSIFIED => 1,
-		HIGHWAY_SERVICE      => 2,
-		HIGHWAY_RESIDENTIAL  => 2,
+		HIGHWAY_MOTORWAY     => 3,
+		HIGHWAY_TRUNK        => 3,
+		HIGHWAY_PRIMARY      => 3,
+		HIGHWAY_SECONDARY    => 3,
+		HIGHWAY_TERTIARY     => 3, 
+		HIGHWAY_UNCLASSIFIED => 3,
+		HIGHWAY_SERVICE      => 3,
+		HIGHWAY_RESIDENTIAL  => 3,
 	),
 18 => array(
-		HIGHWAY_MOTORWAY     => 1,
-		HIGHWAY_TRUNK        => 1,
-		HIGHWAY_PRIMARY      => 1,
-		HIGHWAY_SECONDARY    => 1,
-		HIGHWAY_TERTIARY     => 1, 
-		HIGHWAY_UNCLASSIFIED => 1,
-		HIGHWAY_SERVICE      => 2,
-		HIGHWAY_RESIDENTIAL  => 2,
+		HIGHWAY_MOTORWAY     => 3,
+		HIGHWAY_TRUNK        => 3,
+		HIGHWAY_PRIMARY      => 3,
+		HIGHWAY_SECONDARY    => 3,
+		HIGHWAY_TERTIARY     => 3, 
+		HIGHWAY_UNCLASSIFIED => 3,
+		HIGHWAY_SERVICE      => 3,
+		HIGHWAY_RESIDENTIAL  => 3,
 	),
 );
 
@@ -76,75 +76,75 @@ $ROAD_REF_PRIORITIES = array (
  7 => array(),
  8 => array(),
  9 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
 	),
 10 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
 	),
 11 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,	
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,	
 	),
 12 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,	
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,	
 	),
 13 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 	
-		HIGHWAY_UNCLASSIFIED => 2,
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,
+		HIGHWAY_TERTIARY     => 1, 	
+		HIGHWAY_UNCLASSIFIED => 1,
 	),	
 14 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 
-		HIGHWAY_UNCLASSIFIED => 2,
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,
+		HIGHWAY_TERTIARY     => 1, 
+		HIGHWAY_UNCLASSIFIED => 1,
 	),
 15 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 
-		HIGHWAY_UNCLASSIFIED => 2,	
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,
+		HIGHWAY_TERTIARY     => 1, 
+		HIGHWAY_UNCLASSIFIED => 1,	
 	),
 16 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 
-		HIGHWAY_UNCLASSIFIED => 2,	
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,
+		HIGHWAY_TERTIARY     => 1, 
+		HIGHWAY_UNCLASSIFIED => 1,	
 	),
 17 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,		
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 
-		HIGHWAY_UNCLASSIFIED => 2,	
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,		
+		HIGHWAY_SECONDARY    => 1,
+		HIGHWAY_TERTIARY     => 1, 
+		HIGHWAY_UNCLASSIFIED => 1,	
 	),
 18 => array(
-		HIGHWAY_MOTORWAY     => 2,
-		HIGHWAY_TRUNK        => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_PRIMARY      => 2,
-		HIGHWAY_SECONDARY    => 2,
-		HIGHWAY_TERTIARY     => 2, 
-		HIGHWAY_UNCLASSIFIED => 2,	
+		HIGHWAY_MOTORWAY     => 1,
+		HIGHWAY_TRUNK        => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_PRIMARY      => 1,
+		HIGHWAY_SECONDARY    => 1,
+		HIGHWAY_TERTIARY     => 1, 
+		HIGHWAY_UNCLASSIFIED => 1,	
 	),
 );
 
@@ -217,12 +217,12 @@ HIGHWAY_UNCLASSIFIED => array(8 => 12.5,16=>13),
 );
 
 $ROAD_REF_MINIMUM_DISTANCE  = array(
-HIGHWAY_MOTORWAY     => array(8 => 100, 17 => 200),
-HIGHWAY_TRUNK        => array(8 => 100, 17 => 200),
-HIGHWAY_PRIMARY      => array(8 => 100, 17 => 200),
-HIGHWAY_SECONDARY    => array(8 => 100, 17 => 200),
-HIGHWAY_TERTIARY     => array(8 => 100, 17 => 200),
-HIGHWAY_UNCLASSIFIED => array(8 => 100, 17 => 200),
+HIGHWAY_MOTORWAY     => array(8 => 50, 17 => 200),
+HIGHWAY_TRUNK        => array(8 => 50, 17 => 200),
+HIGHWAY_PRIMARY      => array(8 => 50, 17 => 200),
+HIGHWAY_SECONDARY    => array(8 => 50, 17 => 200),
+HIGHWAY_TERTIARY     => array(8 => 50, 17 => 200),
+HIGHWAY_UNCLASSIFIED => array(8 => 50, 17 => 200),
 );
 /**
  * Height of the road ref shield
@@ -300,18 +300,18 @@ HIGHWAY_UNCLASSIFIED => array(13 => 0),
  * Zoom -> grade -> road ref visibility/render priority maping
  */
 $ROAD_INTREF_PRIORITIES = array ( 
- 7 => 3,
- 8 => 3,
- 9 => 3,
-10 => 3,
-11 => 3,
-12 => 3,
-13 => 3,
-14 => 3,
-15 => 3,
-16 => 3,
-17 => 3,
-18 => 3
+ 7 => 1,
+ 8 => 1,
+ 9 => 1,
+10 => 1,
+11 => 1,
+12 => 1,
+13 => 1,
+14 => 1,
+15 => 1,
+16 => 1,
+17 => 1,
+18 => 1
 );
 
 
@@ -326,7 +326,7 @@ $ROAD_INTREF_COLOR = array(8 => '#ffffff');
  */
 $ROAD_INTREF_SIZE = array(8 => 13,12=>14);
 
-$ROAD_INTREF_MINIMUM_DISTANCE  = array(7 => 70, 17 => 100);
+$ROAD_INTREF_MINIMUM_DISTANCE  = array(7 => 50, 17 => 100);
 
 $ROAD_INTREF_SPACING  = array(7 => 100, 17 => 500);
 
@@ -366,3 +366,35 @@ $ROAD_INTREF_SHIELD_BORDER_WIDTH = array(8 => 0);
  * Width of the margine of theroad ref shield
  */
 $ROAD_INTREF_SHIELD_MARGIN = array(8 => 0);
+
+
+/**
+ * Zoom -> grade -> access shield priorities maping
+ */
+$HIGHWAY_ACCESS_PRIORITIES = array (
+14 => 3,
+15 => 3,
+16 => 3,
+17 => 3,
+18 => 3,
+);
+
+/**
+ * highway access text size
+ */
+$HIGHWAY_ACCESS_SIZE = array(13 => 12);
+
+
+/**
+ * Minmial distance of access shield
+ */
+$HIGHWAY_ACCESS_MINDISTANCE = array(13=>20);
+
+
+$HIGHWAY_ACCESS_DENSITY = array(
+	14 =>  6,
+	15 => 17,
+	16 => 50,
+	17 => 150,
+	18 => 600,
+);

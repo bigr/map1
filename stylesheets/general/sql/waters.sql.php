@@ -20,6 +20,11 @@ function sql_waterway_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_ord
     return "SELECT * FROM waterways WHERE layer = $layer";
 }
 
+function sql_waterway_short_notrect($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
+    $layerSql = _getNewLayerSql();
+    return sql_waterway($cols,"$layerSql = $layer",$order);
+}
+
 
 function sql_waterway($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	$layerSql = _getNewLayerSql();
@@ -53,7 +58,7 @@ return <<<EOD
 			is_tunnel,				
 			$layerSql AS layer,
 			    ST_Length(ST_Transform(way,900913)) AS
-			way_length,
+			way_length,			
 			$cols
 		FROM waterway L
 		LEFT JOIN stream S ON S.osm_id = L.osm_id
@@ -65,9 +70,33 @@ return <<<EOD
 EOD;
 }
 
+function sql_water_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
+	global $WATERPOINT;
+	$layerSql = _getLayerSql();
+	
+	$propertyWhereQuery = getPropertyWhereQuery($WATERPOINT);
+return <<<EOD
+    SELECT
+	way,
+	osm_id, 
+	waterway,							    
+	$layerSql AS layer,
+	name,
+	$cols
+    FROM water_point
+    WHERE
+	($propertyWhereQuery)			
+	AND ($where)	
+EOD;
+}
+
+function sql_water_point_short($layer,$where = '1 = 1',$order = 'z_order') {
+    return "SELECT * FROM water_points WHERE layer = $layer";
+}
+
 
 function sql_waterarea_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM waterarea_layer_$layer";
+    return "SELECT * FROM waterarea WHERE layer = $layer";
 }
 
 
@@ -88,7 +117,7 @@ return <<<EOD
 	    landuse,
 	    "natural",
 	    $layerSql AS layer,
-	    way_area,
+	    way_area,		
 	    osm_id,
 	    $cols
 	FROM waterarea

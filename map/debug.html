@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>OpenLayers Demo</title>
+    <style type="text/css">
+      html, body, #basicMap {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+      }
+    </style>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+    <script>
+      function init() {
+        map = new OpenLayers.Map("basicMap");
+        var mapnik         = new OpenLayers.Layer.OSM();
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+        var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+        var position       = new OpenLayers.LonLat(15.2,50.3).transform( fromProjection, toProjection);
+        var zoom           = 11; 
+ 
+	var newLayerD = new OpenLayers.Layer.XYZ("Map1.eu - Devel", "tiles/${z}/${x}/${y}.jpg", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayerD);
+ 
+ 
+        var newLayer = new OpenLayers.Layer.XYZ("Map1.eu - Alpha", "http://alpha.map1.eu/tiles/${z}/${x}/${y}.jpg", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer);
+	
+	
+	var newLayer = new OpenLayers.Layer.XYZ("Map1.eu - Prometheus", "http://map.prometheus.bigr.cz/tiles/${z}/${x}/${y}.jpg", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer);
+	
+		var newLayer = new OpenLayers.Layer.XYZ("Mtbmap", "http://tile.mtbmap.cz/mtbmap_tiles/${z}/${x}/${y}.png", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer);
+		
+		var newLayer2 = new OpenLayers.Layer.XYZ("Open cycle map", "http://tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer2);
+		
+		var newLayer3 = new OpenLayers.Layer.XYZ("Hike bike map", "http://toolserver.org/tiles/hikebike/${z}/${x}/${y}.png", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer3);
+		
+		
+		var newLayer4 = new OpenLayers.Layer.XYZ("Map quest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer4);
+		
+		var newLayer5 = new OpenLayers.Layer.XYZ("osmapa.pl", "http://a.osm.trail.pl/osmapa.pl/${z}/${x}/${y}.png", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });      
+	
+	
+
+	                  
+		map.addLayer(newLayer5);
+
+	var gphy = new OpenLayers.Layer.Google(
+	    "Google Physical",
+	    {type: google.maps.MapTypeId.TERRAIN}
+	    // used to be {type: G_PHYSICAL_MAP}
+	);
+	map.addLayer(gphy);
+	
+	var gmap = new OpenLayers.Layer.Google(
+	    "Google Streets", // the default
+	    {numZoomLevels: 20}
+	    // default type, no change needed here
+	);
+	map.addLayer(gmap);
+		
+		
+		
+		map.addLayer(mapnik);
+		map.addControl(new OpenLayers.Control.LayerSwitcher());
+		map.setCenter(position, zoom );
+		
+      }
+    </script>
+  </head>
+  <body onload="init();">
+    <div id="basicMap"></div>
+  </body>
+</html>

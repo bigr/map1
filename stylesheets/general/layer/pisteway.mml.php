@@ -2,6 +2,7 @@
 	require_once "sql/pisteway.sql.php";
 	require_once "conf/sqlite.php";
 ?>
+	
 {
 	"id": "pisteway-layer<?php echo $layer?>",
 	"name": "pisteway-layer<?php echo $layer?>",
@@ -28,3 +29,4 @@
 	<?php endif; ?>
 	
 }
+

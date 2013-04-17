@@ -1,3 +1,3 @@
 for f in *.svg; do
-	 convert -resize 128 +antialias -background transparent $f ${f%.*}.png
+	 convert  +antialias -background transparent $f -resize 128 ${f%.*}.png
 done

@@ -53,6 +53,13 @@ function sql_symbol_short() {
     ";
 }
 
+function sql_symbol_short_notrect() {
+    return "
+	SELECT * FROM symbol S	
+	ORDER BY grade DESC
+    ";
+}
+
 function sql_symbol($where = '1 = 1',$order = 'z_order') {
 	global $SYMBOL;
 	$propertyWhereQuery = getPropertyWhereQuery($SYMBOL,array('grade'));
@@ -63,6 +70,9 @@ function sql_symbol($where = '1 = 1',$order = 'z_order') {
 	$propertyWhereQuery = str_replace('"natural"',"T.natural",$propertyWhereQuery);
 	$propertyWhereQuery = str_replace('"ruins"',"T.ruins",$propertyWhereQuery);
 	$propertyWhereQuery = str_replace('"place_of_worship"',"T.place_of_worship",$propertyWhereQuery);
+	$propertyWhereQuery = str_replace('"highway"',"T.highway",$propertyWhereQuery);
+	$propertyWhereQuery = str_replace('"railway"',"T.railway",$propertyWhereQuery);
+	$propertyWhereQuery = str_replace('"aeroway"',"T.aeroway",$propertyWhereQuery);
 	
 	$symbolGradeSql = getSymbolGradeSql();
 return <<<EOD
@@ -97,12 +107,18 @@ return <<<EOD
 	"place_of_worship:type",
 		COALESCE(T.castle_type,'no'::text) AS
 	castle_type,
+		COALESCE(T.railway,'no'::text) AS
+	railway,
+		COALESCE(T.highway,'no'::text) AS
+	highway,
+	    COALESCE(T.aeroway,'no'::text) AS
+	aeroway,
 		COALESCE(T.way_area,0) AS
 	way_area,
 	NULL AS wiki,
 	T.osm_id
     FROM (
-	SELECT osm_id,name,way,historic,man_made,tourism,amenity,"natural",leisure,building,ruins,"tower:type",information,place_of_worship,"place_of_worship:type",castle_type,0 AS way_area, z_order FROM symbol	
+	SELECT osm_id,name,way,historic,man_made,tourism,amenity,"natural",leisure,building,ruins,"tower:type",information,place_of_worship,"place_of_worship:type",castle_type,railway,highway,aeroway,power,0 AS way_area, z_order FROM symbol
     ) AS T    
     WHERE
 		    ($propertyWhereQuery)			

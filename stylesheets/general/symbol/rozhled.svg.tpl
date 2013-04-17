@@ -5,6 +5,7 @@
   width="$size"
   height="$size"
   viewBox="0 0 256 256">
+  $pre
   <g
      
      
@@ -80,5 +81,6 @@
       </g>
     </g>
   </g>
+  $post
 </svg>
 EOD;

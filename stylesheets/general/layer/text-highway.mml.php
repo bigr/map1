@@ -26,4 +26,17 @@
 	"srs": "<?php echo SRS900913?>",
 	<?php echo ds_pgis(sql_text_highway_e($priority));?>
 	<?php endif; ?>		
+},
+{
+	"id": "text-highway-access-priority<?php echo $priority?>",
+	"name": "text-highway-access-priority<?php echo $priority?>",
+	"class": "textHighwayAccess priority<?php echo $priority?>",
+	<?php if ( $TILE ): ?>
+	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+	<?php echo ds_sqlite('highways_access');?>	
+	<?php else: ?>
+	"srs": "<?php echo SRS900913?>",
+	<?php echo ds_pgis(sql_text_highway_access($priority));?>
+	<?php endif; ?>
+	
 }

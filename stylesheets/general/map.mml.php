@@ -28,6 +28,9 @@
 		"style/~_common.mss"
 		<?php if ( $RENDER_LANDCOVER ): ?>
 			,"style/~landcover.mss"
+		<?php endif; ?>
+		<?php if ( $RENDER_ACCESSAREA ): ?>
+			,"style/~accessarea.mss"
 		<?php endif; ?>	
 		<?php if ( $RENDER_COUNTRYFILL ): ?>
 			,"style/~countryfill.mss"
@@ -73,11 +76,12 @@
 		<?php if ( $RENDER_ROUTE ): ?>
 			,"style/~route.mss"
 		<?php endif; ?>	
-		<?php if ( $RENDER_SYMBOL ): ?>
-			,"style/~symbol.mss"
-		<?php endif; ?>		
+		
 		
 		<?php if ( $RENDER_TEXT ): ?>
+			<?php if ( $RENDER_SYMBOL ): ?>
+				,"style/~symbol.mss"
+			<?php endif; ?>		
 			<?php if ( $RENDER_TEXT_PLACE ): ?>
 				,"style/~text-place.mss"
 			<?php endif; ?>
@@ -89,14 +93,22 @@
 			<?php endif; ?>
 			<?php if ( $RENDER_TEXT_ROUTE ): ?>
 				,"style/~text-route.mss"
-			<?php endif; ?>
+			<?php endif; ?>			
 			<?php if ( $RENDER_TEXT_HIGHWAY ): ?>
 				,"style/~text-highway.mss"
 			<?php endif; ?>
 			<?php if ( $RENDER_TEXT_WATERS ): ?>
 				,"style/~text-waters.mss"
 			<?php endif; ?>
-			
+			<?php if ( $RENDER_TEXT_LANDCOVER ): ?>
+				,"style/~text-landcover.mss"
+			<?php endif; ?>
+			<?php if ( $RENDER_TEXT_BUILDING ): ?>
+				,"style/~text-building.mss"
+			<?php endif; ?>
+			<?php if ( $RENDER_TEXT_BOUNDARY ): ?>
+				,"style/~text-boundary.mss"
+			<?php endif; ?>
 			<?php if ( $RENDER_TEXT_CONTOUR ): ?>
 				,"style/~text-contour.mss"
 			<?php endif; ?>			
@@ -117,6 +129,11 @@
 			if ( $RENDER_LANDCOVER ) {
 				if ( !$first ) echo ','; $first = false;
 				require "layer/landcover.mml.php";
+			}
+			
+			if ( $RENDER_ACCESSAREA ) {
+				if ( !$first ) echo ','; $first = false;
+				require "layer/accessarea.mml.php";
 			}
 			
 			if ( $RENDER_COUNTRYFILL ) {
@@ -146,11 +163,11 @@
 						if ( !$first ) echo ','; $first = false;
 						require "layer/waters.mml.php";
 					}
-					if ( $RENDER_PISTEWAY ) {
+					if ( $RENDER_PISTEWAY && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/pisteway.mml.php";
 					}
-					if ( $RENDER_AEROWAY ) {
+					if ( $RENDER_AEROWAY && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/aeroway.mml.php";
 					}					
@@ -158,19 +175,19 @@
 						if ( !$first ) echo ','; $first = false;
 						require "layer/highway.mml.php";
 					}
-					if ( $RENDER_RAILWAY ) {
+					if ( $RENDER_RAILWAY && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/railway.mml.php";
 					}
-					if ( $RENDER_BARRIER ) {
+					if ( $RENDER_BARRIER && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/barrier.mml.php";
 					}
-					if ( $RENDER_POWER ) {
+					if ( $RENDER_POWER && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/power.mml.php";
 					}					
-					if ( $RENDER_AERIALWAY ) {
+					if ( $RENDER_AERIALWAY && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/aerialway.mml.php";
 					}
@@ -187,12 +204,7 @@
 				require "layer/fishnet.mml.php";
 			}						
 			
-			if ( $RENDER_SYMBOL ) {
-				if ( !$first ) echo ','; $first = false;
-				require "layer/symbol.mml.php";
-			}
-						
-						
+														
 			if ( $RENDER_TEXT ) {
 				$clearCache = true;
 				foreach (array_merge($RENDER_TEXT_PRIORITIES ,array(-1)) as $priority) {					
@@ -200,19 +212,19 @@
 						if ( !$first ) echo ','; $first = false;
 						require "layer/text-place.mml.php";
 					}
-					if ( $RENDER_TEXT_SYMBOL ) {
+					if ( $RENDER_SYMBOL && $TILE ) {
 						if ( !$first ) echo ','; $first = false;
-						require "layer/text-symbol.mml.php";
-					}
-					if ( $RENDER_SHIELD_PEAK ) {
+						require "layer/symbol.mml.php";
+					}										
+					if ( $RENDER_SHIELD_PEAK && $TILE  ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/shield-peak.mml.php";
 					}					
-					if ( $RENDER_TEXT_ROUTE ) {
+					if ( $RENDER_TEXT_ROUTE && $TILE  ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/text-route.mml.php";
 					}
-					if ( $RENDER_TEXT_HIGHWAY ) {
+					if ( $RENDER_TEXT_HIGHWAY && $TILE  ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/text-highway.mml.php";
 					}
@@ -220,8 +232,23 @@
 						if ( !$first ) echo ','; $first = false;
 						require "layer/text-waters.mml.php";
 					}
-					
-					if ( $RENDER_TEXT_CONTOUR ) {
+					if ( $RENDER_TEXT_LANDCOVER  && $TILE ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/text-landcover.mml.php";
+					}
+					if ( $RENDER_TEXT_BOUNDARY && $TILE ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/text-boundary.mml.php";
+					}
+					if ( $RENDER_TEXT_BUILDING && $TILE  ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/text-building.mml.php";
+					}
+					if ( $RENDER_TEXT_SYMBOL && $TILE  ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/text-symbol.mml.php";
+					}
+					if ( $RENDER_TEXT_CONTOUR && $TILE  ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/text-contour.mml.php";
 					}										

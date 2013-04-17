@@ -69,7 +69,6 @@ return <<<EOD
 		FROM railway
 		WHERE
 				    railway IS NOT NULL
-			    AND osm_id > 0			    
 			    AND ($where)
 		ORDER BY ($railwayGradeSql), osm_id DESC
 EOD;

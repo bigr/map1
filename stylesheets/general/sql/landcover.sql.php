@@ -22,10 +22,18 @@ return <<<EOD
 		COALESCE(place,CAST('no' AS text)) AS
 			place,
 		sport,
+			COALESCE(power,CAST('no' AS text)) AS 
+		power,
+			COALESCE(tourism,CAST('no' AS text)) AS 
+		tourism,
+			COALESCE(historic,CAST('no' AS text)) AS 
+		historic,
 		COALESCE(wood,type,CAST('no' AS text)) AS wood,
 		COALESCE(religion,CAST('no' AS text)) AS religion,
 		name,
 		way_area,
+			ST_Centroid(way) AS
+		centroid,
 		$cols
 	FROM landcover
 	WHERE

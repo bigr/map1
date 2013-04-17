@@ -20,46 +20,46 @@ function download {
     qs="$1[*]"
     qs=(${!qs})  
     IFS=$OLD_IFS 
-    #echo $qs2 
+    echo $qs2 
     #qs=("raz" "dva" "tri" )   
-    #for qq in "${qs[@]}"; do	
-	#for i_lat in $(eval echo "{$LAT_START..$LAT_END..$LAT_STEP}"); do
-	    #lat_from=$i_lat
-	    #lat_to=$(python <<< "print min($LAT_END,$i_lat+$LAT_STEP)")	    
-	    #for i_lon in $(eval echo "{$LON_START..$LON_END..$LON_STEP}"); do
-		#lon_from=$i_lon
-		#lon_to=$(python <<< "print min($LON_END,$i_lon+$LON_STEP)")
-		#q=${qq//%lon1%/$lon_from}
-		#q=${q//%lon2%/$lon_to}
-		#q=${q//%lat1%/$lat_from}
-		#q=${q//%lat2%/$lat_to}		
-		#i=$(($i+1))
-		#server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		#wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
-		#while [ $? -ne 0 ]; do
-		    #i=$(($i+1))
-		    #server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		    #wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
-		#done			
-		#if [ -f "/tmp/$2.o5m" ]; then
-		    #/home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
-		    #FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
-		    #FS2=$(stat -c%s "/tmp/~$2.o5m")
-		    #if [ $FS1 -ge $FS2 ]; then
-			#unlink "/tmp/~$2.o5m"
-		    #else			    
-			#unlink "/tmp/$2.o5m"
-			#mv "/tmp/~$2.o5m" "/tmp/$2.o5m"
-		    #fi
-		    #unlink "/tmp/~$2.$i_lon.$i_lat.o5m" 
-		#else
-		    #mv "/tmp/~$2.$i_lon.$i_lat.o5m" "/tmp/$2.o5m"
-		#fi
-	    #done
-	#done
-    #done
-    #/home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
-    #unlink "/tmp/$2.o5m"    
+    for qq in "${qs[@]}"; do	
+	for i_lat in $(eval echo "{$LAT_START..$LAT_END..$LAT_STEP}"); do
+	    lat_from=$i_lat
+	    lat_to=$(python <<< "print min($LAT_END,$i_lat+$LAT_STEP)")	    
+	    for i_lon in $(eval echo "{$LON_START..$LON_END..$LON_STEP}"); do
+		lon_from=$i_lon
+		lon_to=$(python <<< "print min($LON_END,$i_lon+$LON_STEP)")
+		q=${qq//%lon1%/$lon_from}
+		q=${q//%lon2%/$lon_to}
+		q=${q//%lat1%/$lat_from}
+		q=${q//%lat2%/$lat_to}		
+		i=$(($i+1))
+		server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
+		wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
+		while [ $? -ne 0 ]; do
+		    i=$(($i+1))
+		    server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
+		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
+		done			
+		if [ -f "/tmp/$2.o5m" ]; then
+		    osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
+		    FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
+		    FS2=$(stat -c%s "/tmp/~$2.o5m")
+		    if [ $FS1 -g $FS2 ]; then
+			unlink "/tmp/~$2.o5m"
+		    else			    
+			unlink "/tmp/$2.o5m"
+			mv "/tmp/~$2.o5m" "/tmp/$2.o5m"
+		    fi
+		    unlink "/tmp/~$2.$i_lon.$i_lat.o5m" 
+		else
+		    mv "/tmp/~$2.$i_lon.$i_lat.o5m" "/tmp/$2.o5m"
+		fi
+	    done
+	done
+    done
+    osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
+    unlink "/tmp/$2.o5m"    
     
     case "$3" in
     
@@ -134,7 +134,7 @@ q=(
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);)"
 )
 #download q symbol pointex \
-    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
+#    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
 
 
 

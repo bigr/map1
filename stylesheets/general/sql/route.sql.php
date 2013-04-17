@@ -143,8 +143,16 @@ return <<<EOD
 		offsetside,
 		"mtb:scale",
 		route,
+		density,
+		network,
+		(CASE 
+		    WHEN oneway IN ('false','0','no') THEN 'no'
+		    WHEN oneway IN ('true','1','yes') THEN 'yes'
+		    ELSE COALESCE(oneway,CAST('no' AS text))
+		END) AS oneway,
+		
 		$cols
-	FROM routes2
+	FROM routes2 R2	
 	WHERE
 		route IN ('bicycle','mtb')
 	    AND "offset" = $offset

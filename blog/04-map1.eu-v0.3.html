@@ -1,0 +1,37 @@
+<h1 id="map1.eu---vydána-verze-0.3"><a href="http://www.map1.eu">map1.eu</a> - Vydána verze 0.3</h1>
+<p>Právě byla vydána verze Alfa 0.3 <a href="http://www.map1.eu">map1.eu</a>. Na vykreslování dlaždic tato verze nic nemění, je totiž zaměřena na uživatelské rozhraní. Kromě oprav chyb je výrazně vylepšen tisk.</p>
+<h2 id="co-je-řešeno-v-této-verzi">Co je řešeno v této verzi ?</h2>
+<ul>
+<li><strong><a href="https://github.com/bigr/map1/issues/91">#091</a></strong> - Předělání tisku, hlavní těžiště práce. Více se dočtete níže.</li>
+<li><strong><a href="https://github.com/bigr/map1/issues/86">#086</a></strong> - Vyhledávání přepracováno, opraveno a zpřehledněno.</li>
+<li><a href="https://github.com/bigr/map1/issues/59">#059</a>,</li>
+<li><a href="https://github.com/bigr/map1/issues/87">#087</a>,</li>
+<li><a href="https://github.com/bigr/map1/issues/23">#023</a> - Facelift routování.</li>
+</ul>
+<h2 id="tisk-map">Tisk map</h2>
+<p>Jedním z cílů map1.eu je snadný tisk map z internetu. Každý, kdo jste si zkoušel vytisknout mapu ať už ze Seznamu nebo z jiného serveru, mi snad dáte za pravdu, že to není nic pěkného. Zaplnit mapou celou stránku je takřka nemožné a chtít, aby byl tisk nakalibrován například na měřítko 1:50000 zůstane navždy nevyplněným přáním. Vytisknutí více stran se stává misí, která vám zabere celé odpoledne.</p>
+<p>Chci to změnit. <strong>Map1eu tiskne do PDF.</strong> Umožňuje si vybrat přesnou oblast, kterou chcete tisknout, měřítko, formát a orientaci stránky. Vygenerovaný dokument se pak podobá autoatlasu. Obsahuje přehledovou stránku, kde je klad dalších listů a jednotlivé listy mapy obsahují odkazy na další stránky. Zatím je to jen začátek. Do budoucna plánuji přidat legendu, jmenný rejstřík a mnoho dalšího.</p>
+<p>Technická poznámka: PDFka jsou generována javaskriptem na straně klienta, což znamená, že pro server je operace tištění mapy pouze poskytování statického obsahu (dlaždic s mapou). To výrazně zvyšuje kapacitu, kterou je server schopný obsloužit. Do budoucna chci nechat počítat klienta místo serveru co nejvíce. Například i routování bych rád prováděl pomocí javaskriptu na straně prohlížeče. Jediná nevýhoda tohoto řešení je v tom, že ke stažení velkého souboru (malé lze stahovat i jinak) vygenerováného javaskriptem je třeba flash (downloadify). Nezbývá než doufat, že do budoucna tato povinnost odpadne.</p>
+<h2 id="co-dál">Co dál?</h2>
+<p>Další verze (0.4 alfa) se bude opět věnovat samotné mapě. Na githubu, zde na blogu a v mé hlavě se nashromáždilo mnoho problémů. Rád bych jich většinu vyřešil a proto patrně bude vydání nové alfy trvat trochu déle než obvyklých 14 dnů.</p>
+<p>Výsledek snahy strukturovaně sepsat cíle příští alfy je tento:</p>
+<ul>
+<li>Gridinfo - při přejíždění kurzorem přes mapu se budou automaticky zobrazovat informace o oblasti ležící pod kurzorem</li>
+<li>Veřejná doprava - Letiště, zastávky, stanice, nádraží, tramvaje, ...</li>
+<li>Podrobná měřítka - Měřítka 16+ jsem zatím moc neřešil. Nyní budu.</li>
+<li>Pro řidiče - Kilometráže, čísla sjezdů, vylepšení zobrazování čísel silnic.</li>
+<li>Pro vodáky - Jezy, kanály, ...</li>
+<li>Omezení - Zákazy vjezdu, jednosměrky, omezení rychlosti.</li>
+</ul>
+<h2 id="poděkování-za-podporu-finanční-i-jinou">Poděkování za podporu finanční i jinou</h2>
+<p>Je to pro mě příjemné překvapení. Poté, co jsem v <a href="http://map1.blog.root.cz/2013/03/04/map-eu-vydana-verze-0-2/">minulém článku</a>, poprosil o finanční i jinou podporu, se skutečně našlo několik z vás, kteří na map1.eu přispěli. K dnešnímu datu se mi podařilo &quot;vyžebrat&quot; 2500Kč. Sice to není částka, která by mě uživila (projektu se nyní věnuji na 90% úvazku), ale pomůže mi zaplatit servery na 2 měsíce dopředu. Největší pozitivum této skutečnosti však je, že mi tato Vaše podpora vlévá elán do žil. A ten elán mě drží v noci v bdělém stavu nad klávesnicí počítače o pár chvil déle.</p>
+<p>A když jsme u těch serverů, tak se našel sponzor, který mi poskytne výpočetní výkon. Zatím jsem ve fázi instalace, takže se může ještě něco pokazit a celá věc zhatit. Proto jeho jméno zatím neprozradím. (Kdyby byla náhodou zkušenost negativní, tak abych mu neuškodil).</p>
+<p><strong>Ještě jednou děkuji všem, kteří mě podporují <a href="http://map1.eu/donation.html">finančně</a> i jinak. Předem děkuji i těm, kteří tak v budoucnu učiní. Velký dík také patří Vám všem, kteří nahlašujete chyby na <a href="https://github.com/bigr/map1">githubu</a> i zde na blogu.</strong></p>
+<h2 id="závěrečný-seznam-odkazů-týkajících-se-projektu">Závěrečný seznam odkazů týkajících se projektu</h2>
+<ul>
+<li>Mail projektu: info@map1.eu</li>
+<li>Github: <a href="https://github.com/bigr/map1">github.com/bigr/map1</a></li>
+<li>Donace: <a href="http://map1.eu/donation.html">map1.eu/donation.html</a></li>
+<li>Facebook: <a href="https://facebook.com/Map1eu">facebook.com/Map1eu</a></li>
+<li>Twitter: <a href="https://twitter.com/map1eu">twitter.com/map1eu</a></li>
+</ul>

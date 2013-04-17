@@ -1,6 +1,7 @@
 <?php $svg = <<<EOD
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="$size" height="$size" viewBox="0 0 26880 26880">
+  $pre
   <path style="fill:#ffffff;fill-opacity:$opacity;stroke:#000000;stroke-width:10.81379986px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 1493.3334,2986.6668 23893.3336,0 0,13813.3332 -23893.3336,0 z"/>
   <path style="fill:$color;fill-opacity:$opacity;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 280,0 C -8.75e-6,0 0,280 0,280 l 0,1468.5625 560,0 0,631.4375 -140,0 0,140 560,0 0,-140 -140,0.7188 0,-632.1563 840,0 0,635.7187 -140,-4.2812 0,140 560,0 0,-140 -140,0 0,-631.4375 560,0 L 2520,280 c 0,0 -1e-4,-280 -280,-280 z m -140,280 2240,0 0,1295 -2240,0 z" transform="scale(10.666667,10.666667)"/>
   <g transform="matrix(5.7313614,0,0,5.352411,3813.7355,4457.9251)" style="fill-rule:evenodd;stroke:#000000;stroke-width:134.81031799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
@@ -460,5 +461,6 @@
       <path style="fill:none;stroke:#000000;stroke-width:134.81031799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" d="m 2015.74,308.003 c 4.5674,2.72027 2.8609,12.4645 8.0038,13.81"/>
     </g>
   </g>
+  $post
 </svg>
 EOD;

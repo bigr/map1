@@ -10,7 +10,7 @@ function _getPlacePopulationColumn() {
 		WHEN P.place = 'town' THEN 3000
 		WHEN P.place IN ('suburb','borough') THEN 3000
 		WHEN P.place = 'village' THEN 300
-		WHEN P.place IN ('neighbourhood','official_neighborhood','municipality') THEN 300
+		WHEN P.place IN ('neighbourhood','official_neighborhood','municipality') THEN 200
 		WHEN P.place = 'hamlet' THEN 15
 		WHEN P.place IN ('isolated_dwelling','farm') THEN 3
 	    END	    

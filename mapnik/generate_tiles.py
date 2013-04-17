@@ -91,7 +91,7 @@ class RenderThread:
                     #print "Loading map %s..." % mapfile % {'country':country,'zooms':self.zooms}
                     #mapnik.load_map(_m, mapfile % {'country':country,'zooms':self.zooms}, True)
                     #m[country] = _m
-                    m[country] = mapfile % {'country':country,'zooms':self.zooms}                    
+                    m[country] = mapfile % {'country':country,'zooms':self.zooms}
                         
             self.m.append(m)
         
@@ -105,82 +105,23 @@ class RenderThread:
         self.tileproj = GoogleProjection(maxZoom+1)
 
 
-    def _renderMapnik(self,mapfile,c0,c1,l0,l1):
+    def _renderMapnik(self,mapfile,c0,c1):	
         render_sizeX = int(self.tile_countX * self.tile_size)
         render_sizeY = int(self.tile_countY * self.tile_size)
-        gprj = GoogleProjection(self.zooms+1) 
-        px0 = gprj.fromLLtoPixel(l0,self.zooms)
-        px1 = gprj.fromLLtoPixel(l1,self.zooms)
+        bbox = mapnik.Box2d(c0.x,c0.y, c1.x,c1.y)
         
-        
-        im = Image.new("RGBA",(render_sizeX,render_sizeY),220)
-        for lon in range(int(floor(l0[0])),int(ceil(l1[0]))):
-            for lat in range(int(floor(l0[1])),int(ceil(l1[1]))):                                
-                
-                cc0 = self.prj.forward(mapnik.Coord(lon,lat))
-                cc1 = self.prj.forward(mapnik.Coord(lon+1,lat+1))
-                pxx0 = gprj.fromLLtoPixel((lon,lat),self.zooms)
-                pxx1 = gprj.fromLLtoPixel((lon+1,lat+1),self.zooms)
-                
-                pxx0 = (max(px0[0],pxx0[0]),min(px0[1],pxx0[1]))                
-                pxx1 = (min(px1[0],pxx1[0]),max(px1[1],pxx1[1]))
-                cc0.x = max(c0.x,cc0.x)
-                cc0.y = max(c0.y,cc0.y)
-                cc1.x = min(c1.x,cc1.x)
-                cc1.y = min(c1.y,cc1.y)
-                
-                #print pxx0, pxx1
-                #print cc0, cc1
-                
-                #sizeX = render_sizeX * (cc1.x - cc0.x) / (c1.x - c0.x)
-                #sizeY = render_sizeY * (cc1.y - cc0.y) / (c1.y - c0.y)
-                                                                    
-                #fromX = render_sizeX * (cc0.x - c0.x) / (c1.x - c0.x)
-                #fromY = render_sizeY * (cc1.y - c1.y) / (c0.y - c1.y) 
-                
-                sizeX = pxx1[0] - pxx0[0];
-                sizeY = pxx0[1] - pxx1[1];
-                
-                fromX = pxx0[0] - px0[0];
-                fromY = pxx1[1] - px1[1];
-                
-                #print int(sizeX), int(sizeY), int(fromX), int(fromY), render_sizeX, render_sizeY
-                
-                bbox = mapnik.Box2d(cc0.x,cc0.y, cc1.x,cc1.y)
-                
-                #m = self.mp
-                m = mapnik.Map(int(sizeX), int(sizeY))                
-                
-                os.system("/home/klinger/mymap/get-data %d %d" % (lon,lat) )
-                
-                sqlitetile = "/tmp/~osm-tile.sqlite"
-                contourstile = "/tmp/~contours"
-                os.system("unlink %s" % sqlitetile)
-                os.symlink("/home/klinger/mymap/data/tiles/sqlite/%d.%d.db" % (lon,lat), sqlitetile);
-                os.system("unlink %s" % contourstile + '.shp')
-                os.system("unlink %s" % contourstile + '.shx')
-                os.system("unlink %s" % contourstile + '.dbf')
-                os.system("unlink %s" % contourstile + '.prj')
-                os.symlink("/home/klinger/mymap/data/tiles/aster/~%d.%d.contours.shp" % (lon,lat), contourstile + '.shp');
-                os.symlink("/home/klinger/mymap/data/tiles/aster/~%d.%d.contours.shx" % (lon,lat), contourstile + '.shx');
-                os.symlink("/home/klinger/mymap/data/tiles/aster/~%d.%d.contours.dbf" % (lon,lat), contourstile + '.dbf');
-                os.symlink("/home/klinger/mymap/data/tiles/aster/~%d.%d.contours.prj" % (lon,lat), contourstile + '.prj');
-                                
-                mapnik.load_map(m, mapfile, True)
-                
-                m.resize(int(sizeX), int(sizeY))
-                
-                
-                
-                m.zoom_to_box(bbox)
-                m.buffer_size = self.buffer_size                                
-                
-                tileim = mapnik.Image(int(sizeX), int(sizeY))            
-                mapnik.render(m, tileim)
-                tileim = Image.fromstring('RGBA',(int(sizeX), int(sizeY)),tileim.tostring())
-                im.paste(tileim,(int(fromX),int(fromY)))            
-                del m
-                m = None
+        #m = self.mp
+        m = mapnik.Map(int(render_sizeX), int(render_sizeX))
+        mapnik.load_map(m, mapfile, True)
+        m.resize(render_sizeX, render_sizeY)
+        m.zoom_to_box(bbox)
+        m.buffer_size = self.buffer_size
+        im = mapnik.Image(render_sizeX, render_sizeY)            
+        mapnik.render(m, im)
+        im = Image.fromstring('RGBA',(render_sizeX, render_sizeY),im.tostring())
+        del m
+        m = None
+
         return im
 	
     def _renderHillshade(self,c0,c1,l0,l1):
@@ -204,8 +145,8 @@ class RenderThread:
                     cc0 = self.prj.forward(mapnik.Coord(lon,lat))
                     cc1 = self.prj.forward(mapnik.Coord(lon+1,lat+1))
                     
-                    cc0x = self.prj.forward(mapnik.Coord(lon-0.00001,lat-0.000001))
-                    cc1x = self.prj.forward(mapnik.Coord(lon+1.00001,lat+1.000001))
+                    cc0x = self.prj.forward(mapnik.Coord(lon-0.01,lat-0.01))
+                    cc1x = self.prj.forward(mapnik.Coord(lon+1.01,lat+1.01))
                     
                     sizeX = render_sizeX * (cc1x.x - cc0x.x) / (c1.x - c0.x)
                     sizeY = render_sizeY * (cc1x.y - cc0x.y) / (c1.y - c0.y)
@@ -213,8 +154,7 @@ class RenderThread:
                     fromX = render_sizeX * (cc0.x - c0.x) / (c1.x - c0.x)
                     fromY = render_sizeY * (cc1.y - c1.y) / (c0.y - c1.y) 
                                     
-                    #tileim = Image.open('/home/klinger/mymap/hillshade/%d/%d.hillshade.jpg' % (lon,lat))
-                    tileim = Image.open('/home/klinger/mymap/data/tiles/aster/~%d.%d.hillshade.tif' % (lon,lat))
+                    tileim = Image.open('/home/klinger/mymap/hillshade/%d/%d.hillshade.jpg' % (lon,lat))                    
                     tileim = tileim.resize(
                         (int(sizeX),int(sizeY)),
                         Image.ANTIALIAS if sizeX > render_sizeX/(l1[0]-l0[0]) else Image.BILINEAR
@@ -288,7 +228,7 @@ class RenderThread:
                 if m == 'hillshade':
                     im = self._renderHillshade(c0,c1,l0,l1)
                 else:
-                    im = self._renderMapnik(m,c0,c1,l0,l1)
+                    im = self._renderMapnik(m,c0,c1)
 
                 print "compositing...",
                 ima = self._composite(im,ima,opts)		
@@ -534,7 +474,6 @@ REGIONS = {
     'Okoli Jiloveho'     : [(14.3879,49.8398,14.69916,49.9589)],
     'Brdy'               : [(13.5943933,49.5775753,14.3440011,49.9070919)],
     'Okoli chalupy'      : [(15.3141911,50.6534653,15.4243831,50.6925925)],
-    'xxx'                : [(15.2,50.2,15.8,50.8)],
 }
 
 
@@ -604,4 +543,4 @@ if __name__ == "__main__":
     for region in regions:
         for zoom in zooms:
             for subregion in REGIONS[region]:
-                render_tiles(subregion, mapfiles, tile_dir, zoom, zoom, region, overwrite = overwrite, tile_count = RENDER_PROPERTIES[zoom][0], buffer_size = RENDER_PROPERTIES[zoom][1], layer_options = layer_options, countries = {'World':mapnik.Box2d(-180.0,-90.0, 180.0,90.0)} if int(zoom) < 20  else COUNTRIES, zooms = zoom)
+                render_tiles(subregion, mapfiles, tile_dir, zoom, zoom, region, overwrite = overwrite, tile_count = RENDER_PROPERTIES[zoom][0], buffer_size = RENDER_PROPERTIES[zoom][1], layer_options = layer_options, countries = {'World':mapnik.Box2d(-180.0,-90.0, 180.0,90.0)} if int(zoom) < 13  else COUNTRIES, zooms = zoom)

@@ -187,7 +187,7 @@ ROUTE_HIKING_UNKNOWN => array(14 => 12, 15 => 13),
 
 
 /**
- * Zoom -> grade -> route name visibility/render priority maping
+ * Zoom -> grade -> route osmcsymbol visibility/render priority maping
  */
 $ROUTE_OSMCSYMBOL_PRIORITIES = array (
 13 => 4,		
@@ -237,7 +237,7 @@ ROUTE_BICYCLE_LCN => array(13 =>  6),
 $ROUTE_REF_SHIELD_PADDING_WIDTH = $ROUTE_REF_SHIELD_LETTER_WIDTH;
 
 /**
- * Background color of the route ref shield
+ * Minmial distance of route osmcsymbol shield
  */
 $ROUTE_OSMCSYMBOL_MINDISTANCE = array(13=>15);
 

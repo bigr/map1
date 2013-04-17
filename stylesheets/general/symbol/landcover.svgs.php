@@ -17,6 +17,9 @@ foreach ( $RENDER_ZOOMS as $zoom ) {
 			$size = exponential($a['symbol-size'],$zoom);			
 			$color = empty($a['symbol-color']) ? '#000000' : linear($a['symbol-color'],$zoom);
 			$opacity = empty($a['symbol-opacity']) ? '1' : linear($a['symbol-opacity'],$zoom);
+			
+			$pre = "";
+			$post = "";
 						
 			require "{$a['symbol-file']}.svg.tpl";
 			

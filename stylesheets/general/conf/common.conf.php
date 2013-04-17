@@ -27,7 +27,7 @@ $RENDER_TEXT_PRIORITIES = range(0,4);
 
 $RENDER_LAYER = getenv('RENDER_LAYER');
 if ( !empty($RENDER_LAYER) ) {
-	$RENDER_LANDCOVER = $RENDER_COUNTRYFILL = $RENDER_BUILDING = $RENDER_BOUNDARY = $RENDER_WAY = $RENDER_ROUTE = $RENDER_CONTOUR = $RENDER_FISHNET = $RENDER_SYMBOL = $RENDER_TEXT = $RENDER_COUNTRYTEXT = $RENDER_GRIDINFO = false;
+	$RENDER_LANDCOVER  = $RENDER_ACCESSAREA = $RENDER_COUNTRYFILL = $RENDER_BUILDING = $RENDER_BOUNDARY = $RENDER_WAY = $RENDER_ROUTE = $RENDER_CONTOUR = $RENDER_FISHNET = $RENDER_TEXT = $RENDER_COUNTRYTEXT = $RENDER_GRIDINFO = false;
 	foreach ( explode(',',strtoupper($RENDER_LAYER)) as $LAYER ) {
 		eval("\$RENDER_$LAYER = true;");
 	}
@@ -38,6 +38,9 @@ else {
  * Enable/Disable landcover (include residentialcover hack and placescover) rendering
  */
 $RENDER_LANDCOVER = true;
+
+
+$RENDER_ACCESSAREA= true;
 
 /**
  * Enable/Disable countryfill rendering
@@ -73,11 +76,6 @@ $RENDER_CONTOUR = true;
  * Enable/Disable fishnet rendering
  */
 $RENDER_FISHNET = true;
-
-/**
- * Enable/Disable symbol rendering
- */
-$RENDER_SYMBOL = true;
 
 
 /**
@@ -210,6 +208,11 @@ $RENDER_AERIALWAY = true;
  */
 $RENDER_TEXT_HIGHWAY = true;
 
+/**
+ * Enable/Disable symbol rendering
+ */
+$RENDER_SYMBOL = true;
+
 
 /**
  * Enable/Disable symbol text/shield rendering
@@ -231,6 +234,23 @@ $RENDER_TEXT_PLACE = true;
  */
 $RENDER_TEXT_WATERS = true;
 
+
+/**
+ * Enable/Disable landcover text rendering
+ */
+$RENDER_TEXT_LANDCOVER = true;
+
+/**
+ * Enable/Disable building text rendering
+ */
+$RENDER_TEXT_BUILDING = true;
+
+
+/**
+ * Enable/Disable boundary text rendering
+ */
+$RENDER_TEXT_BOUNDARY = true;
+
 /**
  * Enable/Disable peak shield rendering
  */
@@ -247,8 +267,7 @@ $RENDER_TEXT_CONTOUR = true;
  */
 $_MINIMAL_AREA = array(5 => 80, 9 => 90, 13 => 0);
 
-
-$_CONTOUR_COLOR = array(12=>'#553322');
+$_CONTOUR_COLOR = array(12=>'#593A0D');
 
 $__zooms = getenv('ZOOMS');
 if ( !empty($__zooms) ) {

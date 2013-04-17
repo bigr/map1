@@ -23,6 +23,10 @@
 					<?php if ( !empty($a['zooms']) &&  in_array($zoom,$a['zooms']) ):?>
 						<?php echo $selector?>::level<?php echo $a['level']?> {
 							polygon-fill: <?php echo linear($a['color'],$zoom)?>;
+							<?php if ( !empty($a['stroke']) ):?>
+								line-color: <?php echo linear($a['stroke-color'],$zoom)?>;
+								line-width: <?php echo exponential($a['stroke'],$zoom)?>;
+							<?php endif; ?>
 						}
 					<?php endif;?>
 					<?php if ( !empty($a['pattern-zooms']) && in_array($zoom,$a['pattern-zooms']) ): ?>
@@ -46,6 +50,18 @@
 				<?php endforeach; ?>
 			}
 		<?php endif; ?>
+		
+		.waterpoint[zoom = <?php echo $zoom?>] {
+		<?php foreach ( $WATERPOINT AS $selector => $a ): ?>	    
+			<?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
+			<?php echo $selector?> {
+				<?php if ( !empty($a['symbol-file']) ): ?>
+							 point-file: url('../../general/symbol/~<?php echo $a['symbol-file']?>-<?php echo $zoom?>-<?php echo empty($a['symbol-color']) ? '#000000' : linear($a['symbol-color'],$zoom)?>.png');			 
+				<?php endif; ?>
+					}
+			<?php endif; ?>
+		<?php endforeach; ?>
+		}    
 	}
 <?php endforeach;?>
 

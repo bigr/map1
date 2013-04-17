@@ -102,7 +102,8 @@ def main():
     # Clean previous routes.
     auxiliaryCursor.execute("DROP TABLE IF EXISTS routes")
     auxiliaryCursor.execute("DELETE FROM geometry_columns WHERE f_table_name = 'routes'")
-    auxiliaryCursor.execute("CREATE TABLE routes AS SELECT osm_id, way, highway, tracktype FROM route WHERE osm_id = 0")
+    auxiliaryCursor.execute("CREATE TABLE routes AS SELECT osm_id, way, highway, tracktype,oneway FROM route WHERE osm_id = 0")
+    
     auxiliaryCursor.execute("DELETE FROM geometry_columns WHERE f_table_name = 'routes'")
     auxiliaryCursor.execute("INSERT INTO geometry_columns VALUES ('', 'public', 'routes', 'way', 2, 900913, 'LINESTRING')")
 
@@ -112,7 +113,7 @@ def main():
         i+=1
         #print "%d/%d" % (i,len(listOfRoutes))
         auxiliaryCursor.execute('''
-            SELECT way, highway, tracktype,sac_scale FROM route
+            SELECT way, highway, tracktype,sac_scale,oneway FROM route
               WHERE osm_id=%s AND (("access"<>'private' AND "access"<>'no') OR "access" IS NULL OR ("access" IN ('private', 'no') AND bicycle='yes'))
         ''' % r.id)
         row = auxiliaryCursor.fetchone()
@@ -122,6 +123,7 @@ def main():
             routes[r.id].highway = row[1]
             routes[r.id].tracktype = row[2]
             routes[r.id].sacScale = row[3]
+            routes[r.id].oneway = row[4]
             wayCursor.execute('''
                 SELECT nodes[1], nodes[array_upper(nodes, 1)]
                     FROM route_ways
@@ -233,12 +235,40 @@ def main():
     print " Finished inserting routes into new table."
 
     auxiliaryCursor.execute('''
+        DROP TABLE IF EXISTS route_centroids;
+    ''');
+
+    auxiliaryCursor.execute('''        
+        CREATE TABLE route_centroids AS
+        SELECT H1.osm_id,St_Centroid(St_Envelope(H1.way)) AS centroid FROM routes H1                
+    ''');
+
+    auxiliaryCursor.execute('''
+        CREATE INDEX i__route_centroids__controid ON route_centroids USING GIST (centroid)
+    ''');
+
+    auxiliaryCursor.execute('''
+        DROP TABLE IF EXISTS route_density;
+    ''');
+
+    auxiliaryCursor.execute('''        
+        CREATE TABLE route_density AS 
+        SELECT H1.osm_id AS osm_id,Count(H2.osm_id) AS density FROM route_centroids H1
+        LEFT JOIN route_centroids H2 ON ST_DWithin(H1.centroid,H2.centroid,1000) AND H1.osm_id <> H2.osm_id
+        GROUP BY H1.osm_id
+     ''');
+
+    auxiliaryCursor.execute('''
+        CREATE INDEX i__route_density__osm_id ON route_density (osm_id)
+    ''');
+
+    auxiliaryCursor.execute('''
         DROP TABLE IF EXISTS routes2
     ''');
 
     auxiliaryCursor.execute('''
         CREATE TABLE routes2 AS (
-        SELECT osm_id,route,way,offsetside,highway,tracktype,"mtb:scale","mtb:scale:uphill",sac_scale,color,rank() OVER (PARTITION BY osm_id ORDER BY 
+        SELECT osm_id,route,way,offsetside,highway,tracktype,"mtb:scale","mtb:scale:uphill",sac_scale,color,network,oneway,rank() OVER (PARTITION BY osm_id ORDER BY 
          (CASE
            WHEN route IS NULL THEN 100
            WHEN color = 'violet' THEN 1
@@ -253,10 +283,11 @@ def main():
            WHEN color = 'orange' THEN 10
            WHEN color = 'purple' THEN 11
          END)
-      ) AS offset FROM (
+         
+      ) AS offset,density FROM (
     SELECT 
       osm_id,way,
-      offsetside,
+      offsetside,network,oneway,
       (CASE 
         WHEN route IN ('bicycle','mtb') THEN 'bicycle'
         WHEN route IS NULL AND (osmcsymbol IS NOT NULL OR network IS NOT NULL OR ref IS NOT NULL) THEN 'hiking'
@@ -280,11 +311,12 @@ def main():
          WHEN network = 'nwn' THEN 'green'
          WHEN network = 'rwn' THEN 'blue'
          ELSE 'red'
-       END) AS color      	
+       END) AS color,
+       density     	
     FROM (
         SELECT
-          osm_id,way,
-          offsetside,highway,tracktype,"mtb:scale","mtb:scale:uphill",sac_scale,	  
+          Y.osm_id,way,
+          offsetside,highway,tracktype,"mtb:scale","mtb:scale:uphill",sac_scale,oneway,	  
            
           (CASE X.Which
           WHEN '0' THEN route0
@@ -328,14 +360,16 @@ def main():
           WHEN '5' THEN ref5
           WHEN '6' THEN ref6
           WHEN '7' THEN ref7
-          END) AS "ref"
+          END) AS "ref",
+          
+          (SELECT Max(RD.density) FROM route_density RD WHERE RD.osm_id = Y.osm_id) AS density
               
         FROM
            routes Y
-           CROSS JOIN (SELECT '0' UNION ALL SELECT '1' UNION ALL SELECT '2' UNION ALL SELECT '3' UNION ALL SELECT '4' UNION ALL SELECT '5' UNION ALL SELECT '6' UNION ALL SELECT '7' UNION ALL SELECT '8') X (Which)
+           CROSS JOIN (SELECT '0' UNION ALL SELECT '1' UNION ALL SELECT '2' UNION ALL SELECT '3' UNION ALL SELECT '4' UNION ALL SELECT '5' UNION ALL SELECT '6' UNION ALL SELECT '7' UNION ALL SELECT '8') X (Which)           
     ) AS R
     ) R2
-    GROUP BY R2.osm_id,R2.way,R2.route,R2.offsetside,R2.highway,R2.tracktype,R2."mtb:scale",R2."mtb:scale:uphill",R2.sac_scale,R2.color )
+    GROUP BY R2.osm_id,R2.way,R2.route,R2.offsetside,R2.highway,R2.tracktype,R2."mtb:scale",R2."mtb:scale:uphill",R2.sac_scale,R2.color,R2.density,R2.network,R2.oneway )
     ''');
 
     print "Relations:   ", len(relations)

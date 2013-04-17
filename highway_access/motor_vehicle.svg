@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   id="svg2"
+   inkscape:label="Pozadí"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="access.svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="7.9182725"
+     inkscape:cy="-19.502815"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2984"
+       empspacing="4"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="5.3333px"
+       spacingy="5.3333px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata6">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-988.36218)">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       id="Car"
+       d="m 13.876247,1023.8969 c -0.09204,-6.7844 -0.460189,-0.9466 3.628909,-11.0051 2.958351,-6.837 -0.03945,-4.9963 15.265089,-5.2461 13.62156,0.2762 10.873581,-1.6962 14.00286,5.5617 3.918171,9.2957 3.615761,4.431 3.589466,10.4923 -0.144632,6.6531 2.31409,4.9436 -18.302329,5.1672 -20.458639,-0.276 -18.039365,1.4595 -18.183995,-4.97 z m 4.14169,-6.5477 2.800573,-6.469 c 0.522519,-1.1492 0.355814,-0.9795 1.577786,-0.9862 l 19.580141,0 c 1.059975,0 0.904469,-0.065 1.34112,0.9468 l 2.784988,6.4314 -28.084608,0.079 z m -2.002913,12.2598 5.237376,-0.012 c -0.01607,6.5756 0.528852,6.2089 -2.327235,6.2513 -3.401008,-0.014 -2.863391,0.3301 -2.910141,-6.2396 z m 26.971391,0.047 5.246143,0 c -0.03506,6.5858 0.444117,6.1359 -2.524459,6.1534 -3.069381,-0.041 -2.679318,0.444 -2.721684,-6.1534 z" />
+  </g>
+</svg>

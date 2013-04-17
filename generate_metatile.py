@@ -140,8 +140,7 @@ for xfrac in range(0,fractions):
             print "SKIPED (low residentials). (%gs/%gs)" % (time.clock() - t00,time.time() - t00_)
             continue
         else:
-            NOT_SKIPED += 1
-        
+            NOT_SKIPED += 1            
        
         for mapfile in mapfiles:
             opts = layer_options[str(k)] if str(k) in layer_options else None

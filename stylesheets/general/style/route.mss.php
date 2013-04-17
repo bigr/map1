@@ -6,6 +6,7 @@
 <?php foreach ( $RENDER_ZOOMS as $zoom ):?>	
 	<?php if ( $zoom < 12 ) continue; ?>
 	<?php foreach ( range(0,8) as $offset ):?>
+	
 		.route<?php echo $offset;?>.hiking[zoom = <?php echo $zoom?>] {
 			<?php foreach ($ROUTE_HIKING_COLORS as $color): ?>
 				[color = '<?php echo $color?>'] {
@@ -15,9 +16,12 @@
 					
 					<?php foreach( range(0,13) as $highway_grade ):?>
 						<?php foreach( array(-1,1) as $offsetside ): ?>
+							<?php $offset_value = $offsetside * (exponential($ROUTE_HIKING_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0); ?>
+							<?php if ( abs($offset_value) > 0.01 ): ?>
 							[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>] {
-								line-offset: <?php echo $offsetside * (exponential($ROUTE_HIKING_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0) ?>;
+								line-offset: <?php echo $offset_value ?>;
 							}			
+							<?php endif; ?>
 						<?php endforeach; ?>
 					<?php endforeach; ?>
 					
@@ -46,42 +50,64 @@
 		}
 		
 		.route<?php echo $offset;?>.bicycle[zoom = <?php echo $zoom?>] {
-			line-color: <?php echo linear($ROUTE_BICYCLE_COLOR,$zoom)?>;
-			line-width: <?php echo linear($ROUTE_BICYCLE_WIDTH,$zoom)?>;
-			line-opacity: <?php echo linear($ROUTE_BICYCLE_OPACITY,$zoom)?>;
-			<?php foreach( range(0,12) as $highway_grade ):?>
-				<?php foreach( array(-1,1) as $offsetside ): ?>
-					[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>] {
-						line-offset: <?php echo $offsetside * (exponential($ROUTE_BICYCLE_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0)?>;
-					}			
+			[network='lcn'][density < <?php echo $ROUTE_BICYCLE_LCN_DENSITY[$zoom] ?>],[network='rcn'][density < <?php echo $ROUTE_BICYCLE_RCN_DENSITY[$zoom] ?>],[network!='lcn'][network!='rcn'] {
+				line-color: <?php echo linear($ROUTE_BICYCLE_COLOR,$zoom)?>;
+				line-width: <?php echo linear($ROUTE_BICYCLE_WIDTH,$zoom)?>;
+				line-opacity: <?php echo linear($ROUTE_BICYCLE_OPACITY,$zoom)?>;
+				<?php foreach( range(0,13) as $highway_grade ):?>
+					<?php foreach( array(-1,1) as $offsetside ): ?>					
+						<?php $offset_value = $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_BICYCLE_WIDTH,$zoom)/2 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2); ?>
+						<?php if ( abs($offset_value) > 0.01 ): ?>
+						[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>][oneway='no'], 
+						<?php if ( $offsetside == -1 ):?>
+							[highway_grade = <?php echo $highway_grade?>][oneway='yes']
+						<?php else: ?>
+							[highway_grade = <?php echo $highway_grade?>][oneway='-1']
+						<?php endif; ?>						
+							{
+																					
+								line-offset: <?php echo $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_BICYCLE_WIDTH,$zoom)/2 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2)?>;								
+								line-opacity: 1.0;
+							}
+						<?php endif;?>
+						<?php $offset_value = $offsetside * (exponential($ROUTE_BICYCLE_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0); ?>
+						<?php if ( $offset_value > 0.01 ): ?>
+						[highway_grade > 7] {
+							line-offset: <?php echo  $offset_value; ?>;
+						}
+						<?php endif;?>
+									
+					<?php endforeach; ?>
 				<?php endforeach; ?>
-			<?php endforeach; ?>
-			['mtb:scale' = '0+'] {
-				line-dasharray: 10,3;
-			}
-			
-			['mtb:scale' = '1'] {
-				line-dasharray: 8,3;
-			}
-			
-			['mtb:scale' = '2'] {
-				line-dasharray: 6,3;
-			}												
-			
-			['mtb:scale' = '3'] {
-				line-dasharray: 5,3;
-			}
-			
-			['mtb:scale' = '4'] {
-				line-dasharray: 4,3;
-			}
-			
-			['mtb:scale' = '5'] {
-				line-dasharray: 3,3;
-			}
-			
-			['mtb:scale' = '6'] {
-				line-dasharray: 2,3;
+				
+				['mtb:scale' = '0+'] {
+					line-dasharray: 10,3;
+				}
+				
+				['mtb:scale' = '1'] {
+					line-dasharray: 8,3;
+				}
+				
+				['mtb:scale' = '2'] {
+					line-dasharray: 6,3;
+				}												
+				
+				['mtb:scale' = '3'] {
+					line-dasharray: 5,3;
+				}
+				
+				['mtb:scale' = '4'] {
+					line-dasharray: 4,3;
+				}
+				
+				['mtb:scale' = '5'] {
+					line-dasharray: 3,3;
+				}
+				
+				['mtb:scale' = '6'] {
+					line-dasharray: 2,3;
+				}
+				
 			}
 		}
 				
@@ -89,11 +115,14 @@
 			line-color: <?php echo linear($ROUTE_SKI_COLOR,$zoom)?>;
 			line-width: <?php echo linear($ROUTE_SKI_WIDTH,$zoom)?>;
 			line-opacity: <?php echo linear($ROUTE_SKI_OPACITY,$zoom)?>;
-			<?php foreach( range(0,12) as $highway_grade ):?>
+			<?php foreach( range(0,13) as $highway_grade ):?>
 				<?php foreach( array(-1,1) as $offsetside ): ?>
+					<?php $offset_value = $offsetside * (exponential($ROUTE_SKI_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0); ?>
+					<?php if ( abs($offset_value) > 0.01 ): ?>
 					[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>] {
-						line-offset: <?php echo $offsetside * (exponential($ROUTE_SKI_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0)?>;
-					}			
+						line-offset: <?php echo $offset_value;?>;
+					}
+					<?php endif;?>		
 				<?php endforeach; ?>
 			<?php endforeach; ?>		
 		}

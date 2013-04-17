@@ -11,7 +11,7 @@
 		"srs": "<?php echo SRS900913?>",		
 		<?php echo ds_shapefile('water_polygons');?>
 	}
-	<?php if ( $RENDER_PLACESCOVER || $RENDER_STD_LANDCOVER || $RENDER_RESIDENTIALCOVER_HACK ) echo ","; ?>
+	<?php if ( $RENDER_PLACESCOVER || $RENDER_STD_LANDCOVER || $RENDER_RESIDENTIALCOVER_HACK || $RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER) echo ","; ?>
 <?php endif?>
 
 <?php if ( $RENDER_RESIDENTIALCOVER_HACK ):?>
@@ -40,10 +40,10 @@
 	"srs": "<?php echo SRS900913?>",
 	<?php echo ds_pgis(sql_placescover());?>
 }
-<?php if ( $RENDER_STD_LANDCOVER) echo ","; ?>
+<?php if ( $RENDER_STD_LANDCOVER || ($TILE && ($RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER)) ) echo ","; ?>
 <?php endif?>
 
-<?php if ( $RENDER_STD_LANDCOVER || $RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER):?>
+<?php if ( $RENDER_STD_LANDCOVER ):?>
 {
 	"id": "landcover",
 	"name": "landcover",
@@ -56,10 +56,11 @@
 	<?php echo ds_pgis(sql_landcover());?>
 	<?php endif; ?>		
 }
-<?php if ( $RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER ) echo ","; ?>
+<?php if ( $TILE && ($RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER) ) echo ","; ?>
 <?php endif?>
 
-<?php if ( $RENDER_LINE_LANDCOVER ):?>
+
+<?php if ( $TILE && $RENDER_LINE_LANDCOVER ):?>
 {
 	"id": "landcover_line",
 	"name": "landcover_line",
@@ -75,7 +76,7 @@
 <?php if ( $RENDER_POINT_LANDCOVER ) echo ","; ?>
 <?php endif?>
 
-<?php if ( $RENDER_POINT_LANDCOVER ):?>
+<?php if ( $TILE && $RENDER_POINT_LANDCOVER ):?>
 {
 	"id": "landcover_point",
 	"name": "landcover_point",

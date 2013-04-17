@@ -1,24 +1,66 @@
 <?php
 
+$highway_tags = array (
+			'highway'       => 'text',
+			'ref'           => 'text',
+			'int_ref'       => 'text',
+			'bridge'        => 'text',
+			'tunnel'        => 'text',
+			'construction'  => 'text',
+			'junction'      => 'text',
+			'smoothness'    => 'text',
+			'surface'       => 'text',
+			'layer'         => 'integer',
+			'tracktype'     => 'text',
+			'service'       => 'text',
+			'area'          => 'text',
+			'access'        => 'text',
+			'foot'          => 'text',
+			'ski'           => 'text',
+			'ski:nordic'    => 'text',
+			'ski:alpine'    => 'text',
+			'ski:telemark'  => 'text',	
+			'inline_skates' => 'text',		
+			'ice_skates'    => 'text',
+			'horse'         => 'text',
+			'vehicle'       => 'text',
+			'bicycle'       => 'text',
+			'carriage'      => 'text',
+			'trailer'       => 'text',
+			'caravan'       => 'text',
+			'motor_vehicle' => 'text',
+			'motorcycle'    => 'text',
+			'moped'         => 'text',
+			'mofa'          => 'text',
+			'motorcar'      => 'text',
+			'motorhome'     => 'text',
+			'psv'           => 'text',
+			'bus'           => 'text',
+			'taxi'          => 'text',
+			'tourist_bus'   => 'text',
+			'goods'         => 'text',
+			'hgv'           => 'text',
+			'agricultural'  => 'text',
+			'ATV'           => 'text',
+			'snowmobile'    => 'text',
+			'name'          => 'text',
+			'oneway'        => 'text',
+		);
+
 $definitions = array (
 	'highway' => array (
 		'filter' => array('highway'),
-		'tags' => array (
-			'highway'      => 'text',
-			'ref'          => 'text',
-			'int_ref'      => 'text',
-			'bridge'       => 'text',
-			'tunnel'       => 'text',
-			'construction' => 'text',
-			'junction'     => 'text',
-			'smoothness'   => 'text',
-			'surface'      => 'text',
-			'layer'        => 'integer',
-			'tracktype'    => 'text'
-		),
+		'tags' => $highway_tags,
 		'table' => 'way'
 		
 	),
+	
+	'highway_area' => array (
+		'filter' => array('highway'),
+		'tags' => $highway_tags,
+		'table' => 'polygon'		
+	),
+	
 	'highway_text' => array (
 		'filter' => array('highway'),
 		'tags' => array (
@@ -32,12 +74,23 @@ $definitions = array (
 			'junction'     => 'text',
 			'smoothness'   => 'text',
 			'surface'      => 'text',			
-			'tracktype'    => 'text'
+			'tracktype'    => 'text',
+			'area'         => 'text',
 		),
 		'table' => 'way'		
 	),
+	'highway_point' => array(
+		'filter' => array('highway'),
+		'tags' => array (
+			'highway'      => 'text',
+			'construction' => 'text',
+			'ref'          => 'text',			
+			'layer'        => 'integer',
+		),
+		'table' => 'node'
+	),	
 	'landcover' => array(
-		'filter' => array('natural','landuse','leisure','amenity','place'),
+		'filter' => array('natural','landuse','leisure','amenity','place','power','tourism','historic'),
 		'tags' => array (
 			'natural'  => 'text',
 			'place'    => 'text',
@@ -50,6 +103,10 @@ $definitions = array (
 			'type'     => 'text',
 			'religion' => 'text',
 			'building' => 'text',
+			'power'    => 'text',
+			'tourism'  => 'text',
+			'historic' => 'text',
+			'area'     => 'text',
 		),
 		'table' => 'polygon'
 	),
@@ -82,13 +139,16 @@ $definitions = array (
 		'table' => 'node'
 	),
 	'paboundary' => array(
-		'filter' => array('boundary','landuse','military'),
+		'filter' => array('boundary','landuse','military','leisure'),
 		'tags' => array(
-			'boundary' => 'text',
-			'landuse' => 'text',
-			'military' => 'text',
-			'protect_class' => 'integer',
-			'name' => 'text',			
+			'boundary'         => 'text',
+			'landuse'          => 'text',
+			'military'         => 'text',
+			'protect_class'    => 'integer',
+			'name'             => 'text',
+			'leisure'          => 'text',
+			'protection_title' => 'text',
+			'iucn_level'       => 'text',
 		),
 		'table' => 'polygon'
 	),	
@@ -130,7 +190,7 @@ $definitions = array (
 			'service'      => 'text'
 		),
 		'table' => 'way'
-	),
+	),	
 	'aeroway' => array(
 		'filter' => array('aeroway'),
 		'tags' => array(
@@ -140,6 +200,7 @@ $definitions = array (
 			'name'      => 'text',
 			'bridge'    => 'text',
 			'tunnel'    => 'text',
+			'area'      => 'text',
 		),
 		'table' => 'way'
 	),
@@ -152,6 +213,7 @@ $definitions = array (
 			'name'      => 'text',		
 			'bridge'    => 'text',
 			'tunnel'    => 'text',
+			'area'      => 'text',
 		),
 		'table' => 'polygon'
 	),
@@ -185,9 +247,10 @@ $definitions = array (
 			'piste:difficulty' => 'text',
 			'piste:grooming'   => 'integer',
 			'piste:name'       => 'text',	
-			'layer'              => 'integer',
-			'bridge'             => 'text',
-			'tunnel'             => 'text',
+			'layer'            => 'integer',
+			'bridge'           => 'text',
+			'tunnel'           => 'text',
+			'area'             => 'text',
 		),
 		'table' => 'way'
 	),
@@ -198,9 +261,10 @@ $definitions = array (
 			'piste:difficulty' => 'text',
 			'piste:grooming'   => 'integer',
 			'piste:name'       => 'text',
-			'layer'              => 'integer',
-			'bridge'             => 'text',			
-			'tunnel'             => 'text',
+			'layer'            => 'integer',
+			'bridge'           => 'text',			
+			'tunnel'           => 'text',
+			'area'             => 'text',
 		),
 		'table' => 'polygon'
 	),
@@ -211,6 +275,7 @@ $definitions = array (
 			'layer'      => 'integer',
 			'bridge'     => 'text',
 			'tunnel'     => 'text',
+			'area'       => 'text',
 		),
 		'table' => 'way'
 	),
@@ -228,7 +293,8 @@ $definitions = array (
 		'tags' => array (
 			'building'  => 'text',
 			'bridge'    => 'text',
-			'tunnel'    => 'text',
+			'tunnel'    => 'text',	
+			'name'      => 'text',		
 		),
 		'table' => 'polygon'
 	),
@@ -252,8 +318,40 @@ $definitions = array (
 			'tunnel'       => 'text',
 			'layer'        => 'integer',
 		),
-		'table' => 'way'
-	),	
+		'table' => 'node'
+	),
+	'barrier_point' => array(
+		'filter' => array('barrier'),
+		'tags' => array (
+			'barrier'      => 'text',
+			'construction' => 'text',
+			'bridge'       => 'text',
+			'tunnel'       => 'text',
+			'layer'        => 'integer',
+			'name'         => 'text',
+		),
+		'table' => 'node'
+	),		
+	'water_point' => array(
+		'filter' => array('waterway'),
+		'tags' => array (
+			'waterway'        => 'text',
+			'construction' => 'text',
+			'bridge'       => 'text',
+			'tunnel'       => 'text',
+			'layer'        => 'integer',
+			'name'         => 'text',
+		),
+		'table' => 'node'
+	),		
+	'access_area' => array(
+		'filter' => array('access'),
+		'tags' => array (
+			'access' => 'text',
+			'name' => 'text'
+		),
+		'table' => 'polygon'
+	)
 );
 
 ?>
@@ -286,7 +384,7 @@ SELECT
 	W.id AS osm_id,
 	W.geom AS way
 	<?php if ( $def['table'] == 'polygon' ): ?>
-		,Area(Transform(BuildArea(W.geom),900913)) AS way_area
+		,Area(Transform(W.geom,900913)) AS way_area
 	<?php endif ?>
 	<?php foreach ( $def['tags'] as $tag => $type ): ?>
 		<?php if ( $def['table'] == 'rel' ): ?>			
@@ -311,7 +409,7 @@ JOIN <?php echo $def['table'] == 'rel' ? 'rtag' : 'wtag'  ?> WT ON WT.id = W.id 
 		<?php echo implode(',',array_map(function($x) { return "'".$x."'";},$def['filter'])) ?>
 	)
 <?php if ( $def['table'] == 'polygon' ): ?>
-WHERE W.is_rel = 0  AND IsValid(W.geom) AND NOT IsEmpty(W.geom) AND NOT NumPoints(W.geom) < 4
+WHERE W.is_rel = 0  AND IsValid(W.geom) AND NOT IsEmpty(W.geom)
 <?php endif; ?>
 GROUP BY WT.id)
 <?php if ( $def['table'] == 'polygon' ): ?>
@@ -320,7 +418,7 @@ SELECT * FROM
 (SELECT
 	P.id AS osm_id,
 	P.geom AS way,	
-	Area(Transform(BuildArea(P.geom),900913)) AS way_area	
+	Area(Transform(P.geom,900913)) AS way_area	
 	<?php foreach ( $def['tags'] as $tag => $type ): ?>
 		,CAST((SELECT v FROM rtag RT2 WHERE RT2.id = P.id AND RT2.k = '<?php echo $tag ?>' LIMIT 1) AS <?php echo $type ?>) AS "<?php echo $tag ?>"
 	<?php endforeach; ?>
@@ -329,7 +427,7 @@ JOIN rtag RT ON RT.id = P.id AND RT.k IN
 	( 
 		<?php echo implode(',',array_map(function($x) { return "'".$x."'";},$def['filter'])) ?>
 	)
-WHERE P.is_rel = 1 AND IsValid(P.geom) AND NOT IsEmpty(P.geom) AND NOT NumPoints(P.geom) < 4
+WHERE P.is_rel = 1 AND IsValid(P.geom) AND NOT IsEmpty(P.geom)
 GROUP BY RT.id)
 <?php endif; ?>
 ;

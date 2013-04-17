@@ -20,7 +20,7 @@
 				text-fill: <?php echo linear(urb_name_color($grade),$zoom)?>;
 				text-size: <?php echo text_limiter($size) ?>;
 				text-halo-radius: <?php echo exponential(urb_name_halo_radius($grade),$zoom)?>;				
-				text-halo-fill: rgba(255,255,255,0.2);
+				text-halo-fill: rgba(255,255,255,<?php echo linear($URB_NAME_HALO_OPACITY,$zoom)?>);
 				text-dy: <?php echo urb_name_dy($zoom,$grade)?>;
 				text-wrap-width: <?php echo round(urb_name_wrap_width($zoom,$grade))?>;
 				<?php if( urb_name_size($zoom,$grade) > linear($URB_NAME_UPPERCASE_SIZE,$zoom) ): ?>
@@ -28,8 +28,8 @@
 				<?php endif; ?>
 				text-opacity: <?php echo urb_name_opacity($zoom,$grade)?>;
 				text-placement-type: simple;
-				text-placements: "X,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,S,<?php echo text_limiter($size*0.7)?>,N,<?php echo text_limiter($size*0.7)?>";
-				<?php if( $priority == 4 ): ?>					
+				text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>";
+				<?php if( $priority == 4 ): ?>
 					text-min-distance: 25px;
 				<?php endif; ?>
 				text-clip: false;
@@ -51,7 +51,7 @@
 				text-fill: <?php echo linear(suburb_name_color($grade),$zoom)?>;
 				text-size: <?php echo text_limiter($size)?>;
 				text-halo-radius: <?php echo exponential(suburb_name_halo_radius($grade),$zoom)?>;				
-				text-halo-fill: rgba(255,255,255,0.2);
+				text-halo-fill: rgba(255,255,255,0.33);
 				text-dy: 0;
 				text-wrap-width: <?php echo round(suburb_name_wrap_width($zoom,$grade))?>;
 				<?php if( suburb_name_size($zoom,$grade) > linear($SUBURB_NAME_UPPERCASE_SIZE,$zoom) ): ?>
@@ -59,7 +59,7 @@
 				<?php endif; ?>
 				text-opacity: <?php echo suburb_name_opacity($zoom, $grade)?>;
 				text-placement-type: simple;
-				text-placements: "X,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,S,<?php echo text_limiter($size*0.7)?>,N,<?php echo text_limiter($size*0.7)?>";
+				text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>";
 				<?php if( $priority == 4 ): ?>
 					text-min-distance: 30px;
 				<?php endif; ?>

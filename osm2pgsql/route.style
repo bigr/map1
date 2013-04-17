@@ -13,6 +13,7 @@ way        int_ref       text         linear
 way        bridge        text         linear
 way        tunnel        text         linear
 way        construction  text         linear
+way        oneway        text         linear
 way        junction      text         linear
 way        smoothness    text         linear
 way        surface       text         linear

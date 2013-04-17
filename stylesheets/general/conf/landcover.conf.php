@@ -3,9 +3,22 @@ require_once "inc/utils.php";
 require_once "conf/common.conf.php";
 require_once "conf/text-place.conf.php";
 
-$_RESIDENTIAL_COLOR = array( 5 => '#666666', 9 => '#bbaaaa', 11 => '#bbaaaa', 18 => '#d7d4d4');
+$_FOREST_BASE_COLOR = '#B3D998';
+$_WOOD_BASE_COLOR = '#A3D998';
+$_NATURAL_SCRUB_COLOR = '#CDEBC7';
+$_LANDUSE_SCRUB_COLOR = '#D6EBC7';
+$_NATURAL_GRASS_COLOR = '#EBFAE8';
+$_LANDUSE_GRASS_COLOR = '#F0FAE8';
+$_LEISURE_PARK_COLOR = '#DEEBC7';
+$_FARM_GRAIN_COLOR = '#F9FAE8';
+$_RESIDENTIAL_BASE_COLOR ='#D9C5CA';
+$_RESIDENTIAL_BASE2_COLOR ='#B3ADAE';
+$_RESIDENTIAL_COLOR = array( 5 => '#aaaaaa',6 =>'#888888',10 => $_RESIDENTIAL_BASE2_COLOR, 12 => $_RESIDENTIAL_BASE_COLOR, 18 => '#F2EEEF');
 
-$_PARK_COLOR = array( 11 => '#bbaaaa', 13 => '#d8e5d0');
+$_PARK_COLOR = array( 10 => $_RESIDENTIAL_BASE2_COLOR, 14 => $_LEISURE_PARK_COLOR);
+
+$_LANDCOVER_PATTERN_DARKEN = 55;
+$_LANDCOVER_PATTERN_OPACITY = 0.2;
 
 /**
  * Zoom x landcover look maping
@@ -17,141 +30,264 @@ $LANDCOVER = array(
 		'zooms' => range( 9,18),
 		'color' => array( 7 => '#f5f5f5', 13 => '#bdd9ad'),			
 		),
-	"[landuse='forest']" => array(
+	"[landuse='forest'],[landuse='wood']" => array(
 			'level' => 1,
 			'zooms' => range( 9,18),
-			'color' => array( 7 => '#f5f5f5', 13 => '#bdd9ad'),	
+			'color' => array( 7 => '#f5f5f5',11 => '#D8E6CF', 14 => $_FOREST_BASE_COLOR),	
 			'smooth' => 1,
 		),
-	"[landuse='forest'][wood='mixed'],[natural='wood'][wood='mixed']" => array(
+	"[natural='wood']" => array(
 			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => array( 7 => '#f5f5f5', 11 => '#D2E6CF', 14 => $_WOOD_BASE_COLOR),
+			'smooth' => 1,
+		),
+	"[natural='scrub'],[natural='heath']" => array(
+			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => array( 7 => '#f5f5f5', 14 => $_NATURAL_SCRUB_COLOR),
+			'smooth' => 1,
+		),
+	"[landuse='scrub']" => array(
+			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => array( 7 => '#f5f5f5', 14 => $_LANDUSE_SCRUB_COLOR),
+			'smooth' => 1,
+		),
+	"[landuse='grass'],[landuse='grassland'],[landuse='meadow']" => array(
+			'level' => 1,
+			'zooms' => range(10,18),
+			'color' => array( 9 => '#f5f5f5', 14 => $_LANDUSE_GRASS_COLOR),
+			'smooth' => 1,
+	),
+	"[natural='grass'],[natural='grassland'],[natural='meadow'],[natural='fell']" => array(
+			'level' => 1,
+			'zooms' => range(10,18),
+			'color' => array( 9 => '#f5f5f5', 14 => $_NATURAL_GRASS_COLOR),
+			'smooth' => 1,
+	),
+	"[natural='sand'],[natural='beach'],[leisure='beach_resort']" => array(
+			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => array( 7 => '#f5f5f5', 14 => '#FAF2DC'),
+			'smooth' => 1,
+		),
+	"[natural='glacier']" => array(
+			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => array( 7 => '#f5f5f5', 14 => '#DCF6FA'),
+			'smooth' => 1,
+		),	
+	"[natural='scree']" => array(
+			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => array( 7 => '#f5f5f5', 14 => '#DEDEDE'),
+			'smooth' => 1,
+		),	
+	"[leisure='park'],[landuse='park'],[landuse='allotments'],[landuse='cemetery'],[amenity='grave_yard'],[leisure='garden'],[landuse='orchard'],[leisure='orchard'],[landuse='recreation_ground'],[landuse='village_green'],[landuse='vineyard'],[leisure='golf_course'],[tourism='zoo']" => array(
+			'level' => 1,
+			'zooms' => range(11,18),
+			'color' => $_PARK_COLOR,
+		),	
+	"[landuse='farm'],[landuse='farmland'],[landuse='plant_nursery'],[landuse='field']" => array(
+			'level' => 1,
+			'zooms' => range(9,18),
+			'color' => array( 9 => '#f5f5f5', 14 => $_FARM_GRAIN_COLOR),
+		),
+	"[landuse='farmyard'],[landuse='greenhouse_horticulture']" => array(
+			'level' => 1,
+			'zooms' => range( 10,18),
+			'color' => array( 10 => $_RESIDENTIAL_BASE2_COLOR, 12 => '#D7D9C5',18=>'#F2F2EE'),
+		),
+	"[landuse='industrial'],[landuse='industrial;retail'],[power='station'],[power='sub_station'],[power='generator']" => array(
+			'level' => 1,
+			'zooms' => range( 10,18),
+			'color' => array( 10 => $_RESIDENTIAL_BASE2_COLOR, 12 => '#D9C5C5',18=>'#F2EEEE'),
+		),	
+	"[landuse='landfill']" => array(
+			'level' => 1,
+			'zooms' => range( 10,18),
+			'color' => array( 10 => $_RESIDENTIAL_BASE2_COLOR, 12 => '#C9C2A3'),
+		),	
+	"[landuse='commercial'],[landuse='retail']" => array(
+			'level' => 1,
+			'zooms' => range( 10,18),
+			'color' => array( 10 => $_RESIDENTIAL_BASE2_COLOR, 12 => '#D9C5D9',18 => '#F2EEF2'),
+		),	
+	"[landuse='railway']" => array(
+			'level' => 1,
+			'zooms' => range(10,18),
+			'color' => array(10 => $_RESIDENTIAL_BASE2_COLOR, 12 => '#D9D9D9',18 => '#F2F2F2'),
+		),
+	"[landuse='residential'],[landuse='brownfield'],[landuse='construction'],[landuse='garages'],[landuse='greenfield'][historic='castle']" => array(
+			'level' => 1,
+			'zooms' => range( 9,18),
+			'color' => $_RESIDENTIAL_COLOR,
+		),
+	"[landuse='quarry'],[landuse='salt_pond'],[landuse='pond'],[landuse='mine']" => array(
+			'level' => 1,
+			'zooms' => range( 10,18),
+			'color' => array( 10 => $_RESIDENTIAL_BASE2_COLOR, 12 => '#D9D0C5'),
+		),	
+		
+	"[natural='wood'][wood='mixed']" => array(
+			'level'           => 2,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'forest-mixed',
 			'pattern-size'    => array(14 => 20),
 			'pattern-margin'  => array(14 => 2.0),
-			'pattern-opacity' => array(14 => 0.1),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_WOOD_BASE_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
 			'smooth' => 1
 		),
-	"[landuse='forest'][wood='coniferous'],[natural='wood'][wood='coniferous']" => array(
+	"[landuse='forest'][wood='mixed']" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'forest-mixed',
+			'pattern-size'    => array(14 => 20),
+			'pattern-margin'  => array(14 => 2.0),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_FOREST_BASE_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1
+		),
+	"[natural='wood'][wood='coniferous']" => array(
 			'level' => 1,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'forest-coniferous',
 			'pattern-size'    => array(14 => 20),
 			'pattern-margin'  => array(14 => 2.0),
-			'pattern-opacity' => array(14 => 0.5),
-			'pattern-color'   => array( 7 => '#f5f5f5', 13 => '#7ab259'),	
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_WOOD_BASE_COLOR,$_LANDCOVER_PATTERN_DARKEN)),			
 			'smooth' => 1
 		),
-	"[landuse='forest'][wood='deciduous'],[natural='wood'][wood='deciduous']" => array(
-			'level' => 1,
+	"[landuse='forest'][wood='coniferous']" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'forest-coniferous',
+			'pattern-size'    => array(14 => 20),
+			'pattern-margin'  => array(14 => 2.0),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_FOREST_BASE_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1
+		),
+	"[landuse='forest'][wood='deciduous']" => array(
+			'level'           => 2,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'forest-deciduous',
 			'pattern-size'    => array(14 => 20),
 			'pattern-margin'  => array(14 => 2.0),
-			'pattern-opacity' => array(14 => 0.5),
-			'pattern-color'   => array( 7 => '#f5f5f5', 13 => '#7ab259'),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_FOREST_BASE_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
 			'smooth' => 1
 		),
-	"[landuse='grass'],[landuse='grassland'],[natural='grassland'],[natural='meadow'],[landuse='meadow']" => array(
-			'level' => 1,
-			'zooms' => range(10,18),
-			'color' => array( 9 => '#f5f5f5', 13 => '#ecfae3'),
-			'smooth' => 1,
+		
+	"[natural='wood'][wood='deciduous']" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'forest-deciduous',
+			'pattern-size'    => array(14 => 20),
+			'pattern-margin'  => array(14 => 2.0),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_WOOD_BASE_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1
 		),
-	"[landuse='grass'],[landuse='grassland'],[natural='grassland'],[natural='meadow'],[landuse='meadow'],.x2" => array(
-			'level' => 1,
+	
+	"[landuse='grass'],[landuse='grassland'],[landuse='meadow'],.x2" => array(
+			'level'           => 2,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'landuse-grass',
 			'pattern-size'    => array(13 => 11,18 => 15),
-			'pattern-margin'  => array(13 => 1.5),
-			'pattern-opacity' => array(13 => 0.5),
-			'pattern-color'   => array( 7 => '#f5f5f5', 13 => '#b3e695'),
+			'pattern-margin'  => array(13 => 1.8),
+			'pattern-opacity' => array(13 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_LANDUSE_GRASS_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
 			'smooth' => 1
 		),
-	"[landuse='residential']" => array(
-			'level' => 1,
-			'zooms' => range( 9,15),
-			'color' => $_RESIDENTIAL_COLOR,
+	
+	"[natural='grassland'],[natural='meadow'],[natural='fell'],.x2" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'landuse-grass',
+			'pattern-size'    => array(13 => 11,18 => 15),
+			'pattern-margin'  => array(13 => 1.8),
+			'pattern-opacity' => array(13 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_NATURAL_GRASS_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1
 		),
-	"[landuse='farm']" => array(
-			'level' => 1,
-			'zooms' => range(10,18),
-			'color' => array( 9 => '#eeeeee', 13 => '#f7fae3'),
+	"[natural='heath'],[natural='scrub'],.x2" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'landuse-scrub',
+			'pattern-size'    => array(13 => 12,18 => 17),
+			'pattern-margin'  => array(14 => 1.5),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),		
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_NATURAL_SCRUB_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1	
 		),
-	"[landuse='farm'],.x2" => array(
-			'level' => 1,
+	"[landuse='scrub'],.x2" => array(
+			'level' => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'landuse-scrub',
+			'pattern-size'    => array(13 => 12,18 => 17),
+			'pattern-margin'  => array(14 => 1.5),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),		
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_LANDUSE_SCRUB_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth'          => 1	
+		),	
+	"[landuse='vineyard'],.x2" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'vineyard',
+			'pattern-size'    => array(13 => 12,18 => 17),
+			'pattern-margin'  => array(14 => 1.5),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),		
+			'pattern-color'   => array( 7 => '#f5f5f5', 13 => darken($_LEISURE_PARK_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth'          => 1	
+		),
+		
+	"[landuse='landfill'],.x2" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'landfill',
+			'pattern-size'    => array(13 => 12,18 => 20),
+			'pattern-margin'  => array(14 => 1.3),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),		
+			'pattern-color'   => array( 7 => '#f5f5f5', 12 => darken('#C9C2A3',$_LANDCOVER_PATTERN_DARKEN)),			
+		),
+	"[landuse='orchard'],.x2" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'forest-deciduous',
+			'pattern-size'    => array(14 => 20),
+			'pattern-margin'  => array(14 => 2.0),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array(10 => $_RESIDENTIAL_BASE2_COLOR, 13 => darken($_LEISURE_PARK_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1
+		),
+	"[power='station'],[power='sub_station'],[power='generator']" => array(
+			'level'           => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'power-generator',
+			'pattern-size'    => array(13 => 12,18 => 17),
+			'pattern-margin'  => array(14 => 1.5),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),		
+			'pattern-color'   => array( 7 => '#f5f5f5', 12 => darken('#D9C5C5',$_LANDCOVER_PATTERN_DARKEN),12 => darken('#F2EEEE',$_LANDCOVER_PATTERN_DARKEN)),			
+		),
+	
+	"[landuse='farm'],[landuse='farmland'],[landuse='plant_nursery'],[landuse='field'],.x2" => array(
+			'level' => 2,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'landuse-farm',
 			'pattern-size'    => array(13 => 13,18 => 17),
 			'pattern-margin'  => array(13 => 1.5),
-			'pattern-opacity' => array(13 => 1.0),
-			'pattern-color'   => array( 7 => '#f5f5f5', 13 => '#dbe695'),
+			'pattern-opacity' => array(13 => $_LANDCOVER_PATTERN_OPACITY),			
+			'pattern-color'   => array(10 => $_RESIDENTIAL_BASE2_COLOR, 12 => darken($_FARM_GRAIN_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth'          => 1
 		),
-	"[landuse='farmyard']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 9 => '#bbaaaa', 13 => '#bbbaa1'),
-		),
-	"[landuse='industrial']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 9 => '#bbaaaa', 17 => '#b6a6b6'),
-		),	
-	"[landuse='commercial']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 9 => '#bbaaaa', 17 => '#aaaabb'),
-		),	
-	"[landuse='railway']" => array(
-			'level' => 1,
-			'zooms' => range(12,18),
-			'color' => array(11 => '#eeeeee', 17 => '#c3e3bb'),
-		),
-	"[natural='wood']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 7 => '#eeeeee', 13 => '#C0E0BB'),
-			'smooth' => 1,
-		),
-	"[natural='scrub']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 7 => '#eeeeee', 13 => '#d8e6d0'),
-			'smooth' => 1,
-		),
-	"[landuse='scrub'],.x2" => array(
-			'level' => 1,
-			'pattern-zooms'   => range(13,18),
-			'pattern-file'    => 'landuse-scrub',
-			'pattern-size'    => array(14 => 20),
-			'pattern-margin'  => array(14 => 2.0),
-			'pattern-opacity' => array(14 => 0.1),			
-		),
-	"[natural='beach']" => array(
-			'level' => 1,
-			'zooms' => range(11,18),
-			'color' => array(10 => '#eeeeee', 13 => '#e8e3ab'),
-		),
-	"[natural='heath']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 7 => '#eeeeee', 13 => '#a5d4bb'),
-		),
-	"[natural='glacier']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 7 => '#eeeeee', 13 => '#ccffff'),
-			'smooth' => 1,
-		),
-	"[natural='sand']" => array(
-			'level' => 1,
-			'zooms' => range( 9,18),
-			'color' => array( 7 => '#eeeeee', 13 => '#e8e3ab'),
-		),
+	
 	"[leisure='pitch'],[leisure='track'],[leisure='sports_centre'],[leisure='stadium']" => array(
 			'level' => 2,
 			'zooms' => range(14,18),
-			'color' => array( 13 => '#bbaaaa', 15 => '#e8937c'),			
+			'color' => array( 13 => $_RESIDENTIAL_BASE_COLOR, 15 => '#e8937c'),			
 		),/*
 	"[leisure='pitch'][sport='soccer']" => array(
 			'level' => 2,
@@ -177,30 +313,62 @@ $LANDCOVER = array(
 			'pattern-margin'  => array(14 => 1.2),
 			'pattern-opacity' => array(14 => 0.1),
 		),*/
-	"[leisure='park'],[landuse='park'],[landuse='allotments'],[landuse='cemetery'],[leisure='garden'][landuse='orchard']" => array(
-			'level' => 2,
-			'zooms' => range(11,18),
-			'color' => $_PARK_COLOR,
-		),
-	"[landuse='cemetery']" => array(
+	
+	"[landuse='cemetery'][religion!='christian'][religion!='jewish'][religion!='muslim'],[amenity='grave_yard'][religion!='christian'][religion!='jewish'][religion!='muslim']" => array(
 			'level' => 2,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'cemetery',
 			'pattern-size'    => array(13 => 9, 18 => 20),
-			'pattern-margin'  => array(14 => 1.5),
-			'pattern-opacity' => array(14 => 0.1),			
+			'pattern-margin'  => array(14 => 2.1),
+			'pattern-opacity' => array(14 => 0.15),			
 		),
+		
+	"[landuse='cemetery'][religion='christian'],[amenity='grave_yard'][religion='christian'],.x2" => array(
+			'level' => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'cemetery-christian',
+			'pattern-size'    => array(13 => 9, 18 => 20),
+			'pattern-margin'  => array(14 => 2.1),
+			'pattern-opacity' => array(14 => 0.15),
+		),
+	"[landuse='cemetery'][religion='jewish'],[amenity='grave_yard'][religion='jewish'],.x2" => array(
+			'level' => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'cemetery-jewish',
+			'pattern-size'    => array(13 => 9, 18 => 20),
+			'pattern-margin'  => array(14 => 2.1),
+			'pattern-opacity' => array(14 => 0.15),
+		),
+	"[landuse='cemetery'][religion='muslim'],[amenity='grave_yard'][religion='muslim']" => array(
+			'level' => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'cemetery-muslim',
+			'pattern-size'    => array(13 => 9, 18 => 20),
+			'pattern-margin'  => array(14 => 2.1),
+			'pattern-opacity' => array(14 => 0.15),
+		),
+	
+	"[tourism='zoo']" => array(
+			'level' => 2,
+			'pattern-zooms'   => range(13,18),
+			'pattern-file'    => 'tourism-zoo',
+			'pattern-size'    => array(14 => 20),
+			'pattern-margin'  => array(14 => 2.0),
+			'pattern-opacity' => array(14 => $_LANDCOVER_PATTERN_OPACITY),
+			'pattern-color'   => array(10 => $_RESIDENTIAL_BASE2_COLOR, 13 => darken($_LEISURE_PARK_COLOR,$_LANDCOVER_PATTERN_DARKEN)),
+			'smooth' => 1
+		),	
 	"[landuse='garden']" => array(
 			'level' => 2,
 			'pattern-zooms'   => range(13,18),
 			'pattern-file'    => 'landuse-garden',
 			'pattern-size'    => array(14 => 20),
 			'pattern-margin'  => array(14 => 2.0),
-			'pattern-opacity' => array(14 => 0.1),			
-		),
+			'pattern-opacity' => array(14 => 0.1),
+		),	
 	"[landuse='allotments']" => array(
 			'level'            => 2,
-			'pattern-zooms'   => range(14,18),
+			'pattern-zooms'    => range(14,18),
 			'pattern'          => 'hatch',
 			'pattern-size'     => array(10 => 5),
 			'pattern-rotation' => array(10 => 0),
@@ -211,7 +379,7 @@ $LANDCOVER = array(
 	"[leisure='playground']" => array(
 			'level' => 2,
 			'zooms' => range(14,18),
-			'color' => array( 13 => '#bbaaaa', 15 => '#e8aa80'),
+			'color' => array( 13 => $_RESIDENTIAL_BASE_COLOR, 15 => '#e8aa80'),
 			'pattern-zooms'   => range(14,18),
 			'pattern-file'    => 'playground',
 			'pattern-size'    => array(14 => 16),
@@ -222,7 +390,8 @@ $LANDCOVER = array(
 			'level' => 2,
 			'zooms' => range(13,18),
 			'color' => array( 13 => '#ffffff'),
-		),	
+		),
+		
 );
 
 
@@ -250,10 +419,10 @@ $LANDCOVER_LINE = array(
 	"[natural='tree_row']" => array(
 		'zooms' => range(13,18),
 		'pattern-file' => 'tree_row',
-		'pattern-size' => array(13=>4,18=>20),
-		'pattern-spacing' => array(14=>20),
+		'pattern-size' => array(13=>4,18=>8),
+		'pattern-spacing' => array(13=>4,18=>8),
 		'width' => array(14 => 0.0),
-		'color' => array(13 => '#6d8c5b'),	
+		'color' => array( 7 => '#f5f5f5', 13 => darken($_FOREST_BASE_COLOR,40)),
 	),
 );
 
@@ -265,7 +434,7 @@ $LANDCOVER_POINT = array(
 	"[natural='tree']" => array(
 		'zooms' => range(13,18),
 		'symbol-file' => 'tree',
-		'symbol-color' => array('#6d8c5b'),
+		'symbol-color' => array( 7 => '#f5f5f5', 13 => darken($_FOREST_BASE_COLOR,40)),
 		'symbol-size' => array(13=>20,17=>35),		
 	),
 );
@@ -309,3 +478,4 @@ $RESIDENTIALCOVER_HACK_COLOR = $_RESIDENTIAL_COLOR;
  * Residentialcover hack width [meters]
  */
 $RESIDENTIALCOVER_HACK_WIDTH = array(8 => 250);
+

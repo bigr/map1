@@ -7,27 +7,31 @@ node,way   created_by   text         delete
 
 node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
 
-node,way   name         text         linear
-node,way   int_name     text         linear
-node,way   name:en      text         linear
-node,way   name:de      text         linear
-node,way   name:cs      text         linear
+node,way   name         text         polygon
+node,way   int_name     text         polygon
+node,way   name:en      text         polygon
+node,way   name:de      text         polygon
+node,way   name:cs      text         polygon
 
 
 
-node,way   historic     text         linear
-node,way   leisure      text         linear
-node,way   man_made     text         linear
-node,way   tourism      text         linear
-node,way   amenity      text         linear
-node,way   ruins        text         linear
-node,way   castle_type  text         linear
-node,way   building     text         linear
-node,way   natural      text         linear
-node,way   tower:type   text         linear
-node,way   information  text         linear
-node,way   place_of_worship  text    linear
-node,way   place_of_worship:type  text    linear
+node,way   historic     text         polygon
+node,way   leisure      text         polygon
+node,way   man_made     text         polygon
+node,way   tourism      text         polygon
+node,way   amenity      text         polygon
+node,way   ruins        text         polygon
+node,way   castle_type  text         polygon
+node,way   building     text         polygon
+node,way   natural      text         polygon
+node,way   tower:type   text         polygon
+node,way   information  text         polygon
+node,way   place_of_worship  text    polygon
+node,way   place_of_worship:type  text    polygon
+node,way   highway      text         polygon
+node,way   railway      text         polygon
+node,way   aeroway      text         polygon
+node,way   power        text         polygon
 
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import

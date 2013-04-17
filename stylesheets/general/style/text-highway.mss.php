@@ -3,23 +3,24 @@
 ?>
 
 <?php foreach ( $RENDER_ZOOMS as $zoom ):?>
+
 	<?php foreach ( $ROAD_NAME_PRIORITIES[$zoom] as $grade => $priority ):?>
 		.textHighway.priority<?php echo $priority?>[zoom = <?php echo $zoom?>][grade = <?php echo $grade?>]::name {
 			text-face-name: "<?php echo FONT_BOOK_SANS ?>";
 			text-name: "[name]";
 			
-			text-size: <?php echo round(exponential($ROAD_NAME_SIZE[$grade],$zoom))?>;
+			text-size: <?php echo round(exponential($ROAD_NAME_SIZE[$grade],$zoom))?>;						
 			
 			text-halo-radius: <?php echo exponential($ROAD_NAME_HALO_RADIUS[$grade],$zoom)?>;
 			[is_construction = 'no'][is_tunnel = 'no'] {
 				text-fill: <?php echo linear($ROAD_NAME_COLOR[$grade],$zoom)?>;
-				text-halo-fill: <?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>;
+				text-halo-fill: fadeout(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,60);
 			}
 			text-placement: line;
 			text-dy: 1;
 			text-label-position-tolerance: 100;
 			[is_tunnel = 'yes'][is_construction = 'no'] {
-				text-halo-fill: lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,50),15);
+				text-halo-fill: fadeout(lighten(desaturate(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,50),15),60);
 				text-fill: lighten(desaturate(<?php echo linear($ROAD_NAME_COLOR[$grade],$zoom)?>,50),15);
 			}									
 			
@@ -63,5 +64,17 @@
 			shield-file: url('../../general/shield/~highway-ref-<?php echo $zoom?>-<?php echo $grade?>-[ref_length].svg');
 		}
 	<?php endforeach;?>	
+	
+	<?php if ( !empty($HIGHWAY_ACCESS_PRIORITIES[$zoom]) ): ?>
+		<?php $priority = $HIGHWAY_ACCESS_PRIORITIES[$zoom];?>
+		.textHighwayAccess.priority<?php echo $priority?>[zoom = <?php echo $zoom?>][density<<?php echo $HIGHWAY_ACCESS_DENSITY[$zoom]; ?>] {			
+			shield-face-name: "<?php echo FONT_BOOK_SANS ?>";		
+			shield-placement: point;
+			shield-opacity: 0.66;
+			/*shield-min-distance: <?php echo round(exponential($HIGHWAY_ACCESS_MINDISTANCE,$zoom))?>;*/
+			shield-spacing: 300;			
+			shield-file: url('../../../highway_access/generated/[file].png');
+		}
+	<?php endif; ?>
 <?php endforeach;?>
 

@@ -101,42 +101,6 @@
        d="M 96 0 C 48 0 48 0 48 176 C 0 176 0 216 0 256 L 256 256 C 256 217.25 256 176 208 176 C 208 0 208 0 160 0 L 96 0 z M 136.875 30.25 C 143.08821 30.25 149.12367 31.02025 154.875 32.5 C 123.81782 40.49065 100.875 68.6987 100.875 102.25 C 100.875 135.8013 123.81782 164.00934 154.875 172 C 149.12367 173.47975 143.08821 174.25 136.875 174.25 C 97.1105 174.25 64.875 142.0145 64.875 102.25 C 64.875 62.4855 97.1105 30.25 136.875 30.25 z M 156.53125 71.5 L 171.09375 86.90625 L 192.03125 83.65625 L 181.875 102.25 L 191.4375 121.15625 L 170.625 117.25 L 155.5625 132.21875 L 152.875 111.1875 L 134 101.5 L 153.15625 92.4375 L 156.53125 71.5 z "
        transform="translate(0,796.36215)"
        id="path7157" />
-    <g
-       id="g16521"
-       style="fill:none;stroke:#003ad1;stroke-opacity:1"
-       transform="matrix(1.151007,0,0,1.151007,-8905.9215,-4660.9202)">
-      <path
-         d="m 2631.5115,2810.8694 -1556.0955,0 778.0477,-1347.6182 z"
-         id="path13485"
-         inkscape:flatsided="true"
-         inkscape:randomized="0"
-         inkscape:rounded="0"
-         sodipodi:arg1="0.52359878"
-         sodipodi:arg2="1.5707963"
-         sodipodi:cx="1853.4637"
-         sodipodi:cy="2361.6633"
-         sodipodi:r1="898.41217"
-         sodipodi:r2="449.20609"
-         sodipodi:sides="3"
-         sodipodi:type="star"
-         style="fill:none;stroke:#003ad1;stroke-width:173.98858643;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
-         transform="matrix(1.081481,0,0,1.065501,1894.485,353.1243)" />
-      <path
-         d="m 2631.5115,2810.8694 -1556.0955,0 778.0477,-1347.6182 z"
-         id="path15003"
-         inkscape:flatsided="true"
-         inkscape:randomized="0"
-         inkscape:rounded="0"
-         sodipodi:arg1="0.52359878"
-         sodipodi:arg2="1.5707963"
-         sodipodi:cx="1853.4637"
-         sodipodi:cy="2361.6633"
-         sodipodi:r1="898.41217"
-         sodipodi:r2="449.20609"
-         sodipodi:sides="3"
-         sodipodi:type="star"
-         style="fill:none;stroke:#003ad1;stroke-width:173.98858643;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
-         transform="matrix(1.081481,0,0,-1.066697,1887.269,5317.887)" />
-    </g>
+    
   </g>
 </svg>

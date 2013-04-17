@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="320"
+   height="75"
+   id="svg2"
+   inkscape:label="Pozadí"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="map1eu_logo_text.svg">
+  <defs
+     id="defs7137" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="208.18144"
+     inkscape:cy="139.39857"
+     inkscape:document-units="px"
+     inkscape:current-layer="g7090"
+     showgrid="false"
+     inkscape:snap-to-guides="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7140">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.74929051,-942.81843)">
+    <g
+       transform="matrix(0.96274034,0,0,0.95891415,-16.834434,222.81291)"
+       id="g7090">
+      <g
+         id="g7207">
+        <text
+           transform="scale(1.005584,0.99444705)"
+           xml:space="preserve"
+           style="font-size:47.7367897px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Sans"
+           x="17.118286"
+           y="828.99518"
+           id="text7047"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan7049"
+             x="17.118286"
+             y="828.99518"
+             style="font-size:22.56557846px;fill:#999999;fill-opacity:1">One map for the whole of Europe</tspan></text>
+        <text
+           transform="scale(0.99951208,1.0004882)"
+           xml:space="preserve"
+           style="font-size:47.97657776px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#77aa00;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Sans"
+           x="13.143422"
+           y="803.47235"
+           id="text7051"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan7053"
+             x="13.143422"
+             y="803.47235"
+             style="font-size:76.96242523px;font-weight:bold;-inkscape-font-specification:Liberation Sans Bold">MAP1.EU</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

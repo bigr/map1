@@ -48,11 +48,11 @@ RAILWAY_DISUSED => array( 10 => '#ffffff'),
  * Railway dark color grade x zoom maping
  */
 $RAILWAY_DARK_COLOR = array(
-RAILWAY_MAIN    => array(  9 => '#444444', 13 => '#333333', 17 => '#222222'),
-RAILWAY_BRANCH  => array( 10 => '#555555', 13 => '#444444', 17 => '#333333'),
-RAILWAY_LIGHT   => array( 11 => '#666666', 13 => '#555555', 17 => '#444444'),
-RAILWAY_SIDING  => array( 12 => '#666666', 13 => '#666666', 17 => '#555555'),
-RAILWAY_DISUSED => array( 13 => '#888888', 13 => '#888888', 17 => '#888888'),
+RAILWAY_MAIN    => array(  9 => '#555555', 13 => '#555555', 17 => '#555555'),
+RAILWAY_BRANCH  => array( 10 => '#555555', 13 => '#555555', 17 => '#555555'),
+RAILWAY_LIGHT   => array( 11 => '#555555', 13 => '#555555', 17 => '#555555'),
+RAILWAY_SIDING  => array( 12 => '#666666', 13 => '#666666', 17 => '#666666'),
+RAILWAY_DISUSED => array( 13 => '#999999', 13 => '#999999', 17 => '#999999'),
 );
 
 
@@ -60,11 +60,11 @@ RAILWAY_DISUSED => array( 13 => '#888888', 13 => '#888888', 17 => '#888888'),
  * Railway width grade x zoom maping
  */
 $RAILWAY_WIDTH = array(
-RAILWAY_MAIN    => array(  9 => 3.0, 13 => 5.5, 18 => 8.0),
-RAILWAY_BRANCH  => array( 10 => 3.0, 13 => 5.0, 18 => 7.0),
-RAILWAY_LIGHT   => array( 11 => 3.0, 13 => 4.5, 18 => 6.2),
-RAILWAY_SIDING  => array( 12 => 3.0, 13 => 4.0, 18 => 5.5),
-RAILWAY_DISUSED => array( 13 => 3.0, 13 => 3.5, 18 => 4.0),
+RAILWAY_MAIN    => array(  9 => 3.0, 11 => 5.5, 18 => 8.0),
+RAILWAY_BRANCH  => array( 10 => 3.0, 11 => 5.0, 18 => 7.0),
+RAILWAY_LIGHT   => array( 11 => 3.0, 11 => 4.5, 18 => 6.2),
+RAILWAY_SIDING  => array( 12 => 3.0, 11 => 4.0, 18 => 5.5),
+RAILWAY_DISUSED => array( 13 => 3.0, 11 => 3.5, 18 => 4.0),
 );
 
 
@@ -89,3 +89,9 @@ RAILWAY_LIGHT   => array( 11 => array(2,4), 13 => array(5,10), 17 => array(6,12)
 RAILWAY_SIDING  => array( 12 => array(2,4), 13 => array(4,8), 17 => array(5,10)),
 RAILWAY_DISUSED => array(                   13 => array(3,3), 17 => array(4,4)),
 );
+
+$TRAM_ZOOMS = range(14,18);
+$TRAM_COLOR = array(16=>'#330000');
+$TRAM_OPACITY = array(14=>0.1,15=>0.5,18=>0.8);
+$TRAM_WIDTH1 = array(16=>1);
+$TRAM_WIDTH2 = array(14=>2,18=>7);

@@ -51,6 +51,8 @@ return <<<EOD
 		landuse,
 		"natural",			
 		way_area,
+			ST_Centroid(way) AS
+	    centroid,
 		osm_id,
 		$cols
 	FROM waterarea_text
@@ -63,5 +65,7 @@ EOD;
 }
 
 function sql_text_waterarea_short($priority,$where = '1 = 1',$order = 'z_order') {
-    return 'SELECT * FROM waterarea_texts_tbl';
+    return 'SELECT * FROM waterarea';
 }
+
+

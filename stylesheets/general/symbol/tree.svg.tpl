@@ -5,6 +5,7 @@
    width="$size"
    height="$size"
    viewBox="0 0 26880 26880">  
+  $pre
   <g transform="matrix(128.05184,0,0,128.05184,-2243.5294,-2187.0589)">
     <path
        style="fill:$color;fill-opacity:$opacity;stroke:none"
@@ -12,5 +13,6 @@
        transform="matrix(0.0832996,0,0,0.0832996,17.520478,17.07948)"
        />
   </g>
+  $post
 </svg>
 EOD;

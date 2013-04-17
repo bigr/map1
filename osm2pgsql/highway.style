@@ -18,6 +18,7 @@ way        smoothness    text         linear
 way        surface       text         linear
 way        layer         int4         linear
 way        tracktype     text         linear
+way        service       text         linear
 
 
 node,way   z_order      int4         linear # This is calculated during import

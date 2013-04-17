@@ -58,6 +58,7 @@ return <<<EOD
 			intref_length,	
 			int_ref AS number,
 			LENGTH(int_ref) AS number_length,
+			area,
 			$cols			
 		FROM highway_text
 		WHERE
@@ -68,3 +69,22 @@ return <<<EOD
 		ORDER BY $order
 EOD;
 }
+
+function sql_text_highway_access($priority = 0, $cols = '0',$where = '1 = 1',$order = 'ST_LENGTH(way) DESC') {
+return <<<EOD
+    SELECT
+	way,
+	H.osm_id AS osm_id,
+	file
+    FROM highway H
+    JOIN highway_access A ON H.osm_id = A.osm_id
+    WHERE 
+	NOT EXISTS (
+	    SELECT * FROM access_areas AA
+	    WHERE MbrIntersects(AA.way,H.way) AND AA.access = H.access
+	    LIMIT 1
+	)
+    ORDER BY $order
+EOD;
+}
+

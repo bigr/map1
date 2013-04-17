@@ -9,7 +9,11 @@
 	"name": "boundary-level<?php echo $level?>",
 	"class": "boundary level<?php echo $level?>",
 	"srs": "<?php echo SRS900913?>",
+	<?php if ( $TILE ): ?>
 	<?php echo ds_pgis(sql_boundary_short($level));?>
+	<?php else: ?>
+	<?php echo ds_pgis(sql_boundary_short_notrect($level));?>	
+	<?php endif; ?>
 }
 <?php if ($level != end($RENDER_BOUNDARY_LEVELS)) echo ",";?>
 <?php endforeach; ?>

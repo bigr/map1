@@ -7,6 +7,7 @@
    height="$size"
    viewBox="0 0 256 256"
    id="svg3096">    
+   $pre
   <g
      transform="scale(0.64,0.64)"
      id="g3098">
@@ -20,5 +21,6 @@
            />
     </g>
   </g>
+  $post
 </svg>
 EOD;

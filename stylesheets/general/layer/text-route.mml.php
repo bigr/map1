@@ -1,6 +1,7 @@
 <?php
 	require_once "sql/text-route.sql.php";
 ?>
+<?php if ( $TILE ): ?>
 {
 	"id": "text-route-ref-priority<?php echo $priority?>",
 	"name": "text-route-ref-priority<?php echo $priority?>",
@@ -22,3 +23,4 @@
 	"srs": "<?php echo SRS900913?>",
 	<?php echo ds_pgis(sql_text_osmcsymbol($priority));?>
 }
+<?php endif; ?>

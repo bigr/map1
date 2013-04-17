@@ -1,4 +1,6 @@
 <?php
+require_once dirname(__FILE__)."/colors.php";
+
 function getPixelSize($zoom) {
 	return 40079171.1277036*cos(0.0174532925*50)/pow(2,($zoom+8));
 }
@@ -21,7 +23,7 @@ function interpolate($def,$zoom, $transport, $transportI)  {
 	
 	$deconvert = function ($z,$a) use($transportI) {
 		if ( count($a) == 3 )
-			return '#'.implode(array_map(function ($x) use($transportI,$z) {return str_pad(dechex(intval($transportI($z,$x))),2,'0');},$a),'');
+			return '#'.implode(array_map(function ($x) use($transportI,$z) {return str_pad(dechex(intval($transportI($z,$x))),2,'0',STR_PAD_LEFT);},$a),'');
 		else if ( count($a) == 1 ) {
 			return $transportI($z,$a[0]);
 		}
@@ -55,8 +57,20 @@ function interpolate($def,$zoom, $transport, $transportI)  {
 
 function blackandwhite($color) {
 	$rgb = array_map(function($x) {return floatval(hexdec($x));}, str_split(substr($color,1),2));
-	$c = str_pad(dechex(intval((0.3 * $rgb[0] + 0.59*$rgb[1] + 0.11 * $rgb[2]))),2,'0');
+	$c = str_pad(dechex(intval((0.3 * $rgb[0] + 0.59*$rgb[1] + 0.11 * $rgb[2]))),2,'0',STR_PAD_LEFT);
 	return "#$c$c$c";
+}
+
+function darken($color,$percent) {	
+	$hsl = RGBToHSL(HTMLToRGB($color));
+	$l = ($hsl & 0xFF) * (1 - $percent/100.0);
+	if ( $l > 0xFF ) $l = 0xFF;
+	$hsl = $hsl & (0xFFFF00 & $hsl) | $l;
+	return RGBToHTML(HSLToRGB($hsl));
+}
+
+function darken_a($color_a,$percent) {
+	return array_map(function($_c) use($percent) { return darken($_c,$percent); },$color_a);
 }
 
 function linear($def,$zoom) {
@@ -172,21 +186,21 @@ function expex($coefs,$value) {
 }
 
 function text_limiter($size) {
-	$size = $size >= 17.5
+	$size = $size >= 19
 		? $size
-		: 17.5 + 0.5 * ($size - 17.5);
+		: 19 + 0.4 * ($size - 19);
 	
-	$size = $size >= 13.5
+	$size = $size >= 14
 		? $size
-		: 13.5 + 0.5 * ($size - 13.5);
+		: 14 + 0.3 * ($size - 14);
 		
-	$size = $size >= 11.5
+	$size = $size >= 12
 		? $size
-		: 11.5 + 0.25 * ($size - 11.5);
+		: 12 + 0.2 * ($size - 12);
 		
-	$size = $size <= 25.0
+	$size = $size <= 30.0
 		? $size
-		: 25.0 + 0.66 * ($size - 25.0);
+		: 30.0 + 0.7 * ($size - 30.0);
 	
 	$size = $size <= 45.0
 		? $size

@@ -28,3 +28,28 @@ EOD;
 function sql_barrier_short($layer,$where = '1 = 1',$order = 'z_order') {
     return "SELECT * FROM barriers WHERE layer = $layer";
 }
+
+
+function sql_barrier_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
+	global $BARRIERPOINT;
+	$layerSql = _getLayerSql();
+	
+	$propertyWhereQuery = getPropertyWhereQuery($BARRIERPOINT);
+return <<<EOD
+    SELECT
+	way,
+	osm_id, 
+	barrier,							    
+	$layerSql AS layer,
+	name,
+	$cols	
+    FROM barrier_point
+    WHERE
+	($propertyWhereQuery)			
+	AND ($where)	
+EOD;
+}
+
+function sql_barrier_point_short($layer,$where = '1 = 1',$order = 'z_order') {
+    return "SELECT * FROM barrier_points WHERE layer = $layer";
+}

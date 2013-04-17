@@ -55,3 +55,4 @@ local.properties
 stderr.txt
 stdout.txt
 /osmcsymbol/generated
+/highway_access/generated

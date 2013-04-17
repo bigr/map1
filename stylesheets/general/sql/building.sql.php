@@ -10,6 +10,10 @@ return <<<EOD
 	SELECT
 		way,
 		osm_id,
+		name,
+		way_area,
+			ST_Centroid(way) AS
+		centroid,
 		$cols
 	FROM building
 	WHERE			

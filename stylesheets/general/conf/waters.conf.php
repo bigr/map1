@@ -14,7 +14,8 @@ function waterway_grades($zoom,$grade) {
 	return  waterway_width($zoom,$grade) > linear(array(7 => 0.5, 9 => 1.0, 11 => 0.35, 12 => 0.25, 13 => 0),$zoom);
 }
 
-$_WATER_COLOR = array( 7 => '#5195cd', 10 => '#0066bb');
+$_WATER_COLOR = array( 7 => '#5195cd', 10 => '#0066bb',12 => '#0066bb',15=>'#4387bf');
+$_WATER_COLOR_STROKE = array( 7 => '#5195cd', 10 => '#0066bb');
 
 /**
  * Waterway color grade x zoom maping
@@ -45,6 +46,8 @@ $WATERAREA = array(
 			'level' => 1,
 			'zooms' => range( 7,18),
 			'color' => $_WATER_COLOR,
+			'stroke' => array(5=>0,12=>0,13=>1,18=>2),
+			'stroke-color' => $_WATER_COLOR_STROKE,
 			'smooth' => 1,
 		),
 	"[waterway='dam']" => array(
@@ -69,3 +72,29 @@ $WATERAREA = array(
  * Minimal rendered area in given zoom in pixels^2
  */
 $WATERAREA_MINIMAL_AREA = $_MINIMAL_AREA;
+
+
+
+$WATERPOINT = array(	
+	"[waterway='weir']" => array(
+			'zooms' => range(13,18),
+			'point-template' => 'weir',
+			'point-file' => 'weir',						
+			'size' => array(13 => 10,18 => 16),
+			'color' => $_WATER_COLOR,
+		),	
+	"[waterway='lock_gate']" => array(
+			'zooms' => range(13,18),
+			'point-template' => 'lock_gate',
+			'point-file' => 'lock_gate',
+			'size' => array(13 => 10,18 => 16),
+			'color' => $_WATER_COLOR,
+		),
+	"[waterway='dam']" => array(
+			'zooms' => range(13,18),
+			'point-template' => 'dam',
+			'point-file' => 'dam',
+			'size' => array(13 => 10,18 => 16),
+			'color' => $_WATER_COLOR,
+		),	
+);

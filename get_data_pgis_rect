@@ -117,7 +117,8 @@ function download {
 	    echo "ALTER TABLE $2_point RENAME TO $2; DROP TABLE $2_polygon; DROP TABLE $2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
 	    ;;
 	pointex)
-	    echo "CREATE TABLE $2 AS $4; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB	    
+	    echo "CREATE TABLE $2 AS $4;" | psql -d $DB	    
+	    #echo "CREATE TABLE $2 AS $4; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB	    
 	    ;;
 	line)
 	    echo "ALTER TABLE $2_line RENAME TO $2; DROP TABLE $2_polygon; DROP TABLE $2_point,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
@@ -139,20 +140,33 @@ function download {
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[place~\"city|town|village|hamlet|isolated_dwelling|farm|suburb|neighbourhood|locality|island|islet\"]" )
 download q places point
 
-    
-
 
 q=(
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[historic]"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[man_made]"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[leisure]"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[tourism]"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[amenity]"
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[historic]"  
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;node(w);)"   
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[man_made]"  
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[man_made];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[man_made];);(._;node(w);)"   
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[leisure]"  
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;node(w);)"   
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[tourism]"  
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;node(w);)"   
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[amenity]"  
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;node(w);)"     
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[highway]"
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[railway]"
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway]"
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway];);(._;node(w);)"
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"]"
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"];);(._;node(w);)"
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"]"
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;node(w);)"       
+    "node(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"]"
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);)"
 )
+
+
 download q symbol pointex \
-    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
+    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,z_order,ST_Centroid(way) AS way FROM symbol_polygon"
 
 q=(
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)"
@@ -160,4 +174,4 @@ q=(
 
 
 
-#download q route route
+download q route route

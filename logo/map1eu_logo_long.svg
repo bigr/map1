@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="287.50391"
+   height="64.126785"
+   id="svg2"
+   inkscape:label="Pozadí"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="map1eu_logo_long.svg"
+   inkscape:export-filename="/home/klinger/current/projects/devel/my-map/map/image/logo_final.jpg.png"
+   inkscape:export-xdpi="225"
+   inkscape:export-ydpi="225">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="91.930476"
+     inkscape:cy="27.153726"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:snap-to-guides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2984"
+       empspacing="4"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="5.3333px"
+       spacingy="5.3333px"
+       originx="-0.0133929px"
+       originy="0.099821145px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata6">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.0133929,-988.33521)">
+    <text
+       sodipodi:linespacing="125%"
+       id="text7047"
+       y="1056.7367"
+       x="78.768158"
+       style="font-size:28.85380363px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Sans"
+       xml:space="preserve"
+       transform="scale(1.0075882,0.99246895)"><tspan
+         style="font-size:13.63943005px;fill:#999999;fill-opacity:1"
+         y="1056.7367"
+         x="78.768158"
+         id="tspan7049"
+         sodipodi:role="line">One map for the whole of Europe</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text7051"
+       y="1037.9552"
+       x="76.781212"
+       style="font-size:28.99873543px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#999999;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Sans"
+       xml:space="preserve"
+       transform="scale(1.0015042,0.99849806)"><tspan
+         style="font-size:46.51881027px;font-weight:bold;fill:#999999;fill-opacity:1;-inkscape-font-specification:Liberation Sans Bold"
+         y="1037.9552"
+         x="76.781212"
+         id="tspan7053"
+         sodipodi:role="line">MAP1.EU</tspan></text>
+    <path
+       style="fill:#77aa33;fill-opacity:1;stroke:none"
+       d="m 10.680596,988.40668 c -5.3336015,0 -10.6672031,5.3336 -10.6672031,10.66721 l 0,53.26461 53.3360161,0.072 c 5.3336,-2e-4 10.667202,-5.3338 10.667202,-10.6674 l 0,-53.40746 z"
+       id="path4012"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       d="m 0.0133929,1036.3376 c 0,0 8.0004023,0 16.0008041,-8.0004 8.000402,-8.0004 8.000402,-24.0012 16.000806,-32.00158 8.000402,-8.00041 16.000804,-8.00041 16.000804,-8.00041 l 16.000804,0 0,16.00079 c 0,0 -8.000402,0 -16.000804,8.0004 -8.000402,8.0004 -8.000402,24.0012 -16.000804,32.0016 -8.000404,8.0005 -16.000806,8.0005 -16.000806,8.0005 l -16.0008041,0 0,-16.0009"
+       id="path4522"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="czzccczzccc" />
+  </g>
+</svg>

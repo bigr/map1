@@ -11,6 +11,7 @@ class Route:
         self.geometry = None
         self.highway = None
         self.tracktype = None
+        self.oneway = None
         self.mtbScale = relation.mtbScale
         self.mtbUphill = relation.mtbUphill
         self.sacScale = None
@@ -40,6 +41,10 @@ class Route:
                 values += ", NULL"
             if self.tracktype is not None:
                 values += ", '" + self.tracktype + "'"
+            else:
+                values += ", NULL"
+            if self.oneway is not None:
+                values += ", '" + self.oneway + "'"
             else:
                 values += ", NULL"
             if self.mtbScale is not None:

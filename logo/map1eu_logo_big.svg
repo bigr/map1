@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="106.7086"
+   height="129.23491"
+   id="svg2"
+   inkscape:label="Pozadí"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="map1eu_logo_big.svg"
+   inkscape:export-filename="/home/klinger/current/projects/devel/my-map/map/image/logo_final.jpg.png"
+   inkscape:export-xdpi="225"
+   inkscape:export-ydpi="225">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="-35.891626"
+     inkscape:cy="33.101953"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:snap-to-guides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2984"
+       empspacing="4"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="5.3333px"
+       spacingy="5.3333px"
+       originx="42.6664px"
+       originy="22.568931px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata6">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(42.6664,-945.69621)">
+    <g
+       transform="matrix(0.32088332,0,0,0.31960804,-48.478727,817.76919)"
+       id="g7207">
+      <text
+         transform="scale(0.99951208,1.0004882)"
+         xml:space="preserve"
+         style="font-size:47.97657775999999785px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#999999;fill-opacity:1;stroke:none;font-family:Liberation Sans;-inkscape-font-specification:Sans"
+         x="13.143422"
+         y="803.47235"
+         id="text7051"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan7053"
+           x="13.143422"
+           y="803.47235"
+           style="font-size:76.96242522999997959px;font-weight:bold;-inkscape-font-specification:Liberation Sans Bold;fill:#999999;fill-opacity:1">MAP1.EU</tspan></text>
+    </g>
+    <path
+       style="fill:#77aa33;fill-opacity:1;stroke:none"
+       d="m -24.883648,945.75017 c -8.889748,0 -17.779494,8.88974 -17.779494,17.77949 l 0,88.77824 88.897469,0.12 c 8.889747,0 17.779493,-8.8898 17.779493,-17.7794 l 0,-89.01657 z"
+       id="path4012"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       d="m -42.663142,1025.6388 c 0,0 13.33462,0 26.66924,-13.3346 13.3346212,-13.33468 13.3346212,-40.00392 26.669242,-53.33854 13.33462,-13.33462 26.669239,-13.33462 26.669239,-13.33462 l 26.669241,0 0,26.66924 c 0,0 -13.33462,0 -26.669241,13.33462 -13.334619,13.33462 -13.334619,40.0039 -26.669239,53.3384 -13.3346208,13.3346 -26.669242,13.3346 -26.669242,13.3346 l -26.66924,0 0,-26.6691"
+       id="path4522"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="czzccczzccc" />
+  </g>
+</svg>

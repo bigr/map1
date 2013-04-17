@@ -1,6 +1,7 @@
 <?php
 	require_once "sql/power.sql.php";
 ?>
+<?php if ( $TILE ): ?>	
 {
 	"id": "power-layer<?php echo $layer?>",
 	"name": "power-layer<?php echo $layer?>",
@@ -23,7 +24,8 @@
 	<?php echo ds_sqlite('power_point_layer_'.strtr($layer,'-','_'));?>
 	<?php else: ?>
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_power_point($layer));?>
+	<?php echo ds_pgis(sql_power_point_short($layer));?>
 	<?php endif; ?>
 	
 }
+<?php endif; ?>
