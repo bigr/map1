@@ -55,7 +55,7 @@ if [ ! -f "$SQLITE_TILE_DIR/$1.$2.db" ]; then
 				server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
 				wget -q -T 86400 -O - "$server/interpreter?data=[timeout:86400];(node($lat_from,$lon_from,$lat_to,$lon_to);<;>;);out;" | osmconvert - --out-o5m > /tmp/~$1.$2.o5m
 				if [ $? -ne 0 ]; then continue; fi
-				o5m2sqlite $SQLITE_TILE_DIR/$1.$2.db /tmp/~$1.$2.o5m notfinal
+				o5m2sqlite $SQLITE_TILE_DIR/$1.$2.db /tmp/~$1.$2.o5m
 				if [ $? -ne 0 ]; then continue; fi
 				break
 			done
