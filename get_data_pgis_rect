@@ -55,14 +55,14 @@ function download {
 		q=${q//%lat2%/$lat_to}		
 		i=$(($i+1))
 		server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
+		wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
 		while [ $? -ne 0 ]; do
 		    i=$(($i+1))
 		    server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | /home/klinger/mymap/osm/osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
+		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
 		done			
 		if [ -f "/tmp/$2.o5m" ]; then
-		    /home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
+		    osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
 		    FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
 		    FS2=$(stat -c%s "/tmp/~$2.o5m")
 		    if [ $FS1 -ge $FS2 ]; then
@@ -78,7 +78,7 @@ function download {
 	    done
 	done
     done
-    /home/klinger/mymap/osm/osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
+    osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
     unlink "/tmp/$2.o5m"    
     
     case "$3" in
