@@ -25,9 +25,9 @@
 			    text-halo-radius: 5;
 			<?php endif; ?>		    
 			<?php if ( !empty($a['halo-color']) ): ?>
-			    text-halo-fill: fadeout(<?php echo linear($a['halo-color'],$zoom)?>,<?=empty($a['halo-opacity'])?67:100-100*linear($a['halo-opacity'],$zoom)?>);
+			    text-halo-fill: fadeout(<?php echo linear($a['halo-color'],$zoom)?>,<?php echo empty($a['halo-opacity'])?67:100-100*linear($a['halo-opacity'],$zoom)?>);
 			<?php else: ?>
-			    text-halo-fill: fadeout(rgb(255,255,255),<?=empty($a['halo-opacity'])?67:100-100*$a['halo-opacity']?>);
+			    text-halo-fill: fadeout(rgb(255,255,255),<?php echo empty($a['halo-opacity'])?67:100-100*$a['halo-opacity']?>);
 			<?php endif; ?>
 			<?php if ( !empty($a['dy']) ): ?>
 			    text-dy: <?php echo linear($a['dy'],$zoom)?>;
