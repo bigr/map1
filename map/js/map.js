@@ -128,10 +128,9 @@ var  callback = function(infoLookup) {
 }
 
 var callback2 = function(infoLookup) {    
-    if ( undefined != infoLookup[1] && undefined != infoLookup[1]['data'] && null != infoLookup[1]['data']['wiki'] ) {
-        window.open('http://cs.wikipedia.org/wiki/'+infoLookup[1]['data']['wiki'], 'Wikipedie', '')
-
-    }    
+    //if ( undefined != infoLookup[1] && undefined != infoLookup[1]['data'] && null != infoLookup[1]['data']['wiki'] ) {
+    //    window.open('http://cs.wikipedia.org/wiki/'+infoLookup[1]['data']['wiki'], 'Wikipedie', '')
+    //}     
 }
 
 var utfgridControl = new OpenLayers.Control.UTFGrid({

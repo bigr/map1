@@ -19,15 +19,8 @@
 	"id": "residentialcoverhack",
 	"name": "residentialcoverhack",
 	"class": "residentialcoverhack",
-	"srs": "<?php echo SRS900913?>",
-	<?php if ( $TILE ): ?>
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('residentialcover');?>
-	<?php else: ?>
-	"srs": "<?php echo SRS900913?>",
+	"srs": "<?php echo SRS900913?>",	
 	<?php echo ds_pgis(sql_residentialcover_hack());?>
-	<?php endif; ?>
-	
 }
 <?php if ( $RENDER_PLACESCOVER || $RENDER_STD_LANDCOVER || $RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER) echo ","; ?>
 <?php endif?>
@@ -47,14 +40,9 @@
 {
 	"id": "landcover",
 	"name": "landcover",
-	"class": "landcover",
-	<?php if ( $TILE ): ?>
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('landcover_tbl');?>
-	<?php else: ?>
+	"class": "landcover",	
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_landcover());?>
-	<?php endif; ?>		
+	<?php echo ds_pgis(sql_landcover_short());?>	
 }
 <?php if ( $TILE && ($RENDER_LINE_LANDCOVER || $RENDER_POINT_LANDCOVER) ) echo ","; ?>
 <?php endif?>
@@ -64,14 +52,9 @@
 {
 	"id": "landcover_line",
 	"name": "landcover_line",
-	"class": "landcover_line",
-	<?php if ( $TILE ): ?>
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('landcover_line_tbl');?>
-	<?php else: ?>
+	"class": "landcover_line",	
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_landcover_line());?>
-	<?php endif; ?>		
+	<?php echo ds_pgis(sql_landcover_line_short());?>	
 }
 <?php if ( $RENDER_POINT_LANDCOVER ) echo ","; ?>
 <?php endif?>
@@ -80,14 +63,9 @@
 {
 	"id": "landcover_point",
 	"name": "landcover_point",
-	"class": "landcover_point",
-	<?php if ( $TILE ): ?>
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('landcover_point_tbl');?>
-	<?php else: ?>
+	"class": "landcover_point",	
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_landcover_point());?>
-	<?php endif; ?>		
+	<?php echo ds_pgis(sql_landcover_point_short());?>
 }
 <?php endif?>
 

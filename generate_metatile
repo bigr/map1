@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-MAPNIK_MAP_FILES="countryfill;landcover;hillshade;contour;building;accessarea;way;route;boundary;fishnet;text"
-LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"8":{"colorToAlpha": [255,255,255,255], "opacity": 1.0}}'
+MAPNIK_MAP_FILES="landcover;hillshade;contour;building;accessarea;way;route;boundary;fishnet;text"
+LAYER_OPTIONS='{"1":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"7":{"colorToAlpha": [255,255,255,255], "opacity": 1.0}}'
 MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$3"
 TILE_PATH="/home/klinger/mymap/map/tiles"
+
+
 
 #LAYER_OPTIONS='{"0":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"1":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
 #MAPNIK_MAP_FILES="hillshade;boundary;contour"
 
 
-#MAPNIK_MAP_FILES="text"	
+#MAPNIK_MAP_FILES="way"	
 #LAYER_OPTIONS='{}'
 
 export MAPNIK_MAP_FILES

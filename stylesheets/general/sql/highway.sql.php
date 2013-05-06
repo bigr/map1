@@ -106,7 +106,7 @@ function _isLinkSql() {
 	return "$highwayCol IN ('motorway_link','trunk_link','primary_link','secondary_link','tertiary_link')";
 }
 
-function sql_highway_quary($cols = '0',$where = '1 = 1',$table='highway',$simple = false) {
+function sql_highway_query($cols = '0',$where = '1 = 1',$table='highway',$simple = false) {
     $layerSql = _getNewLayerSql();
     $isBridgeSql = _isBridgeSql();
     $isTunnelSql = _isTunnelSql();
@@ -121,7 +121,7 @@ function sql_highway_quary($cols = '0',$where = '1 = 1',$table='highway',$simple
 		    ELSE COALESCE(oneway,CAST('no' AS text))
 		END) AS 
 	    oneway,";
-    $accessSql = $simple ? '' : "area,access,foot,ski,\"ski:nordic\",\"ski:alpine\",\"ski:telemark\",ice_skates,inline_skates,horse,
+    $accessSql = $simple ? '' : "access,foot,ski,\"ski:nordic\",\"ski:alpine\",\"ski:telemark\",ice_skates,inline_skates,horse,
 	    vehicle,bicycle,carriage,trailer,caravan,motor_vehicle,motorcycle,moped,mofa,motorcar,motorhome,
 	    psv,bus,taxi,tourist_bus,goods,hgv,agricultural,ATV,snowmobile,";
 return <<<EOD
@@ -134,10 +134,26 @@ return <<<EOD
 			    ELSE 'unknown'
 		    END) AS
 	    type,
+	    construction,
+	    footway,
+	    cycleway,
+	    service,
+	    tracktype,
+	    bridge,
+	    tunnel,
 		    $highwayGradeSql AS
 	    grade,
 		    $smoothnessSql AS
-	    smoothness,	    
+	    smoothness,	
+	    surface,
+	    "mtb:scale",
+	    sac_scale,
+	    attribution,
+	    lanes,
+	    lit,
+	    sidewalk,
+	    width,
+	    maxspeed,    
 		    $highwaySql AS
 	    highway,
 		    (CASE
@@ -160,9 +176,13 @@ return <<<EOD
 		    (CASE WHEN highway = 'construction' THEN CAST('yes' AS text) ELSE CAST('no' AS text) END) AS
 	    is_construction,
 	    $layerSql AS layer,
-	    osm_id,
-		COALESCE(int_ref,CAST('no' AS text)) AS
-	    int_ref,
+	    osm_id,	  
+	  ref,		
+	  int_ref,
+		LENGTH(ref) AS
+	    ref_length,
+		LENGTH(int_ref) AS
+	    intref_length,
 	    $onewaySql		
 		(CASE 
 		    WHEN name IS NULL THEN 'no'
@@ -170,6 +190,7 @@ return <<<EOD
 		    ELSE 'yes'
 		END) AS
 	    has_name,
+	  name,
 		ST_Length(ST_Transform(way,900913)) AS
 	    way_length,	    
 	    $accessSql
@@ -181,42 +202,52 @@ EOD;
 }
 
 function sql_highway($cols = '0',$where = '1 = 1') {
-    return sql_highway_quary($cols,"
-	COALESCE(area,'no') NOT IN ('yes','Yes',1,'true','True')
-		AND ($where)
-    ",'highway');
+    return sql_highway_query($cols,$where,'highway');
 }
 
 function sql_highway_norect($layer) {
     $layerSql = _getNewLayerSql();
-    return sql_highway_quary('0',"	
+    return sql_highway_query('0',"	
 		($layerSql) = $layer
     ",'highway',true);
 }
 
 function sql_highway_area($cols = '0',$where = '1 = 1') {
-    return sql_highway_quary($cols,"
-	COALESCE(area,'no') IN ('yes','Yes',1,'true','True') AND ($where)
-    ",'highway_area');
+    return sql_highway_query('way_area,'.$cols,$where,'highway_area');
 }
 
-function sql_highway_area_layer($layer,$cols = '0',$where = '1 = 1',$order = "z_order") {
-    return "SELECT * FROM highways_area WHERE layer = $layer ORDER BY $order";
+function sql_highway_area_short($layer,$cols = '0',$where = '1 = 1') {
+    return "SELECT * FROM highway_areas WHERE layer = $layer ORDER BY way_area";
 }
 
-function sql_highway_major($layer, $cols = '0',$order = 'grade') {
-    return "SELECT * FROM highways WHERE layer = $layer AND grade < 6 ORDER BY $order";
+function sql_highway_road($layer, $grade, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND type = 'road'";
 }
 
-function sql_highway_minor($layer, $cols = '0',$order = 'grade') {
-    return "SELECT * FROM highways WHERE layer = $layer AND grade >= 6 ORDER BY $order";
+function sql_highway_bridge($layer, $grade, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND is_bridge = 'yes'";
 }
 
+function sql_highway_oneway($layer, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND oneway IN ('yes','-1')";
+}
+
+function sql_highway_path($layer, $grade, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND type = 'path' AND highway != 'steps'";
+}
+
+function sql_highway_steps($layer, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND type = 'path' AND highway = 'steps'";
+}
 
 function sql_highway_point($layer) {
     return "SELECT * FROM highway_point";
 }
 
-function sql_highway_point_short($layer,$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM highway_points WHERE layer = $layer";
+function sql_highway_infogrid($layer) {
+		global $RENDER_ZOOMS,$ROAD_GRADES;
+		$zoom = $RENDER_ZOOMS[0];
+		$grades = $ROAD_GRADES[$zoom];		
+		$grades = implode(',',$grades);		
+		return "SELECT * FROM highways WHERE layer = $layer AND grade IN ($grades)";
 }

@@ -1,6 +1,9 @@
 <?php
 require_once "inc/utils.php";
 
+$TILE = getenv('TILE');
+$UTFGRID = getenv('UTFGRID');
+
 /**
  * Which zooms should be rendered to render all use range(0,18)
  */
@@ -9,7 +12,7 @@ $RENDER_ZOOMS = range(8,16);
 /**
  * Which layers should be rendered to render all use range(-5,5)
  */  
-$RENDER_LAYERS = range(-2,2);
+$RENDER_LAYERS = empty($UTFGRID)?range(-2,2):array(0);
 
 /**
  * Which text priorities should be rendered bigger means less important,
@@ -275,4 +278,4 @@ if ( !empty($__zooms) ) {
 }
 unset($__zooms);
 
-$TILE = getenv('TILE');
+

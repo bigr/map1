@@ -49,7 +49,7 @@ function _getPlaceGradeSql() {
 
 function sql_text_place_short($priority = null) {
     return "
-	SELECT * FROM place ORDER BY grade DESC, population DESC
+	SELECT * FROM places ORDER BY grade DESC, population DESC
     ";
 }
 
@@ -74,7 +74,7 @@ return <<<EOD
 	P.place,
 	P.osm_id,
 	$cols			
-    FROM places P  
+    FROM place P  
     WHERE
 	    P.place IS NOT NULL			   
 	AND P.name IS NOT NULL

@@ -38,3 +38,8 @@
     }
     
 ?>
+
+
+CREATE INDEX i__text_waterway__way ON text_waterway USING GIST (way);
+CREATE INDEX i__waterways__layer ON waterways (layer);
+CREATE INDEX i__waterways__way ON waterways USING GIST (way);

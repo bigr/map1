@@ -7,7 +7,7 @@
 	"name": "fishnet1000",
 	"class": "fishnet1000",
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_fishnet1000());?>
+	<?php echo ds_pgis(sql_fishnet1000(),'way',true);?>
 },
 
 {
@@ -15,7 +15,7 @@
 	"name": "fishnet10000",
 	"class": "fishnet10000",
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_fishnet10000());?>
+	<?php echo ds_pgis(sql_fishnet10000(),'way',true);?>
 },
 {
 	"id": "graticules",

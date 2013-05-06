@@ -1,0 +1,27 @@
+
+
+# OsmType  Tag          DataType     Flags
+node,way   note         text         delete   # These tags can be long but are useless for rendering
+node,way   source       text         delete   # This indicates that we shouldn't store them
+node,way   created_by   text         delete
+
+node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
+
+node        power             text         linear
+node        name              text         linear
+node        ref               text         linear
+node        material          text         linear
+node        structure         text         linear
+node        height            text         linear
+node        colour            text         linear
+node        tower:type        text         linear
+node        design            text         linear
+node        design:name       text         linear
+node        design:incomplete text         linear
+node        bridge        text         linear
+node        tunnel        text         linear
+node        layer         int4         linear
+
+
+node,way   z_order      int4         linear # This is calculated during import
+

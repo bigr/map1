@@ -115,43 +115,68 @@ function svg2png($file, $svg) {
 	$im->destroy();	
 }
 
-function getPropertyWhereQuery($conf, $ignoreList = array()) {
-	$properties = array();
-	
-	foreach ( array_keys($conf) as $string ) {
-			
-		$array = explode(',',$string);
-		foreach ( $array as $item) {
-			$item = ltrim($item,'[');
-			$item = rtrim($item,']');
-			$subarray = explode('][',$item);
-			foreach( $subarray as $subitem ) {
-				if ( $subitem[0] == '.' )
-					continue;
-				if ( !preg_match('/[\"]?([\w:]+)[\"]?(=|\!=|\<|\>)[\']?([^\']+)[\']?/',$subitem, $matches) ) {
-					throw new Exception("Error during parsint properties: $subitem");
-				}
-				if ( empty( $properties[$matches[1]]) ) {
-					$properties[$matches[1]] = array();
-				} 
-				if ( ! in_array($matches[3],$properties[$matches[1]]) ) 
-					$properties[$matches[1]][] = $matches[3];
-			}
-					
-		} 
-	}
-	
+function propertyToSql($string) {
+	$array = explode(',',$string);	
 	$query = array();
-	foreach ( $properties as $k => $v ) {
-		if ( in_array($k,$ignoreList) )
-			continue;
-		$v = implode("','",$v);
-		$query[] = "\"$k\" IN ('$v')";
+	foreach ( $array as $item) {
+		$item = ltrim($item,'[');
+		$item = rtrim($item,']');
+		$subarray = explode('][',$item);
+		$subquery = array();
+		foreach( $subarray as $subitem ) {
+			if ( $subitem[0] == '.' )
+				continue;
+			if ( !preg_match('/[\"]?([\w:]+)[\"]?\s*(=|\!=|\<|\>)\s*[\']?([^\']+)[\']?/',$subitem, $matches) ) {
+				throw new Exception("Error during parsint properties: $subitem");
+			}
+			
+			$operator = $matches[2];
+			$column = $matches[1];
+			$value = addslashes($matches[3]);
+			if ( $value == 'no' && $operator == '=' ) {
+					$subquery[] = "( \"$column\" IS NULL OR \"$column\" = 'no' )"; 
+			}
+			else if ( $value == 'no' && $operator == '!=' ) {
+					$subquery[] = "( \"$column\" IS NOT NULL AND \"$column\" <> 'no' )"; 
+			}
+			else {
+				if ( $operator == '!=' ) $operator = '<>';				
+				$subquery[] = "(\"$column\" $operator '$value')";
+			}						
+			
+		}		
+		if ( !empty($subquery) ) {			
+			$query[] = '('.implode(" AND ",$subquery).')';
+		}
+		
+		$ret = '('.implode(" OR ",$query).')';
+	}
+	return $ret;
+}
+
+
+function getPropertyWhereQuery($conf) {		
+	$query = array();
+	foreach ( array_keys($conf) as $string ) {			
+		$query[] = '('.propertyToSql($string).')';
 	}
 	$query = implode(' OR ',$query);
-	
 	return $query;
+}
+
+
+function getPropertyTypeQuery($conf) {
+	$ret = " (CASE ";	
+	$i = 0;
+	foreach ( array_keys($conf) as $string ) {		
+		$ret .= " WHEN ";
+		$ret .= '('.propertyToSql($string).')';
+		$ret .= " THEN " . ($i+1) ."\n";
+		++$i;
+	}
+	$ret .= " END) ";
 	
+	return $ret;
 }
 
 function interval2selector($intervals,$field, $function = null) {

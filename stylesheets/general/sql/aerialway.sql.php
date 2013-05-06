@@ -31,7 +31,7 @@ function sql_aerialway_short($layer,$where = '1 = 1',$order = 'z_order') {
 }
 
 
-function sql_aerialway_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
+function sql_aerialpoint($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	$layerSql = _getLayerSql();
 return <<<EOD
     SELECT
@@ -42,7 +42,7 @@ return <<<EOD
 	(($layerSql) - 1) AS layer,
 	osm_id,
 	$cols
-    FROM aerialway_point
+    FROM aerialpoint
     WHERE
 	    aerialway IN ('pylon')
 	AND ($where)
@@ -50,6 +50,6 @@ EOD;
 }
 
 
-function sql_aerialway_point_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM aerialway_points WHERE layer = $layer";
+function sql_aerialpoint_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
+    return "SELECT * FROM aerialpoints WHERE layer = $layer";
 }

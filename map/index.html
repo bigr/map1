@@ -37,25 +37,39 @@
 	    <a href="/donation.html" target="_blank"><img src="image/donation.svg" class="button-donation" /></a>
 	</div>
 	
+	<div id="gridinfo" class="panel">
+		<div class="sticked">
+		</div>
+		<div class="current">
+		</div>
+	</div>
 	
-	
-	<script id="featureinfo" type="text/html">
-	    {{#highway}}
-		<img data-i18n-src="" src="{{photo}}" style="float: right; margin-left: 10px;"/>
-		<h2><span data-i18n="">highway_{{highway}}_{{grade}}</span> {{name}}</h2>		
-		<p>
-		    {{#ref}}
-		    <span data-i18n="">Highway_ref</span>: <strong>{{ref}}</strong><br/>
-		    {{/ref}}
-		    {{#int_ref}}
-		    <span data-i18n="">Highway_int_ref</span>: <strong>{{int_ref}}</strong><br/>
-		    {{/int_ref}}
-		    <span data-i18n="">Highway_surface</span>: <span data-i18n="">Surface_{{surface}}</span><br/>			    
-		</p>
-	    {{/highway}}
-	    {{symbol_name}}
-		<h2>{{symbol_name}}</h2>
-	    {{/symbol_name}}    
+	<script id="featureinfo" type="text/html">		
+		<ul>
+	  {{#features}}
+	    <li>
+				<table>
+				  <tr>
+						<th colspan="2" class="title">
+							{{#name}}
+							<span class="name">{{name}}</span>							
+							{{/name}}							
+							<a href="http://www.openstreetmap.org/browse/way/{{osm_id}}"><img src="image/osm.png" alt="osm"/></a>							
+							{{#wikipedia}}
+							<a href="http://{{wikipedia}}"><img src="image/wiki.png" alt="wiki"/></a>
+							{{/wikipedia}}
+							{{#website}}
+							<a href="{{website}}"><img src="image/web.png" alt="web"/></a>
+							{{/website}}							
+						</th>
+					</tr>
+					{{#tags}}
+					<tr><th class="key">{{key}}</th><td class="val">{{val}}</td></tr>
+					{{/tags}}
+				</table>
+			</li>
+		{{/features}}  
+		</ul>
 	</script>
 	
 	

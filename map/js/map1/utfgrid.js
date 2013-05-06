@@ -6,9 +6,13 @@ map1.utfgrid.Layer = OpenLayers.Class(OpenLayers.Layer.UTFGrid,{
         options = options || {}
         options = OpenLayers.Util.extend({           
             utfgridResolution: 4,
-            displayInLayerSwitcher: false
+            displayInLayerSwitcher: false,
+            sphericalMercator: true,
+            projection: new OpenLayers.Projection("EPSG:900913"),
+            displayProjection: new OpenLayers.Projection("EPSG:4326"), 
         }, options); 
-        OpenLayers.Layer.UTFGrid.prototype.initialize.apply(this, [options]);        
+        OpenLayers.Layer.UTFGrid.prototype.initialize.apply(this, [options]); 
+        this.infoPopup = false       
     }
 });
 
@@ -28,20 +32,22 @@ map1.utfgrid.ControlMouseMove =  OpenLayers.Class(OpenLayers.Control.UTFGrid,{
     onMouseMove: function(infoLookup) { 
         var self = this
         
-        if ( this.map.isLocked ) return
+        if ( this.map.isLocked() ) return
                
-        if ( undefined == infoLookup[1] || undefined === infoLookup[1]['data'] ) {
+        if ( undefined == infoLookup[1] || undefined === infoLookup[1]['data'] ) {          
             $('#map').css('cursor','auto')
-            if ( this.infoPopup ) {
+            if ( this.infoPopup != false) {
                 if ( this.infoPopup.timeOut ) {
                     clearTimeout(this.infoPopup.timeOut)
                     this.infoPopup.timeOut = null
                 }
                 else {
-                    this.map.removePopup(this.infoPopup)
+                    $('#gridinfo .current').hide()
+                    $('#gridinfo .current').html('')
+                    this.infoPopup = false
+                    //this.map.removePopup(this.infoPopup)
                 }
-            }
-            this.infoPopup = false
+            }            
             
             return
         }
@@ -54,7 +60,33 @@ map1.utfgrid.ControlMouseMove =  OpenLayers.Class(OpenLayers.Control.UTFGrid,{
             }
         }
 
-        data = infoLookup[1]['data']
+        var data = {features: []}
+        for ( i in infoLookup[1]['data'] ) {
+            data['features'][i] = {tags: []}            
+            for ( prop in infoLookup[1]['data'][i] ) {
+                if (infoLookup[1]['data'][i].hasOwnProperty(prop)) {
+                    if (prop == 'wikipedia') {
+                        data['features'][i]['wikipedia'] = infoLookup[1]['data'][i][prop].replace(':','.wikipedia.org/wiki/')
+                    }
+                    else if (prop == 'name' ) {
+                        data['features'][i]['name'] = infoLookup[1]['data'][i][prop]
+                    }
+                    else if (prop == 'osm_id' ) {
+                        data['features'][i]['osm_id'] = infoLookup[1]['data'][i][prop]
+                    }
+                    else if (prop == 'website' ) {
+                        data['features'][i]['website'] = infoLookup[1]['data'][i][prop]
+                    }
+                    else if (prop == 'way_area' ) {
+                        data['features'][i]['way_area'] = infoLookup[1]['data'][i][prop]
+                    }
+                    else {
+                        data['features'][i]['tags'].push({'key':prop,'val':infoLookup[1]['data'][i][prop]})
+                    }
+                }
+            }
+        }
+        /*
         if ( data['highway'] != null ) {
             if ( data['surface'] == null ) {
                 if ( parseInt(data['grade']) < 5 ) {
@@ -78,12 +110,15 @@ map1.utfgrid.ControlMouseMove =  OpenLayers.Class(OpenLayers.Control.UTFGrid,{
                 data['photo'] = 'highway_photo_surface_'+data['surface']
             }
         }
-        
-        content = ich.featureinfo(data)    
+        */
+        var content = ich.featureinfo(data)    
         content = jQuery('<div>').append(content)
         this.map.i18n.translate(content)
         content = content.html()
-        
+        $('#gridinfo .current').html(content)
+        $('#gridinfo .current').show()
+        this.infoPopup = {timeOut: 100}
+        /*
         if ( !this.infoPopup ) {
         
             this.infoPopup = new OpenLayers.Popup("featureinfo",
@@ -107,12 +142,13 @@ map1.utfgrid.ControlMouseMove =  OpenLayers.Class(OpenLayers.Control.UTFGrid,{
             //this.infoPopup.lonlat = arguments[1]
             //this.infoPopup.updatePosition()                
         }
+        * */
         /*
         var offset = $(this.infoPopup.div).offset()
                 
         $(this.infoPopup.div).offset({left:offset.left+16,top:offset.top+16})
         */
-        $(this.infoPopup.div).css('background','none')
+        //$(this.infoPopup.div).css('background','none')
          
     }
 });
@@ -128,10 +164,12 @@ map1.utfgrid.ControlClick =  OpenLayers.Class(OpenLayers.Control.UTFGrid,{
         }, options); 
         OpenLayers.Control.UTFGrid.prototype.initialize.apply(this, [options]);                
     },
-    onClick: function(infoLookup) {    
-        if ( undefined != infoLookup[1] && undefined != infoLookup[1]['data'] && null != infoLookup[1]['data']['wiki'] ) {
-            window.open('http://cs.wikipedia.org/wiki/'+infoLookup[1]['data']['wiki'], 'Wikipedie', '')
-        }    
+    onClick: function(infoLookup) {                
+        $('#gridinfo .sticked').html($('#gridinfo .current').html())
+        $('#gridinfo .current').html('')
+        //if ( undefined != infoLookup[1] && undefined != infoLookup[1]['data'] && null != infoLookup[1]['data']['wiki'] ) {
+        //    window.open('http://cs.wikipedia.org/wiki/'+infoLookup[1]['data']['wiki'], 'Wikipedie', '')
+        //}    
     }
     
 });

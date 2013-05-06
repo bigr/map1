@@ -50,7 +50,7 @@ $WATERAREA = array(
 			'stroke-color' => $_WATER_COLOR_STROKE,
 			'smooth' => 1,
 		),
-	"[waterway='dam']" => array(
+	"[waterway='dam'],[waterway='weir']" => array(
 			'level' => 1,
 			'zooms' => range(12,18),
 			'color' => array(13 => '#eeeeee'),

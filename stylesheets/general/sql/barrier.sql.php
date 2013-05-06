@@ -16,6 +16,13 @@ return <<<EOD
 	barrier,
 	    $layerSql AS
 	layer,
+	name,
+	wikipedia,
+	website,
+	fence_type,
+	height,
+	stile,
+	material,
 	osm_id
     FROM barrier
     WHERE
@@ -30,7 +37,7 @@ function sql_barrier_short($layer,$where = '1 = 1',$order = 'z_order') {
 }
 
 
-function sql_barrier_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
+function sql_barrierpoint($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	global $BARRIERPOINT;
 	$layerSql = _getLayerSql();
 	
@@ -41,15 +48,15 @@ return <<<EOD
 	osm_id, 
 	barrier,							    
 	$layerSql AS layer,
-	name,
+	name,	
 	$cols	
-    FROM barrier_point
+    FROM barrierpoint
     WHERE
 	($propertyWhereQuery)			
 	AND ($where)	
 EOD;
 }
 
-function sql_barrier_point_short($layer,$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM barrier_points WHERE layer = $layer";
+function sql_barrierpoint_short($layer,$where = '1 = 1',$order = 'z_order') {
+    return "SELECT * FROM barrierpoints WHERE layer = $layer";
 }

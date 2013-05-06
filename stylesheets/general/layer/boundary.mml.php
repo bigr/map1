@@ -10,7 +10,7 @@
 	"class": "boundary level<?php echo $level?>",
 	"srs": "<?php echo SRS900913?>",
 	<?php if ( $TILE ): ?>
-	<?php echo ds_pgis(sql_boundary_short($level));?>
+	<?php echo ds_pgis(sql_boundary_short($level),'way',true);?>
 	<?php else: ?>
 	<?php echo ds_pgis(sql_boundary_short_notrect($level));?>	
 	<?php endif; ?>
@@ -22,15 +22,9 @@
 {
 	"id": "paboundary-class<?php echo $class?>",
 	"name": "paboundary-class<?php echo $class?>",
-	"class": "paboundary class<?php echo $class?>",	
-	<?php if ( $TILE ): ?>
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('paboundary_tbl_'.$class);?>
-	<?php else: ?>
+	"class": "paboundary class<?php echo $class?>",		
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_boundary_pa_short($class));?>
-	<?php endif; ?>
-	
+	<?php echo ds_pgis(sql_boundary_pa_short($class));?>	
 }
 <?php if ($class != end($RENDER_BOUNDARY_PA_CLASSES)) echo ",";?>
 <?php endforeach; ?>

@@ -70,7 +70,7 @@ return <<<EOD
 EOD;
 }
 
-function sql_water_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
+function sql_waterpoint($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	global $WATERPOINT;
 	$layerSql = _getLayerSql();
 	
@@ -83,20 +83,20 @@ return <<<EOD
 	$layerSql AS layer,
 	name,
 	$cols
-    FROM water_point
+    FROM waterpoint
     WHERE
 	($propertyWhereQuery)			
 	AND ($where)	
 EOD;
 }
 
-function sql_water_point_short($layer,$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM water_points WHERE layer = $layer";
+function sql_waterpoint_short($layer,$where = '1 = 1',$order = 'z_order') {
+    return "SELECT * FROM waterpoints WHERE layer = $layer";
 }
 
 
 function sql_waterarea_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM waterarea WHERE layer = $layer";
+    return "SELECT * FROM waterareas WHERE layer = $layer ORDER BY way_area DESC";
 }
 
 
@@ -119,6 +119,11 @@ return <<<EOD
 	    $layerSql AS layer,
 	    way_area,		
 	    osm_id,
+	    ST_Centroid(way) AS centroid,
+	    name,
+	    wikipedia,
+	    website,
+	    wetland,
 	    $cols
 	FROM waterarea
 	WHERE

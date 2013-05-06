@@ -32,6 +32,8 @@ node,way   highway      text         polygon
 node,way   railway      text         polygon
 node,way   aeroway      text         polygon
 node,way   power        text         polygon
+node,way   wikipedia    text         polygon
+node,way   website      text         polygon
 
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import

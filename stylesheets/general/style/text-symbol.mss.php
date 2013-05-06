@@ -3,11 +3,11 @@
 ?>
 
 <?php foreach ( $RENDER_ZOOMS as $zoom ):?>
-    .textSymbol[zoom = <?php echo $zoom?>][count < <?php echo linear($SYMBOL_DENSITY,$zoom)?>] {
-	<?php foreach ( $SYMBOL as $selector => $a ): ?>
+    .textSymbol[zoom = <?php echo $zoom?>] {
+	<?php $i = 0; foreach ( $SYMBOL as $selector => $a ): ++$i; ?>
 	    <?php if ( !empty($a['zooms']) && array_key_exists($zoom, $a['zooms']) ): ?>
 		.priority<?php echo $a['zooms'][$zoom] ?> {
-		    <?php echo $selector?> {
+		    [type = <?php echo $i?>] {
 			text-face-name: "<?php echo FONT_ITALIC_SERIF ?>";
 			text-name: "[name]";		    
 			text-fill: <?php echo !empty($a['text-color'])?linear($a['text-color'],$zoom):'#000000'?>;

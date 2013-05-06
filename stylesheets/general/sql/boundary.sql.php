@@ -43,19 +43,16 @@ function sql_boundary_pa($cols = '0',$where = '1 = 1') {
 		way,			
 		(CASE
 			WHEN protect_class IS NOT NULL THEN protect_class
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'I' THEN 1
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'Ia' THEN 1
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'Ib' THEN 1
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'II' THEN 2
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'III' THEN 3
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'IV' THEN 4
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'V' THEN 5
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'VI' THEN 6
-			WHEN iucn_level IS NOT NULL AND iucn_level = 'VII' THEN 7
-			WHEN iucn_level IS NOT NULL THEN CAST(iucn_level AS integer)
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('I','Ia','Ib','1','1a','1b') THEN 1			
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('II','2') THEN 2
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('III','3') THEN 3
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('IV','4') THEN 4
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('V','5') THEN 5
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('VI','6') THEN 6
+			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('VII','7') THEN 7			
 			WHEN boundary = 'national_park' THEN 2
 			WHEN leisure = 'nature_reserve' THEN 4
-			WHEN military IS NOT NULL THEN 25 
+			WHEN military IS NOT NULL THEN 25
 			ELSE 0			
 		END) AS protect_class,
 		name,
@@ -63,17 +60,51 @@ function sql_boundary_pa($cols = '0',$where = '1 = 1') {
 		way_area,
 			ST_Centroid(way) AS
 		centroid,
+		protection_title,
+		protection_object,
+		protection_aim,
+		protection_ban,
+		protection_instruction,
+		related_law,
+		site_zone,
+		valid_from,
+		start_date,
+		end_date,
+		opening_hours,
+		operator,
+		governance_type,
+		site_ownership,
+		site_status,
+		protection_award,
+		contamination,
+		ethnic_group,
+		period,
+		scale,
+		ownership,
+		owner,
+		attribution,
+		type,
+		military,
+		boundary,
+		landuse,
+		leisure,
+		wikipedia,
+		website,
 		$cols
 	FROM paboundary
 	WHERE
 		(boundary IN ('protected_area','national_park') OR
 		landuse='military' OR
 		leisure='nature_reserve' OR
-		military IS NOT NULL) AND	
-		($where)			
+		military IN ('danger_area','range')) AND	
+		($where)
 EOD;
 }
 
 function sql_boundary_pa_short($class) {	
-	return "SELECT * FROM paboundary WHERE protect_class=$class";			
+	return "SELECT * FROM paboundaries WHERE protect_class=$class ORDER BY way_area DESC";			
+}
+
+function sql_boundary_pa_text_short() {	
+	return "SELECT * FROM paboundaries WHERE name IS NOT NULL ORDER BY way_area DESC";			
 }

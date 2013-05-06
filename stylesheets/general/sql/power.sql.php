@@ -29,6 +29,18 @@ return <<<EOD
 	power,							    
 	    $layerSql AS 
 	layer,	
+	note,
+	line,
+	length,
+	location,
+	voltage,
+	cables,
+	wires,
+	frequency,
+	operator,
+	name,
+	bridge,
+	tunnel,
 	osm_id,
 	$cols
     FROM power
@@ -42,16 +54,26 @@ function sql_power_short($layer,$where = '1 = 1',$order = 'z_order') {
     return "SELECT * FROM powers WHERE layer = $layer";
 }
 
-function sql_power_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
+function sql_powerpoint($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	$layerSql = _getLayerSql();
 return <<<EOD
     SELECT
 	way,
 	osm_id, 
-	power,							    
+	power,
+	name,
+	ref,
+	material,
+	structure,
+	height,
+	colour,
+	"tower:type",
+	design,
+	"design:name",
+	"design:incomplete",
 	$layerSql AS layer,
 	$cols
-    FROM power_point
+    FROM powerpoint
     WHERE
 	    power IN ('pole','tower')
 	AND osm_id > 0
@@ -59,6 +81,6 @@ return <<<EOD
 EOD;
 }
 
-function sql_power_point_short($layer,$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM power_points WHERE layer = $layer";
+function sql_powerpoint_short($layer,$where = '1 = 1',$order = 'z_order') {
+    return "SELECT * FROM powerpoints WHERE layer = $layer";
 }

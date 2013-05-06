@@ -10,6 +10,9 @@ function sql_pisteway($where = '1 = 1',$order = 'z_order') {
 	global $PISTEWAY;
 	$layerSql = _getLayerSql();
 	$propertyWhereQuery = getPropertyWhereQuery($PISTEWAY);
+	$propertyWhereQuery = str_replace("pisteway",'piste:type',$propertyWhereQuery);
+	$propertyWhereQuery = str_replace("difficulty",'piste:difficulty',$propertyWhereQuery);
+	$propertyWhereQuery = str_replace("grooming",'piste:grooming',$propertyWhereQuery);
 return <<<EOD
     SELECT
 	way,
@@ -36,6 +39,9 @@ function sql_pistearea($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	global $PISTEAREA;
 	$layerSql = _getLayerSql();
 	$propertyWhereQuery = getPropertyWhereQuery($PISTEAREA);
+	$propertyWhereQuery = str_replace("pisteway",'piste:type',$propertyWhereQuery);
+	$propertyWhereQuery = str_replace("difficulty",'piste:difficulty',$propertyWhereQuery);
+	$propertyWhereQuery = str_replace("grooming",'piste:grooming',$propertyWhereQuery);
 return <<<EOD
     SELECT
 	way,	  
@@ -56,5 +62,6 @@ EOD;
 
 
 function sql_pistearea_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM pisteareas WHERE layer = $layer";
+    return "SELECT * FROM pisteareas WHERE layer = $layer ORDER BY way_area";
 }
+

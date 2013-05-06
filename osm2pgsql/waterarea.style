@@ -10,21 +10,21 @@ node,way   area         text         # hard coded support for area=1/yes => poly
 way   waterway     text         polygon
 way   natural      text         polygon
 way   landuse      text         polygon
+way   wetland      text         polygon
 
-way   name         text         linear
-way   int_name     text         linear
-way   name:en      text         linear
-way   name:de      text         linear
-way   name:cs      text         linear
-
-way        layer        int4         linear
-
-way        bridge       text        linear
-way        tunnel       text        linear
-way        building       text        linear
+way   name         text         polygon
 
 
+way        layer        int4        polygon
+
+way        bridge       text        polygon
+way        tunnel       text        polygon
+way        building     text        polygon
+way        website      text        polygon
+way        wikipedia    text        polygon
 
 
-node,way   z_order      int4         linear # This is calculated during import
+
+
+node,way   z_order      int4         polygon # This is calculated during import
 way        way_area     real                # This is calculated during import

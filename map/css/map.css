@@ -774,6 +774,74 @@ html,body,input,textarea {
 	opacity: 1.0
 }
 
+#gridinfo {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 240px;
+	padding: 20px 0 0 0;
+	opacity: 0.8;
+	font-size: 0.9em;
+	/*display: none;*/
+	overflow: hidden;
+}
+
+#gridinfo .sticked {
+	background: rgba(255,255,255,0.5);	
+}
+
+#gridinfo ul, #gridinfo li {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+
+#gridinfo table {
+	border-bottom: 1px solid rgba(0,0,0,0.7);
+	border-top: 1px solid rgba(0,0,0,0.7);
+	width: 100%;
+	font-size: 14px;
+}
+
+#gridinfo table tr:nth-child(even), #gridinfo table tr:nth-child(even) td, #gridinfo table tr:nth-child(even) th {
+	background: rgba(0,0,0,0.3);
+}
+
+#gridinfo table th.title {
+	text-align: right;
+	padding: 1px 8px;
+	background: rgba(255,255,255,0.2);
+} 
+
+#gridinfo table th.title .name {
+	padding: 7px 0px;
+	width: 120px;
+	text-align: left;
+}
+
+#gridinfo table th.title .name {
+	float: left;
+}
+
+#gridinfo table .key {
+	border-right: 1px solid rgba(0,0,0,0.7);
+	padding: 0 4px 0 8px;
+	font-weight: bold;	
+	text-align: left;
+	font-size: 0.95em;
+}
+
+#gridinfo table .val {
+	font-style: italic;
+	text-align: left;
+	padding: 0 8px 0 4px;
+}
+
+
+
+
+
 #featureinfo {
 	
 }

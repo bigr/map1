@@ -56,3 +56,11 @@ stderr.txt
 stdout.txt
 /osmcsymbol/generated
 /highway_access/generated
+/articles/
+/atlas-logs/
+/generate-praha
+/generate-praha-nw
+/generate-botanicka-zahrada
+/generate-botanicka-zahrada-gridinfo
+/generate-troja
+/generate-zizkov

@@ -15,7 +15,7 @@ function _getLayerSql() {
 	return "	
 		(
 			CASE 
-				WHEN ltrim(layer) IN ('-5','-4','-3','-2','-1','0','1','2','3','4','5') THEN CAST(round(CAST(ltrim(layer) AS float)) AS integer)
+				WHEN layer IN ('-5','-4','-3','-2','-1','0','1','2','3','4','5') THEN CAST(round(CAST(layer AS float)) AS integer)
 				WHEN $isBridgeSql THEN 1
 				WHEN $isTunnelSql THEN -1
 				ELSE 0

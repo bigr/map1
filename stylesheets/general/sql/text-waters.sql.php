@@ -34,38 +34,8 @@ function sql_text_waterway_short($priority) {
 }
 
 
-function sql_text_waterarea($cols = '0',$where = '1 = 1',$order = 'way_area DESC') {		
-	global $WATERAREA;	
-	$waterwayCol = _getWaterwayColSql();	
-	$propertyWhereQuery = getPropertyWhereQuery($WATERAREA);
-return <<<EOD
-	SELECT
-		way,				
-			(CASE
-				WHEN waterway IN ('dock','dam') or landuse IN ('basin','reservoir') THEN CAST('yes' AS text)
-				ELSE CAST('no' AS text)
-			END) AS
-		artificial,
-		name,
-		waterway,
-		landuse,
-		"natural",			
-		way_area,
-			ST_Centroid(way) AS
-	    centroid,
-		osm_id,
-		$cols
-	FROM waterarea_text
-	WHERE
-				($propertyWhereQuery)
-			AND building IS NULL
-			AND (waterway IS NULL or waterway <> 'riverbank')
-			AND ($where)	
-EOD;
-}
-
 function sql_text_waterarea_short($priority,$where = '1 = 1',$order = 'z_order') {
-    return 'SELECT * FROM waterarea';
+    return "SELECT * FROM waterareas WHERE waterway <> 'riverbank' AND name IS NOT NULL";
 }
 
 

@@ -1,0 +1,40 @@
+
+
+# OsmType  Tag          DataType     Flags
+node,way   note         text         delete   # These tags can be long but are useless for rendering
+node,way   source       text         delete   # This indicates that we shouldn't store them
+node,way   created_by   text         delete
+
+node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
+
+way   building                    text   polygon
+way   wall                        text   polygon
+way   building:material           text   polygon
+way   building:levels             text   polygon
+way   building:use                text   polygon
+way   building:roof               text   polygon
+way   building:roof:shape         text   polygon
+way   building:walls              text   polygon
+way   building:structure          text   polygon
+way   building:type               text   polygon
+way   building:height             text   polygon
+way   building:cladding           text   polygon
+way   building:orientation        text   polygon
+way   building:roof:orientation   text   polygon
+way   building:architecture       text   polygon
+way   building:levels:aboveground text   polygon
+way   building:levels:underground text   polygon
+way   building:facade:material    text   polygon
+way   building:roof:material      text   polygon
+way   building:levels:top         text   polygon
+way   name                        text   polygon
+way   description                 text   polygon
+way   height                      text   polygon
+way   bridge                      text   polygon
+way   tunnel                      text   polygon
+way   layer                       text   polygon
+
+
+
+node,way   z_order      int4    polygon # This is calculated during import
+way        way_area     real                # This is calculated during import

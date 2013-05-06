@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-exists=$(ps -ef | grep "process\-queue" | wc -l)
-
-if [ $exists -gt 2 ]; then	
-	echo "already running"
-	echo $exists
-	exit
-fi
-
-
-while [ -s $1 ]; do
-	$(head -n 1 $1)
-	tail -n +2 $1 > /tmp/~$1
-	mv /tmp/~$1 $1
+while [ -s "$1" ] || [ -f "~$$.$1" ]; do
+	if [ ! -f "~$$.$1" ]; then		
+		tail -n +2 "$1" > "/tmp/~$1"
+		head -n 1 "$1" > "~$$.$1"
+		mv "/tmp/~$1" "$1"
+	fi
+	chmod +x "~$$.$1"
+	"./~$$.$1"
+	if [[ "$?" != "0" ]]; then
+		cat "~$$.$1" >> "$$.$1.error"
+	else
+		cat "~$$.$1" >> "$$.$1.done"
+	fi
+	unlink ~$$.$1
 done

@@ -6,27 +6,17 @@
 {
 	"id": "pisteway-layer<?php echo $layer?>",
 	"name": "pisteway-layer<?php echo $layer?>",
-	"class": "pisteway layer<?php echo $layer?>",
-	<?php if ( $TILE ): ?>	
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('pisteway_layer_'.strtr($layer,'-','_'));?>
-	<?php else: ?>
+	"class": "pisteway layer<?php echo $layer?>",	
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_pisteway_short($layer));?>
-	<?php endif; ?>
+	<?php echo ds_pgis(sql_pisteway_short($layer));?>	
 	
 },
 {
 	"id": "pistearea-layer<?php echo $layer?>",
 	"name": "pistearea-layer<?php echo $layer?>",
-	"class": "pistearea layer<?php echo $layer?>",
-	<?php if ( $TILE ): ?>	
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('pistearea_layer_'.strtr($layer,'-','_'));?>
-	<?php else: ?>
+	"class": "pistearea layer<?php echo $layer?>",	
 	"srs": "<?php echo SRS900913?>",
 	<?php echo ds_pgis(sql_pistearea_short($layer));?>
-	<?php endif; ?>
 	
 }
 

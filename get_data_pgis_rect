@@ -1,33 +1,23 @@
 #!/usr/bin/env bash
 
-MARGIN_LAT_SIZE=0.05
-MARGIN_LON_SIZE=0.15
+set -e
 
 LON_START=$1
-
 LAT_START=$2
-
 LON_END=$3
-
 LAT_END=$4
+DB=$5
 
-
-LON_START_TMP=$LON_START
-LON_START=$(bc -l <<< "$LON_START-($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
-LAT_START_TMP=$LAT_START
-LAT_START=$(bc -l <<< "$LAT_START-($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
-LON_END=$(bc -l <<< "$LON_END + ($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
-LAT_END=$(bc -l <<< "$LAT_END + ($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
+./make-gis-db $DB klinger
 
 function download {
-    OVERPASS_SERVERS=( "http://overpass-api.de/api"  "http://overpass.osm.rambler.ru/cgi" )
-    OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}
-    DB=gis_eu
+    OVERPASS_SERVERS=( "http://overpass-api.de/api" "http://overpass.osm.rambler.ru/cgi" "http://api.openstreetmap.fr/oapi/" )
+    OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}    
    
-    LAT_STEP=2
-    LON_STEP=2
-    LAT_STEP2=$(python <<< "print ($LAT_END - $LAT_START)*(1+2*$MARGIN_LAT_SIZE)/$LAT_STEP")
-    LON_STEP2=$(python <<< "print ($LON_END - $LON_START)*(1+2*$MARGIN_LON_SIZE)/$LON_STEP")
+    LAT_STEP=$5
+    LON_STEP=$6
+    LAT_STEP2=$(python <<< "print ($LAT_END - $LAT_START)/$LAT_STEP")
+    LON_STEP2=$(python <<< "print ($LON_END - $LON_START)/$LON_STEP")
     i=0
     str=""
     #qs="${1}" 
@@ -36,8 +26,8 @@ function download {
     qs="$1[*]"
     qs=(${!qs})  
     IFS=$OLD_IFS 
-    #echo $qs2 
-    #qs=("raz" "dva" "tri" )   
+    #echo $qs2  
+      
     for qq in "${qs[@]}"; do	
 	for i_lat_index in $(eval echo "{1..$LAT_STEP}"); do
 	    i_lat=$(bc -l <<< "$LAT_START+($i_lat_index-1)*$LAT_STEP2")
@@ -55,31 +45,52 @@ function download {
 		q=${q//%lat2%/$lat_to}		
 		i=$(($i+1))
 		server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
-		while [ $? -ne 0 ]; do
+		set +e
+		errs=0
+		wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"		
+		while [ $? -ne 0 ] && [ $errs -le 12 ]; do
 		    i=$(($i+1))
 		    server=${OVERPASS_SERVERS[$(($i % $OVERPASS_SERVERS_COUNT))]}
-		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"
-		done			
-		if [ -f "/tmp/$2.o5m" ]; then
-		    osmconvert "/tmp/$2.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/~$2.o5m"
-		    FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
-		    FS2=$(stat -c%s "/tmp/~$2.o5m")
+		    if [ $errs -gt 3 ]; then
+			sleep $(($errs * $errs))
+		    fi
+		    let errs++	
+		    wget -T 86400 -O - "$server/interpreter?data=[timeout:86400];$q;out;" | osmconvert - --out-o5m > "/tmp/~$2.$i_lon.$i_lat.o5m"		    	    
+		done
+		set -e		
+		if [ $errs -gt 12 ]; then
+		    exit -1
+		fi;
+		if [ -f "/tmp/$2.$LON_START.$LAT_START.o5m" ]; then
+		    osmconvert "/tmp/$2.$LON_START.$LAT_START.o5m" "/tmp/~$2.$i_lon.$i_lat.o5m" --out-o5m > "/tmp/$2.$LON_START.$LAT_START.o5m~"
+		    if [ -f "/tmp/~$2.$i_lon.$i_lat.o5m" ]; then
+			FS1=$(stat -c%s "/tmp/~$2.$i_lon.$i_lat.o5m")
+		    else
+			FS1=0
+		    fi		    
+		    if [ -f "/tmp/$2.$LON_START.$LAT_START.o5m~" ]; then
+			FS2=$(stat -c%s "/tmp/$2.$LON_START.$LAT_START.o5m~")
+		    else
+			FS2=0
+		    fi
 		    if [ $FS1 -ge $FS2 ]; then
-			unlink "/tmp/~$2.o5m"
-		    else			    
-			unlink "/tmp/$2.o5m"
-			mv "/tmp/~$2.o5m" "/tmp/$2.o5m"
+			unlink "/tmp/$2.$LON_START.$LAT_START.o5m~"
+		    else
+			if [ -f "/tmp/$2.$LON_START.$LAT_START.o5m" ]; then
+			    unlink "/tmp/$2.$LON_START.$LAT_START.o5m"
+			fi			
+			mv "/tmp/$2.$LON_START.$LAT_START.o5m~" "/tmp/$2.$LON_START.$LAT_START.o5m"
 		    fi
 		    unlink "/tmp/~$2.$i_lon.$i_lat.o5m" 
 		else
-		    mv "/tmp/~$2.$i_lon.$i_lat.o5m" "/tmp/$2.o5m"
+		    mv "/tmp/~$2.$i_lon.$i_lat.o5m" "/tmp/$2.$LON_START.$LAT_START.o5m"
 		fi
 	    done
 	done
     done
-    osmconvert "/tmp/$2.o5m" --out-osm | bzip2 > "/tmp/$2.osm.bz2"
-    unlink "/tmp/$2.o5m"    
+    
+    osmconvert "/tmp/$2.$LON_START.$LAT_START.o5m" --out-osm | bzip2 > "/tmp/$2.$LON_START.$LAT_START.osm.bz2"
+    unlink "/tmp/$2.$LON_START.$LAT_START.o5m"    
     
     case "$3" in
 
@@ -101,24 +112,23 @@ function download {
 	    echo "DROP TABLE $2; DROP INDEX $2_polygon_pkey,$2_polygon_index;" | psql -d $DB
 	    ;;
     esac
-        
+    
     /usr/local/bin/osm2pgsql \
 	-d $DB \
 	--style "/home/klinger/mymap/osm2pgsql/$2.style" \
 	--create \
-	--slim --cache 30 \
+	--slim --cache 768 \
 	--prefix $2 \
-	/tmp/$2.osm.bz2
-    unlink /tmp/$2.osm.bz2
+	/tmp/$2.$LON_START.$LAT_START.osm.bz2
+    unlink "/tmp/$2.$LON_START.$LAT_START.osm.bz2"
     
     case "$3" in
 
 	point)
 	    echo "ALTER TABLE $2_point RENAME TO $2; DROP TABLE $2_polygon; DROP TABLE $2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
 	    ;;
-	pointex)
-	    echo "CREATE TABLE $2 AS $4;" | psql -d $DB	    
-	    #echo "CREATE TABLE $2 AS $4; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB	    
+	pointex)	   
+	    echo "CREATE TABLE $2 AS $4; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways; DROP TABLE $2_point,$2_polygon,$2_line,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB	    
 	    ;;
 	line)
 	    echo "ALTER TABLE $2_line RENAME TO $2; DROP TABLE $2_polygon; DROP TABLE $2_point,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
@@ -130,48 +140,146 @@ function download {
 	    echo "ALTER TABLE $2_polygon RENAME TO $2; DROP TABLE $2_line; DROP TABLE $2_point,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
 	    ;;
     esac
+    if [ -f "/home/klinger/mymap/osm2pgsql/$2.get-sql.php" ]; then
+	php "/home/klinger/mymap/osm2pgsql/$2.get-sql.php" | psql -d $DB
+    fi
     
 }
 
 
-
-
     
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[place~\"city|town|village|hamlet|isolated_dwelling|farm|suburb|neighbourhood|locality|island|islet\"]" )
-download q places point
+download q place point "" 1 1
+
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[highway][area!~\"yes|1|Yes|true|True\"];);(._;node(w);)" )
+download q highway line "" 2 2
+
+q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[highway][area~\"yes|1|Yes|true|True\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[highway][area~\"yes|1|Yes|true|True\"];);(._;node(w);)" )
+download q highway_area polygon "" 1 1
+
+q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[highway]" )
+download q highway_point point "" 1 1
+
 
 
 q=(
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[historic]"  
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;node(w);)"   
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[man_made]"  
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[man_made];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[man_made];);(._;node(w);)"   
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[leisure]"  
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;node(w);)"   
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[tourism]"  
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;node(w);)"   
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[amenity]"  
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;node(w);)"     
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[highway]"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[railway]"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway]"
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway];);(._;node(w);)"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"]"
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"];);(._;node(w);)"
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"]"
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;node(w);)"       
-    "node(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"]"
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);)"
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[access][highway!~\".*\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[access][highway!~\".*\"];);(._;node(w);)"    
+)
+download q accessarea polygon "" 1 1
+
+
+q=(
+    "(((rel(%lat1%,%lon1%,%lat2%,%lon2%)[natural][natural!~\"wetland|marsh|water\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural][natural!~\"wetland|marsh|water\"];);(._;node(w);))->.a); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[landuse][landuse!~\"basin|reservoir\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[landuse][landuse!~\"basin|reservoir\"];);(._;node(w);))->.b); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;node(w);))->.c); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;node(w);))->.d); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[place];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[place];);(._;node(w);))->.e); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[power];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[power];);(._;node(w);))->.f); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;node(w);))->.g); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;node(w);))->.h); \
+     (.a; .b; .c; .d; .e; .f; .g; .h;)"
 )
 
+download q landcover polygon "" 2 2
 
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural][area!~\"yes|1|Yes|true|True\"];);(._;node(w);)" )
+download q landcover_line line "" 1 1
+   
+
+q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural]" )
+download q landcover_point point "" 1 1
+
+q=(   
+    "(((rel(%lat1%,%lon1%,%lat2%,%lon2%)[boundary~\"protected_area|national_park\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[boundary~\"protected_area|national_park\"];);(._;node(w);))->.a); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[landuse=military];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[landuse=military];);(._;node(w);))->.b); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[military~\"danger_area|range\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[military~\"danger_area|range\"];);(._;node(w);))->.c); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[leisure=nature_reserve];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[leisure=nature_reserve];);(._;node(w);))->.d); \
+     (.a; .b; .c; .d;)"
+)
+download q paboundary polygon "" 1 1
+
+
+q=(
+    "(((rel(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"dock|riverbank|dam|weir\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"dock|riverbank|dam|weir\"];);(._;node(w);))->.a); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[natural~\"wetland|marsh|water\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural~\"wetland|marsh|water\"];);(._;node(w);))->.b); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[landuse~\"basin|reservoir\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[landuse~\"basin|reservoir\"];);(._;node(w);))->.c); \
+     (.a; .b; .c;)"
+)
+download q waterarea polygon "" 2 1
+
+q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural~\"weir|dam|lock_gate\"]" )
+download q waterpoint point "" 1 1
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[railway];);(._;node(w);)" )
+download q railway line "" 2 1
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway~\"taxiway|runway\"][area!~\"yes|1|true|Yes|True\"];);(._;node(w);)" )
+download q aeroway line "" 1 1
+
+q=(
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway~\"taxiway|runway\"][area~\"yes|1|true|Yes|True\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway~\"taxiway|runway\"][area~\"yes|1|true|Yes|True\"];);(._;node(w);)"    
+)
+download q aeroarea polygon "" 1 1
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[aerialway];);(._;node(w);)" )
+download q aerialway line "" 1 1
+
+q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[aerialway]" )
+download q aerialpoint point "" 1 1
+
+q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[type=route][route=piste][\"piste:type\"=downhill][area!~\"yes|1|true|Yes|True\"];);(._;way(r););(._;node(w);)" )
+download q pisteway line "" 1 1
+
+q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[type=route][route=piste][\"piste:type\"=downhill][area~\"yes|1|true|Yes|True\"];);(._;way(r););(._;node(w);)" )
+download q pistearea polygon "" 1 1
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[barrier][area!~\"yes|1|true|Yes|True\"];);(._;node(w);)" )
+download q barrier line "" 1 1
+
+q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[barrier]" )
+download q barrierpoint point "" 1 1
+
+q=(
+    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building][building!~\"no|0|false|No|False|bridge|tunnel\"][bridge!~\"yes|true|1|Yes|True\"][tunnel!~\"yes|true|1|Yes|True\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building][building!~\"no|0|false|No|False|bridge|tunnel\"][bridge!~\"yes|true|1|Yes|True\"][tunnel!~\"yes|true|1|Yes|True\"];);(._;node(w);)"    
+)
+download q building polygon "" 3 2
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[power~\"line|minor_line|cable\"][area!~\"yes|1|true|Yes|True\"];);(._;node(w);)" )
+download q power line "" 1 1
+
+q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[power]" )
+download q powerpoint point "" 1 1
+
+q=(
+    "((node(%lat1%,%lon1%,%lat2%,%lon2%)[historic])->.a); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[historic];);(._;node(w);))->.b); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[man_made])->.c); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[man_made];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[man_made];);(._;node(w);))->.d); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[leisure])->.e); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[leisure];);(._;node(w);))->.f); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[tourism])->.g); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[tourism];);(._;node(w);))->.h); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[amenity])->.i); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[amenity];);(._;node(w);))->.j); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[highway])->.k); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[railway])->.l); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway])->.m); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[aeroway];);(._;node(w);))->.n); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"])->.o); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[power=\"generator\"];);(._;node(w);))->.p); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"])->.q); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;node(w);))->.r); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"])->.s); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);))->.t); \
+     (.a; .b; .c; .d; .e; .f; .g; .h; .i; .j; .k; .l; .m; .n; .o; .p; .q; .r; .s; .t;)"
+)
 download q symbol pointex \
-    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,z_order,ST_Centroid(way) AS way FROM symbol_polygon"
+    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,wikipedia,website,z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,wikipedia,'website',z_order,ST_Centroid(way) AS way FROM symbol_polygon" \
+    2 2
 
-q=(
-    "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)"
-)
+q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)" )
+download q route route "" 1 2
 
 
-
-download q route route

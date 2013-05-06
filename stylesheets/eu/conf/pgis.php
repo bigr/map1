@@ -1,7 +1,12 @@
 <?php
 $PGIS_TBL_PREFIX = 'planet_osm';
 
-function ds_pgis($table, $geometry_field = 'way') {
+function ds_pgis($table, $geometry_field = 'way', $globaldb = false) {
+	global $TILE;
+	if ( $TILE && $globaldb == false ) {
+		$db = explode('.',$TILE);
+		$db = 'gis_eu_'.$db[0].'_'.$db[1];
+	}
 	return '"Datasource": ' . json_encode(array(
 		'table'           => '(' . trim($table) . ') AS data',
 		'type'            => 'postgis',
@@ -9,7 +14,7 @@ function ds_pgis($table, $geometry_field = 'way') {
 		'host'            => 'localhost',
 		'port'            => 5432,
 		'user'            => 'klinger',
-		'dbname'          => 'gis_eu',
+		'dbname'          => ($globaldb?'gis_eu':$db),
 		'estimate_extent' => false,
 		'extent'          => '-20037508,-19929239,20037508,19929239',
 		'geometry_field'  => $geometry_field,

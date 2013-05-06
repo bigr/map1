@@ -1,5 +1,5 @@
 <?php
-
+/*
     $LON_START = $argv[1] - ($argv[3] - $argv[1]) * 0.15;
     $LAT_START = $argv[2] - ($argv[4] - $argv[2]) * 0.05;
     $LON_END = $argv[3] + ($argv[3] - $argv[1]) * 0.15;
@@ -29,7 +29,7 @@
         echo "DROP TABLE IF EXISTS {$sql[1]};\n";    
         echo "CREATE TABLE {$sql[1]} AS (SELECT * FROM (" . $sql[2]() . ") T WHERE ST_Intersects(way,ST_Transform(ST_SetSRID(ST_MakeBox2D(ST_GeomFromEWKT('SRID=4326;POINT($LON_START $LAT_START)'), ST_GeomFromEWKT('SRID=4326;POINT($LON_END $LAT_END)')), 4326),900913)));\n";
     }
-?>
+  
 
 DROP INDEX IF EXISTS i__symbols__way;
 CREATE INDEX i__symbols__way ON symbols USING GIST ( way );
@@ -56,4 +56,5 @@ JOIN symbols S2 ON ST_Distance(S1.way,S2.way) < 2500  AND S1.osm_id <> S2.osm_id
 GROUP BY S1.osm_id;
 
 
-
+  */
+?>

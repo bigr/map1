@@ -6,7 +6,7 @@ ZOOM=8
 
 case "$1" in
 
-CentralErupe)
+CentralEurope)
 	x1=136
 	y1=83
 	x2=144
@@ -39,14 +39,10 @@ esac
 
 Z1=9
 Z2=15
+Z3=17
 
 for x in $(eval echo {$x1..$x2}); do		
 	for y in $(eval echo {$y1..$y2}); do
-		echo "./get-data $x $y" >> _queue
-		for z in $(eval echo {$Z1..$Z2}); do			
-			echo "./compile_stylesheets -sc eu -z $z -t $x.$y" >> _queue
-			echo "./generate_metatile $x $y $z" >> _queue
-			
-		done;
+		echo "./generate_whole_metatile $Z1 $Z2 $Z3 $x $y" >> _queue		
 	done;
 done;

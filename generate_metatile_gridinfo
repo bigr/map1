@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+MAPNIK_MAP_FILES="countryfill;landcover;hillshade;contour;building;accessarea;way;route;boundary;fishnet;text"
+LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"8":{"colorToAlpha": [255,255,255,255], "opacity": 1.0}}'
+MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$3"
+TILE_PATH="/home/klinger/mymap/map/tiles"
+
+#LAYER_OPTIONS='{"0":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"1":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
+#MAPNIK_MAP_FILES="hillshade;boundary;contour"
+
+
+#MAPNIK_MAP_FILES="text"	
+#LAYER_OPTIONS='{}'
+
+export MAPNIK_MAP_FILES
+export LAYER_OPTIONS
+export MAPNIK_MAP_PATH
+export TILE_PATH
+
+case "$4" in
+
+Zizkov)
+	BB="14.45,50.074,14.48,50.093"	
+	;;
+
+Praha)
+	BB="14.239,49.956,14.645,50.159"
+	;;
+Jilove)
+	BB="14.362,49.845,14.622,49.954"	
+	;;
+Jizerky)
+	BB="15.041,50.728,15.373,50.896"	
+	;;
+Tatry)
+	BB="19.594,48.88,20.629,49.478"	
+	;;
+OkoliTurnova)	
+	BB="14.9590694,50.3987186,15.6006272,50.8716425"	
+	;;
+PecPodSnezkou)
+	BB="15.6851092,50.6206644,15.8456919,50.6989886"
+	;;
+*)
+	BB=$4
+	;;
+esac
+
+python ./generate_metatile_gridinfo.py $1 $2 $3 $BB

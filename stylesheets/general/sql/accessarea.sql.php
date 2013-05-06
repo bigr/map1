@@ -18,10 +18,14 @@ return <<<EOD
 			ST_Centroid(way) AS
 		centroid,
 		$cols
-	FROM access_area
+	FROM accessarea
 	WHERE
 			($propertyWhereQuery)
 		AND ($where)
 	ORDER BY way_area DESC
 EOD;
+}
+
+function sql_accessarea_short($cols = '0',$where = '1 = 1',$order = 'z_order') {
+	return "SELECT * FROM accessareas WHERE layer = $layer";
 }

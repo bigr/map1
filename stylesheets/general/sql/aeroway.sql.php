@@ -50,5 +50,5 @@ EOD;
 
 
 function sql_aeroarea_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM aeroareas WHERE layer = $layer";
+    return "SELECT * FROM aeroareas WHERE layer = $layer ORDER BY way_area DESC";
 }

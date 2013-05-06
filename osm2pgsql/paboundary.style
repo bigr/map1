@@ -1,0 +1,49 @@
+
+
+# OsmType  Tag          DataType     Flags
+node,way   note         text         delete   # These tags can be long but are useless for rendering
+node,way   source       text         delete   # This indicates that we shouldn't store them
+node,way   created_by   text         delete
+
+node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
+
+way   boundary         text         polygon
+way   landuse          text         polygon
+way   military         text         polygon
+way   leisure          text         polygon
+way   name             text         polygon
+way   protect_class    int4         polygon
+way   iucn_level       text         polygon
+way   protection_title text         polygon
+way   protection_object text        polygon
+way   protection_aim   text         polygon
+way   protection_ban   text         polygon
+way   protection_instruction text   polygon
+way   related_law      text         polygon
+way   site_zone        text         polygon 
+way   valid_from       text         polygon
+way   start_date       text         polygon
+way   end_date         text         polygon
+way   opening_hours    text         polygon
+way   operator         text         polygon
+
+way   governance_type  text         polygon
+way   site_ownership   text         polygon
+way   site_status      text         polygon
+way   protection_award text         polygon
+way   contamination    text         polygon
+way   ethnic_group     text         polygon
+way   period           text         polygon
+way   scale            text         polygon
+way   ownership        text         polygon
+way   owner            text         polygon
+way   attribution      text         polygon
+way   type             text         polygon
+
+way   wikipedia        text         polygon
+way   website          text         polygon
+
+
+node,way   z_order      int4    polygon # This is calculated during import
+way        way_area     real                # This is calculated during import
+

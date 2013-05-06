@@ -122,6 +122,8 @@ ldconfig
 su postgres -c "pg_ctl start -D /usr/local/pgsql/data"
 sleep 15
 su postgres -c "psql -c 'CREATE USER klinger'"
+su postgres -c "psql -c 'ALTER USER klinger WITH CREATEDB'"
+su postgres -c "psql -c 'ALTER USER klinger WITH SUPERUSER'"
 
 
 su $USR -c "wget http://download.osgeo.org/postgis/source/postgis-2.0.3.tar.gz"

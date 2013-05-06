@@ -1,10 +1,30 @@
 #!/usr/bin/env bash
 
-createdb -E UTF8 -O klinger $1
-createlang plpgsql $1
-#psql -d $1 -f /usr/share/postgresql/8.4/contrib/_int.sql
-psql -d $1 -f /usr/share/postgresql/8.4/contrib/postgis-2.0/postgis.sql
-psql -d $1 -f /usr/share/postgresql/8.4/contrib/postgis-2.0/spatial_ref_sys.sql
-psql $1 -c "ALTER TABLE geometry_columns OWNER TO klinger"
-psql $1 -c "ALTER TABLE geography_columns OWNER TO klinger"
-psql $1 -c "ALTER TABLE spatial_ref_sys OWNER TO klinger"
+POSTGIS_DIRS=( 
+  "/usr/local/pgsql/share/contrib/postgis-2.0"  
+  "/usr/share/postgresql/9.2/contrib/postgis-2.0"
+  "/usr/share/postgresql/9.1/contrib/postgis-2.0"
+  "/usr/share/postgresql/9.0/contrib/postgis-2.0"
+  "/usr/share/postgresql/8.4/contrib/postgis-2.0"  
+  "/usr/local/pgsql/share/contrib/postgis-1.5"  
+  "/usr/share/postgresql/9.2/contrib/postgis-1.5"   
+  "/usr/share/postgresql/9.1/contrib/postgis-1.5"   
+  "/usr/share/postgresql/9.0/contrib/postgis-1.5"   
+  "/usr/share/postgresql/8.4/contrib/postgis-1.5"
+  "/usr/local/share/postgis/"
+)
+
+for POSTGIS_DIR in "${POSTGIS_DIRS[@]}"; do
+  if [ -d $POSTGIS_DIR ]; then
+    break;
+  fi
+done
+
+
+psql -d postgres -c "DROP DATABASE IF EXISTS $1"
+psql -d postgres -c "CREATE DATABASE $1 ENCODING 'UTF8' OWNER $2"
+psql -d $1 -f $POSTGIS_DIR/postgis.sql
+psql -d $1 -f $POSTGIS_DIR/spatial_ref_sys.sql
+psql -d $1 -c "ALTER TABLE geometry_columns OWNER TO $2"
+psql -d $1 -c "ALTER TABLE geography_columns OWNER TO $2"
+psql -d $1 -c "ALTER TABLE spatial_ref_sys OWNER TO $2"

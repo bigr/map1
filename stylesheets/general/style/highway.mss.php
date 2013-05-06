@@ -5,9 +5,8 @@
 
 
 <?php foreach ( $RENDER_ZOOMS as $zoom ):?>		
-
 	<?php foreach ( $ROAD_GRADES[$zoom] as $grade ):?>
-		.highway[type = 'road'][zoom = <?php echo $zoom?>][grade = <?php echo $grade?>] {
+		.highway.grade<?php echo $grade?>.road[zoom = <?php echo $zoom?>] {
 			
 			<?php if ($zoom <= 8):?>			 	
 				::body[int_ref = 'no'] {
@@ -21,29 +20,33 @@
 			<?php if ($zoom <= 8):?>
 				[int_ref != 'no'] {
 			<?php endif;?>
-			/* this is hack to force correct rendering */
-			::bridge-fill[is_bridge = 'yes'][way_length > <?php echo $MIN_BRIDGE_SIZE*getPixelSize($zoom)?>] {
-				line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom)+4?>;
-				line-color: #000000;
-			}
-			::bridge-fill2[is_bridge = 'yes'][way_length > <?php echo $MIN_BRIDGE_SIZE*getPixelSize($zoom)?>] {
-				line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom)+2?>;
-				line-color: #cccccc;
-			}						
 			
-			<?php if ( $zoom >= 13): ?>
-			::glow {
-				line-color: <?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>;
-				line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom) + 2?>;
-				line-opacity: <?php echo linear($PATH_GLOW_OPACITY,$zoom)?>;
-				[is_tunnel = 'yes'],[is_construction = 'yes'] {
-					line-opacity: 0;
-					line-width: 0;
-				}					
-			}
-			<?php endif; ?>
+			
+			
+			
+			
 			<?php if ( !in_array($grade,$ROAD_DRAFT_DRAW[$zoom]) ): ?>
-			::stroke {
+			.bridge {
+				::bridge-fill[is_bridge = 'yes'][way_length > <?php echo $MIN_BRIDGE_SIZE*getPixelSize($zoom)?>] {
+					line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom)+4?>;
+					line-color: #000000;
+				}
+				::bridge-fill2[is_bridge = 'yes'][way_length > <?php echo $MIN_BRIDGE_SIZE*getPixelSize($zoom)?>] {
+					line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom)+2?>;
+					line-color: #cccccc;
+				}						
+			}
+			
+			.stroke {
+				<?php if ( $zoom >= 13): ?>					
+					glow/line-color: <?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>;
+					glow/line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom) + 2?>;
+					glow/line-opacity: <?php echo linear($PATH_GLOW_OPACITY,$zoom)?>;
+					[is_tunnel = 'yes'],[is_construction = 'yes'] {
+						glow/line-opacity: 0;
+						glow/line-width: 0;
+					}					
+				<?php endif; ?>
 				line-color: <?php echo linear($ROAD_STROKE_COLOR[$grade],$zoom)?>;
 				line-width: <?php echo exponential($ROAD_WIDTH[$grade],$zoom)?>;
 				<?php if ( $grade == 8 and $zoom >= 13 ): ?>
@@ -90,7 +93,7 @@
 			<?php endif;?>	
 			
 			<?php if ( !in_array($grade,$ROAD_NOT_DRAW_FILL[$zoom]) ): ?>	
-			::fill {
+			.fill {
 				[is_construction = 'no'] {	
 					<?php if ( in_array($grade,$ROAD_DRAFT_DRAW[$zoom]) ): ?>
 						line-color: <?php echo linear(array(1 => linear($ROAD_STROKE_COLOR[$grade],$zoom),4 => linear($ROAD_FILL_COLOR[$grade],$zoom)),3)?>;
@@ -138,18 +141,7 @@
 				
 				
 			}			
-			<?php endif;?>	
-			[is_construction = 'no'] {
-			<?php foreach ( $ONEWAY AS $selector => $a ): ?>	    
-				<?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
-				<?php echo $selector?> {
-					<?php if ( !empty($a['pattern-file']) ): ?>			
-					line-pattern-file: url('../../general/pattern/~<?php echo $a['pattern-file']?>-<?php echo $zoom?>.png');
-					<?php endif; ?>					
-				}
-				<?php endif; ?>
-			<?php endforeach; ?>
-			}
+			<?php endif;?>			
 			<?php if ( !empty($ROAD_LINE_GRADES[$zoom]) && in_array($grade,$ROAD_LINE_GRADES[$zoom]) ):?>
 			/*
 				::line[is_link = 'no'] {						
@@ -173,24 +165,38 @@
 						
 		}
 	<?php endforeach;?>
-
+  .oneway {	
+			[is_construction = 'no'] {
+			<?php foreach ( $ONEWAY AS $selector => $a ): ?>	    
+				<?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
+				<?php echo $selector?> {
+					<?php if ( !empty($a['pattern-file']) ): ?>			
+					line-pattern-file: url('../../general/pattern/~<?php echo $a['pattern-file']?>-<?php echo $zoom?>.png');
+					<?php endif; ?>					
+				}
+				<?php endif; ?>
+			<?php endforeach; ?>
+			}
+		}
 	<?php if ( in_array($zoom,$PATH_ZOOMS) ):?>
-		.highway[type = 'path'][zoom = <?php echo $zoom?>][is_construction = 'no'][highway!='steps'] {		
+		.highway.path[zoom = <?php echo $zoom?>][is_construction = 'no'][highway!='steps'] {
+			/*
 			::bridge-fill[is_bridge = 'yes'] {			
 				line-width: <?php echo (exponential($ROAD_WIDTH[HIGHWAY_TRACK1],$zoom) - 2 * exponential($ROAD_STROKE_WIDTH[HIGHWAY_TRACK1],$zoom))?>;
 				line-color: <?php echo linear($ROAD_FILL_COLOR[HIGHWAY_TRACK1],$zoom)?>;			
-			}
-			::glow {
-				line-color: <?php echo linear($PATH_GLOW_COLOR,$zoom)?>;
-				line-width: <?php echo exponential($PATH_GLOW_WIDTH,$zoom)?>;
+			}			
+			*/
+			
+			
+			.stroke {
+				glow/line-color: <?php echo linear($PATH_GLOW_COLOR,$zoom)?>;
+				glow/line-width: <?php echo exponential($PATH_GLOW_WIDTH,$zoom)?>;
 				.layer0[smoothness < 2] {
-					line-opacity: <?php echo linear($PATH_GLOW_OPACITY_SOLID,$zoom)?>;
+					glow/line-opacity: <?php echo linear($PATH_GLOW_OPACITY_SOLID,$zoom)?>;
 				}
 				.layer0[smoothness >= 2] {
-					line-opacity: <?php echo linear($PATH_GLOW_OPACITY,$zoom)?>;
+					glow/line-opacity: <?php echo linear($PATH_GLOW_OPACITY,$zoom)?>;
 				}
-			}
-			::stroke {
 				line-color: <?php echo linear($PATH_COLOR,$zoom)?>;
 				line-width: <?php echo exponential($PATH_WIDTH,$zoom)?>;
 				<?php foreach ( range(2,7) as $smoothness ):?>
@@ -201,14 +207,11 @@
 			}
 		}
 		
-		.highway[highway='steps'][zoom = <?php echo $zoom?>][is_construction = 'no'] {
-			::glow {
-				line-color: <?php echo linear($PATH_GLOW_COLOR,$zoom)?>;
-				line-width: <?php echo exponential($ROAD_WIDTH[HIGHWAY_TRACK1],$zoom)?>;				
-				line-opacity: <?php echo linear($PATH_GLOW_OPACITY_SOLID,$zoom)?>;				
-			}
-			
-			::stroke {
+		.highway.steps[zoom = <?php echo $zoom?>][is_construction = 'no'] {														
+			.stroke {
+				glow/line-color: <?php echo linear($PATH_GLOW_COLOR,$zoom)?>;
+				glow/line-width: <?php echo exponential($ROAD_WIDTH[HIGHWAY_TRACK1],$zoom)?>;				
+				glow/line-opacity: <?php echo linear($PATH_GLOW_OPACITY_SOLID,$zoom)?>;			
 				line-color: <?php echo linear($PATH_COLOR,$zoom)?>;
 				line-width: <?php echo exponential($ROAD_WIDTH[HIGHWAY_TRACK1],$zoom)?>;				
 				line-dasharray: 1,<?php echo exponential($ROAD_WIDTH[HIGHWAY_TRACK1],$zoom)-1?>;

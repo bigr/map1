@@ -63,6 +63,18 @@ return <<<EOD
 			is_construction,
 			$layerSql AS layer,
 			$cols,
+			usage,
+			service,
+			gauge,
+			cutting,
+			embankment,
+			electrified,
+			frequency,
+			voltage,
+			operator,
+			maxspeed,
+			wikipedia,
+			website,
 			osm_id,
 			ST_Length(ST_Transform(way,900913)) AS
 			    way_length

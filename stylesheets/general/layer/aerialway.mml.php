@@ -4,26 +4,15 @@
 {
 	"id": "aerialway-layer<?php echo $layer?>",
 	"name": "aerialway-layer<?php echo $layer?>",
-	"class": "aerialway layer<?php echo $layer?>",
-	<?php if ( $TILE ): ?>	
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('aerialway_layer_'.strtr($layer,'-','_'));?>
-	<?php else: ?>
+	"class": "aerialway layer<?php echo $layer?>",	
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_aerialway_short($layer));?>
-	<?php endif; ?>
-	
+	<?php echo ds_pgis(sql_aerialway_short($layer));?>	
 },
 {
 	"id": "aerialwaypoint-layer<?php echo $layer?>",
 	"name": "aerialwaypoint-layer<?php echo $layer?>",
-	"class": "aerialwaypoint layer<?php echo $layer?>",
-	<?php if ( $TILE ): ?>	
-	"srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-	<?php echo ds_sqlite('aerialway_point_layer_'.strtr($layer,'-','_'));?>
-	<?php else: ?>
+	"class": "aerialwaypoint layer<?php echo $layer?>",	
 	"srs": "<?php echo SRS900913?>",
-	<?php echo ds_pgis(sql_aerialway_point($layer));?>
-	<?php endif; ?>
+	<?php echo ds_pgis(sql_aerialpoint_short($layer));?>
 	
 }

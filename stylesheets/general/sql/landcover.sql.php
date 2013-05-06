@@ -34,6 +34,13 @@ return <<<EOD
 		way_area,
 			ST_Centroid(way) AS
 		centroid,
+		wikipedia,
+		website,
+		ele,
+		type,
+		attribution,
+		species,
+		operator,
 		$cols
 	FROM landcover
 	WHERE
@@ -44,24 +51,24 @@ return <<<EOD
 EOD;
 }
 
+function sql_landcover_short($cols = '0',$where = '1 = 1',$order = 'z_order') {
+	return 'SELECT * FROM landcovers ORDER BY way_area DESC';
+}
+
 function sql_landcover_line($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	global $LANDCOVER_LINE;
 	$propertyWhereQuery = getPropertyWhereQuery($LANDCOVER_LINE);
 	return <<<EOD
 	SELECT
 		osm_id,
-		way,
-			COALESCE(landuse,CAST('no' AS text)) AS
-		landuse,
+		way,			
 			COALESCE("natural",CAST('no' AS text)) AS
-		natural,
-			COALESCE(leisure,CAST('no' AS text)) AS
-		leisure,
-			COALESCE(amenity,CAST('no' AS text)) AS
-		amenity,
-		sport,
-		COALESCE(wood,type,CAST('no' AS text)) AS wood,
-		name,		
+		natural,		
+			COALESCE(wood,type,CAST('no' AS text)) AS 
+		wood,
+		name,
+		wikipedia,
+		website,
 	$cols
 	FROM landcover_line
 	WHERE
@@ -70,24 +77,29 @@ function sql_landcover_line($cols = '0',$where = '1 = 1',$order = 'z_order') {
 EOD;
 }
 
+function sql_landcover_line_short($cols = '0',$where = '1 = 1',$order = 'z_order') {
+	return 'SELECT * FROM landcover_lines';
+}
+
 function sql_landcover_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
 	global $LANDCOVER_POINT;
 	$propertyWhereQuery = getPropertyWhereQuery($LANDCOVER_POINT)	;
 	return <<<EOD
 	SELECT
 		osm_id,
-		way,
-			COALESCE(landuse,CAST('no' AS text)) AS
-		landuse,
+		way,	
 			COALESCE("natural",CAST('no' AS text)) AS
-		natural,
-			COALESCE(leisure,CAST('no' AS text)) AS
-		leisure,
-			COALESCE(amenity,CAST('no' AS text)) AS
-		amenity,
-		sport,
-		COALESCE(wood,type,CAST('no' AS text)) AS wood,
-		name,		
+		natural,					
+			COALESCE(wood,type,CAST('no' AS text)) AS
+		wood,
+		name,	
+		species,
+		genus,
+		taxon,
+		denotation,
+		attribution,	
+		wikipedia,
+		website,
 	$cols
 	FROM landcover_point
 	WHERE
@@ -96,19 +108,22 @@ function sql_landcover_point($cols = '0',$where = '1 = 1',$order = 'z_order') {
 EOD;
 }
 
+function sql_landcover_point_short($cols = '0',$where = '1 = 1',$order = 'z_order') {
+	return 'SELECT * FROM landcover_points';
+}
+
 function sql_residentialcover_hack($cols = '0',$where = '1 = 1',$order = 'z_order') {	
 return <<<EOD
 	SELECT
 		way,
 		$cols
-	FROM residential
-	WHERE ($where)
-	ORDER BY $order
+	FROM highways
+	WHERE grade = 7	
 EOD;
 }
 
 function sql_placescover($cols = '0',$where = '1 = 1') {    
 return "   
-    SELECT way,grade FROM place WHERE type='urb'
+    SELECT way,grade FROM places WHERE type='urb'
 ";
 }

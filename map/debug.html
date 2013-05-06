@@ -45,6 +45,14 @@
             isBaseLayer: true      
         });                        
 		map.addLayer(newLayer);
+		
+	var newLayer = new OpenLayers.Layer.XYZ("Map1.eu - Tethys", "http://tethys.bigr.cz/map/tiles/${z}/${x}/${y}.jpg", {
+            transitionEffect: "resize", 
+            buffer: 0, 
+            sphericalMercator: true,             
+            isBaseLayer: true      
+        });                        
+		map.addLayer(newLayer);
 	
 		var newLayer = new OpenLayers.Layer.XYZ("Mtbmap", "http://tile.mtbmap.cz/mtbmap_tiles/${z}/${x}/${y}.png", {
             transitionEffect: "resize", 

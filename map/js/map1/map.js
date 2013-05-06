@@ -41,19 +41,22 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
         
         this.layerMap = new OpenLayers.Layer.XYZ("map", MAP_TILE_URLS, {
             transitionEffect: "resize", 
-            buffer: 2, 
+            buffer: 0, 
             sphericalMercator: true, 
             
             isBaseLayer: true      
         });        
         this.addLayer(this.layerMap)
         
+        this.layerUtfgrid = new map1.utfgrid.Layer({
+            url: DATA_TILE_URLS            
+        });
+        this.addLayer(this.layerUtfgrid)
+        
+        
         this.zoomTo(5)
         
-        //this.layerUtfgrid = new map1.utfgrid.Layer({
-        //    url: DATA_TILE_URLS            
-        //});
-        //this.addLayer(this.layerUtfgrid)
+        
         
         this.controlNavigation = new OpenLayers.Control.Navigation({
             dragPanOptions: {
@@ -72,6 +75,9 @@ map1.Map = OpenLayers.Class(OpenLayers.Map,{
         
         this.controlUtfgridMouseMove = new map1.utfgrid.ControlMouseMove(self,{layers: [self.layerUtfgrid]})
         this.addControl(this.controlUtfgridMouseMove)
+        
+        this.controlUtfgridClick = new map1.utfgrid.ControlClick(self,{layers: [self.layerUtfgrid]})
+        this.addControl(this.controlUtfgridClick)
               
         
         this.searchPanel = new map1.gui.SideBar('#panel-search','#button-start')

@@ -2,14 +2,24 @@
 
 # OsmType  Tag          DataType     Flags
 node,way   note         text         delete   # These tags can be long but are useless for rendering
-node,way   source       text         delete   # This indicates that we shouldn't store them
+node,way   source       text         delete   # This indicates that we shouldn t store them
 node,way   created_by   text         delete
 
-node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
+node,way   area         text         # hard coded support for area=1/yespolygon is in osm2pgsql
 
 way        highway       text         linear
 way        ref           text         linear
 way        int_ref       text         linear
+way        lanes         int4         linear
+way        maxspeed      int4         linear
+way        width         int4         linear
+way        lit           text         linear
+way        sidewalk      text         linear
+way        footway       text         linear
+way        cycleway      text         linear
+way        mtb:scale     int4         linear
+way        sac_scale     int4         linear
+way        attribution   text         linear
 way        bridge        text         linear
 way        tunnel        text         linear
 way        construction  text         linear
@@ -19,7 +29,38 @@ way        surface       text         linear
 way        layer         int4         linear
 way        tracktype     text         linear
 way        service       text         linear
+way        access        text         linear
+way        foot          text         linear
+way        ski           text         linear
+way        ski:nordic    text         linear
+way        ski:alpine    text         linear
+way        ski:telemark  text         linear	
+way        inline_skates text         linear		
+way        ice_skates    text         linear
+way        horse         text         linear
+way        vehicle       text         linear
+way        bicycle       text         linear
+way        carriage      text         linear
+way        trailer       text         linear
+way        caravan       text         linear
+way        motor_vehicle text         linear
+way        motorcycle    text         linear
+way        moped         text         linear
+way        mofa          text         linear
+way        motorcar      text         linear
+way        motorhome     text         linear
+way        psv           text         linear
+way        bus           text         linear
+way        atv           text         linear
+way        taxi          text         linear
+way        tourist_bus   text         linear
+way        goods         text         linear
+way        hgv           text         linear
+way        agricultural  text         linear
+way        ATV           text         linear
+way        snowmobile    text         linear
+way        name          text         linear
+way        oneway        text         linear
+way        wikipedia     text         linear
+node,way   z_order      int4          linear # This is calculated during import
 
-
-node,way   z_order      int4         linear # This is calculated during import
-way        way_area     real                # This is calculated during import

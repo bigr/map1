@@ -45,11 +45,25 @@ function getSymbolGradeSQl() {
     ";
 }
 
-function sql_symbol_short() {
+function sql_symbol_short($priority) {
+		global $RENDER_ZOOMS,$SYMBOL_DENSITY,$SYMBOL;
+	  $zoom = $RENDER_ZOOMS[0];
+		$count = linear($SYMBOL_DENSITY,$RENDER_ZOOMS[0]);
+		$type = 0;
+		$types = array();
+		foreach ( $SYMBOL AS $a ) {
+			 $type++;
+			 if ( !empty($a['zooms'][$zoom]) && $a['zooms'][$zoom] == $priority + 1 ) {
+				 $types[] = $type;
+			 } 			 
+		}
+		
+		$types = empty($types) ? 'false' : 'type IN ('.implode(',',$types).')';
     return "
-	SELECT * FROM symbols S
-	JOIN symbol_density D ON S.osm_id = D.osm_id
-	ORDER BY grade DESC
+			SELECT * FROM symbols S
+			JOIN symbol_density D ON S.osm_id = D.osm_id
+			WHERE name IS NOT NULL AND count < $count AND $types
+			ORDER BY grade DESC
     ";
 }
 
@@ -62,7 +76,7 @@ function sql_symbol_short_notrect() {
 
 function sql_symbol($where = '1 = 1',$order = 'z_order') {
 	global $SYMBOL;
-	$propertyWhereQuery = getPropertyWhereQuery($SYMBOL,array('grade'));
+	$propertyWhereQuery = getPropertyWhereQuery($SYMBOL);
 	$propertyWhereQuery = str_replace('"historic"',"T.historic",$propertyWhereQuery);
 	$propertyWhereQuery = str_replace('"castle_type"',"T.castle_type",$propertyWhereQuery);
 	$propertyWhereQuery = str_replace('"amenity"',"T.amenity",$propertyWhereQuery);
@@ -75,10 +89,13 @@ function sql_symbol($where = '1 = 1',$order = 'z_order') {
 	$propertyWhereQuery = str_replace('"aeroway"',"T.aeroway",$propertyWhereQuery);
 	
 	$symbolGradeSql = getSymbolGradeSql();
+	$typeQuery = getPropertyTypeQuery($SYMBOL);
 return <<<EOD
     SELECT
 		T.way AS		
 	way,
+		$typeQuery AS
+	type,
 		T.name AS
 	name,
 		$symbolGradeSql AS
@@ -114,11 +131,14 @@ return <<<EOD
 	    COALESCE(T.aeroway,'no'::text) AS
 	aeroway,
 		COALESCE(T.way_area,0) AS
-	way_area,
+	way_area,	
+	wikipedia,
+	website,
+	power,
 	NULL AS wiki,
 	T.osm_id
     FROM (
-	SELECT osm_id,name,way,historic,man_made,tourism,amenity,"natural",leisure,building,ruins,"tower:type",information,place_of_worship,"place_of_worship:type",castle_type,railway,highway,aeroway,power,0 AS way_area, z_order FROM symbol
+	SELECT osm_id,name,way,historic,man_made,tourism,amenity,"natural",leisure,building,ruins,"tower:type",information,place_of_worship,"place_of_worship:type",castle_type,railway,highway,aeroway,power,0 AS way_area, wikipedia, website, z_order FROM symbol
     ) AS T    
     WHERE
 		    ($propertyWhereQuery)			

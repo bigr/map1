@@ -1,4 +1,4 @@
-from pysqlite2 import dbapi2 as sqlite3
+from psycopg2 import *
 import sys
 from PIL import Image, ImageMath,ImageChops,ImageDraw
 import os.path
@@ -22,8 +22,7 @@ def colorize(im,color):
 	return ret
 	
 	
-connection = sqlite3.connect('/home/klinger/mymap/data/tiles/sqlite/%s.%s.db' %(sys.argv[1], sys.argv[2]))
-connection.enable_load_extension(True);        
+connection = connect("dbname='" + sys.argv[1] + "' user='klinger' password='' port=5432");
 cCursor = connection.cursor()
 cursor = connection.cursor()
 
@@ -116,6 +115,32 @@ while True:
 
 	im.save('highway_access/generated/%s.png' % fileName);
 
+
+aCursor = connection.cursor()
+aCursor.execute("""CREATE VIEW highway_access_view AS SELECT
+		way,
+		H.osm_id AS osm_id,
+		file
+			FROM highway H
+			JOIN highway_access A ON H.osm_id = A.osm_id
+			WHERE 
+		NOT EXISTS (
+				SELECT * FROM accessareas AA
+				WHERE ST_Intersects(AA.way,H.way) AND AA.access = H.access
+				LIMIT 1
+		)
+	""");
+aCursor.close()
+
+aCursor = connection.cursor()
+aCursor.execute("DROP TABLE IF EXISTS highways_access");
+aCursor.execute("""
+	CREATE TABLE highways_access AS
+	SELECT H.way AS way,H.osm_id AS osm_id,H.file AS file,HD.density AS density FROM highway_access_view H
+	LEFT JOIN highway_access_density HD ON HD.osm_id = H.osm_id
+	GROUP BY H.osm_id,H.way,H.file,HD.density
+""");
+aCursor.close()
+
 cursor.close()
 connection.commit()
-connection.close()

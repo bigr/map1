@@ -1,0 +1,67 @@
+
+
+# OsmType  Tag          DataType     Flags
+node,way   note         text         delete   # These tags can be long but are useless for rendering
+node,way   source       text         delete   # This indicates that we shouldn t store them
+node,way   created_by   text         delete
+
+node,way   area         text         # hard coded support for area=1/yespolygon is in osm2pgsql
+
+way        highway       text         polygon
+way        ref           text         polygon
+way        int_ref       text         polygon
+way        lanes         int4         polygon
+way        maxspeed      int4         polygon
+way        width         int4         polygon
+way        lit           text         polygon
+way        sidewalk      text         polygon
+way        footway       text         polygon
+way        cycleway      text         polygon
+way        mtb:scale     int4         polygon
+way        sac_scale     int4         polygon
+way        attribution   text         polygon
+way        bridge        text         polygon
+way        tunnel        text         polygon
+way        construction  text         polygon
+way        junction      text         polygon
+way        smoothness    text         polygon
+way        surface       text         polygon
+way        layer         int4         polygon
+way        tracktype     text         polygon
+way        service       text         polygon
+way        access        text         polygon
+way        foot          text         polygon
+way        ski           text         polygon
+way        ski:nordic    text         polygon
+way        ski:alpine    text         polygon
+way        ski:telemark  text         polygon	
+way        inline_skates text         polygon		
+way        ice_skates    text         polygon
+way        horse         text         polygon
+way        vehicle       text         polygon
+way        bicycle       text         polygon
+way        carriage      text         polygon
+way        trailer       text         polygon
+way        caravan       text         polygon
+way        motor_vehicle text         polygon
+way        motorcycle    text         polygon
+way        moped         text         polygon
+way        mofa          text         polygon
+way        motorcar      text         polygon
+way        motorhome     text         polygon
+way        psv           text         polygon
+way        bus           text         polygon
+way        atv           text         polygon
+way        taxi          text         polygon
+way        tourist_bus   text         polygon
+way        goods         text         polygon
+way        hgv           text         polygon
+way        agricultural  text         polygon
+way        ATV           text         polygon
+way        snowmobile    text         polygon
+way        name          text         polygon
+way        oneway        text         polygon
+way        wikipedia     text         polygon
+node,way   z_order      int4          polygon # This is calculated during import
+way        way_area     real
+
