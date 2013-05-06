@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+Z1=$1
+Z2=$2
+Z3=$3
+x=$4
+y=$5
+
+./get-data $x $y
+for z in $(eval echo {$Z1..$Z3}); do			
+	./compile_stylesheets -sc eu -z $z -t $x.$y
+	if [ $z -gt $Z2 ]; then
+		./generate_metatile $x $y $z "regions"
+	else
+		./generate_metatile $x $y $z
+	fi
+	./compile_stylesheets -c eu -z $z -t $x.$y -u
+	if [ $z -gt $Z2 ]; then
+		./generate_metatile_gridinfo $x $y $z "regions"
+	else
+		./generate_metatile_gridinfo $x $y $z
+	fi
+done;
