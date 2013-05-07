@@ -2,7 +2,7 @@
 
 MAPNIK_MAP_FILES="countryfill;landcover;hillshade;contour;building;accessarea;way;route;boundary;fishnet;text"
 LAYER_OPTIONS='{"2":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"8":{"colorToAlpha": [255,255,255,255], "opacity": 1.0}}'
-MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$3"
+MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$1.$2/$3"
 TILE_PATH="/home/klinger/mymap/map/tiles"
 
 #LAYER_OPTIONS='{"0":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"1":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'

@@ -63,8 +63,8 @@ for ZOOMS in ${ALL_ZOOMS//,/ }; do
 		f=`basename "$f"`		
 		f2=${f%.*}
 		echo "Creating: \"~$f2\""		
-		mkdir -p "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/style"
-		php "$DIR_STYLESHEETS/$STYLESHEET/style.php" $f > "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/style/~$f2"
+		mkdir -p "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/style"
+		php "$DIR_STYLESHEETS/$STYLESHEET/style.php" $f > "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/style/~$f2"
 	done;
 	if [ $SYMBOLS = "yes" ]; then	
 		for f in $DIR_STYLESHEETS/general/shield/*.svgs.php; do		
@@ -88,17 +88,19 @@ for ZOOMS in ${ALL_ZOOMS//,/ }; do
 		RENDER_LAYER=$LAYER
 		export RENDER_LAYER	
 	
-		mkdir -p "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS"
-		php "$DIR_STYLESHEETS/$STYLESHEET/map.mml.php" > "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.mml"
-		time carto "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.mml" | grep -v "^\\[millstone\\]" > "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.xml" 
+		mkdir -p "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS"
+		php "$DIR_STYLESHEETS/$STYLESHEET/map.mml.php" > "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/~map-$LAYER.mml"
+		time carto "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/~map-$LAYER.mml" | grep -v "^\\[millstone\\]" > "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/~map-$LAYER.xml" 
 
-		sed -i "s/'\\\\a'/'\n'/g"  "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.xml" 
+		sed -i "s/'\\\\a'/'\n'/g"  "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/~map-$LAYER.xml" 
 		#if [ $_FIRST = "0" ]; then
-			sed -i "s/background-color=\"#[A-Fa-f0-9]*\"/background-color=\"transparent\"/g"  "$DIR_STYLESHEETS/$STYLESHEET/$ZOOMS/~map-$LAYER.xml" 		
+			sed -i "s/background-color=\"#[A-Fa-f0-9]*\"/background-color=\"transparent\"/g"  "$DIR_STYLESHEETS/$STYLESHEET/$TILE/$ZOOMS/~map-$LAYER.xml" 		
 		#fi
 		_FIRST="0"
 	done	
 
 done
+
+ln -s "$DIR_STYLESHEETS/general" "$DIR_STYLESHEETS/$STYLESHEET/general"
 
 cd $DIR_BACKUP
