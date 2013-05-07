@@ -20,7 +20,7 @@ function makeGisDb {
 
 apt-get -y update
 apt-get -y upgrade
-apt-get -y install screen mc htop git gcc g++ python-dev zlib1g-dev libjpeg8-dev libfreetype6-dev build-essential libxml2-dev libbz2-dev libtool automake libprotobuf-c0-dev protobuf-c-compiler libtiff5-dev libpng12-dev libgif-dev libgeotiff2 libproj-dev flex bison libreadline6-dev xsltproc libicu-dev pkg-config libcurl3-dev libagg-dev python-imaging python-cairo swig check uthash-dev subversion php5-cli rsync imagemagick php5-imagick php5-pgsql ttf-liberation nginx
+apt-get -y install screen mc htop git gcc g++ python-dev zlib1g-dev libjpeg8-dev libfreetype6-dev build-essential libxml2-dev libbz2-dev libtool automake libprotobuf-c0-dev protobuf-c-compiler libtiff5-dev libpng12-dev libgif-dev libgeotiff2 libproj-dev flex bison libreadline6-dev xsltproc libicu-dev pkg-config libcurl3-dev libagg-dev python-imaging python-cairo swig check uthash-dev subversion php5-cli rsync imagemagick php5-imagick php5-pgsql ttf-liberation nginx python-numpy
 
 su $USR -c "git clone https://github.com/bigr/map1 /home/$USR/mymap"
 cd "/home/$USR/mymap"
