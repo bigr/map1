@@ -114,7 +114,7 @@ while True:
 	iCursor.close()
 
 	if not os.path.exists("highway_access/generated/%s" % sys.argv[1]):
-		os.makedirs('highway_access/generated/%s',sys.argv[1])
+		os.makedirs('highway_access/generated/%s' % sys.argv[1])
 	im.save('highway_access/generated/%s/%s.png' % (sys.argv[1],fileName));
 
 
