@@ -6,6 +6,8 @@ Z3=$3
 x=$4
 y=$5
 
+set -e
+
 ./get-data $x $y
 for z in $(eval echo {$Z1..$Z3}); do			
 	./compile_stylesheets -sc eu -z $z -t $x.$y
