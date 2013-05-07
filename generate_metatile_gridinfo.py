@@ -187,7 +187,7 @@ for xfrac in range(0,fractions):
                     os.makedirs("%s/%s/%s" % (TILES_DIR,zoom,tileX))
                                                 
                 f = gzip.open("%s/%s/%s/%s.js.gz" % (TILES_DIR,zoom,tileX,tileY),'wb')
-                f.write(composer.writeResult([TILE_SIZE*i/RESOLUTION, TILE_SIZE*j/RESOLUTION,TILE_SIZE*(i+1)/RESOLUTION,TILE_SIZE*(j+1)/RESOLUTION]).encode('utf8'))
+                f.write(composer.writeResult([TILE_SIZE*i/RESOLUTION, TILE_SIZE*j/RESOLUTION,TILE_SIZE*(i+1)/RESOLUTION,TILE_SIZE*(j+1)/RESOLUTION]))
                 f.close()
                 
         sys.stdout.write("done. (%gs/%gs)\n" % (time.clock() - t0,time.time() - t0_))

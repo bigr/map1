@@ -97,10 +97,12 @@ while True:
 	fileName = ";".join(filter(lambda a: a,row_raw[1:]));
 
 	iCursor = connection.cursor()
-	iCursor.execute("INSERT INTO osmcsymbols (osm_id,file) VALUES ('%s','%s')" % (row_raw[0],fileName))
+	iCursor.execute("INSERT INTO osmcsymbols (osm_id,file) VALUES ('%s','%s/%s')" % (row_raw[0],sys.argv[1],fileName))
 	iCursor.close()
-
-	im.save('osmcsymbol/generated/%s.png' % fileName);
+	
+	if not os.path.exists("osmcsymbol/generated/%s" % sys.argv[1]):
+		os.makedirs("osmcsymbol/generated/%s" % sys.argv[1])
+	im.save('osmcsymbol/generated/%s/%s.png' % (sys.argv[1],fileName));
 
 cursor.close()
 connection.commit()

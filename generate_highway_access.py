@@ -110,10 +110,12 @@ while True:
 
 	iCursor = connection.cursor()
 	#print "INSERT INTO highway_access (osm_id,file) VALUES ('%s','%s')" % (row_raw[0],fileName)
-	iCursor.execute("INSERT INTO highway_access (osm_id,file) VALUES ('%s','%s')" % (row_raw[0],fileName))
+	iCursor.execute("INSERT INTO highway_access (osm_id,file) VALUES ('%s','%s/%s')" % (row_raw[0],sys.argv[1],fileName))
 	iCursor.close()
 
-	im.save('highway_access/generated/%s.png' % fileName);
+	if not os.path.exists("highway_access/generated/%s" % sys.argv[1]):
+		os.makedirs('highway_access/generated/%s',sys.argv[1])
+	im.save('highway_access/generated/%s/%s.png' % (sys.argv[1],fileName));
 
 
 aCursor = connection.cursor()
