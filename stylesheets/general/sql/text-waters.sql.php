@@ -38,7 +38,7 @@ function sql_text_waterway_short($priority) {
 
 
 function sql_text_waterarea_short($priority,$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM waterareas WHERE waterway <> 'riverbank' AND name IS NOT NULL";
+    return "SELECT * FROM waterareas WHERE (waterway IS NULL OR waterway <> 'riverbank') AND name IS NOT NULL";
 }
 
 
