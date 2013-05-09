@@ -17,7 +17,10 @@ function _getWaterwayGradeSql($col) {
 }
 
 function sql_waterway_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM waterways WHERE layer = $layer";
+		global $TILE;
+		$db = explode('.',$TILE);
+		$table = $db[0].'_'.$db[1];
+    return "SELECT * FROM waterways_$table WHERE layer = $layer";
 }
 
 function sql_waterway_short_notrect($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {

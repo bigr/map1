@@ -30,7 +30,10 @@ EOD;
 }
 
 function sql_boundary_short($level) {	
-	return "SELECT * FROM adminboundaries WHERE admin_level=$level";			
+	global $TILE;
+	$db = explode('.',$TILE);
+	$table = $db[0].'_'.$db[1];
+	return "SELECT * FROM adminboundaries_$table WHERE admin_level=$level";			
 }
 
 function sql_boundary_short_notrect($level) {	
