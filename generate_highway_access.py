@@ -5,9 +5,10 @@ import os.path
 import os
 import shutil
 
-if os.path.isdir("highway_access/generated"):
-    shutil.rmtree("highway_access/generated")
-os.makedirs("highway_access/generated")
+
+if os.path.isdir("highway_access/generated/%s" % sys.argv[1]):
+    shutil.rmtree("highway_access/generated/%s" % sys.argv[1])
+os.makedirs("highway_access/generated/%s" % sys.argv[1])
 
 
 
@@ -113,8 +114,7 @@ while True:
 	iCursor.execute("INSERT INTO highway_access (osm_id,file) VALUES ('%s','%s/%s')" % (row_raw[0],sys.argv[1],fileName))
 	iCursor.close()
 
-	if not os.path.exists("highway_access/generated/%s" % sys.argv[1]):
-		os.makedirs('highway_access/generated/%s' % sys.argv[1])
+
 	im.save('highway_access/generated/%s/%s.png' % (sys.argv[1],fileName));
 
 

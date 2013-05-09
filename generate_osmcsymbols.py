@@ -5,9 +5,10 @@ import os.path
 import os
 import shutil
 
-if os.path.isdir("osmcsymbol/generated"):
-    shutil.rmtree("osmcsymbol/generated")
-os.makedirs("osmcsymbol/generated")
+if os.path.isdir("osmcsymbol/generated/%s" % sys.argv[1]):
+    shutil.rmtree("osmcsymbol/generated/%s" % sys.argv[1]);
+os.makedirs("osmcsymbol/generated/%s" % sys.argv[1]);
+
 
 COLORS = {
 	'white': '#ffffff',
@@ -100,8 +101,7 @@ while True:
 	iCursor.execute("INSERT INTO osmcsymbols (osm_id,file) VALUES ('%s','%s/%s')" % (row_raw[0],sys.argv[1],fileName))
 	iCursor.close()
 	
-	if not os.path.exists("osmcsymbol/generated/%s" % sys.argv[1]):
-		os.makedirs("osmcsymbol/generated/%s" % sys.argv[1])
+	
 	im.save('osmcsymbol/generated/%s/%s.png' % (sys.argv[1],fileName));
 
 cursor.close()
