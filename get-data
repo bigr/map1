@@ -56,7 +56,7 @@ fi
 
 ./get_data_pgis_rect $LON_START $LAT_START $LON_END $LAT_END gis_eu_$1_$2
 
-#php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END | psql -d gis_eu
+php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END $1 $2 | psql -d gis_eu
 
 python /home/klinger/mymap/relations2lines/relations2lines5.py gis_eu_$1_$2 $LON_START $LAT_START $LON_END $LAT_END
 

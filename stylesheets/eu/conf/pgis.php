@@ -6,6 +6,7 @@ function ds_pgis($table, $geometry_field = 'way', $globaldb = false) {
 	if ( $TILE && $globaldb == false ) {
 		$db = explode('.',$TILE);
 		$db = 'gis_eu_'.$db[0].'_'.$db[1];
+		$table = $table . '_' . $db[0] . '_' . $db[1];
 	}
 	return '"Datasource": ' . json_encode(array(
 		'table'           => '(' . trim($table) . ') AS data',
