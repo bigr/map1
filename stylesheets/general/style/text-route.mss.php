@@ -41,7 +41,7 @@
 			shield-opacity: 0.9;
 			shield-min-distance: <?php echo round(exponential($ROUTE_OSMCSYMBOL_MINDISTANCE,$zoom))?>;
 			shield-spacing: 300;			
-			shield-file: url('../../../osmcsymbol/generated/[file].png');
+			shield-file: url('../../../../osmcsymbol/generated/[file].png');
 		}
 	<?php endif; ?>
 <?php endforeach;?>

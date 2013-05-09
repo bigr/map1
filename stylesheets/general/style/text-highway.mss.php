@@ -73,7 +73,7 @@
 			shield-opacity: 0.66;
 			/*shield-min-distance: <?php echo round(exponential($HIGHWAY_ACCESS_MINDISTANCE,$zoom))?>;*/
 			shield-spacing: 300;			
-			shield-file: url('../../../highway_access/generated/[file].png');
+			shield-file: url('../../../../highway_access/generated/[file].png');
 		}
 	<?php endif; ?>
 <?php endforeach;?>
