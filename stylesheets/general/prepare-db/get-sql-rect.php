@@ -5,7 +5,7 @@
     $LON_END = $argv[3] + ($argv[3] - $argv[1]) * 0.15;
     $LAT_END = $argv[4] + ($argv[4] - $argv[2]) * 0.05;
 
-    $TILE = $argv[5] . '_' . $argv[6]
+    $TILE = $argv[5] . '_' . $argv[6];
 
     if ( !defined('ROOT') ) {
         define('ROOT',dirname(dirname(dirname(__FILE__))));
