@@ -44,20 +44,24 @@ class Utfgrid:
 		chunksCount = 32
 		chunkSize = gridSize/chunksCount				
 		t = time.clock();	
-		emptyLine = numpy.empty(gridSize/chunksCount,dtype=str);
-		emptyLine.fill(emptyKey);
-		grid = numpy.array(layer['grid']);	
+		try:
+			emptyChunk = numpy.empty(gridSize/chunksCount,dtype=str)
+			emptyChunk.fill(emptyKey)
+			grid = numpy.array(layer['grid'])
+		except UnicodeEncodeError:
+			emptyChunk = numpy.empty(gridSize/chunksCount,dtype=unicode)
+			emptyChunk.fill(emptyKey)
+			grid = numpy.array(layer['grid'],dtype=unicode)
+			
 		keyPairRemap = {}		
 		for y in xrange(gridSize):			
 			line = grid[y]
 			for chunk in xrange(0,chunksCount):				
-				if line[chunk*chunkSize:(chunk+1)*chunkSize] == emptyLine:				
+				if line[chunk*chunkSize:(chunk+1)*chunkSize] == emptyChunk:				
 					continue;
 				for x in xrange(chunk*chunkSize,(chunk+1)*chunkSize):								
 					if line[x] == emptyKey:
-						continue
-					
-					
+						continue										
 					
 					idNo = self.decodeId(line[x])
 																					
