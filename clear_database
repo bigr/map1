@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+LC_NUMERIC=C
+LC_COLLATE=C
+
+ZOOM=8
+
+case "$1" in
+
+CentralEurope)
+	x1=136
+	y1=83
+	x2=144
+	y2=90
+	;;
+
+SouthEurpe)
+	x1=131
+	y1=91
+	x2=143
+	y2=95
+	;;
+WestEurope)
+	x1=130
+	y1=82
+	x2=135
+	y2=90
+	;;
+*)
+	X1=11.3 #-20
+	X2=22.6 #53
+	Y1=46.4 #80
+	Y2=52.6 #30
+	x1=$(./extract-aster/lon2x $X1 $ZOOM)
+	y1=$(./extract-aster/lat2y $Y1 $ZOOM)
+	x2=$(./extract-aster/lon2x $X2 $ZOOM)
+	y2=$(./extract-aster/lat2y $Y2 $ZOOM)
+	;;
+esac
+
+
+for x in $(eval echo {$x1..$x2}); do		
+	for y in $(eval echo {$y1..$y2}); do
+		echo "DROP DATABASE gis_eu_$1_$2" | psql -d postgis
+	done;
+done;
