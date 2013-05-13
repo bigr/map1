@@ -40,6 +40,6 @@ esac
 
 for x in $(eval echo {$x1..$x2}); do		
 	for y in $(eval echo {$y1..$y2}); do
-		echo "DROP DATABASE gis_eu_$x_$y" | psql -d postgres
+		printf "DROP DATABASE gis_eu_%d_%d" $x $y | psql -d postgres
 	done;
 done;
