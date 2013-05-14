@@ -94,10 +94,10 @@ regions = {
 
 
   
-'def get(zoom):
+def get(zoom):
   ret = []
   for _,region in regions.items():
     if zoom in region[0]:
-      ret.append(region[1]'
+      ret.append(region[1])
   return ret
 
