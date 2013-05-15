@@ -227,7 +227,7 @@ def main():
     # Insert route values into the table
     for r in listOfRoutes:
         if r.geometry is not None:
-            row = r.getValuesRow()
+            row = r.getValuesRow()            
             auxiliaryCursor.execute('''
                 INSERT INTO routes
                   VALUES (%s)

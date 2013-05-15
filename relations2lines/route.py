@@ -33,48 +33,51 @@ class Route:
             # first item in osmcSigns has the highest priority
             self.osmcSigns.sort(reverse=True)
 
+    def escape(self,a):
+        return a.replace("\\","\\\\").replace("'","\\'")
+
     def getValuesRow(self):
             values = str(self.id) + ", '" + self.geometry + "'"
             if self.highway is not None:
-                values += ", '" + self.highway + "'"
+                values += ", '" + self.escape(self.highway) + "'"
             else:
                 values += ", NULL"
             if self.tracktype is not None:
-                values += ", '" + self.tracktype + "'"
+                values += ", '" + self.escape(self.tracktype) + "'"
             else:
                 values += ", NULL"
             if self.oneway is not None:
-                values += ", '" + self.oneway + "'"
+                values += ", '" + self.escape(self.oneway) + "'"
             else:
                 values += ", NULL"
             if self.mtbScale is not None:
-                values += ", '" + self.mtbScale + "'"
+                values += ", '" + self.escape(self.mtbScale) + "'"
             else:
                 values += ", NULL"
             if self.mtbUphill is not None:
-                values += ", '" + self.mtbUphill + "'"
+                values += ", '" + self.escape(self.mtbUphill) + "'"
             else:
                 values += ", NULL"
             if self.sacScale is not None:
-                values += ", '" + self.sacScale + "'"
+                values += ", '" + self.escape(self.sacScale) + "'"
             else:
                 values += ", NULL"
             values += ", " + str(self.offset)
             for i in range(len(self.osmcSigns)):
                 if self.osmcSigns[i].osmcSymbol is not None:
-                    values += ", '" + self.osmcSigns[i].osmcSymbol + "'"
+                    values += ", '" + self.escape(self.osmcSigns[i].osmcSymbol) + "'"
                 else:
                     values += ", NULL"
                 if self.osmcSigns[i].network is not None:
-                    values += ", '" + self.osmcSigns[i].network + "'"
+                    values += ", '" + self.escape(self.osmcSigns[i].network) + "'"
                 else:
                     values += ", NULL"
                 if self.osmcSigns[i].route is not None:
-                    values += ", '" + self.osmcSigns[i].route + "'"
+                    values += ", '" + self.escape(self.osmcSigns[i].route) + "'"
                 else:
                     values += ", NULL"
                 if self.osmcSigns[i].ref is not None:
-                    values += ", '" + self.osmcSigns[i].ref + "'"
+                    values += ", '" + self.escape(self.osmcSigns[i].ref) + "'"
                 else:
                     values += ", NULL"
             return values
