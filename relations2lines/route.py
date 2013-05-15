@@ -34,7 +34,7 @@ class Route:
             self.osmcSigns.sort(reverse=True)
 
     def escape(self,a):
-        return a.replace("\\","\\\\").replace("'","\\'")
+        return a.replace("'","''")
 
     def getValuesRow(self):
             values = str(self.id) + ", '" + self.geometry + "'"
