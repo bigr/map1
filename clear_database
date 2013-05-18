@@ -19,6 +19,12 @@ SouthEurpe)
 	x2=143
 	y2=95
 	;;
+SouthSouthEurope)
+	x1=128
+	y1=96
+	x2=152
+	y2=101
+	;;
 WestEurope)
 	x1=130
 	y1=82
@@ -43,3 +49,4 @@ for x in $(eval echo {$x1..$x2}); do
 		printf "DROP DATABASE gis_eu_%d_%d" $x $y | psql -d postgres
 	done;
 done;
+

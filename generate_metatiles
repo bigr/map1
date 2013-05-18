@@ -13,11 +13,17 @@ CentralEurope)
 	y2=90
 	;;
 
-SouthEurpe)
+SouthEurope)
 	x1=131
 	y1=91
 	x2=143
 	y2=95
+	;;
+SouthSouthEurope)
+	x1=128
+	y1=96
+	x2=152
+	y2=101
 	;;
 WestEurope)
 	x1=130
