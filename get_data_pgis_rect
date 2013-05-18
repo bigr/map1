@@ -73,7 +73,7 @@ function download {
 		    else
 			FS2=0
 		    fi
-		    if [ $FS1 -ge $FS2 ]; then
+		    if [ $FS1 -gt $FS2 ]; then
 			unlink "/tmp/$2.$LON_START.$LAT_START.o5m~"
 		    else
 			if [ -f "/tmp/$2.$LON_START.$LAT_START.o5m" ]; then
