@@ -24,6 +24,14 @@ LAT_START=$(bc -l <<< "$LAT_START-($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
 LON_END=$(bc -l <<< "$LON_END + ($LON_END - $LON_START_TMP)*$MARGIN_LON_SIZE")
 LAT_END=$(bc -l <<< "$LAT_END + ($LAT_END - $LAT_START_TMP)*$MARGIN_LAT_SIZE")
 
+LON_START=$(echo $LON_START | sed -E 's/^\.(.+)/0.\1/')
+LON_START=$(echo $LON_START | sed -E 's/^-\.(.+)/-0.\1/')
+LON_END=$(echo $LON_END | sed -E 's/^\.(.+)/0.\1/')
+LON_END=$(echo $LON_END | sed -E 's/^-\.(.+)/-0.\1/')
+LAT_START=$(echo $LAT_START | sed -E 's/^\.(.+)/0.\1/')
+LAT_START=$(echo $LAT_START | sed -E 's/^-\.(.+)/-0.\1/')
+LAT_END=$(echo $LAT_END | sed -E 's/^\.(.+)/0.\1/')
+LAT_END=$(echo $LAT_END | sed -E 's/^-\.(.+)/-0.\1/')
 
 mkdir -p $DEM_TILE_DIR
 

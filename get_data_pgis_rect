@@ -33,12 +33,21 @@ function download {
 	    i_lat=$(bc -l <<< "$LAT_START+($i_lat_index-1)*$LAT_STEP2")
 	    echo $i_lat
 	    lat_from=$i_lat
-	    lat_to=$(python <<< "print min($LAT_END,$i_lat+$LAT_STEP2)")	    
+	    lat_to=$(python <<< "print min($LAT_END,$i_lat+$LAT_STEP2)")
+	    lat_from=$(echo $lat_from | sed -E 's/^\.(.+)/0.\1/')
+	    lat_from=$(echo $lat_from | sed -E 's/^-\.(.+)/-0.\1/')
+	    lat_to=$(echo $lat_to | sed -E 's/^\.(.+)/0.\1/')
+	    lat_to=$(echo $lat_to | sed -E 's/^-\.(.+)/-0.\1/')
+	    
 	    for i_lon_index in $(eval echo "{1..$LON_STEP}"); do
 		i_lon=$(bc -l <<< "$LON_START+($i_lon_index-1)*$LON_STEP2")
 		echo $i_lon
 		lon_from=$i_lon
 		lon_to=$(python <<< "print min($LON_END,$i_lon+$LON_STEP2)")
+		lon_from=$(echo $lon_from | sed -E 's/^\.(.+)/0.\1/')
+		lon_from=$(echo $lon_from | sed -E 's/^-\.(.+)/-0.\1/')
+		lon_to=$(echo $lon_to | sed -E 's/^\.(.+)/0.\1/')
+		lon_to=$(echo $lon_to | sed -E 's/^-\.(.+)/-0.\1/')
 		q=${qq//%lon1%/$lon_from}
 		q=${q//%lon2%/$lon_to}
 		q=${q//%lat1%/$lat_from}
