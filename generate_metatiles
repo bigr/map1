@@ -37,9 +37,15 @@ WestEurope)
 	x2=135
 	y2=90
 	;;
+WestWestEurope)
+	x1=121
+	y1=82
+	x2=130
+	y2=90
+	;;
 *)
 	X1=11.3 #-20
-	X2=22.6 #53
+	X2=22.16 #53
 	Y1=46.4 #80
 	Y2=52.6 #30
 	x1=$(./extract-aster/lon2x $X1 $ZOOM)
