@@ -31,6 +31,12 @@ SouthWestEurope)
 	x2=130
 	y2=100
 	;;
+SouthEastEurope)
+	x1=144
+	y1=91
+	x2=155
+	y2=95
+	;;
 WestEurope)
 	x1=130
 	y1=82
