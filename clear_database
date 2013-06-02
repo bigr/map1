@@ -19,6 +19,12 @@ SouthEurope)
 	x2=143
 	y2=95
 	;;
+NordEurope)
+	x1=136
+	y1=73
+	x2=144
+	y2=84
+	;;
 SouthSouthEurope)
 	x1=128
 	y1=96
