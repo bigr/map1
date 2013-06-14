@@ -31,6 +31,12 @@ NordEastEurope)
 	x2=155
 	y2=82
 	;;
+EastEurope)
+	x1=145
+	y1=83
+	x2=155
+	y2=90
+	;;
 NordWestEurope)
 	x1=121
 	y1=73
