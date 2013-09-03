@@ -61,7 +61,10 @@
 			<?php endif; ?>
 			
 			text-placement-type: simple;
-			text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($textSize*0.9)?>,<?php echo text_limiter($textSize*0.8)?>,<?php echo text_limiter($textSize*0.7)?>,<?php echo text_limiter($textSize*0.62)?>";
+			text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($textSize*0.9)?>,<?php echo text_limiter($textSize*0.8)?>,<?php echo text_limiter($textSize*0.7)?>,<?php echo text_limiter($textSize*0.62)?>,<?php echo text_limiter($textSize*0.55)?>,<?php echo text_limiter($textSize*0.49)?>,<?php echo text_limiter($textSize*0.44)?>,<?php echo text_limiter($textSize*0.4)?>";
+			<?php if( $a['zooms'][$zoom] == 4 ): ?>
+				text-min-distance: 30px;
+			<?php endif; ?>
 		    }
 		}		
 	    <?php endif; ?>

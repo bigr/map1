@@ -1,0 +1,185 @@
+h2 {
+  color: #f00;
+}
+
+.profile .axis {
+  fill: none;
+  stroke: rgba(0,0,100,1);
+  stroke-width: 1px;
+}
+
+.profile .marker {
+  fill: none;  
+}
+
+.profile .marker.marker-x {  
+  stroke: rgba(0,0,100,0.5);
+  stroke-dasharray: 10,4;
+  stroke-width: 1.5px;
+}
+
+.profile .marker.marker-y {  
+  stroke: RGBA(0,0,0,1);
+  stroke-width: 0.25px;
+}
+
+.profile.trip .marker.marker-y {
+  stroke: rgba(0,0,100,0.1);
+  stroke-width: 3px;
+}
+
+ 
+.profile .kvote {
+  fill: none;
+  stroke-width: 1px;
+  stroke: rgba(0,0,100,0.5);
+}
+
+
+.profile text.elevation {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 16px;
+  fill: RGBA(0,0,100,0.5);
+  font-weight: bold;
+}
+
+.profile text.global-slope {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 12px;
+  fill: RGBA(0,0,100,0.5);  
+}
+
+.profile text.units {
+  text-anchor: middle;
+  dominant-baseline: top;
+  font-size: 12px;
+  fill: RGBA(0,0,100,0.8);
+  font-weight: bold;
+}
+
+.profile .axis-tick {
+  fill: none;
+  stroke: rgba(0,0,100,1);
+  stroke-width: 1;
+}
+
+.profile .grid {
+  fill: none;
+  stroke: rgba(0,0,100,0.15);
+  stroke-width: 1px;
+  stroke-dasharray: 1,3;
+}
+
+.profile .axis-label {
+  font-size: 12px;
+  fill: RGBA(0,0,100,0.8);
+}
+
+.profile .axis-y-label {
+  text-anchor: middle;
+  dominant-baseline: top;  
+}
+
+.profile .axis-x-label {
+  text-anchor: end;
+  dominant-baseline: central;  
+}
+
+.profile.uphill .profile-contour {
+  fill: none;
+  stroke: rgba(0,0,0,0.5);
+  stroke-width: 2px;
+}
+
+.profile.trip .profile-contour {
+  fill: none;
+  stroke: rgba(0,0,0,0.5);
+  stroke-width: 2px;
+}
+
+.profile text.slope-segment {
+  text-anchor: begin;
+  dominant-baseline: central;
+  font-size: 16px; 
+  font-weight: bold;
+  fill: RGBA(1,0,0,0.3);
+}
+
+
+.profile text.uphill-number {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 28px;
+  fill: rgba(0,0,100,0.3);
+  font-weight: bold;
+   
+}
+
+.profile circle.uphill-number {
+  stroke: rgba(0,0,100,0.3);
+  stroke-width: 4px;
+  fill: rgba(255,255,255,0.7);
+}
+
+text.uphillstat-number {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 20px;
+  fill: rgba(0,0,100,0.3);
+  font-weight: bold;
+   
+}
+
+circle.uphillstat-number {
+  stroke: rgba(0,0,100,0.3);
+  stroke-width: 4px;
+  fill: rgba(255,255,255,0.7);
+}
+
+text.uphillstat-height {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 15px;
+  fill: rgba(0,0,100,0.3);
+  font-weight: bold;
+}
+
+text.uphillstat-slope {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-size: 12px;
+  fill: rgba(0,0,100,0.3);  
+}
+
+.profile text.uphill-position {
+  text-anchor: middle;
+  dominant-baseline: top;
+  font-size: 20px;
+  fill: rgba(0,0,100,0.3);
+  font-weight: bold;
+   
+}
+
+.profile text.uphill-length {
+  text-anchor: middle;
+  dominant-baseline: top;
+  font-size: 16px;
+  font-weight: bold;
+  fill: rgba(0,0,100,0.3);  
+   
+}
+
+.profile text.waypoint {
+  text-anchor: begin;
+  dominant-baseline: central;
+  font-size: 14px;
+  fill: rgba(0,0,0,0.5);  
+}
+
+.profile .waypoint-marker {
+  stroke: rgba(0,0,0,0.25);  
+  stroke-width: 1px;
+  fill: none;
+}

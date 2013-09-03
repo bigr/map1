@@ -9,7 +9,7 @@
 	    <?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
 		<?php echo $selector?> {
 		    <?php if ( !empty($a['pattern-file']) ): ?>			
-			line-pattern-file: url('../../general/pattern/~<?php echo $a['pattern-file']?>-<?php echo $zoom?>.png');
+			line-pattern-file: url('../../general/pattern/~<?php echo $a['pattern-file-png']?>-<?php echo $zoom?>.png');
 		    <?php endif; ?>		    
 		    line-color: <?php echo empty($a['color']) ? '#000000' : linear($a['color'],$zoom)?>;
 		    line-width: <?php echo empty($a['width']) ? 1.0 : linear($a['width'],$zoom)?>;

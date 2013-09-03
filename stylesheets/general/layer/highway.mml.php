@@ -8,11 +8,43 @@
 {
 	"id": "highway-bridge-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
 	"name": "highway-bridge-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
-	"class": "highway bridge layer<?php echo $layer?> grade<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",		
+	"class": "highway road bridge layer<?php echo $layer?> grade<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",		
 	"srs": "<?php echo SRS900913?>",
 	<?php echo ds_pgis(sql_highway_bridge($layer,$ROAD_GRADES[$RENDER_ZOOMS[0]][$i]));?>	
 },
 <?php endfor; ?>
+
+<?php for ( $i = count($ROAD_GRADES[$RENDER_ZOOMS[0]])-1; $i>=0; --$i ):?>
+{
+	"id": "highway-tunnel-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
+	"name": "highway-tunnel-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
+	"class": "highway road tunnel layer<?php echo $layer?> grade<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",		
+	"srs": "<?php echo SRS900913?>",
+	<?php echo ds_pgis(sql_highway_tunnel($layer,$ROAD_GRADES[$RENDER_ZOOMS[0]][$i]));?>	
+},
+<?php endfor; ?>
+
+<?php for ( $i = count($ROAD_GRADES[$RENDER_ZOOMS[0]])-1; $i>=0; --$i ):?>
+{
+	"id": "highway-pathbridge-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
+	"name": "highway-pathbridge-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
+	"class": "highway path bridge layer<?php echo $layer?> grade<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",		
+	"srs": "<?php echo SRS900913?>",
+	<?php echo ds_pgis(sql_highway_path_bridge($layer,$ROAD_GRADES[$RENDER_ZOOMS[0]][$i]));?>	
+},
+<?php endfor; ?>
+
+<?php for ( $i = count($ROAD_GRADES[$RENDER_ZOOMS[0]])-1; $i>=0; --$i ):?>
+{
+	"id": "highway-pathtunnel-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
+	"name": "highway-pathtunnel-layer<?php echo $layer?>-grade-<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",
+	"class": "highway path tunnel layer<?php echo $layer?> grade<?php echo $ROAD_GRADES[$RENDER_ZOOMS[0]][$i]?>",		
+	"srs": "<?php echo SRS900913?>",
+	<?php echo ds_pgis(sql_highway_path_tunnel($layer,$ROAD_GRADES[$RENDER_ZOOMS[0]][$i]));?>	
+},
+<?php endfor; ?>
+
+
 {
 	"id": "highway-steps-layer<?php echo $layer?>",
 	"name": "highway-steps-layer<?php echo $layer?>",

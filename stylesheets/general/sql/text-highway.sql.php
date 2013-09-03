@@ -34,6 +34,11 @@ EOD;
 }
 
 
+
+function sql_text_highway_junction($priority,$cols = '0',$order = 'grade') {    
+    return "SELECT way,osm_id,ref,name FROM highway_point WHERE highway='motorway_junction' AND COALESCE(ref,'') <> ''";
+}
+
 function sql_text_highway_access_short($priority = 0, $cols = '0',$where = '1 = 1',$order = 'ST_LENGTH(way) DESC') {
     return "SELECT * FROM highways_access";
 }

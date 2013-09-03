@@ -43,7 +43,7 @@ return <<<EOD
 	FROM route
 	WHERE
 		    route IN ('hiking','foot')
-	    AND name IS NOT NULL
+	    AND COALESCE(name,'') <> ''
 	    AND ($where)
 	ORDER BY $order
 EOD;

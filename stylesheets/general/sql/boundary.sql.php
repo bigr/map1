@@ -53,9 +53,10 @@ function sql_boundary_pa($cols = '0',$where = '1 = 1') {
 			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('V','5') THEN 5
 			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('VI','6') THEN 6
 			WHEN iucn_level IS NOT NULL AND btrim(iucn_level) IN ('VII','7') THEN 7			
-			WHEN boundary = 'national_park' THEN 2
-			WHEN leisure = 'nature_reserve' THEN 4
-			WHEN military IS NOT NULL THEN 25
+			WHEN COALESCE(boundary,'') = 'national_park' THEN 2
+			WHEN COALESCE(leisure,'') = 'nature_reserve' THEN 4
+			WHEN COALESCE(military,'') IN ('danger_area','range') THEN 25
+			WHEN COALESCE(landuse,'') = 'military' THEN 25
 			ELSE 0			
 		END) AS protect_class,
 		name,

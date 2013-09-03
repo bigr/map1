@@ -14,7 +14,7 @@
 			text-halo-radius: <?php echo exponential($ROAD_NAME_HALO_RADIUS[$grade],$zoom)?>;
 			[is_construction = 'no'][is_tunnel = 'no'] {
 				text-fill: <?php echo linear($ROAD_NAME_COLOR[$grade],$zoom)?>;
-				text-halo-fill: fadeout(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,60);
+				text-halo-fill: fadeout(<?php echo linear($ROAD_FILL_COLOR[$grade],$zoom)?>,40);
 			}
 			text-placement: line;
 			text-dy: 1;
@@ -76,5 +76,14 @@
 			shield-file: url('../../../../highway_access/generated/[file].png');
 		}
 	<?php endif; ?>
+	
+	.textHighwayJunction.priority1[zoom = <?php echo $zoom?>] {			
+			shield-face-name: "<?php echo FONT_BOLD_SANS ?>";		
+			shield-placement: point;			
+			shield-file: url('../../general/pattern/~<?php echo $HIGHWAY_JUNCTION_FILE?>-<?php echo $zoom?>.png');
+			shield-fill: <?php echo linear($ROAD_FILL_COLOR[HIGHWAY_MOTORWAY],$zoom) ?>;
+			shield-name: "[ref]";
+			shield-size: <?php echo text_limiter(exponential($HIGHWAY_JUNCTION_SIZE,$zoom)*0.5) ?>;		
+		}
 <?php endforeach;?>
 

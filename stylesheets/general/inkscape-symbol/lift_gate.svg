@@ -12,7 +12,7 @@
    viewBox="0 0 26880 26880"
    id="svg3064"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="lift_gate.svg">
   <metadata
      id="metadata3072">
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -42,9 +42,9 @@
      id="namedview3068"
      showgrid="true"
      inkscape:snap-grids="false"
-     inkscape:zoom="0.29857056"
-     inkscape:cx="1430.719"
-     inkscape:cy="1281.6704"
+     inkscape:zoom="0.10556063"
+     inkscape:cx="-684.00836"
+     inkscape:cy="825.49515"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -136,9 +136,29 @@
        position="451.42857,771.42857"
        id="guide5329" />
   </sodipodi:namedview>
+  <g
+     id="g2319"
+     transform="matrix(43.576395,0,0,43.576395,38358.675,3180.9666)"
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1">
+    <path
+       inkscape:connector-curvature="0"
+       id="path2323"
+       style="fill:#000000;stroke:#000000;fill-opacity:1;stroke-opacity:1"
+       d="" />
+  </g>
+  <g
+     id="g2325"
+     transform="matrix(43.576395,0,0,43.576395,38358.675,3180.9666)"
+     style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1">
+    <path
+       inkscape:connector-curvature="0"
+       id="path2329"
+       style="fill:#000000;stroke:#000000;fill-opacity:1;stroke-opacity:1"
+       d="" />
+  </g>
   <path
-     style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;stroke:none;stroke-width:400;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-     d="M 2080.1875 38.25 L 11.40625 2107 L 3.34375 2107 L 3.34375 2115.0625 L 3.34375 2507 L 2523.3438 2507 L 2523.3438 2107 L 610.84375 2107 L 2379.875 337.9375 L 2080.1875 38.25 z "
-     transform="scale(10.666667,10.666667)"
-     id="path2995" />
+     style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2382.97631836;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+     d="m 1044.969,3916.563 c -270.90257,0 -540.19549,111.3281 -731.75245,302.8864 C 121.65286,4411.0078 10.340718,4680.2926 10.329996,4951.202 l 0,17902.025 c 0,270.909 111.322864,540.195 302.886554,731.753 191.55696,191.557 460.84988,302.881 731.75245,302.885 l 2618.7626,0 c 270.9038,0 540.6407,-111.328 732.1991,-302.885 191.5638,-191.558 302.8759,-460.844 302.8866,-731.753 l 0,-9021.373 C 3389.7256,14233.795 1819.5987,13878.12 973.9381,12766.39 -308.59343,11232.253 345.80407,8521.1494 2236.8589,7805.8407 c 820.513,-190.0252 1641.2873,-378.5314 2461.9584,-567.8006 l 0,-2286.8381 c 0,-270.9094 -111.3228,-540.1943 -302.8866,-731.7526 -191.5582,-191.5582 -461.2953,-302.8811 -732.1991,-302.8864 l -2618.7626,0 z m 24171.062,430.6527 a 1596.9991,1596.9991 0 0 0 -427.525,42.44 L 3207.6148,9200.5484 a 1596.9991,1596.9991 0 1 0 694.6734,3117.3196 L 25483.179,7506.528 a 1596.9991,1596.9991 0 0 0 -267.148,-3159.3123 z m -2182.749,7920.6173 c -217.423,-0.107 -433.716,89.727 -587.456,243.471 -153.744,153.742 -243.126,369.587 -243.024,587.01 l 0,9959.518 c -0.111,217.422 89.28,433.268 243.024,587.009 153.74,153.744 370.033,243.125 587.456,243.024 l 3027.526,0 c 217.422,0.11 433.715,-89.28 587.456,-243.024 153.741,-153.741 243.121,-369.587 243.024,-587.009 l 0,-9959.518 c 0.108,-217.423 -89.283,-433.268 -243.024,-587.01 -153.741,-153.744 -370.034,-243.569 -587.456,-243.471 l -3027.526,0 z"
+     id="path3732"
+     inkscape:connector-curvature="0" />
 </svg>

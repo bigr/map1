@@ -15,11 +15,11 @@
 		    
 		    text-fill: darken(<?php echo linear($_BOUNDARY_PA_NATURAL_COLOR,$zoom)?>,10);
 		    text-halo-fill:  rgba(255,255,255,0.35);
-		    [protect_class='25'] {
-			text-fill: darken(<?php echo linear($_BOUNDARY_PA_MILITARY_COLOR,$zoom)?>,10);
+		    [protect_class=25] {
+			text-fill: darken(<?php echo linear($_BOUNDARY_PA_MILITARY_COLOR,$zoom)?>,0);
 			text-halo-fill:  rgba(255,255,255,0.35);
 		    }
-		    [protect_class='12'] {
+		    [protect_class=12] {
 			text-fill: darken(<?php echo linear($_BOUNDARY_PA_WATER_COLOR,$zoom)?>,10);
 			text-halo-fill:  rgba(255,255,255,0.35);
 		    }			

@@ -46,6 +46,10 @@
 						<?php endif;?>
 						xxx/line-opacity: <?php echo exponential($BOUNDARY_PA_OPACITY[$class],$zoom); ?>;
 						
+						<?php if ( $class == 25 ): ?>
+							polygon-pattern-file: url('../../general/pattern/~access-no-<?php echo max(10,$zoom)?>.png');
+						<?php endif; ?>
+						
 						<?php //if ( in_array($class,$BOUNDARY_PA_GLOW[$zoom]) ):?>
 						::glow {
 							line-width: <?php echo exponential($width,$zoom)*2.5; ?>;

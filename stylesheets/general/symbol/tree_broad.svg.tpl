@@ -1,0 +1,4 @@
+<?php $svg = <<<EOD
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="$size" height="$size" viewBox="0 0 26880 26880">$pre<g transform="matrix(128.05184,0,0,128.05184,-2243.5294,-2187.0589)"><path style="fill:$color;fill-opacity:$opacity;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 1080,2520 0,-560 C 944.99996,2015.9999 629.99994,1970.9998 629.99997,1574.9999 359.99995,1574.9998 179.99999,1120 503.99998,899.99997 419.99998,839.99998 419.99998,280 945,420 c -4e-5,-559.99999 629.9999,-559.99999 629.9999,-10e-6 525,-139.99999 525,419.99999 441,479.99998 324,220.00003 143.9999,674.99983 -126,674.99993 -10e-5,395.9999 -315,441 -449.9999,385.0001 l 0,560 z" transform="matrix(0.0832996,0,0,0.0832996,17.520478,17.07948)"/></g>$post</svg>
+EOD;

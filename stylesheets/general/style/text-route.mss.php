@@ -29,6 +29,7 @@
 				}
 			<?php endforeach; ?>
 			text-size: <?php echo round(exponential($ROUTE_NAME_SIZE[$grade],$zoom))?>;
+			text-label-position-tolerance: 100;	
 			text-placement: line;
 			text-dy: 8;
 		}

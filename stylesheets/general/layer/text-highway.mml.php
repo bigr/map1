@@ -17,6 +17,13 @@
 	<?php echo ds_pgis(sql_text_highway_e($priority));?>	
 },
 {
+	"id": "text-highway-junction<?php echo $priority?>",
+	"name": "text-highway-junction<?php echo $priority?>",
+	"class": "textHighwayJunction priority<?php echo $priority?>",	
+	"srs": "<?php echo SRS900913?>",
+	<?php echo ds_pgis(sql_text_highway_junction($priority));?>	
+},
+{
 	"id": "text-highway-access-priority<?php echo $priority?>",
 	"name": "text-highway-access-priority<?php echo $priority?>",
 	"class": "textHighwayAccess priority<?php echo $priority?>",	

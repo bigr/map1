@@ -10,6 +10,10 @@ function getSymbolGradeSQl() {
     $castle_type = "T.castle_type";
     $amenity = "T.amenity";
     $tourism = "T.tourism";
+    $highway = "T.highway";
+    $railway = "T.railway";    
+    $shop = "T.shop";
+    $sport = "T.sport";    
     $ruins = "COALESCE(T.ruins,'no'::text)";
     $place_of_worship = "COALESCE(T.place_of_worship)";
     $place_of_worship_type = "T.\"place_of_worship:type\"";
@@ -32,7 +36,23 @@ function getSymbolGradeSQl() {
 		WHEN COALESCE($place_of_worship_type,$place_of_worship,$historic)='monastery' THEN 2.0
 		WHEN $amenity = 'theatre' THEN 0.5
 		WHEN $tourism = 'museum' THEN 0.8
-		WHEN $tourism = 'zoo' THEN 1.0		
+		WHEN $tourism IN ('hotel','hostel','motel','guest_house','alpine_hut','hut') THEN 0.15	
+		WHEN $amenity = 'restaurant' THEN 0.1
+		WHEN $amenity = 'cinema' THEN 0.07
+		WHEN $amenity IN ('pub','fast_food','biergarten','cafe','pub','bar','nightclub') THEN 0.08
+		WHEN $railway = 'station' THEN 0.4
+		WHEN $railway = 'halt' THEN 0.3
+		WHEN $railway = 'tram_stop' THEN 0.25
+		WHEN $railway = 'subway_entrance' THEN 0.2
+		WHEN $highway = 'bus_stop' THEN 0.24
+		WHEN $amenity = 'embassy' THEN 0.12
+		WHEN $tourism = 'zoo' THEN 1.0
+		WHEN $shop IN ('mall','department_store') THEN 0.3
+		WHEN $shop IN ('supermarket') THEN 0.05
+		WHEN $amenity IN ('toilets') THEN 0.03
+		WHEN $amenity IN ('swimming_pool') THEN 0.1
+		WHEN $amenity IN ('post_box','bench','atm','telephone','fire_hydrant') THEN -0.1
+		WHEN $sport IN ('swimming') THEN 0.05
 		ELSE 0
 	    END)
 	)
@@ -53,7 +73,7 @@ function sql_symbol_short($priority) {
 		$types = array();
 		foreach ( $SYMBOL AS $a ) {
 			 $type++;
-			 if ( !empty($a['zooms'][$zoom]) && $a['zooms'][$zoom] == $priority + 1 ) {
+			 if ( !empty($a['zooms'][$zoom]) && ($a['zooms'][$zoom] == $priority + 2 || ($priority == 0 && $a['zooms'][$zoom] < 2 ) )  ) {
 				 $types[] = $type;
 			 } 			 
 		}
@@ -87,6 +107,7 @@ function sql_symbol($where = '1 = 1',$order = 'z_order') {
 	$propertyWhereQuery = str_replace('"highway"',"T.highway",$propertyWhereQuery);
 	$propertyWhereQuery = str_replace('"railway"',"T.railway",$propertyWhereQuery);
 	$propertyWhereQuery = str_replace('"aeroway"',"T.aeroway",$propertyWhereQuery);
+	$propertyWhereQuery = str_replace('"shop"',"T.shop",$propertyWhereQuery);
 	
 	$symbolGradeSql = getSymbolGradeSql();
 	$typeQuery = getPropertyTypeQuery($SYMBOL);
@@ -104,10 +125,16 @@ return <<<EOD
 	historic,
 		COALESCE(T.man_made,'no'::text) AS
 	man_made,
+		COALESCE(T.sport,'no'::text) AS
+	sport,
+		COALESCE(T.military,'no'::text) AS
+	military,
 		COALESCE(T.tourism,'no'::text) AS
 	tourism,	
 	    COALESCE(T.amenity,'no'::text) AS
 	amenity,
+	    COALESCE(T.shop,'no'::text) AS
+	shop,
 	    COALESCE(T.natural,'no'::text) AS
 	"natural",
 		COALESCE(leisure,'no'::text) AS
@@ -135,10 +162,21 @@ return <<<EOD
 	wikipedia,
 	website,
 	power,
+	colour,
+	transport,
+	public_transport,
+	cargo,
+	cuisine,
+	parking,
+	maxheight,
+	fee,
+	surveillance,
+	memorial,
+	operator,
 	NULL AS wiki,
 	T.osm_id
     FROM (
-	SELECT osm_id,name,way,historic,man_made,tourism,amenity,"natural",leisure,building,ruins,"tower:type",information,place_of_worship,"place_of_worship:type",castle_type,railway,highway,aeroway,power,0 AS way_area, wikipedia, website, z_order FROM symbol
+	SELECT osm_id,name,way,historic,man_made,shop,tourism,amenity,"natural",leisure,sport,military,building,ruins,"tower:type",information,place_of_worship,"place_of_worship:type",castle_type,railway,highway,aeroway,power,0 AS way_area, wikipedia, website,colour,transport,public_transport,cargo,cuisine,parking,maxheight,fee,surveillance,memorial,operator, z_order FROM symbol
     ) AS T    
     WHERE
 		    ($propertyWhereQuery)			

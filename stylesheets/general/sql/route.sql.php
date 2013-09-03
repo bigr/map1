@@ -112,69 +112,90 @@ function _getHikingRouteColumn($col,$offset) {
 
 function sql_route_hiking($offset, $cols = '0',$where = '1 = 1') {
     $highwayGradeSql = _getHighwayGradeSql(true);    
+    $highwayGradeSql = str_replace("smoothness","T1.smoothness",$highwayGradeSql);
+    $highwayGradeSql = str_replace("surface","T1.surface",$highwayGradeSql);
+    $highwayGradeSql = str_replace("highway","T1.highway",$highwayGradeSql);
+    $highwayGradeSql = str_replace("tracktype","T1.tracktype",$highwayGradeSql);
     
 return <<<EOD
 	SELECT 
-		way,
+		T1.way,
 		    $highwayGradeSql AS
 		highway_grade,
-		offsetside,		   
-		color,
-		sac_scale,
-		route,
+		T1.highway,
+		T1.offsetside,		   
+		T1.color,
+		T1.sac_scale,
+		T1.route,
 		$cols
-	FROM routes2
+	FROM routes2 T1
+	LEFT JOIN routes2 T2 ON T1.osm_id = T2.osm_id AND T2."offset" <  T1."offset" AND T1."color" <> T2."color" AND (T2.route <> 'bicycle' OR T2.network <> '')
 	WHERE
-		route IN ('foot','hiking')
-	    AND "offset" = $offset
-	    AND ($where)	
+		T1.route IN ('foot','hiking')
+	    AND ($where)
+	GROUP BY T1."way",T1."osm_id",T1."offsetside",T1."color",T1."sac_scale",T1."route",T1."highway",T1."tracktype"
+	HAVING count(DISTINCT T2.offset)+1 = $offset
 EOD;
 }
 
 
 function sql_route_bicycle($offset,$cols = '0',$where = '1 = 1') {	
     $highwayGradeSql = _getHighwayGradeSql(true);    
+    $highwayGradeSql = str_replace("smoothness","T1.smoothness",$highwayGradeSql);
+    $highwayGradeSql = str_replace("surface","T1.surface",$highwayGradeSql);
+    $highwayGradeSql = str_replace("highway","T1.highway",$highwayGradeSql);
+    $highwayGradeSql = str_replace("tracktype","T1.tracktype",$highwayGradeSql);
     
 return <<<EOD
 	SELECT 
-		way,
+		T1.way,
 		    $highwayGradeSql AS
 		highway_grade,
-		offsetside,
-		"mtb:scale",
-		route,
-		density,
-		network,
+		T1.highway,
+		T1.offsetside,
+		T1."mtb:scale",
+		T1.route,
+		T1.density,
+		T1.network,
 		(CASE 
-		    WHEN oneway IN ('false','0','no') THEN 'no'
-		    WHEN oneway IN ('true','1','yes') THEN 'yes'
-		    ELSE COALESCE(oneway,CAST('no' AS text))
+		    WHEN T1.oneway IN ('false','0','no') THEN 'no'
+		    WHEN T1.oneway IN ('true','1','yes') THEN 'yes'
+		    ELSE COALESCE(T1.oneway,CAST('no' AS text))
 		END) AS oneway,
-		
+		T1."osmc:symbol"
 		$cols
-	FROM routes2 R2	
+	FROM routes2 T1
+	LEFT JOIN routes2 T2 ON T1.osm_id = T2.osm_id AND T2."offset" <  T1."offset" AND T1."color" <> T2."color" AND (T2.route <> 'bicycle' OR T2.network <> '')
 	WHERE
-		route IN ('bicycle','mtb')
-	    AND "offset" = $offset
-	    AND ($where)	
+		T1.route IN ('bicycle','mtb')	   
+	    AND ($where)
+	GROUP BY T1."way",T1."osm_id",T1."offsetside",T1."mtb:scale",T1."route",T1."highway",T1."tracktype",T1.density,T1.network,T1.oneway
+	HAVING count(DISTINCT T2.offset)+1 = $offset
 EOD;
 }
 
 function sql_route_ski($offset,$cols = '0',$where = '1 = 1') {	
-    $highwayGradeSql = _getHighwayGradeSql(true);    
+    $highwayGradeSql = _getHighwayGradeSql(true); 
+    $highwayGradeSql = str_replace("smoothness","T1.smoothness",$highwayGradeSql);
+    $highwayGradeSql = str_replace("surface","T1.surface",$highwayGradeSql);
+    $highwayGradeSql = str_replace("highway","T1.highway",$highwayGradeSql);
+    $highwayGradeSql = str_replace("tracktype","T1.tracktype",$highwayGradeSql);   
     
 return <<<EOD
 	SELECT 
-		way,
+		T1.way,
 		    $highwayGradeSql AS
 		highway_grade,
-		offsetside,
-		route,	  
+		T1.highway,
+		T1.offsetside,
+		T1.route,	  
 		$cols
-	FROM routes2
+	FROM routes2 T1
+	LEFT JOIN routes2 T2 ON T1.osm_id = T2.osm_id AND T2."offset" <  T1."offset" AND T1."color" <> T2."color" AND (T2.route <> 'bicycle' OR T2.network <> '')
 	WHERE
-		route IN ('ski')
-	    AND "offset" = $offset
-	    AND ($where)	
+		T1.route IN ('ski')	    
+	    AND ($where)
+	GROUP BY T1."way",T1."osm_id",T1."offsetside",T1."route",T1."highway",T1."tracktype"
+	HAVING count(DISTINCT T2.offset)+1 = $offset
 EOD;
 }

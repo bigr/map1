@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2520"
+   height="2520"
+   viewBox="0 0 26880 26880"
+   id="svg3064"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="military_bunker.svg">
+  <metadata
+     id="metadata3072">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3070" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="6"
+     gridtolerance="6"
+     guidetolerance="6"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1400"
+     inkscape:window-height="997"
+     id="namedview3068"
+     showgrid="true"
+     inkscape:snap-grids="true"
+     inkscape:zoom="0.27057957"
+     inkscape:cx="980.67083"
+     inkscape:cy="1163.4384"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3064"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-to-guides="false"
+     inkscape:object-paths="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3074"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       dotted="false"
+       spacingx="315px"
+       spacingy="315px"
+       color="#00009b"
+       opacity="0.1372549"
+       empcolor="#00009b"
+       empopacity="0.29411765" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5379"
+       empspacing="3"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.11764706"
+       empcolor="#9b0000"
+       empopacity="0.39215686"
+       spacingx="280px"
+       spacingy="280px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5381"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="252px"
+       spacingy="252px"
+       empcolor="#009b00"
+       empopacity="0.23529412"
+       color="#009b00"
+       opacity="0.09803922" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5383"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="180px"
+       spacingy="180px"
+       color="#009b9b"
+       opacity="0.07843137"
+       empcolor="#009b9b"
+       empopacity="0.15686275" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3019"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.09803922"
+       empcolor="#0000ff"
+       empopacity="0"
+       dotted="true"
+       spacingx="140px"
+       spacingy="140px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3013"
+       empspacing="5"
+       visible="true"
+       enabled="false"
+       snapvisiblegridlinesonly="true"
+       spacingx="210px"
+       spacingy="210px"
+       color="#ff00ff"
+       opacity="0.29411765" />
+  </sodipodi:namedview>
+  <path
+     style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;stroke:none;stroke-width:350;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+     d="M 138.6875 13.75 A 125.01249 125.01249 0 0 0 51.625 228.375 L 455.09375 631.84375 C 455.04351 633.52996 455 635.2115 455 636.90625 L 455 1135 L 280 1135 A 125.01249 125.01249 0 1 0 280 1385 L 455 1385 L 455 1883.0938 C 455 1884.7885 455.04351 1886.47 455.09375 1888.1562 L 51.625 2291.625 A 125.01249 125.01249 0 1 0 228.375 2468.375 L 631.84375 2064.9062 C 633.52996 2064.9565 635.2115 2065 636.90625 2065 L 1135 2065 L 1135 2240 A 125.01249 125.01249 0 1 0 1385 2240 L 1385 2065 L 1883.0938 2065 C 1884.7885 2065 1886.47 2064.9565 1888.1562 2064.9062 L 2291.625 2468.375 A 125.01249 125.01249 0 1 0 2468.375 2291.625 L 2064.9062 1888.1562 C 2064.9565 1886.47 2065 1884.7885 2065 1883.0938 L 2065 1385 L 2240 1385 A 125.01249 125.01249 0 1 0 2240 1135 L 2065 1135 L 2065 636.90625 C 2065 635.2115 2064.9565 633.52996 2064.9062 631.84375 L 2468.375 228.375 A 125.01249 125.01249 0 0 0 2377.5312 13.78125 A 125.01249 125.01249 0 0 0 2291.625 51.625 L 1888.1562 455.09375 C 1886.47 455.04351 1884.7885 455 1883.0938 455 L 1385 455 L 1385 280 A 125.01249 125.01249 0 0 0 1258.125 153.21875 A 125.01249 125.01249 0 0 0 1135 280 L 1135 455 L 636.90625 455 C 635.2115 455 633.52996 455.04351 631.84375 455.09375 L 228.375 51.625 A 125.01249 125.01249 0 0 0 138.6875 13.75 z M 805 805 L 1715 805 L 1715 1715 L 805 1715 L 805 805 z "
+     transform="scale(10.666667,10.666667)"
+     id="rect5688" />
+</svg>

@@ -11,7 +11,7 @@
 			shield-fill: <?php echo linear($SHIELD_PEAK_COLOR,$zoom)?>;
 			shield-size: <?php echo text_limiter(shield_peak_text_size($zoom,$grade)) ?>;			
 			shield-placement: point;
-			shield-halo-fill: rgba(255,255,255,0.2);
+			shield-halo-fill: rgba(255,255,255,0.4);
 			shield-halo-radius: <?php echo exponential(shield_peak_text_halo_radius($grade),$zoom)?>;	
 			<?php if( $priority == 4 ): ?>					
 				shield-min-distance: 25px;

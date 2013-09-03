@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2520"
+   height="2520"
+   viewBox="0 0 26880 26880"
+   id="svg3064"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="chemist.svg">
+  <metadata
+     id="metadata3072">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3070" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="6"
+     gridtolerance="6"
+     guidetolerance="6"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="1147"
+     id="namedview3068"
+     showgrid="true"
+     inkscape:snap-grids="false"
+     inkscape:zoom="0.11313708"
+     inkscape:cx="62.250164"
+     inkscape:cy="741.68786"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3064"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-to-guides="false"
+     inkscape:object-paths="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3074"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       dotted="false"
+       spacingx="315px"
+       spacingy="315px"
+       color="#00009b"
+       opacity="0.1372549"
+       empcolor="#00009b"
+       empopacity="0.29411765" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5379"
+       empspacing="3"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.11764706"
+       empcolor="#9b0000"
+       empopacity="0.39215686"
+       spacingx="280px"
+       spacingy="280px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5381"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="252px"
+       spacingy="252px"
+       empcolor="#009b00"
+       empopacity="0.23529412"
+       color="#009b00"
+       opacity="0.09803922" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5383"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="180px"
+       spacingy="180px"
+       color="#009b9b"
+       opacity="0.07843137"
+       empcolor="#009b9b"
+       empopacity="0.15686275" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3019"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       color="#9b0000"
+       opacity="0.09803922"
+       empcolor="#0000ff"
+       empopacity="0"
+       dotted="true"
+       spacingx="140px"
+       spacingy="140px" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3013"
+       empspacing="5"
+       visible="true"
+       enabled="false"
+       snapvisiblegridlinesonly="true"
+       spacingx="210px"
+       spacingy="210px"
+       color="#ff00ff"
+       opacity="0.29411765" />
+  </sodipodi:namedview>
+  <path
+     style="fill:#000000;fill-opacity:1;stroke:none"
+     d="M 809.46875 1.84375 C 772.04142 2.4420077 733.75191 14.58444 694.875 44.15625 C 674.07136 98.361421 675.23599 158.02104 693.3125 207.90625 C 657.90627 220.06967 647.15373 234.24091 633.34375 268 L 634.875 349 C 766.706 298.47835 888.55494 297.44304 1016.0625 337.71875 L 1017.625 259.8125 C 1000.0281 231.55083 979.48928 207.71544 944.6875 209.5625 C 968.75734 135.75023 968.60909 87.806346 949.53125 44.15625 C 904.3771 19.378199 857.58912 1.0740606 809.46875 1.84375 z M 1776.4375 202.90625 C 1664.4575 203.28374 1570.0583 232.97211 1497.6562 299.3125 C 1467.0859 401.54173 1498.6253 415.75531 1517.125 448.46875 L 1655 451.78125 L 1661.4062 552.3125 C 1663.5418 578.28623 1659.7431 621.55376 1695.5312 613.875 C 1674.4494 653.39416 1650.1136 640.02231 1629.0312 742.03125 L 1620.875 1110.1562 L 1520.3125 2373.4688 C 1573.3901 2506.094 1615.8129 2526.7301 1705.25 2522.625 L 2409.0625 2525.8438 C 2480.4189 2501.4268 2518.2329 2449.0826 2516.125 2329.5938 C 2520.8845 2293.268 2498.6984 2207.6883 2454.4688 2152.9375 L 2457.6875 1402.0625 C 2461.1167 1346.8992 2389.0869 1252.1094 2340.9062 1239.875 L 2094.4062 1155.5625 L 1997.1562 779.375 L 1997.1562 610.65625 C 2027.2534 604.50745 2036.8548 549.2703 2045.7812 492.3125 L 2178.8125 487.46875 C 2178.8125 487.46875 2072.0198 402.38812 2049 357.65625 C 2025.9801 312.92469 2029.5625 240.96875 2029.5625 240.96875 C 1937.9009 216.15459 1853.0553 202.6479 1776.4375 202.90625 z M 2078.25 242.53125 C 2078.25 242.53125 2070.8137 306.49942 2091.1875 346.375 C 2111.5608 386.25057 2211.1875 458.1875 2211.1875 458.1875 L 2201.4688 545.8125 L 2370.1562 711.1875 C 2370.1562 711.1875 2401.304 710.30395 2410.625 699.8125 C 2422.2536 686.72391 2418.7812 648 2418.7812 648 L 2254.9375 461.5 L 2373.375 419.3125 L 2373.375 284.71875 L 2078.25 242.53125 z M 845.34375 351.21875 C 777.45514 351.21594 708.26865 370.99587 634.875 409.5625 C 361.45032 548.26675 123.09422 731.55993 38.15625 1110.1562 L 12.1875 2251.8125 C 39.845324 2361.667 53.472862 2480.9223 180.875 2524.2812 L 1127.875 2524.2812 C 1226.765 2479.9332 1228.0028 2370.4428 1225.2188 2258.3125 L 1205.75 785.78125 C 1204.5353 656.20397 1202.6001 469.0381 1024.125 398.1875 C 964.17919 366.59105 905.24561 351.2202 845.34375 351.21875 z M 627.21875 600 C 641.94341 600.10809 654.51216 604.06372 664.15625 612.3125 C 727.60104 672.9049 635.15143 969.22228 279.78125 1254.4688 C 229.72108 1283.9759 173.73406 1270.0475 216.5625 1079.3438 C 280.44792 819.91565 512.17875 603.04634 624.25 600.03125 C 625.25064 600.0043 626.23711 599.99279 627.21875 600 z "
+     transform="scale(10.666667,10.666667)"
+     id="path4072" />
+</svg>

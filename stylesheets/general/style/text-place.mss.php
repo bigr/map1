@@ -28,7 +28,7 @@
 				<?php endif; ?>
 				text-opacity: <?php echo urb_name_opacity($zoom,$grade)?>;
 				text-placement-type: simple;
-				text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>";
+				text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>,<?php echo text_limiter($size*0.55)?>,<?php echo text_limiter($size*0.49)?>,<?php echo text_limiter($size*0.44)?>,<?php echo text_limiter($size*0.4)?>";
 				<?php if( $priority == 4 ): ?>
 					text-min-distance: 25px;
 				<?php endif; ?>
@@ -51,7 +51,7 @@
 				text-fill: <?php echo linear(suburb_name_color($grade),$zoom)?>;
 				text-size: <?php echo text_limiter($size)?>;
 				text-halo-radius: <?php echo exponential(suburb_name_halo_radius($grade),$zoom)?>;				
-				text-halo-fill: rgba(255,255,255,0.33);
+				text-halo-fill: rgba(255,255,255,<?php echo linear($SUBURB_NAME_HALO_OPACITY,$zoom) ?>);
 				text-dy: 0;
 				text-wrap-width: <?php echo round(suburb_name_wrap_width($zoom,$grade))?>;
 				<?php if( suburb_name_size($zoom,$grade) > linear($SUBURB_NAME_UPPERCASE_SIZE,$zoom) ): ?>
@@ -59,7 +59,7 @@
 				<?php endif; ?>
 				text-opacity: <?php echo suburb_name_opacity($zoom, $grade)?>;
 				text-placement-type: simple;
-				text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>";
+				text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>,<?php echo text_limiter($size*0.55)?>,<?php echo text_limiter($size*0.49)?>,<?php echo text_limiter($size*0.44)?>,<?php echo text_limiter($size*0.4)?>";
 				<?php if( $priority == 4 ): ?>
 					text-min-distance: 30px;
 				<?php endif; ?>
@@ -69,15 +69,18 @@
 	<?php endforeach; ?>
 	
 	<?php $priority = locality_priorities($zoom); if ( $priority !== false ): ?>		
-		.textPlace.priority<?php echo $priority?>[zoom = <?php echo $zoom?>][type = 'locality'] {			
+		.textPlace.priority<?php echo $priority?>[zoom = <?php echo $zoom?>][type = 'locality'] {
+			<?php $size = locality_name_size($zoom); ?>
 			text-face-name: "<?php echo FONT_BOOK_SANS_NARROW ?>";
 			text-name: "[name]";
 			text-fill: <?php echo locality_name_color($zoom)?>;
-			text-size: <?php echo text_limiter(locality_name_size($zoom))?>;
+			text-size: <?php echo text_limiter($size) ?>;
 			text-halo-radius: <?php echo exponential(locality_name_halo_radius(),$zoom)?>;
-			text-halo-fill: rgba(255,255,255,0.4);			
+			text-halo-fill: rgba(255,255,255,0.6);			
 			text-wrap-width: <?php echo round(locality_name_wrap_width($zoom))?>;			
 			text-opacity: <?php echo locality_name_opacity($zoom)?>;
+			text-placement-type: simple;
+			text-placements: "X,N,S,E,W,NE,SE,NW,SW,<?php echo text_limiter($size*0.9)?>,<?php echo text_limiter($size*0.8)?>,<?php echo text_limiter($size*0.7)?>,<?php echo text_limiter($size*0.62)?>,<?php echo text_limiter($size*0.55)?>,<?php echo text_limiter($size*0.49)?>,<?php echo text_limiter($size*0.44)?>,<?php echo text_limiter($size*0.4)?>";
 			<?php if( $priority == 4 ): ?>
 				text-min-distance: 30px;
 			<?php endif; ?>

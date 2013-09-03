@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+time python report.py "$1" > "/tmp/~$1.xml"
+
+saxonb-xslt -xsl:report2svg.xsl "-s:/tmp/~$1.xml" > "$1.html"
+unlink "/tmp/~$1.xml"

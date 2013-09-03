@@ -10,7 +10,7 @@ function _getRailwayGradeSql() {
 	
 	return "
 		(CASE
-			WHEN $railwayCol = 'rail' THEN (CASE
+			WHEN $railwayCol IN ('rail','narrow_gaugue') THEN (CASE
 				WHEN usage IN ('main','mainline','highspeed') THEN 1				
 				WHEN usage IN ('industrial','military','tourism','Stock','yard','siding','garage','preserved') THEN 4
 				WHEN service IN ('siding','spur','yeard') THEN 4
@@ -37,11 +37,12 @@ return <<<EOD
 	SELECT
 			way,
 				(CASE
-					WHEN $railwayCol IN ('rail','light_rail','disused','abandoned') THEN 'train'
+					WHEN $railwayCol IN ('rail','light_rail','disused','abandoned','narrow_gauge') THEN 'train'
 					WHEN $railwayCol = 'tram' THEN 'tram'
 					WHEN $railwayCol = 'subway' THEN 'subway'
 					WHEN $railwayCol = 'funicular' THEN 'funicular'
 					WHEN $railwayCol = 'monorail' THEN 'monorail'
+					WHEN $railwayCol = 'platform' THEN 'platform'
 					WHEN $railwayCol = 'abandoned' THEN 'abandoned'
 					ELSE 'unknown'
 				END) AS
@@ -75,6 +76,13 @@ return <<<EOD
 			maxspeed,
 			wikipedia,
 			website,
+			colour,
+			transport,
+			public_transport,
+			tram,
+			name,
+			surface,
+			width,
 			osm_id,
 			ST_Length(ST_Transform(way,900913)) AS
 			    way_length
@@ -84,4 +92,9 @@ return <<<EOD
 			    AND ($where)
 		ORDER BY ($railwayGradeSql), osm_id DESC
 EOD;
+}
+
+
+function sql_text_railway() {
+	return "SELECT * FROM railways WHERE COALESCE(name,'') <> ''";
 }

@@ -51,7 +51,7 @@
 			}
 		<?php endif; ?>
 		
-		.waterpoint[zoom = <?php echo $zoom?>] {
+		.waterpoint {
 		<?php foreach ( $WATERPOINT AS $selector => $a ): ?>	    
 			<?php if ( !empty($a['zooms']) && in_array($zoom,$a['zooms']) ): ?>
 			<?php echo $selector?> {
@@ -61,7 +61,28 @@
 					}
 			<?php endif; ?>
 		<?php endforeach; ?>
-		}    
+		}
+		
+		<?php if ( in_array($zoom,$WATERWAY_WEIR) ): ?>
+		.waterway2[waterway='weir'] {
+			line-color: lighten(<?php echo linear($_WATER_COLOR,$zoom)?>,20);
+			line-width: <?php echo exponential($WATERWAY_WEIR_LINE_WIDTH,$zoom) ?>;
+			b/line-color: lighten(<?php echo linear($_WATER_COLOR,$zoom)?>,20);
+			b/line-width: <?php echo exponential($WATERWAY_WEIR_WIDTH,$zoom) ?>;
+			b/line-dasharray: <?php echo round(exponential($WATERWAY_WEIR_WIDTH,$zoom) - exponential($WATERWAY_WEIR_LINE_WIDTH,$zoom)) ?>,<?php echo round(exponential($WATERWAY_WEIR_WIDTH,$zoom) - exponential($WATERWAY_WEIR_LINE_WIDTH,$zoom)) ?>;
+		}
+		<?php endif; ?>
+		
+		<?php if ( in_array($zoom,$WATERWAY_DAM) ): ?>
+		.waterway2[waterway='dam'] {
+			line-color: lighten(<?php echo linear($_WATER_COLOR,$zoom)?>,20);
+			line-width: <?php echo exponential($WATERWAY_DAM_LINE_WIDTH,$zoom) ?>;
+			b/line-color: lighten(<?php echo linear($_WATER_COLOR,$zoom)?>,20);
+			b/line-width: <?php echo exponential($WATERWAY_DAM_WIDTH,$zoom) ?>;
+			b/line-dasharray: <?php echo round(exponential($WATERWAY_DAM_WIDTH,$zoom) - exponential($WATERWAY_DAM_LINE_WIDTH,$zoom)) ?>,<?php echo round(exponential($WATERWAY_DAM_WIDTH,$zoom) - exponential($WATERWAY_DAM_LINE_WIDTH,$zoom)) ?>;
+		}
+		<?php endif; ?>
+		    
 	}
 <?php endforeach;?>
 

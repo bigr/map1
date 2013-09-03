@@ -33,7 +33,7 @@ EOD;
 
 
 function sql_barrier_short($layer,$where = '1 = 1',$order = 'z_order') {
-    return "SELECT * FROM barriers WHERE layer = $layer";
+    return "SELECT *,st_length(way) AS length FROM barriers WHERE layer = $layer";
 }
 
 
@@ -49,7 +49,7 @@ return <<<EOD
 	barrier,							    
 	$layerSql AS layer,
 	name,	
-	$cols	
+	$cols
     FROM barrierpoint
     WHERE
 	($propertyWhereQuery)			

@@ -12,12 +12,13 @@ function sql_aerialway($where = '1 = 1',$order = 'z_order') {
 	$propertyWhereQuery = getPropertyWhereQuery($AERIALWAY);
 return <<<EOD
     SELECT
-	way,		
+	way,
 	aerialway,
 	    COALESCE("piste:lift",'no') AS
 	"piste:lift",
 	    $layerSql as 
 	layer,
+	name,
 	osm_id
     FROM aerialway
     WHERE
@@ -28,6 +29,15 @@ EOD;
 
 function sql_aerialway_short($layer,$where = '1 = 1',$order = 'z_order') {
     return "SELECT * FROM aerialways WHERE layer = $layer";
+}
+
+function sql_aerialway_text($priority,$where = '1 = 1',$order = 'z_order') {
+    $layerSql = _getLayerSql();
+    return "
+	SELECT way,name,osm_id,'' AS difficulty FROM aerialway WHERE COALESCE(name,'') <> ''
+	UNION
+	SELECT way,COALESCE(name,\"piste:name\") AS name,osm_id,\"piste:difficulty\" AS difficulty FROM pisteway WHERE  COALESCE(name,'') <> ''
+    ";
 }
 
 

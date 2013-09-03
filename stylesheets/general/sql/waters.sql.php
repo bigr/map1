@@ -23,6 +23,11 @@ function sql_waterway_short($layer, $cols = '0',$where = '1 = 1',$order = 'z_ord
     return "SELECT * FROM waterways_$table WHERE layer = $layer";
 }
 
+function sql_waterway2($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
+    $layerSql = _getNewLayerSql();		
+    return "SELECT * FROM waterway2 WHERE $layerSql = $layer";
+}
+
 function sql_waterway_short_notrect($layer, $cols = '0',$where = '1 = 1',$order = 'z_order') {
     $layerSql = _getNewLayerSql();
     return sql_waterway($cols,"$layerSql = $layer",$order);

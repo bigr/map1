@@ -16,7 +16,14 @@
 					
 					<?php foreach( range(0,13) as $highway_grade ):?>
 						<?php foreach( array(-1,1) as $offsetside ): ?>
-							<?php $offset_value = $offsetside * (exponential($ROUTE_HIKING_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0); ?>
+							<?php $offset_value = exponential($ROAD_WIDTH[$highway_grade],$zoom) - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom) - 0.5 < 2.0 * exponential($ROUTE_HIKING_WIDTH,$zoom) 
+									? $offsetside * (exponential($ROUTE_HIKING_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)*0.5 + 0.5)
+									: (
+											$offset == 1
+												? $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_HIKING_WIDTH,$zoom)*0.5 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2 - 0.5)
+												: $offsetside * (exponential($ROUTE_HIKING_WIDTH,$zoom) * ($offset-1.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)*0.5 + 0.5)
+										);
+								?>
 							<?php if ( abs($offset_value) > 0.01 ): ?>
 							[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>] {
 								line-offset: <?php echo $offset_value ?>;
@@ -51,32 +58,42 @@
 		
 		.route<?php echo $offset;?>.bicycle[zoom = <?php echo $zoom?>] {
 			[network='lcn'][density < <?php echo $ROUTE_BICYCLE_LCN_DENSITY[$zoom] ?>],[network='rcn'][density < <?php echo $ROUTE_BICYCLE_RCN_DENSITY[$zoom] ?>],[network!='lcn'][network!='rcn'] {
-				line-color: <?php echo linear($ROUTE_BICYCLE_COLOR,$zoom)?>;
+				[network='lcn'] {
+					line-color: <?php echo linear($BICYCLE_ROUTE_LCN_COLOR,$zoom)?>;
+				}
+				[network='rcn'] {
+					line-color: <?php echo linear($BICYCLE_ROUTE_RCN_COLOR,$zoom)?>;
+				}
+				[network='ncn'] {
+					line-color: <?php echo linear($BICYCLE_ROUTE_NCN_COLOR,$zoom)?>;
+				}
+				[network='icn'] {
+					line-color: <?php echo linear($BICYCLE_ROUTE_ICN_COLOR,$zoom)?>;
+				}
 				line-width: <?php echo linear($ROUTE_BICYCLE_WIDTH,$zoom)?>;
 				line-opacity: <?php echo linear($ROUTE_BICYCLE_OPACITY,$zoom)?>;
 				<?php foreach( range(0,13) as $highway_grade ):?>
-					<?php foreach( array(-1,1) as $offsetside ): ?>					
-						<?php $offset_value = $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_BICYCLE_WIDTH,$zoom)/2 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2); ?>
+					<?php foreach( array(-1,1) as $offsetside ): ?>
+						<?php 
+						
+									$offset_value = exponential($ROAD_WIDTH[$highway_grade],$zoom) - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom) - 0.5 < 2.0 * exponential($ROUTE_BICYCLE_WIDTH,$zoom) 
+									? $offsetside * (exponential($ROUTE_BICYCLE_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)*0.5 + 0.5)
+									: (
+											$offset == 1
+												? $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_BICYCLE_WIDTH,$zoom)*0.5 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2 - 0.5)
+												: $offsetside * (exponential($ROUTE_BICYCLE_WIDTH,$zoom) * ($offset-1.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)*0.5 + 0.5)
+										);
+								?>
 						<?php if ( abs($offset_value) > 0.01 ): ?>
 						[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>][oneway='no'], 
 						<?php if ( $offsetside == -1 ):?>
 							[highway_grade = <?php echo $highway_grade?>][oneway='yes']
 						<?php else: ?>
 							[highway_grade = <?php echo $highway_grade?>][oneway='-1']
-						<?php endif; ?>						
-							{
-																					
-								line-offset: <?php echo $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_BICYCLE_WIDTH,$zoom)/2 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2)?>;								
-								line-opacity: 1.0;
-							}
-						<?php endif;?>
-						<?php $offset_value = $offsetside * (exponential($ROUTE_BICYCLE_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0); ?>
-						<?php if ( $offset_value > 0.01 ): ?>
-						[highway_grade > 7] {
-							line-offset: <?php echo  $offset_value; ?>;
+						<?php endif; ?>	{
+							line-offset: <?php echo $offset_value ?>;
 						}
-						<?php endif;?>
-									
+						<?php endif; ?>
 					<?php endforeach; ?>
 				<?php endforeach; ?>
 				
@@ -117,7 +134,14 @@
 			line-opacity: <?php echo linear($ROUTE_SKI_OPACITY,$zoom)?>;
 			<?php foreach( range(0,13) as $highway_grade ):?>
 				<?php foreach( array(-1,1) as $offsetside ): ?>
-					<?php $offset_value = $offsetside * (exponential($ROUTE_SKI_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 + 1.0); ?>
+					<?php $offset_value = exponential($ROAD_WIDTH[$highway_grade],$zoom) - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom) - 0.5 < 2.0 * exponential($ROUTE_SKI_WIDTH,$zoom) 
+									? $offsetside * (exponential($ROUTE_SKI_WIDTH,$zoom) * ($offset-0.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)*0.5 + 0.5)
+									: (
+											$offset == 1
+												? $offsetside * (exponential($ROAD_WIDTH[$highway_grade],$zoom)/2 - exponential($ROUTE_SKI_WIDTH,$zoom)*0.5 - exponential($ROAD_STROKE_WIDTH[$highway_grade],$zoom)/2 - 0.5)
+												: $offsetside * (exponential($ROUTE_SKI_WIDTH,$zoom) * ($offset-1.5) + exponential($ROAD_WIDTH[$highway_grade],$zoom)*0.5 + 0.5)
+										);
+								?>
 					<?php if ( abs($offset_value) > 0.01 ): ?>
 					[highway_grade = <?php echo $highway_grade?>][offsetside = <?php echo $offsetside?>] {
 						line-offset: <?php echo $offset_value;?>;

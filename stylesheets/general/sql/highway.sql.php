@@ -225,7 +225,19 @@ function sql_highway_road($layer, $grade, $cols = '0',$order = 'grade') {
 }
 
 function sql_highway_bridge($layer, $grade, $cols = '0',$order = 'grade') {
-    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND is_bridge = 'yes'";
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND is_bridge = 'yes' AND type = 'road'";
+}
+
+function sql_highway_tunnel($layer, $grade, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND is_tunnel = 'yes' AND type = 'road'";
+}
+
+function sql_highway_path_bridge($layer, $grade, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND is_bridge = 'yes' AND type = 'path'";
+}
+
+function sql_highway_path_tunnel($layer, $grade, $cols = '0',$order = 'grade') {
+    return "SELECT * FROM highways WHERE layer = $layer AND grade = $grade AND is_tunnel = 'yes' AND type = 'path'";
 }
 
 function sql_highway_oneway($layer, $cols = '0',$order = 'grade') {
