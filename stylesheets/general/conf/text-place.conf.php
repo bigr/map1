@@ -8,13 +8,16 @@ require_once "conf/text.conf.php";
  */
 function urb_priorities($zoom,$grade) {		
 	$sz = urb_name_size($zoom,$grade);
+	$factor = linear(array(5 => 0.7, 8 => 0.8, 11 => 1, 13 => 1, 15 => 1.1,18 => 1.2),$zoom);
+	$z2 = linear(array(5 => 1.1, 10 => 1.5, 12 => 1),$zoom);
+	$z3 = linear(array(5 => 1.5, 10 => 2.5, 12 => 1),$zoom);
 	$factor = linear(array(5 => 0.7, 8 => 0.8, 11 => 1, 12 => 1.3, 15 => 1.0),$zoom);
-	if ( $sz > 125*$factor ) return -1;
-	if ( $sz > 33*$factor ) return 0;
-	if ( $sz > 24*$factor ) return 1;
-	if ( $sz > 19*$factor) return 2;
-	if ( $sz > 9.0 ) return 3;
-	if ( $sz > 1.0 ) return 4;		
+	if ( $sz > 96*$factor ) return -1;
+	if ( $sz > 32*$factor ) return 0;
+	if ( $sz > 16*$factor ) return 1;
+	if ( $sz > $z2*8.0*$factor) return 2;
+	if ( $sz > $z3*4.0*$factor ) return 3;
+	if ( $sz > 2.0*$factor ) return 4;			
 	return false;
 }
  
@@ -97,13 +100,15 @@ $URB_NAME_COLUMN = array(
  */
 function suburb_priorities($zoom,$grade) {	
 	$sz = suburb_name_size($zoom,$grade);
-	$factor = linear(array(11 => 1, 12 => 1.3),$zoom);
-	if ( $sz > 85*$factor ) return -1;
-	if ( $sz > 40*$factor ) return 0;
-	if ( $sz > 25*$factor ) return 1;
-	if ( $sz > 18*$factor) return 2;
-	if ( $sz > 8*$factor ) return 3;
-	if ( $sz > 1.0*$factor ) return 4;		
+	$z2 = linear(array(5 => 1.5, 10 => 1.4, 12 => 1),$zoom);
+	$z3 = linear(array(5 => 2.5, 10 => 2.0, 12 => 1),$zoom);
+	$factor = linear(array(5 => 0.7, 8 => 0.8, 11 => 1, 12 => 1, 14 => 1.4,15 => 1.2),$zoom);
+	if ( $sz > 64*$factor ) return -1;
+	if ( $sz > 32*$factor ) return 0;
+	if ( $sz > 16*$factor ) return 1;
+	if ( $sz > 8.0*$z2*$factor) return 2;
+	if ( $sz > 4.0*$z3*$factor ) return 3;
+	if ( $sz > 2.0*$factor ) return 4;			
 	return false;
 }
  
@@ -119,27 +124,30 @@ function suburb_name_color($grade) {
  */
 function suburb_name_opacity($zoom,$grade) {
 	$sz = suburb_name_size($zoom,$grade);
-	return linear(array(20 => 0.6, 40=>0.5, 70 => 0.4, 120 => 0.3),$sz);	
+	return linear(array(13 => 0.75, 20 => 0.6, 40=>0.5, 70 => 0.4, 120 => 0.3),$sz);	
 }
 
 $SUBURB_NAME_UPPERCASE_SIZE = array(5 => 50, 13 => 50);
 
-$SUBURB_NAME_SIZE_ZOOM_EXPEX = array(5 => 1.5, 8 => 1.55, 12 => 1.55,13 => 1.65);
+$SUBURB_NAME_SIZE_ZOOM_EXPEX = array(5 => 1.5, 8 => 1.55, 12 => 1.55,14 => 1.65,15 => 1.75);
 $SUBURB_NAME_SIZE_GRADE_EXPEX = array(5 => 1.08);
+
+
+$SUBURB_NAME_HALO_OPACITY = array(13 => 0.7,16=>0.4);
 
 /**
  * Suburb name text size grade x zoom maping
  */
 function suburb_name_size($zoom,$grade) {
 	global $SUBURB_NAME_SIZE_ZOOM_EXPEX, $SUBURB_NAME_SIZE_GRADE_EXPEX;
-	return expex($SUBURB_NAME_SIZE_GRADE_EXPEX,$grade) * expex($SUBURB_NAME_SIZE_ZOOM_EXPEX,$zoom) * 0.012;	
+	return expex($SUBURB_NAME_SIZE_GRADE_EXPEX,$grade) * expex($SUBURB_NAME_SIZE_ZOOM_EXPEX,$zoom) * 0.0105;	
 }
 
 /**
  * Suburb name text halo radius grade x zoom maping
  */
 function suburb_name_halo_radius($grade) {
-	return array(12 => 2);
+	return array(12 => 4,14=>5,16 => 2);
 }
 
 /**
@@ -156,13 +164,13 @@ function locality_priorities($zoom) {
 	if ( $zoom < 12 ) return false;
 	if ( $zoom == 12 ) return 4;
 	$sz = locality_name_size($zoom);
-	$factor = linear(array(11 => 1, 12 => 1.3),$zoom);
-	if ( $sz > 150*$factor ) return -1;
-	if ( $sz > 50*$factor ) return 0;
-	if ( $sz > 40*$factor ) return 1;
-	if ( $sz > 35*$factor) return 2;
-	if ( $sz > 9.5 ) return 3;
-	if ( $sz > 1.0 ) return 4;		
+	$factor = linear(array(5 => 0.7, 8 => 0.8, 11 => 1, 13 => 1, 15 => 1.1,18 => 1.2),$zoom);	
+	if ( $sz > 96*$factor ) return -1;
+	if ( $sz > 48*$factor ) return 0;
+	if ( $sz > 24*$factor ) return 1;
+	if ( $sz > 12.0*$factor) return 2;
+	if ( $sz > 6.0*$factor ) return 3;
+	if ( $sz > 3.0*$factor ) return 4;			
 	return false;	
 }
 
@@ -177,14 +185,14 @@ function locality_name_color($zoom) {
  * Locality name text size grade x zoom maping
  */
 function locality_name_size($zoom) {		
-	return 11 * pow(1.1,($zoom - 12));	
+	return 7 * pow(1.1,($zoom - 12));	
 } 
 
 /**
  * Locality name text halo radius grade x zoom maping
  */
 function locality_name_halo_radius() {
-	return array(14 => 1);
+	return array(14 => 2);
 }
 
 

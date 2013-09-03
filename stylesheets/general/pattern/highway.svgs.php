@@ -24,6 +24,14 @@ foreach ( $RENDER_ZOOMS as $zoom ) {
 			svg2png(ROOT."/general/pattern/~{$a['point-file']}-$zoom.png",$svg);
 		}
 	}
+	
+	if ( in_array($zoom,$HIGHWAY_JUNCTION_ZOOMS) ) {			
+			$size = exponential($HIGHWAY_JUNCTION_SIZE,$zoom)*2;
+			$color = linear($HIGHWAY_JUNCTION_COLOR,$zoom);
+			$opacity = 0.6;			
+			require "$HIGHWAY_JUNCTION_FILE.svg.tpl";
+			svg2png(ROOT."/general/pattern/~$HIGHWAY_JUNCTION_FILE-$zoom.png",$svg);
+	}
 }
 
 

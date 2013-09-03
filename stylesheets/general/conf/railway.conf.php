@@ -91,7 +91,26 @@ RAILWAY_DISUSED => array(                   13 => array(3,3), 17 => array(4,4)),
 );
 
 $TRAM_ZOOMS = range(14,18);
-$TRAM_COLOR = array(16=>'#330000');
-$TRAM_OPACITY = array(14=>0.1,15=>0.5,18=>0.8);
+$TRAM_COLOR = array(16=>'#773333');
+$TRAM_OPACITY = array(14=>0.2,15=>0.4,18=>1.0);
 $TRAM_WIDTH1 = array(16=>1);
 $TRAM_WIDTH2 = array(14=>2,18=>7);
+
+$FUNICULAR_ZOOMS = range(13,18);
+$FUNICULAR_COLOR = array(16=>'#444444');
+$FUNICULAR_OPACITY = array(13=>1.0);
+$FUNICULAR_WIDTH = array(13=>2);
+$FUNICULAR_WIDTH2 = array(13=>5,18=>12);
+
+
+$SUBWAY_ZOOMS = array();
+$SUBWAY_COLOR = array(16=>'#009900');
+$SUBWAY_OPACITY = array(14=>0.2,15=>0.15,18=>0.2);
+$SUBWAY_WIDTH = array(14=>10,18=>15);
+
+$RAILWAY_TEXT_ZOOMS = array(
+	13 => 3, 14 => 2, 15 => 2, 16 =>1, 17 => 1, 18 => 1
+);
+
+$RAILWAY_TEXT_SIZE = array(13 => 6, 18 => 15);
+

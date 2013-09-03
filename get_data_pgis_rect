@@ -8,8 +8,6 @@ LON_END=$3
 LAT_END=$4
 DB=$5
 
-./make-gis-db $DB klinger
-
 function download {
     OVERPASS_SERVERS=( "http://overpass-api.de/api" "http://overpass.osm.rambler.ru/cgi" "http://api.openstreetmap.fr/oapi/" )
     OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}    
@@ -155,7 +153,7 @@ function download {
     
 }
 
-
+./make-gis-db $DB klinger
     
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[place~\"city|town|village|hamlet|isolated_dwelling|farm|suburb|neighbourhood|locality|island|islet\"]" )
 download q place point "" 1 1
@@ -218,8 +216,21 @@ q=(
 )
 download q waterarea polygon "" 2 1
 
-q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural~\"weir|dam|lock_gate\"]" )
-download q waterpoint point "" 1 1
+
+q=(
+    "((node(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"weir|dam|lock_gate\"])->.a); \
+     ((way(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"weir|dam|lock_gate\"];);(._;node(w);)->.b); \
+     (.a; .b;)"
+)
+
+download q waterpoint pointex \
+    "      SELECT osm_id,waterway,layer,bridge,tunnel,building,name,way FROM waterpoint_point \
+     UNION SELECT osm_id,waterway,layer,bridge,tunnel,building,name,ST_PointOnSurface(way) AS way FROM waterpoint_line" \
+    2 2
+
+q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"weir|dam|lock_gate\"][area!~\"yes|1|Yes|true|True\"];);(._;node(w);)" )
+download q waterway2 line "" 1 1    
+
 
 q=( "(way(%lat1%,%lon1%,%lat2%,%lon2%)[railway];);(._;node(w);)" )
 download q railway line "" 2 1
@@ -238,7 +249,12 @@ download q aerialway line "" 1 1
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[aerialway]" )
 download q aerialpoint point "" 1 1
 
-q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[type=route][route=piste][\"piste:type\"=downhill][area!~\"yes|1|true|Yes|True\"];);(._;way(r););(._;node(w);)" )
+q=( 
+    "(((rel(%lat1%,%lon1%,%lat2%,%lon2%)[type=route][route=piste][\"piste:type\"=downhill][area!~\"yes|1|true|Yes|True\"];);(._;way(r););(._;node(w);))->.a); \
+     (((way(%lat1%,%lon1%,%lat2%,%lon2%)[\"piste:type\"=downhill][area!~\"yes|1|true|Yes|True\"];);(._;node(w);))->.b);\
+     (.a; .b;)
+    "
+)
 download q pisteway line "" 1 1
 
 q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[type=route][route=piste][\"piste:type\"=downhill][area~\"yes|1|true|Yes|True\"];);(._;way(r););(._;node(w);)" )
@@ -282,13 +298,25 @@ q=(
      (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"];);(._;node(w);))->.r); \
      ((node(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"])->.s); \
      (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);))->.t); \
-     (.a; .b; .c; .d; .e; .f; .g; .h; .i; .j; .k; .l; .m; .n; .o; .p; .q; .r; .s; .t;)"
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[shop])->.u); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[shop];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[shop];);(._;node(w);))->.v); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[sport])->.w); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[sport];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[sport];);(._;node(w);))->.x); \
+     ((node(%lat1%,%lon1%,%lat2%,%lon2%)[military])->.y); \
+     (((rel(%lat1%,%lon1%,%lat2%,%lon2%)[military];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[military];);(._;node(w);))->.z); \
+     (.a; .b; .c; .d; .e; .f; .g; .h; .i; .j; .k; .l; .m; .n; .o; .p; .q; .r; .s; .t; .u; .v; .w; .x; .y; .z;)"
 )
 download q symbol pointex \
-    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,wikipedia,website,z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,wikipedia,'website',z_order,ST_Centroid(way) AS way FROM symbol_polygon" \
+    "      SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,sport,military,man_made,shop,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,colour,transport,public_transport,cargo,cuisine,parking,maxheight,fee,surveillance,memorial,operator,wikipedia,website,z_order,way FROM symbol_point \
+     UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,sport,military,man_made,shop,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",railway,highway,aeroway,power,colour,transport,public_transport,cargo,cuisine,parking,maxheight,fee,surveillance,memorial,operator,wikipedia,website,z_order,ST_Centroid(way) AS way FROM symbol_polygon" \
     2 2
+
+
 
 q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)" )
 download q route route "" 1 2
+
+q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"ferry\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"ferry\"];);(._;node(w);)" )
+download q ferry line "" 1 1
 
 

@@ -36,7 +36,7 @@ $_BOUNDARY_COLOR = array(5 => '#555555', 8 => '#9a0070',11 => '#f100b0');
 
 $_BOUNDARY_PA_NATURAL_COLOR  = array(10 => '#338800',11 => '#338800');
 $_BOUNDARY_PA_WATER_COLOR    = array(10 => '#0000dd',11 => '#0000dd');
-$_BOUNDARY_PA_MILITARY_COLOR = array(10 => '#dd0000',11 => '#dd0000');
+$_BOUNDARY_PA_MILITARY_COLOR = array(10 => '#cc0000',11 => '#cc0000');
 
 $RENDER_BOUNDARY_LEVELS = array(
 	BOUNDARY_LEVEL_CATASTRAL,
@@ -142,16 +142,16 @@ BOUNDARY_LEVEL_CATASTRAL  => array(15 => 1),
  * Boundary opacity level x zoom maping
  */
 $BOUNDARY_OPACITY = array(
-BOUNDARY_LEVEL_1          => array( 8 => 0.5),
-BOUNDARY_LEVEL_COUNTRY    => array( 8 => 0.5, 10 => 0.5),
-BOUNDARY_LEVEL_SUBCOUNTRY => array( 8 => 0.5, 12 => 0.5),
-BOUNDARY_LEVEL_STATE      => array( 8 => 0.5, 13 => 0.5),
-BOUNDARY_LEVEL_SUBSTATE   => array( 8 => 0.5, 14 => 0.5),
-BOUNDARY_LEVEL_COUNTY     => array( 8 => 0.5, 15 => 0.5),
-BOUNDARY_LEVEL_DISTRICT   => array(10 => 0.5, 16 => 0.5),
-BOUNDARY_LEVEL_URB        => array(12 => 0.5, 17 => 0.5),
-BOUNDARY_LEVEL_SUBURB     => array(14 => 0.5, 18 => 0.5),
-BOUNDARY_LEVEL_CATASTRAL  => array(15 => 0.5, 19 => 0.5),
+BOUNDARY_LEVEL_1          => array( 8 => 0.4),
+BOUNDARY_LEVEL_COUNTRY    => array( 8 => 0.4, 10 => 0.4),
+BOUNDARY_LEVEL_SUBCOUNTRY => array( 8 => 0.4, 12 => 0.4),
+BOUNDARY_LEVEL_STATE      => array( 8 => 0.4, 13 => 0.4),
+BOUNDARY_LEVEL_SUBSTATE   => array( 8 => 0.4, 14 => 0.4),
+BOUNDARY_LEVEL_COUNTY     => array( 8 => 0.4, 15 => 0.4),
+BOUNDARY_LEVEL_DISTRICT   => array(10 => 0.4, 16 => 0.4),
+BOUNDARY_LEVEL_URB        => array(12 => 0.4, 17 => 0.4),
+BOUNDARY_LEVEL_SUBURB     => array(14 => 0.4, 18 => 0.4),
+BOUNDARY_LEVEL_CATASTRAL  => array(15 => 0.4, 19 => 0.4),
 );
 
 
@@ -353,15 +353,15 @@ BOUNDARY_PA_CLASS_25 => array( 10 => 2, 15 => 2),
  * Protected Area Boundary opacity level x zoom maping
  */
 $BOUNDARY_PA_OPACITY = array(
-BOUNDARY_PA_CLASS_1 => array( 8 => 0.8),
-BOUNDARY_PA_CLASS_2 => array( 8 => 0.7),
-BOUNDARY_PA_CLASS_3 => array( 8 => 0.6),
-BOUNDARY_PA_CLASS_4 => array( 8 => 0.5),
-BOUNDARY_PA_CLASS_5 => array( 8 => 0.4),
-BOUNDARY_PA_CLASS_6 => array( 8 => 0.3),
-BOUNDARY_PA_CLASS_7 => array( 8 => 0.2),
-BOUNDARY_PA_CLASS_12 => array( 8 => 0.7),
-BOUNDARY_PA_CLASS_25 => array( 8 => 0.7),
+BOUNDARY_PA_CLASS_1 => array( 8 => 1.0),
+BOUNDARY_PA_CLASS_2 => array( 8 => 0.9),
+BOUNDARY_PA_CLASS_3 => array( 8 => 0.8),
+BOUNDARY_PA_CLASS_4 => array( 8 => 0.7),
+BOUNDARY_PA_CLASS_5 => array( 8 => 0.6),
+BOUNDARY_PA_CLASS_6 => array( 8 => 0.5),
+BOUNDARY_PA_CLASS_7 => array( 8 => 0.4),
+BOUNDARY_PA_CLASS_12 => array( 8 => 0.9),
+BOUNDARY_PA_CLASS_25 => array( 8 => 0.9),
 );
 
 
@@ -386,15 +386,15 @@ $BOUNDARY_PA_RENDER_DASH = array (
  * Protected Area Boundary opacity level x zoom maping
  */
 $BOUNDARY_PA_DASH = array(
-BOUNDARY_PA_CLASS_1 => array(10 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_2 => array(10 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_3 => array(10 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_4 => array(10 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_5 => array(10 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_6 => array(10 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_7 => array(11 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_12 => array(11 => array(10,3,5,3)),
-BOUNDARY_PA_CLASS_25 => array(11 => array( 10,3,5,3)),
+BOUNDARY_PA_CLASS_1 => array(10 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_2 => array(10 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_3 => array(10 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_4 => array(10 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_5 => array(10 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_6 => array(10 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_7 => array(11 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_12 => array(11 => array(8,2,4,2)),
+BOUNDARY_PA_CLASS_25 => array(11 => array(8,2,4,2)),
 );
 
 /**
@@ -409,7 +409,7 @@ BOUNDARY_PA_CLASS_5 => $_BOUNDARY_PA_NATURAL_COLOR,
 BOUNDARY_PA_CLASS_6 => $_BOUNDARY_PA_NATURAL_COLOR,
 BOUNDARY_PA_CLASS_7 => $_BOUNDARY_PA_NATURAL_COLOR,
 BOUNDARY_PA_CLASS_12 => array(10 => '#0000dd',11 => '#0000dd'),
-BOUNDARY_PA_CLASS_25 => array(10 => '#dd0000',11 => '#dd0000'),
+BOUNDARY_PA_CLASS_25 => array(10 => '#cc0000',11 => '#cc0000'),
 
 );
 
@@ -448,18 +448,18 @@ BOUNDARY_PA_CLASS_25 => array( 9 => 0.2,11 => 0.2),
 
 
 $BOUNDARY_PA_WIDTH = array(    
-    220 => array( 8 => 1.0),
-    470 => array( 8 => 1.2),
-   1000 => array( 8 => 1.5),
-   2200 => array( 8 => 1.9),
-   4700 => array( 8 => 2.4),
-  10000 => array( 8 => 3.0),
-  22000 => array( 8 => 3.7),
-  47000 => array( 8 => 4.5),
- 100000 => array( 8 => 5.4), 
- 220000 => array( 8 => 6.4), 
- 470000 => array( 8 => 7.5), 
-1000000 => array( 8 => 8.6), 
+    220 => array( 8 => 0.8),
+    470 => array( 8 => 1.0),
+   1000 => array( 8 => 1.2),
+   2200 => array( 8 => 1.5),
+   4700 => array( 8 => 1.9),
+  10000 => array( 8 => 2.4),
+  22000 => array( 8 => 3.0),
+  47000 => array( 8 => 3.7),
+ 100000 => array( 8 => 4.5), 
+ 220000 => array( 8 => 5.4), 
+ 470000 => array( 8 => 6.4), 
+1000000 => array( 8 => 7.5), 
 );
 
 $BOUNDARY_PA_MINIMAL_AREA = $_MINIMAL_AREA;

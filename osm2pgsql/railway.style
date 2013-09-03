@@ -7,24 +7,31 @@ node,way   created_by   text         delete
 
 node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
 
-way        railway       text         linear
-way        ref           text         linear
-way        bridge        text         linear
-way        tunnel        text         linear
-way        construction  text         linear
-way        layer         int4         linear
-way        usage         text         linear
-way        service       text         linear
-way        cutting       text         linear
-way        embankment    text         linear
-way        electrified   text         linear
-way        frequency     text         linear
-way        voltage       text         linear
-way        gauge         int4         linear
-way        operator      text         linear
-way        maxspeed      text         linear
-way        wikipedia     text         linear
-way        website       text         linear
+way        railway          text         linear
+way        ref              text         linear
+way        bridge           text         linear
+way        tunnel           text         linear
+way        construction     text         linear
+way        layer            int4         linear
+way        usage            text         linear
+way        service          text         linear
+way        cutting          text         linear
+way        embankment       text         linear
+way        electrified      text         linear
+way        frequency        text         linear
+way        voltage          text         linear
+way        gauge            int4         linear
+way        operator         text         linear
+way        maxspeed         text         linear
+way        wikipedia        text         linear
+way        website          text         linear
+way        transport        text         linear
+way        colour           text         linear
+way        public_transport text         linear
+way        tram             text         linear
+way        name             text         linear
+way        width            int4         linear
+way        surface          text         linear
 
 
 

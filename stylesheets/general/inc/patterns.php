@@ -11,6 +11,7 @@ function pattern_hatch($size, $rotation, $opacity, $color, $stroke) {
 	$sizehalf = $size/2;
 	require ROOT."/general/pattern/hatch.svg.tpl";	
 	$file = ROOT."/general/pattern/~hatch-$size-$rotation-$opacity-$color-$stroke.png";					
+	file_put_contents("$file.svg",$svg);
 	svg2png($file,$svg);	
 	return $file;
 }

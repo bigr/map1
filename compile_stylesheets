@@ -5,6 +5,7 @@ STYLESHEET="cz"
 
 ALL_ZOOMS="8,9,10,11,12,13,14,15,16,17"
 SYMBOLS="no"
+RENDER_LAYER=ALL
 
 echo "Usage: compile_stylesheets [options]"
 echo "OPTIONS:"
@@ -16,7 +17,7 @@ echo " -u             Compile utfgrid"
 echo ""
 
 
-while getopts "sz:c:t:u" OPT; do
+while getopts "sz:c:t:l:u" OPT; do
 	case $OPT in		
 		s)
 			SYMBOLS="yes"
@@ -32,7 +33,10 @@ while getopts "sz:c:t:u" OPT; do
 		;;
 		u)
 			UTFGRID=1
-		;;	
+		;;
+		l)
+			RENDER_LAYER=$OPTARG
+		;;
 		\?)
 			exit 1
 		;;
@@ -43,15 +47,14 @@ DIR_BACKUP=`pwd`
 
 export TILE
 export UTFGRID
+#export RENDER_LAYER
 
 for ZOOMS in ${ALL_ZOOMS//,/ }; do
 
 	export ZOOMS
 	
 	
-	if [ $ZOOMS -ge 9 ]; then
-		#OUTPUT_LAYERS="landcover countryfill hillshade building boundary way,contour,fishnet,route,symbol text,countrytext gridinfo"		
-		#OUTPUT_LAYERS="landcover countryfill hillshade building boundary way,contour,fishnet,symbol text gridinfo"		
+	if [ $ZOOMS -ge 9 ]; then		
 		OUTPUT_LAYERS="landcover countryfill hillshade building accessarea boundary route way contour fishnet symbol text"	
 		#OUTPUT_LAYERS="way"
 	else
@@ -59,7 +62,7 @@ for ZOOMS in ${ALL_ZOOMS//,/ }; do
 	fi
 		
 	for f in $DIR_STYLESHEETS/general/style/*.mss.php; do
-	#for f in $DIR_STYLESHEETS/general/style/highway.mss.php; do
+	#for f in $DIR_STYLESHEETS/general/style/pisteway.mss.php; do
 		f=`basename "$f"`		
 		f2=${f%.*}
 		echo "Creating: \"~$f2\""		

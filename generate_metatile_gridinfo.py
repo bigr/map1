@@ -32,14 +32,25 @@ gridinfo = {
     "highway-road-stroke": ["osm_id","highway","oneway","name","ref","int_ref","lanes","maxspeed","width","lit","sidewalk","footway","cycleway","mtb:scale","sac_scale","attribution","construction","smoothness","surface","tracktype","service","access","foot","ski","inline_skates","ice_skates","horse","vehicle","bicycle","carriage","trailer","caravan","motor_vehicle","motorcycle","moped","mofa","motorcar","motorhome","psv","bus","atv","taxi","tourist_bus","goods","hgv","agricultural","snowmobile","name"], 
     "highway-path-stroke": ["osm_id","highway","oneway","name","ref","int_ref","lanes","maxspeed","width","lit","sidewalk","footway","cycleway","mtb:scale","sac_scale","attribution","construction","smoothness","surface","tracktype","service","access","foot","ski","inline_skates","ice_skates","horse","vehicle","bicycle","carriage","trailer","caravan","motor_vehicle","motorcycle","moped","mofa","motorcar","motorhome","psv","bus","atv","taxi","tourist_bus","goods","hgv","agricultural","snowmobile","name"], 
     "railway": ["osm_id","railway","usage","service","gauge","voltage","frequency","electrified","cutting","embankment","operator","maxspeed","wikipedia","website"],     
-    "waterarea": ["osm_id","waterway","natural","landuse","name","wetland","way_area","wikipedia","website"], 
+    "waterarea": ["osm_id","waterway","natural","landuse","name","wetland","way_area","wikipedia","website"],
     "power": ["osm_id","line","length","location","voltage","wires","frequency","operator","name","power"], 
     "barrier": ["osm_id","wikipedia","website","fence_type","height","stile","material","name","barrier"],
     "symbol": ["name","historic","man_made","amenity","leisure","tourism","information","natural","building","tower:type","place_of_worship","place_of_worship:type","railway","castle_type","highway","aeroway","type","name","wikipedia","website","ruins"],
     "text-place": ["name","population","place"],
+    "accessarea": ["name","access"],
+    "aerialway": ["name","aerialway","piste:lift"],
+    "aerialwaypoint": ["aerialway","piste:lift"],
+    "aeroway": ["aeroway"],
+    "aeroarea": ["aeroway"],
+    "barrier": ["barrier","name","wikipedia","website","height","stile","material"],
+    "barrierpoint": ["barrier","name"],
+    "pisteway": ["pisteway","difficulty","name","grooming"],
+    "power": ["power","line","length","location","voltage","cables","wires","frequency","operator","name","grade"],
+    "powerpoint": ["power","name","ref","material","structure","height","colour","tower:type","design","design:name","design:incomplete"],
+    "shieldPeak": ["ele","name"],
+    "text-place": ["population","name","type"],    
+    
 }
-
-
 
 
 #gridinfo = {
@@ -155,7 +166,8 @@ for xfrac in range(0,fractions):
             m.resize(mtileSize, mtileSize)        
             m.zoom_to_box(bbox)            
             for n,l in enumerate(m.layers):                
-                name = re.sub(r'((?:-layer|-priority|-grade|-class)[-]?[0-9]+)','',l.name)                
+                tmp = re.sub(r'((?:-layer|-priority|-grade|-class)[-]?[0-9]+)','',l.name)                
+                name = re.sub(r'((?:route)[-]?[0-9]+)','route',tmp)                
                 if name in gridinfo: 
                     grid = mapnik.Grid(mtileSize, mtileSize) 
                     mapnik.render_layer(m, grid, layer = n, fields = gridinfo[name])

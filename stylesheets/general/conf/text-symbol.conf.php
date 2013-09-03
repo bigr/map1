@@ -2,7 +2,7 @@
 require_once "conf/text.conf.php";
 require_once "conf/symbol.conf.php";
 
-$TEXT_SYMBOL_DENSITY = array(12 => 12,13 => 60, 14 => 220, 15 => 900,16 => 50000);
+$TEXT_SYMBOL_DENSITY = array(11 => 5,12 => 10,13 => 90, 14 => 250, 15 => 1000,16 => 20000);
 
 $TEXT_SYMBOL = array(
 	"[tourism='information'][information='guidepost']" => array(

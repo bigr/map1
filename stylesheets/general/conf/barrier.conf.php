@@ -27,7 +27,7 @@ $BARRIER = array(
 			'pattern-file' => 'wall',
 			'pattern-size' => array(13=>7,18=>18),
 			'pattern-spacing' => array(13=>2.3,18=>5),
-			'width' => array(13 => 2,18=>4),
+			'width' => array(13 => 1.5,18=>3.7),
 			'color' => $BARRIER_COLOR,
 		),
 	"[barrier='fence']" => array(
@@ -36,7 +36,7 @@ $BARRIER = array(
 			'pattern-file' => 'fence',
 			'pattern-size' => array(14=>6,18=>14),
 			'pattern-spacing' => array(14=>0,18=>0),
-			'width' => array(14 => 1.2,18=>2.4),
+			'width' => array(14 => 0.9,18=>2.2),
 			'color' => $BARRIER_COLOR,
 		),
 	"[barrier='hedge']" => array(
@@ -45,7 +45,7 @@ $BARRIER = array(
 			'pattern-file' => 'hedge',
 			'pattern-size' => array(14=>6,18=>14),
 			'pattern-spacing' => array(14=>0,18=>0),
-			'width' => array(14 => 1.2,18=>2.4),
+			'width' => array(14 => 0.9,18=>2.2),
 			'color' => darken_a($_PARK_COLOR,20),
 		),
 	"[barrier='ditch']" => array(
@@ -54,7 +54,7 @@ $BARRIER = array(
 			'pattern-file' => 'ditch',
 			'pattern-size' => array(14=>6,18=>14),
 			'pattern-spacing' => array(14=>0,18=>0),
-			'width' => array(14 => 1.2,18=>2.4),
+			'width' => array(14 => 0.9,18=>2.2),
 			'color' => $_WATER_COLOR,
 		),
 	"[barrier='bollard']" => array(
@@ -78,33 +78,39 @@ $BARRIER = array(
 );
 
 
+$BARRIER_LENGTH_VISIBILITY = array(13=>5,17=>5);
+
+$BARRIER_SYMBOL_LENGTH_VISIBILITY = array(13=>120,17=>120);
+
+$BARRIER_DRAFT_LENGTH_VISIBILITY = array(13=>40,17=>40);
+
+
 $BARRIERPOINT = array(	
 	"[barrier='gate']" => array(
 			'zooms' => range(15,18),
-			'point-template' => 'gate',
-			'point-file' => 'gate',						
-			'size' => array(13 => 10,18 => 16),
-			'color' => $BARRIER_COLOR,
+			'symbol-file' => 'gate',						
+			'symbol-size' => array(13 => 10,18 => 16),
+			'symbol-color' => $BARRIER_COLOR,
 		),
 	"[barrier='lift_gate']" => array(
 			'zooms' => range(15,18),
-			'point-template' => 'lift_gate',
-			'point-file' => 'lift_gate',						
-			'size' => array(13 => 10,18 => 16),
-			'color' => $BARRIER_COLOR,
+			'symbol-file' => 'lift_gate',						
+			'symbol-size' => array(13 => 10,18 => 16),
+			'symbol-color' => $BARRIER_COLOR,
 		),
+	/*	
 	"[barrier='bollard']" => array(
 			'zooms' => range(15,18),
-			'point-template' => 'bollard_point',
-			'point-file' => 'bollard_point',						
-			'size' => array(13 => 8,18 => 12),
-			'color' => $BARRIER_COLOR,
+			'symbol-file' => 'bollard_point',						
+			'symbol-size' => array(13 => 8,18 => 12),
+			'symbol-color' => $BARRIER_COLOR,
 		),
+	
 	"[barrier='block']" => array(
-			'zooms' => range(15,18),
-			'point-template' => 'block',
-			'point-file' => 'block',						
-			'size' => array(13 => 8,18 => 12),
-			'color' => $BARRIER_COLOR,
+			'zooms' => range(15,18),			
+			'symbol-file' => 'block',						
+			'symbol-size' => array(13 => 8,18 => 12),
+			'symbol-color' => $BARRIER_COLOR,
 		),	
+	*/
 );

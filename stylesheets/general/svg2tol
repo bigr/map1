@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 INKSCAPE_SYMBOLS="./inkscape-symbol"
-SYMBOLS="./symbol"
+SYMBOLS="./symbol-processed"
 
 for f in $INKSCAPE_SYMBOLS/*.svg; do
 	f2=`basename "$f"`

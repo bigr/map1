@@ -11,7 +11,7 @@ function waterway_grade2dist($grade) {
  */
 function waterway_grades($zoom,$grade) {	
 	if ( $zoom < 7 ) return false;
-	return  waterway_width($zoom,$grade) > linear(array(7 => 0.5, 9 => 1.0, 11 => 0.35, 12 => 0.25, 13 => 0),$zoom);
+	return  waterway_width($zoom,$grade) > linear(array(7 => 0.6, 9 => 1.1, 11 => 0.25, 12 => 0.15, 13 => 0),$zoom);
 }
 
 $_WATER_COLOR = array( 7 => '#5195cd', 10 => '#0066bb',12 => '#0066bb',15=>'#4387bf');
@@ -25,8 +25,8 @@ function waterway_color($grade) {
 	return $_WATER_COLOR;
 }
 
-$WATERWAY_WIDTH_ZOOM_EXPEX = array ( 5 => 1.5, 8 => 1.5, 9 => 1.3);
-$WATERWAY_WIDTH_GRADE_EXPEX = array ( 5 => 1.29, 12 => 1.28, 35 => 1.05 );
+$WATERWAY_WIDTH_ZOOM_EXPEX = array ( 5 => 1.5, 8 => 1.5, 9 => 1.3, 12 => 1.3, 15 => 1.7);
+$WATERWAY_WIDTH_GRADE_EXPEX = array ( 0 => 1.6, 3 => 1.3, 15 => 1.2, 35 => 1.05 );
 
 
 /**
@@ -34,7 +34,7 @@ $WATERWAY_WIDTH_GRADE_EXPEX = array ( 5 => 1.29, 12 => 1.28, 35 => 1.05 );
  */
 function waterway_width($zoom,$grade) {
 	global $WATERWAY_WIDTH_ZOOM_EXPEX, $WATERWAY_WIDTH_GRADE_EXPEX;
-	return expex($WATERWAY_WIDTH_GRADE_EXPEX,$grade) * expex($WATERWAY_WIDTH_ZOOM_EXPEX,$zoom) * 0.0003;
+	return expex($WATERWAY_WIDTH_GRADE_EXPEX,$grade) * expex($WATERWAY_WIDTH_ZOOM_EXPEX,$zoom) * 0.0003 + exponential(array(7 => 0, 12 => 0.1,13 => 0.3,14=>0.6,18 => 1.5),$zoom);
 }
 
 
@@ -77,24 +77,35 @@ $WATERAREA_MINIMAL_AREA = $_MINIMAL_AREA;
 
 $WATERPOINT = array(	
 	"[waterway='weir']" => array(
-			'zooms' => range(13,18),
-			'point-template' => 'weir',
-			'point-file' => 'weir',						
-			'size' => array(13 => 10,18 => 16),
-			'color' => $_WATER_COLOR,
+			'zooms' => range(13,18),			
+			'symbol-file' => 'weir',						
+			'symbol-size' => array(13 => 12,18 => 24),			
+			'symbol-color' => array(14 => '#003399'),
+			'halo-color' => array(14 => '#eef5ff'),
 		),	
+		/*
 	"[waterway='lock_gate']" => array(
 			'zooms' => range(13,18),
-			'point-template' => 'lock_gate',
-			'point-file' => 'lock_gate',
-			'size' => array(13 => 10,18 => 16),
-			'color' => $_WATER_COLOR,
+			'symbol-file' => 'lock_gate',
+			'symbol-size' => array(13 => 10,18 => 16),
+			'symbol-color' => array(14 => '#ffffff'),
+			'halo-color' => $_WATER_COLOR,
 		),
+		*/ 
 	"[waterway='dam']" => array(
-			'zooms' => range(13,18),
-			'point-template' => 'dam',
-			'point-file' => 'dam',
-			'size' => array(13 => 10,18 => 16),
-			'color' => $_WATER_COLOR,
+			'zooms' => range(12,18),			
+			'symbol-file' => 'dam',
+			'symbol-size' => array(13 => 16,18 => 32),			
+			'symbol-color' => array(14 => '#003399'),
+			'halo-color' => array(14 => '#eef5ff'),
 		),	
 );
+
+$WATERWAY_WEIR = range(14,18);
+$WATERWAY_WEIR_LINE_WIDTH = array(14 => 2, 18 => 6);
+$WATERWAY_WEIR_WIDTH = array(14 => 4, 18 => 12);
+
+
+$WATERWAY_DAM = range(14,18);
+$WATERWAY_DAM_LINE_WIDTH = array(13 => 4, 18 => 12);
+$WATERWAY_DAM_WIDTH = array(13 => 6, 18 => 16);

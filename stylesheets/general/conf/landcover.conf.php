@@ -3,17 +3,17 @@ require_once "inc/utils.php";
 require_once "conf/common.conf.php";
 require_once "conf/text-place.conf.php";
 
-$_FOREST_BASE_COLOR = '#B3D998';
-$_WOOD_BASE_COLOR = '#A3D998';
-$_NATURAL_SCRUB_COLOR = '#CDEBC7';
-$_LANDUSE_SCRUB_COLOR = '#D6EBC7';
+$_FOREST_BASE_COLOR = '#bbe4a2';
+$_WOOD_BASE_COLOR = '#aee4a2';
+$_NATURAL_SCRUB_COLOR = '#d8efd3';
+$_LANDUSE_SCRUB_COLOR = '#dfefd3';
 $_NATURAL_GRASS_COLOR = '#EBFAE8';
 $_LANDUSE_GRASS_COLOR = '#F0FAE8';
-$_LEISURE_PARK_COLOR = '#DEEBC7';
+$_LEISURE_PARK_COLOR = '#daebbc';
 $_FARM_GRAIN_COLOR = '#F9FAE8';
-$_RESIDENTIAL_BASE_COLOR ='#D9C5CA';
-$_RESIDENTIAL_BASE2_COLOR ='#B3ADAE';
-$_RESIDENTIAL_COLOR = array( 5 => '#aaaaaa',6 =>'#888888',10 => $_RESIDENTIAL_BASE2_COLOR, 12 => $_RESIDENTIAL_BASE_COLOR, 18 => '#F2EEEF');
+$_RESIDENTIAL_BASE_COLOR ='#D9CED1';
+$_RESIDENTIAL_BASE2_COLOR ='#b3b0b0';
+$_RESIDENTIAL_COLOR = array( 5 => '#aaaaaa',6 =>'#888888',10 => $_RESIDENTIAL_BASE2_COLOR, 12 => $_RESIDENTIAL_BASE_COLOR, 16 => '#EEEEEE');
 
 $_PARK_COLOR = array( 10 => $_RESIDENTIAL_BASE2_COLOR, 14 => $_LEISURE_PARK_COLOR);
 
@@ -84,11 +84,16 @@ $LANDCOVER = array(
 			'color' => array( 7 => '#f5f5f5', 14 => '#DEDEDE'),
 			'smooth' => 1,
 		),	
-	"[leisure='park'],[landuse='park'],[landuse='allotments'],[landuse='cemetery'],[amenity='grave_yard'],[leisure='garden'],[landuse='orchard'],[leisure='orchard'],[landuse='recreation_ground'],[landuse='village_green'],[landuse='vineyard'],[leisure='golf_course'],[tourism='zoo']" => array(
+	"[leisure='park'],[landuse='park'],[landuse='allotments'],[landuse='cemetery'],[amenity='grave_yard'],[leisure='garden'],[leisure='orchard'],[landuse='recreation_ground'],[landuse='village_green'],[leisure='golf_course'],[tourism='zoo']" => array(
 			'level' => 1,
 			'zooms' => range(11,18),
 			'color' => $_PARK_COLOR,
-		),	
+		),
+	"[landuse='vineyard'],[landuse='orchard']" => array(
+		'level' => 1,
+		'zooms' => range(11,18),
+		'color' => array( 9 => '#f5f5f5', 14 => $_LEISURE_PARK_COLOR),
+	),		
 	"[landuse='farm'],[landuse='farmland'],[landuse='plant_nursery'],[landuse='field']" => array(
 			'level' => 1,
 			'zooms' => range(9,18),
@@ -287,33 +292,8 @@ $LANDCOVER = array(
 	"[leisure='pitch'],[leisure='track'],[leisure='sports_centre'],[leisure='stadium']" => array(
 			'level' => 2,
 			'zooms' => range(14,18),
-			'color' => array( 13 => $_RESIDENTIAL_BASE_COLOR, 15 => '#e8937c'),			
-		),/*
-	"[leisure='pitch'][sport='soccer']" => array(
-			'level' => 2,
-			'pattern-zooms'   => range(14,15),
-			'pattern-file'    => 'soccer',
-			'pattern-size'    => array(14 => 24),
-			'pattern-margin'  => array(14 => 1.2),
-			'pattern-opacity' => array(14 => 0.1),
-		),
-	"[leisure='pitch'][sport='tennis']" => array(
-			'level' => 2,
-			'pattern-zooms'   => range(14,15),
-			'pattern-file'    => 'tennis',
-			'pattern-size'    => array(14 => 24),
-			'pattern-margin'  => array(14 => 1.2),
-			'pattern-opacity' => array(14 => 0.1),
-		),
-	"[leisure='pitch'][sport='athletics'],[leisure='track']" => array(
-			'level' => 2,
-			'pattern-zooms'   => range(14,15),
-			'pattern-file'    => 'runner',
-			'pattern-size'    => array(14 => 24),
-			'pattern-margin'  => array(14 => 1.2),
-			'pattern-opacity' => array(14 => 0.1),
-		),*/
-	
+			'color' => array( 13 => $_RESIDENTIAL_BASE_COLOR, 16 => '#e8b19f'),			
+		),	
 	"[landuse='cemetery'][religion!='christian'][religion!='jewish'][religion!='muslim'],[amenity='grave_yard'][religion!='christian'][religion!='jewish'][religion!='muslim']" => array(
 			'level' => 2,
 			'pattern-zooms'   => range(13,18),
@@ -375,16 +355,6 @@ $LANDCOVER = array(
 			'pattern-opacity'  => array(11 => 0.0, 15 => 0.3),
 			'pattern-color'    => array(11 => '#dddddd'),
 			'pattern-stroke'   => array(10 => 1),
-		),
-	"[leisure='playground']" => array(
-			'level' => 2,
-			'zooms' => range(14,18),
-			'color' => array( 13 => $_RESIDENTIAL_BASE_COLOR, 15 => '#e8aa80'),
-			'pattern-zooms'   => range(14,18),
-			'pattern-file'    => 'playground',
-			'pattern-size'    => array(14 => 16),
-			'pattern-margin'  => array(14 => 1),
-			'pattern-opacity' => array(14 => 0.1),
 		),	
 	"[amenity='parking']" => array(
 			'level' => 2,
@@ -435,7 +405,7 @@ $LANDCOVER_POINT = array(
 		'zooms' => range(13,18),
 		'symbol-file' => 'tree',
 		'symbol-color' => array( 7 => '#f5f5f5', 13 => darken($_FOREST_BASE_COLOR,40)),
-		'symbol-size' => array(13=>20,17=>35),		
+		'symbol-size' => array(13=>15,18=>25),		
 	),
 );
 

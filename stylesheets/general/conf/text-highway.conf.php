@@ -167,28 +167,28 @@ HIGHWAY_RESIDENTIAL  => array(15 => '#000000'),
  * Road name text size grade x zoom maping
  */
 $ROAD_NAME_SIZE = array(
-HIGHWAY_MOTORWAY     => array(14 => '13',15 => '14',16 => '15', 18 =>'19'),
-HIGHWAY_TRUNK        => array(14 => '13',15 => '14',16 => '15', 18 =>'19'),
-HIGHWAY_PRIMARY      => array(14 => '13',15 => '14',16 => '15', 18 =>'19'),
-HIGHWAY_SECONDARY    => array(14 => '13',15 => '14',16 => '15', 18 =>'19'),
-HIGHWAY_TERTIARY     => array(14 => '13',15 => '14',16 => '15', 18 =>'19'),
-HIGHWAY_UNCLASSIFIED => array(14 => '13',15 => '14',16 => '15', 18 =>'19'),
-HIGHWAY_SERVICE      => array(15 => '13',16 => '15',18 => '19'),
-HIGHWAY_RESIDENTIAL  => array(15 => '13',16 => '15',18 => '19'),
+HIGHWAY_MOTORWAY     => array(14 => '13.5',15 => '14',16 => '20', 18 =>'25'),
+HIGHWAY_TRUNK        => array(14 => '13.5',15 => '14',16 => '20', 18 =>'25'),
+HIGHWAY_PRIMARY      => array(14 => '13.5',15 => '14',16 => '20', 18 =>'25'),
+HIGHWAY_SECONDARY    => array(14 => '13.5',15 => '14',16 => '19', 18 =>'24'),
+HIGHWAY_TERTIARY     => array(14 => '13.5',15 => '14',16 => '18', 18 =>'23'),
+HIGHWAY_UNCLASSIFIED => array(14 => '13.5',15 => '14',16 => '17', 18 =>'22'),
+HIGHWAY_SERVICE      => array(15 => '13',16 => '15.5',18 => '19'),
+HIGHWAY_RESIDENTIAL  => array(15 => '13',16 => '15.5',18 => '19'),
 );
 
 /**
  * Road name text halo radius grade x zoom maping
  */
 $ROAD_NAME_HALO_RADIUS = array(
-HIGHWAY_MOTORWAY     => array(14 => '2'),
-HIGHWAY_TRUNK        => array(14 => '2'),
-HIGHWAY_PRIMARY      => array(14 => '2'),
-HIGHWAY_SECONDARY    => array(14 => '2'),
-HIGHWAY_TERTIARY     => array(14 => '2'),
-HIGHWAY_UNCLASSIFIED => array(14 => '2'),
-HIGHWAY_SERVICE      => array(15 => '2'),
-HIGHWAY_RESIDENTIAL  => array(15 => '2'),
+HIGHWAY_MOTORWAY     => array(14 => '3'),
+HIGHWAY_TRUNK        => array(14 => '3'),
+HIGHWAY_PRIMARY      => array(14 => '3'),
+HIGHWAY_SECONDARY    => array(14 => '3'),
+HIGHWAY_TERTIARY     => array(14 => '3'),
+HIGHWAY_UNCLASSIFIED => array(14 => '3'),
+HIGHWAY_SERVICE      => array(15 => '3'),
+HIGHWAY_RESIDENTIAL  => array(15 => '3'),
 );
 
 

@@ -97,6 +97,12 @@
 			<?php if ( $RENDER_TEXT_HIGHWAY ): ?>
 				,"style/~text-highway.mss"
 			<?php endif; ?>
+			<?php if ( $RENDER_TEXT_AERIALWAY ): ?>
+				,"style/~text-railway.mss"
+			<?php endif; ?>
+			<?php if ( $RENDER_TEXT_AERIALWAY ): ?>
+				,"style/~text-aerialway.mss"
+			<?php endif; ?>
 			<?php if ( $RENDER_TEXT_WATERS ): ?>
 				,"style/~text-waters.mss"
 			<?php endif; ?>
@@ -191,6 +197,10 @@
 						if ( !$first ) echo ','; $first = false;
 						require "layer/aerialway.mml.php";
 					}
+					if ( $RENDER_WATERS ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/watersymbols.mml.php";
+					}
 				}
 			}
 									
@@ -227,6 +237,14 @@
 					if ( $RENDER_TEXT_HIGHWAY && $TILE  ) {
 						if ( !$first ) echo ','; $first = false;
 						require "layer/text-highway.mml.php";
+					}
+					if ( $RENDER_TEXT_RAILWAY && $TILE  ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/text-railway.mml.php";
+					}
+					if ( $RENDER_TEXT_AERIALWAY && $TILE  ) {
+						if ( !$first ) echo ','; $first = false;
+						require "layer/text-aerialway.mml.php";
 					}
 					if ( $RENDER_TEXT_WATERS ) {
 						if ( !$first ) echo ','; $first = false;

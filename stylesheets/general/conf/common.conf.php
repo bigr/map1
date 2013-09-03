@@ -12,7 +12,7 @@ $RENDER_ZOOMS = range(8,16);
 /**
  * Which layers should be rendered to render all use range(-5,5)
  */  
-$RENDER_LAYERS = empty($UTFGRID)?range(-2,2):array(0);
+$RENDER_LAYERS = empty($UTFGRID)?range(-5,5):array(0);
 
 /**
  * Which text priorities should be rendered bigger means less important,
@@ -212,6 +212,16 @@ $RENDER_AERIALWAY = true;
 $RENDER_TEXT_HIGHWAY = true;
 
 /**
+ * Enable/Disable aerialway text/shield rendering
+ */
+$RENDER_TEXT_AERIALWAY = true;
+
+/**
+ * Enable/Disable railway text/shield rendering
+ */
+$RENDER_TEXT_RAILWAY = true;
+
+/**
  * Enable/Disable symbol rendering
  */
 $RENDER_SYMBOL = true;
@@ -270,7 +280,7 @@ $RENDER_TEXT_CONTOUR = true;
  */
 $_MINIMAL_AREA = array(5 => 80, 9 => 90, 13 => 0);
 
-$_CONTOUR_COLOR = array(12=>'#593A0D');
+$_CONTOUR_COLOR = array(12=>'#805A40');
 
 $__zooms = getenv('ZOOMS');
 if ( !empty($__zooms) ) {

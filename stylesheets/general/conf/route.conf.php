@@ -34,10 +34,14 @@ $_ROUTE_WHITE = array( 13 => '#9EA3A3');
 $_ROUTE_PURPLE = array( 13 => '#5819B5');
 
 
-$_BICYCLE_ROUTE_COLOR = array(12 => '#A069BF');
-$_SKI_ROUTE_COLOR = array(12 => '#00A5B8');
+$BICYCLE_ROUTE_ICN_COLOR = array(12 => '#8041A3');
+$BICYCLE_ROUTE_NCN_COLOR = array(12 => '#9259B3');
+$BICYCLE_ROUTE_RCN_COLOR = array(12 => '#B683D4');
+$BICYCLE_ROUTE_LCN_COLOR = array(12 => '#D1ACE6');
 
-$_ROUTE_WIDTH = array(12 => 1,13=>2.5,14 => 3, 17=>4);
+$_SKI_ROUTE_COLOR = array(12 => '#36D9C8');
+
+$_ROUTE_WIDTH = array(12 => 1,13=>2.1,15 => 2.5, 18=>3.2);
 
 /**
  * Zoom => Hiking route grade zoom visibility maping 
@@ -139,10 +143,7 @@ $ROUTE_BICYCLE_WIDTH = $_ROUTE_WIDTH;
  */
 $ROUTE_BICYCLE_OPACITY = array(12 => 0.5,13 => 1.0);
 
-/**
- * Bicycle route kct blue color
- */
-$ROUTE_BICYCLE_COLOR = $_BICYCLE_ROUTE_COLOR;
+
 
 $ROUTE_BICYCLE_LCN_DENSITY = array(12 => 15,13 => 15,14 => 30, 15 => 1000, 16 => 1000, 17 => 1000, 18 => 1000);
 

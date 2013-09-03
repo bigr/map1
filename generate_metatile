@@ -1,10 +1,34 @@
 #!/usr/bin/env bash
 
-MAPNIK_MAP_FILES="landcover;hillshade;contour;building;accessarea;way;route;boundary;fishnet;text"
-LAYER_OPTIONS='{"1":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"7":{"colorToAlpha": [255,255,255,255], "opacity": 1.0}}'
+case "$3" in
+18) 
+	hillshade_opacity=0.5
+	;;
+17) 
+	hillshade_opacity=0.6
+	;;
+16) 
+	hillshade_opacity=0.7
+	;;
+15) 
+	hillshade_opacity=0.8
+	;;
+14) 
+	hillshade_opacity=0.9
+	;;
+*)
+	hillshade_opacity=1.0
+	;;
+esac
+
+
+
+MAPNIK_MAP_FILES="landcover;hillshade;contour;accessarea;way;building;route;boundary;fishnet;text"
+LAYER_OPTIONS="{\"1\":{\"colorToAlpha\": [255,255,255,255], \"opacity\": $hillshade_opacity},\"7\":{\"colorToAlpha\": [255,255,255,255], \"opacity\": 0.6}}"
 MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$1.$2/$3"
 TILE_PATH="/home/klinger/mymap/map/tiles"
 
+echo $LAYER_OPTIONS;
 
 
 #LAYER_OPTIONS='{"0":{"colorToAlpha": [255,255,255,255], "opacity": 1.0},"1":{"colorToAlpha": [255,255,255,255], "opacity": 0.5}}'
@@ -48,5 +72,4 @@ PecPodSnezkou)
 	;;
 esac
 
-echo $BB
 python ./generate_metatile.py $1 $2 $3 $BB

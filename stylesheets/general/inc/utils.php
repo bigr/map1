@@ -141,7 +141,7 @@ function propertyToSql($string) {
 			}
 			else {
 				if ( $operator == '!=' ) $operator = '<>';				
-				$subquery[] = "(\"$column\" $operator '$value')";
+				$subquery[] = "(COALESCE(\"$column\",'') $operator '$value')";
 			}						
 			
 		}		

@@ -29,7 +29,7 @@ foreach ( $RENDER_ZOOMS as $zoom ) {
 			else
 			require "{$a['pattern-file']}.svg.tpl";
 
-			svg2png(ROOT."/general/pattern/~{$a['pattern-file']}-$zoom.png",$svg);
+			svg2png(ROOT."/general/pattern/~{$a['pattern-file-png']}-$zoom.png",$svg);
 		}
 	}
 
@@ -42,6 +42,7 @@ foreach ( $RENDER_ZOOMS as $zoom ) {
 			
 			$viewbox = 256*$margin;
 			$size *= $margin;
+						
 			
 			require "{$a['pattern-file']}.svg.tpl";
 			

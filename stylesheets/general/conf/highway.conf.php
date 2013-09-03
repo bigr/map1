@@ -79,18 +79,18 @@ $PATH_ZOOMS = range(13, 18);
 $ROAD_STROKE_COLOR = array(
 HIGHWAY_MOTORWAY     => array( 7 => '#995555', 9 => '#aa3333'),
 HIGHWAY_TRUNK        => array( 7 => '#995555', 9 => '#aa3333'),
-HIGHWAY_PRIMARY      => array( 7 => '#222222', 9 => '#000000'),
-HIGHWAY_SECONDARY    => array(10 => '#000000'),
-HIGHWAY_TERTIARY     => array(11 => '#000000'),
-HIGHWAY_UNCLASSIFIED => array(12 => '#000000'),
-HIGHWAY_SERVICE      => array(13 => '#000000'),
-HIGHWAY_RESIDENTIAL  => array(13 => '#000000'),
-HIGHWAY_TRACK1       => array(13 => '#000000'),
-HIGHWAY_TRACK2       => array(13 => '#888888',14 => '#000000'),
-HIGHWAY_TRACK3       => array(13 => '#888888',14 => '#666666',15=>'#000000'),
-HIGHWAY_TRACK4       => array(13 => '#888888',14 => '#666666',15=>'#666666',16=>'#000000'),
-HIGHWAY_TRACK5       => array(13 => '#888888',14 => '#666666',              16=>'#666666',17=>'#000000'),
-HIGHWAY_UNKNOWN      => array(13 => '#888888',14 => '#666666',              16=>'#666666',17=>'#000000'),
+HIGHWAY_PRIMARY      => array( 7 => '#222222', 9 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_SECONDARY    => array(10 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_TERTIARY     => array(11 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_UNCLASSIFIED => array(12 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_SERVICE      => array(13 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_RESIDENTIAL  => array(13 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_TRACK1       => array(13 => '#000000',14 => '#000000',16 => '#333333'),
+HIGHWAY_TRACK2       => array(13 => '#888888',14 => '#000000',16 => '#333333'),
+HIGHWAY_TRACK3       => array(13 => '#888888',14 => '#666666',15=>'#222222',16 => '#333333'),
+HIGHWAY_TRACK4       => array(13 => '#888888',14 => '#666666',15=>'#666666',16=>'#333333'),
+HIGHWAY_TRACK5       => array(13 => '#888888',14 => '#666666',              16=>'#666666',17=>'#333333'),
+HIGHWAY_UNKNOWN      => array(13 => '#888888',14 => '#666666',              16=>'#666666',17=>'#333333'),
 );
 
 /**
@@ -284,11 +284,15 @@ $ONEWAY = array(
 		),
 );
 
-$HIGHWAYPOINT = array(	
-	"[highway='motorway_junction']" => array(
-			'zooms' => array( 5 => 0.17, 6 => 0.27, 7 => 3.0,  8 =>  4.5, 11 =>  6.0, 13 => 11.0, 14 => 12.5, 16=>21  , 18 => 29),
-			'point-file' => 'highway-junction',						
-			'size' => array(15 => 5,18 => 10),
-			'color' => array( 7 => '#995555', 9 => '#aa3333'),
-		),	
+$HIGHWAYPOINT = array(		
 );
+
+$HIGHWAY_JUNCTION_FILE = 'highway-junction';
+$HIGHWAY_JUNCTION_ZOOMS = array( 9,10,11,12,13,14,15,16,17,18 );
+$HIGHWAY_JUNCTION_SIZE = $ROAD_WIDTH[HIGHWAY_MOTORWAY];
+$HIGHWAY_JUNCTION_COLOR = $ROAD_STROKE_COLOR[HIGHWAY_MOTORWAY];
+
+/**
+ * Minimal rendered area in given zoom in pixels^2
+ */
+$HIGHWAY_MINIMAL_AREA = $_MINIMAL_AREA;

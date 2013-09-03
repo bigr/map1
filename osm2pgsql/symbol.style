@@ -18,12 +18,15 @@ node,way   name:cs      text         polygon
 node,way   historic     text         polygon
 node,way   leisure      text         polygon
 node,way   man_made     text         polygon
+node,way   shop         text         polygon
+node,way   sport        text         polygon
 node,way   tourism      text         polygon
 node,way   amenity      text         polygon
 node,way   ruins        text         polygon
 node,way   castle_type  text         polygon
 node,way   building     text         polygon
 node,way   natural      text         polygon
+node,way   military     text         polygon
 node,way   tower:type   text         polygon
 node,way   information  text         polygon
 node,way   place_of_worship  text    polygon
@@ -34,6 +37,18 @@ node,way   aeroway      text         polygon
 node,way   power        text         polygon
 node,way   wikipedia    text         polygon
 node,way   website      text         polygon
+node,way   colour       text         polygon
+node,way   cuisine      text         polygon
+node,way   parking      text         polygon
+node,way   maxheight    text         polygon
+node,way   fee          text         polygon
+node,way   surveillance text         polygon
+node,way   memorial     text         polygon
+node,way   operator     text         polygon
+node,way   cargo        text         polygon
+node,way   transport    text         polygon
+node,way   public_transport    text         polygon
+
 
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import
