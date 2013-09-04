@@ -1,0 +1,51 @@
+
+
+# OsmType  Tag          DataType     Flags
+node,way   note         text         delete   # These tags can be long but are useless for rendering
+node,way   source       text         delete   # This indicates that we shouldn't store them
+node,way   created_by   text         delete
+
+node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
+
+way        route         text         linear
+way        ref           text         linear
+way        name          text         linear
+way        duration      text         linear
+way        operator      text         linear
+way        access        text         linear
+way        foot          text         linear
+way        ski           text         linear
+way        ski:nordic    text         linear
+way        ski:alpine    text         linear
+way        ski:telemark  text         linear	
+way        inline_skates text         linear		
+way        ice_skates    text         linear
+way        horse         text         linear
+way        vehicle       text         linear
+way        bicycle       text         linear
+way        carriage      text         linear
+way        trailer       text         linear
+way        caravan       text         linear
+way        motor_vehicle text         linear
+way        motorcycle    text         linear
+way        moped         text         linear
+way        mofa          text         linear
+way        motorcar      text         linear
+way        motorhome     text         linear
+way        psv           text         linear
+way        bus           text         linear
+way        atv           text         linear
+way        taxi          text         linear
+way        tourist_bus   text         linear
+way        goods         text         linear
+way        hgv           text         linear
+way        agricultural  text         linear
+way        ATV           text         linear
+way        snowmobile    text         linear
+
+
+
+
+
+
+node,way   z_order      int4         linear # This is calculated during import
