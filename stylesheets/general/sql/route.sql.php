@@ -161,8 +161,7 @@ return <<<EOD
 		    WHEN T1.oneway IN ('false','0','no') THEN 'no'
 		    WHEN T1.oneway IN ('true','1','yes') THEN 'yes'
 		    ELSE COALESCE(T1.oneway,CAST('no' AS text))
-		END) AS oneway,
-		T1."osmc:symbol"
+		END) AS oneway,		
 		$cols
 	FROM routes2 T1
 	LEFT JOIN routes2 T2 ON T1.osm_id = T2.osm_id AND T2."offset" <  T1."offset" AND T1."color" <> T2."color" AND (T2.route <> 'bicycle' OR T2.network <> '')
