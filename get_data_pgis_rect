@@ -313,7 +313,7 @@ download q symbol pointex \
 
 
 
-q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)" )
+q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|mountain hiking|foot\"];);(._;way(r););(._;node(w);)" )
 download q route route "" 1 2
 
 q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"ferry\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"ferry\"];);(._;node(w);)" )

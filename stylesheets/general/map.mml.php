@@ -76,6 +76,9 @@
 		<?php if ( $RENDER_ROUTE ): ?>
 			,"style/~route.mss"
 		<?php endif; ?>	
+		<?php if ( $RENDER_FERRY ): ?>
+			,"style/~ferry.mss"
+		<?php endif; ?>	
 		
 		
 		<?php if ( $RENDER_TEXT ): ?>
@@ -203,6 +206,11 @@
 					}
 				}
 			}
+			
+			if ( $RENDER_FERRY ) {
+				if ( !$first ) echo ','; $first = false;
+				require "layer/ferry.mml.php";
+			}
 									
 			if ( $RENDER_CONTOUR ) {
 				if ( !$first ) echo ','; $first = false;
@@ -272,6 +280,8 @@
 					}										
 				}
 			}
+			
+			
 			
 			if ( $RENDER_COUNTRYTEXT ) {
 				if ( !$first ) echo ','; $first = false;

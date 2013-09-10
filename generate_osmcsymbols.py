@@ -17,15 +17,23 @@ COLORS = {
 	'blue':'#0000bb',
 	'yellow':'#e7c500',
 	'orange':'#E77B00',
-	'black':'#273561',
+	'black':'#272727',
 	'brown':'#963011',	
 	'purple':'#5819B5',
 	'mtb':'#e7c500',
+	'gray':'#777777',
 }
 
 BORDER_COLOR=(0,0,0,127)
 SIZE=14
 
+
+SHAPE_DEFAULT_COLORS = {
+	'shell' : 'yellow',
+	'shell_modern' : 'yellow',
+	'heart' : 'red',
+	'wolfshook' : 'white',
+}
 
 def colorize(im,color):
 	alpha = im.split()[-1]	
@@ -75,15 +83,21 @@ while True:
 		offsetY = SIZE * (i / 2)
 		offsetX = SIZE * (i % 2)
 		i += 1
-		for part in sym:
-			color = part[0]
-			if color not in COLORS:
-				print "not found color: %s" % color	
-				continue
-			shape = part[1] if len(part) > 1 else 'full'
-			if not os.path.isfile('osmcsymbol/%s.png' % shape):
-				print "not found shape: %s" % shape
-				continue;
+		for part in sym[:4]:
+			if not part or len(part) == 1 and part[0].strip() == '': continue;			
+			shape = "_".join(part).strip()
+			color = SHAPE_DEFAULT_COLORS[shape] if shape in SHAPE_DEFAULT_COLORS else 'black'
+			if not os.path.isfile('osmcsymbol/%s.png' % shape):				
+				shape = "_".join(part[1:]).strip()
+				if shape == '':
+					shape = 'full'
+				color = part[0].strip()				
+				if color not in COLORS:					
+					print "not found color: %s" % "_".join(part)
+					continue									
+				if not os.path.isfile('osmcsymbol/%s.png' % shape):
+					print "not found shape: %s" % "_".join(part)
+					continue;
 			im2 = Image.open('osmcsymbol/%s.png' % shape,'r')	
 			im2.convert('RGBA')
 			im2 = im2.resize((SIZE,SIZE),Image.ANTIALIAS)

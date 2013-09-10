@@ -58,16 +58,17 @@
 		
 		.route<?php echo $offset;?>.bicycle[zoom = <?php echo $zoom?>] {
 			[network='lcn'][density < <?php echo $ROUTE_BICYCLE_LCN_DENSITY[$zoom] ?>],[network='rcn'][density < <?php echo $ROUTE_BICYCLE_RCN_DENSITY[$zoom] ?>],[network!='lcn'][network!='rcn'] {
-				[network='lcn'] {
+				line-color: <?php echo linear($BICYCLE_ROUTE_LCN_COLOR,$zoom)?>;
+				[network='lcn'],[network='lwn'] {
 					line-color: <?php echo linear($BICYCLE_ROUTE_LCN_COLOR,$zoom)?>;
 				}
-				[network='rcn'] {
+				[network='rcn'],[network='rwn'] {
 					line-color: <?php echo linear($BICYCLE_ROUTE_RCN_COLOR,$zoom)?>;
 				}
-				[network='ncn'] {
+				[network='ncn'],[network='nwn'] {
 					line-color: <?php echo linear($BICYCLE_ROUTE_NCN_COLOR,$zoom)?>;
 				}
-				[network='icn'] {
+				[network='icn'],[network='iwn'] {
 					line-color: <?php echo linear($BICYCLE_ROUTE_ICN_COLOR,$zoom)?>;
 				}
 				line-width: <?php echo linear($ROUTE_BICYCLE_WIDTH,$zoom)?>;

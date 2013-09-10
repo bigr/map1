@@ -36,20 +36,58 @@ class Relation:
                 self.osmcSymbol = 'mtb:white:mtb_mtb'
             else:
                 self.osmcSymbol = attrs[5]
-            if ( attrs[6] == 'None' ):
+            if (attrs[6] == 'None'):
+                self.color = None
+            else:
+                self.color = attrs[6]
+                
+            if (attrs[7] == 'None'):
+                self.colour = None
+            else:
+                self.colour = attrs[7]
+            
+            if (attrs[8] == 'None'):
+                self.kct_blue = None
+            else:
+                self.kct_blue = attrs[8]
+                
+            if (attrs[9] == 'None'):
+                self.kct_green = None
+            else:
+                self.kct_green = attrs[9]
+                
+            if (attrs[10] == 'None'):
+                self.kct_yellow = None
+            else:
+                self.kct_yellow = attrs[10]
+                
+            if (attrs[11] == 'None'):
+                self.kct_red = None
+            else:
+                self.kct_red = attrs[11]
+                
+            if ( attrs[12] == 'None' ):
                 self.route = None
             else:
-                self.route = attrs[6]
-            if ( attrs[7] == 'None' ):
+                self.route = attrs[12]
+                
+            if ( attrs[13] == 'None' ):
                 self.ref = None
             else:
-                self.ref = attrs[7]
+                self.ref = attrs[13]
+                
         else:
             self.id = -row[0]
             self.lines = self.parseMembers(row[1])
             self.rawTags = row[2]
             self.network = None
             self.osmcSymbol = None
+            self.color = None
+            self.colour = None
+            self.kct_blue = None
+            self.kct_green = None
+            self.kct_yellow = None            
+            self.kct_red = None
             self.mtbScale = None
             self.mtbUphill = None
             self.route = None

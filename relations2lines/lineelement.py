@@ -13,6 +13,12 @@ routeOrder = ['bicycle', 'horse', 'ski', 'hiking']
 class LineElement:
     def __init__(self, relation):
         self.osmcSymbol = relation.osmcSymbol
+        self.color = relation.color
+        self.colour = relation.colour
+        self.kct_blue = relation.kct_blue
+        self.kct_green = relation.kct_green
+        self.kct_yellow = relation.kct_yellow
+        self.kct_red = relation.kct_red
         self.network = relation.network
         self.route = relation.route
         if self.route == 'foot':

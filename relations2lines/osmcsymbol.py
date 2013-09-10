@@ -45,17 +45,31 @@ class OsmcSymbol:
             self.text = ':'.join(self.parts[3:])
 
     def isAccepted(self):
-        return ((self.wayColor in acceptedWayColors)
-                and (self.bgColor in acceptedBgColors)
-                and (self.fgColor == self.wayColor)
-                and (self.symbol in acceptedSymbols))
+        return True 
+            #((self.wayColor in acceptedWayColors)
+            #    and (self.bgColor in acceptedBgColors)
+            #    and (self.fgColor == self.wayColor)
+            #    and (self.symbol in acceptedSymbols))
 
     def getStringValue(self, maxNumberOfParts=3):
         return ':'.join(self.parts[0:maxNumberOfParts])
 
+    def getColorIndex(self, color):
+        if color in acceptedWayColors:
+            return acceptedWayColors.index(color)
+        else:
+            return len(acceptedWayColors)
+            
+    def getSymbolIndex(self, symbol):
+        if symbol in acceptedSymbols:
+            return acceptedSymbols.index(symbol)
+        else:
+            return len(acceptedSymbols)
+
     def __lt__(self, other):
         if (self.isAccepted() and other.isAccepted()):
             if (self.symbol == other.symbol):
-                return acceptedWayColors.index(self.wayColor) > acceptedWayColors.index(other.wayColor)
+                
+                return self.getColorIndex(self.wayColor) > self.getColorIndex(other.wayColor)
             else:
-                return acceptedSymbols.index(self.symbol) > acceptedSymbols.index(other.symbol)
+                return self.getSymbolIndex(self.symbol) > self.getSymbolIndex(other.symbol)

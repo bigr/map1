@@ -28,25 +28,23 @@ def main():
     relations = []
     relationCursor.execute('''
         SELECT
-            osm_id,
-                CASE
-                    WHEN ("highway"='track' AND "tracktype"='grade1' AND "mtb:scale" IS NULL) THEN 'grade1'                   
-                    ELSE "mtb:scale"
-                END AS
+            osm_id,               
             "mtb:scale",
             "mtb:scale:uphill",
             "sac_scale",
             network,
             "osmc:symbol",
+            "color",
+            "colour",
+            "kct_blue",
+            "kct_green",
+            "kct_yellow",
+            "kct_red",
             route,                           
             ref
         FROM route
-        WHERE            
-            (
-                   COALESCE("osmc:symbol","mtb:scale","mtb:scale:uphill","sac_scale") IS NOT NULL
-                OR route IN ('mtb','horse','ski','bicycle','horse')
-                OR ("highway"='track' AND "tracktype"='grade1')
-            )
+        WHERE                        
+            route IN ('mtb','horse','ski','bicycle','hiking','foot','mountain hiking')                            
             AND
             (
                 "access" IS NULL OR "access" NOT IN ('private','no') OR COALESCE(bicycle,foot,horse) = 'yes'
@@ -72,7 +70,7 @@ def main():
                     relationIDs.append(-row[0])
             else:
                 # 0: osm_id; 1: mtb:scale; 2: mtb:scale:uphill; 3: network; 4: "osmc:symbol; 5: route; 6: ref"
-                lineInfo = "LINE;" + str(row[0]) + ";" + str(row[1]) + ";" + str(row[2]) + ";" + str(row[3]) + ";" + str(row[4]) + ";" + str(row[5]) + ";" + str(row[6])
+                lineInfo = "LINE;" + str(row[0]) + ";" + str(row[1]) + ";" + str(row[2]) + ";" + str(row[3]) + ";" + str(row[4]) + ";" + str(row[5]) + ";" + str(row[6]) + ";" + str(row[7]) + ";" + str(row[8]) + ";" + str(row[9]) + ";" + str(row[10]) + ";" + str(row[11]) + ";" + str(row[12]) + ";" + str(row[13])
                 relations.append(relation.Relation(lineInfo))
 
     print time.strftime("%H:%M:%S", time.localtime()), " - RelationIDs and Lines found."
@@ -114,7 +112,7 @@ def main():
         #print "%d/%d" % (i,len(listOfRoutes))
         auxiliaryCursor.execute('''
             SELECT way, highway, tracktype,sac_scale,oneway FROM route
-              WHERE osm_id=%s AND (("access"<>'private' AND "access"<>'no') OR "access" IS NULL OR ("access" IN ('private', 'no') AND bicycle='yes'))
+              WHERE osm_id=%s AND (("access"<>'private' AND "access"<>'no') OR "access" IS NULL OR ("access" IN ('private', 'no') AND (bicycle='yes' or foot='yes') or horse='yes'))
         ''' % r.id)
         row = auxiliaryCursor.fetchone()
         # Some route IDs from relations may not be present in line table, ie. out of bounding box, those are ignored
@@ -213,6 +211,30 @@ def main():
         ''' % (str(column)))
         auxiliaryCursor.execute('''
             ALTER TABLE routes
+              ADD color%s text;
+        ''' % (str(column)))
+        auxiliaryCursor.execute('''
+            ALTER TABLE routes
+              ADD colour%s text;
+        ''' % (str(column)))
+        auxiliaryCursor.execute('''
+            ALTER TABLE routes
+              ADD kct_blue%s text;
+        ''' % (str(column)))
+        auxiliaryCursor.execute('''
+            ALTER TABLE routes
+              ADD kct_green%s text;
+        ''' % (str(column)))
+        auxiliaryCursor.execute('''
+            ALTER TABLE routes
+              ADD kct_yellow%s text;
+        ''' % (str(column)))
+        auxiliaryCursor.execute('''
+            ALTER TABLE routes
+              ADD kct_red%s text;
+        ''' % (str(column)))
+        auxiliaryCursor.execute('''
+            ALTER TABLE routes
               ADD network%s text;
         ''' % (str(column)))
         auxiliaryCursor.execute('''
@@ -284,20 +306,24 @@ def main():
            WHEN color = 'purple' THEN 11
          END)
          
-      ) AS offset,density FROM (
+      ) AS offset,density,osmcsymbol FROM (
     SELECT 
       osm_id,way,
       offsetside,network,oneway,
       (CASE 
         WHEN route IN ('bicycle','mtb') THEN 'bicycle'
         WHEN route IS NULL AND (osmcsymbol IS NOT NULL OR network IS NOT NULL OR ref IS NOT NULL) THEN 'hiking'
-        WHEN route IN ('foot','hiking') THEN 'hiking'
+        WHEN route IN ('foot','hiking','mountain hiking') THEN 'hiking'
         ELSE route
       END) AS route,
       highway,tracktype,"mtb:scale","mtb:scale:uphill",sac_scale,
       (CASE
          WHEN route IN ('bicycle','mtb') THEN 'violet'
          WHEN route IN ('ski') THEN 'turquoise'
+         WHEN COALESCE(kct_blue,'') <> '' THEN 'blue'
+         WHEN COALESCE(kct_green,'') <> '' THEN 'green'
+         WHEN COALESCE(kct_yellow,'') <> '' THEN 'yellow'
+         WHEN COALESCE(kct_red,'') <> '' THEN 'red'
          WHEN osmcsymbol LIKE 'red:%' THEN 'red'
          WHEN osmcsymbol LIKE 'blue:%' THEN 'blue'
          WHEN osmcsymbol LIKE 'green:%' THEN 'green'
@@ -306,13 +332,12 @@ def main():
          WHEN osmcsymbol LIKE 'white:%' THEN 'white'
          WHEN osmcsymbol LIKE 'brown:%' THEN 'brown'
          WHEN osmcsymbol LIKE 'orange:%' THEN 'orange'
-         WHEN osmcsymbol LIKE 'purple:%' THEN 'purple'
-         WHEN network = 'iwn' THEN 'red'
-         WHEN network = 'nwn' THEN 'green'
-         WHEN network = 'rwn' THEN 'blue'
+         WHEN osmcsymbol LIKE 'purple:%' THEN 'purple'         
+         WHEN COALESCE(colour,color,'') <> '' THEN COALESCE(colour,color)         
          ELSE 'red'
-       END) AS color,
-       density     	
+       END) AS color,       
+       density,
+       osmcsymbol
     FROM (
         SELECT
           Y.osm_id,way,
@@ -362,6 +387,72 @@ def main():
           WHEN '7' THEN ref7
           END) AS "ref",
           
+          (CASE X.Which
+          WHEN '0' THEN color0
+          WHEN '1' THEN color1
+          WHEN '2' THEN color2
+          WHEN '3' THEN color3
+          WHEN '4' THEN color4
+          WHEN '5' THEN color5
+          WHEN '6' THEN color6
+          WHEN '7' THEN color7	  
+          END) AS color,
+          
+          (CASE X.Which
+          WHEN '0' THEN colour0
+          WHEN '1' THEN colour1
+          WHEN '2' THEN colour2
+          WHEN '3' THEN colour3
+          WHEN '4' THEN colour4
+          WHEN '5' THEN colour5
+          WHEN '6' THEN colour6
+          WHEN '7' THEN colour7	  
+          END) AS colour,
+          
+         (CASE X.Which
+          WHEN '0' THEN kct_blue0
+          WHEN '1' THEN kct_blue1
+          WHEN '2' THEN kct_blue2
+          WHEN '3' THEN kct_blue3
+          WHEN '4' THEN kct_blue4
+          WHEN '5' THEN kct_blue5
+          WHEN '6' THEN kct_blue6
+          WHEN '7' THEN kct_blue7	  
+          END) AS kct_blue,
+          
+          (CASE X.Which
+          WHEN '0' THEN kct_green0
+          WHEN '1' THEN kct_green1
+          WHEN '2' THEN kct_green2
+          WHEN '3' THEN kct_green3
+          WHEN '4' THEN kct_green4
+          WHEN '5' THEN kct_green5
+          WHEN '6' THEN kct_green6
+          WHEN '7' THEN kct_green7	  
+          END) AS kct_green,
+          
+          (CASE X.Which
+          WHEN '0' THEN kct_yellow0
+          WHEN '1' THEN kct_yellow1
+          WHEN '2' THEN kct_yellow2
+          WHEN '3' THEN kct_yellow3
+          WHEN '4' THEN kct_yellow4
+          WHEN '5' THEN kct_yellow5
+          WHEN '6' THEN kct_yellow6
+          WHEN '7' THEN kct_yellow7	  
+          END) AS kct_yellow,
+          
+          (CASE X.Which
+          WHEN '0' THEN kct_red0
+          WHEN '1' THEN kct_red1
+          WHEN '2' THEN kct_red2
+          WHEN '3' THEN kct_red3
+          WHEN '4' THEN kct_red4
+          WHEN '5' THEN kct_red5
+          WHEN '6' THEN kct_red6
+          WHEN '7' THEN kct_red7	  
+          END) AS kct_red,
+          
           (SELECT Max(RD.density) FROM route_density RD WHERE RD.osm_id = Y.osm_id) AS density
               
         FROM
@@ -369,7 +460,8 @@ def main():
            CROSS JOIN (SELECT '0' UNION ALL SELECT '1' UNION ALL SELECT '2' UNION ALL SELECT '3' UNION ALL SELECT '4' UNION ALL SELECT '5' UNION ALL SELECT '6' UNION ALL SELECT '7' UNION ALL SELECT '8') X (Which)           
     ) AS R
     ) R2
-    GROUP BY R2.osm_id,R2.way,R2.route,R2.offsetside,R2.highway,R2.tracktype,R2."mtb:scale",R2."mtb:scale:uphill",R2.sac_scale,R2.color,R2.density,R2.network,R2.oneway )
+    WHERE COALESCE(route,'') <> ''
+    GROUP BY R2.osm_id,R2.way,R2.route,R2.offsetside,R2.highway,R2.tracktype,R2."mtb:scale",R2."mtb:scale:uphill",R2.sac_scale,R2.color,R2.density,R2.osmcsymbol,R2.network,R2.oneway )
     ''');
 
     print "Relations:   ", len(relations)

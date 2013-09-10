@@ -45,8 +45,14 @@ way       nwn              text     linear
 way       route_pref_color text     linear
 way       route_name       text     linear
 way       mtb              text     linear
-way       name              text     linear
+way       name             text     linear
 
+way       color        text     linear
+way       colour       text     linear
+way       kct_red      text     linear
+way       kct_green    text     linear
+way       kct_blue     text     linear
+way       kct_yellow   text     linear
 
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import

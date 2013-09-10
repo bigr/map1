@@ -68,6 +68,30 @@ class Route:
                     values += ", '" + self.escape(self.osmcSigns[i].osmcSymbol) + "'"
                 else:
                     values += ", NULL"
+                if self.osmcSigns[i].color is not None:
+                    values += ", '" + self.escape(self.osmcSigns[i].color) + "'"
+                else:
+                    values += ", NULL"
+                if self.osmcSigns[i].colour is not None:
+                    values += ", '" + self.escape(self.osmcSigns[i].colour) + "'"
+                else:
+                    values += ", NULL"
+                if self.osmcSigns[i].kct_blue is not None:
+                    values += ", '" + self.escape(self.osmcSigns[i].kct_blue) + "'"
+                else:
+                    values += ", NULL"
+                if self.osmcSigns[i].kct_green is not None:
+                    values += ", '" + self.escape(self.osmcSigns[i].kct_green) + "'"
+                else:
+                    values += ", NULL"
+                if self.osmcSigns[i].kct_yellow is not None:
+                    values += ", '" + self.escape(self.osmcSigns[i].kct_yellow) + "'"
+                else:
+                    values += ", NULL"
+                if self.osmcSigns[i].kct_red is not None:
+                    values += ", '" + self.escape(self.osmcSigns[i].kct_red) + "'"
+                else:
+                    values += ", NULL"
                 if self.osmcSigns[i].network is not None:
                     values += ", '" + self.escape(self.osmcSigns[i].network) + "'"
                 else:

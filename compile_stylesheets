@@ -55,7 +55,7 @@ for ZOOMS in ${ALL_ZOOMS//,/ }; do
 	
 	
 	if [ $ZOOMS -ge 9 ]; then		
-		OUTPUT_LAYERS="landcover countryfill hillshade building accessarea boundary route way contour fishnet symbol text"	
+		OUTPUT_LAYERS="landcover countryfill hillshade building accessarea boundary route way ferry contour fishnet symbol text"	
 		#OUTPUT_LAYERS="way"
 	else
 		OUTPUT_LAYERS="landcover countryfill hillshade boundary way,fishnet,symbol text,countrytext gridinfo"			
