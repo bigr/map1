@@ -528,7 +528,7 @@
     <nd ref='-5135' />
     <nd ref='-4789' />
     <tag k='size' v='1' />
-    <tag k='text' v='Shqipër' />
+    <tag k='text' v='Shqipëria' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-4743' action='modify' visible='true'>
@@ -542,7 +542,7 @@
     <nd ref='-5106' />
     <nd ref='-4742' />
     <tag k='size' v='0' />
-    <tag k='text' v='Crna Hora' />
+    <tag k='text' v='Crna Gora' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-4560' action='modify' visible='true'>
@@ -617,7 +617,7 @@
     <nd ref='-4037' />
     <nd ref='-3957' />
     <tag k='size' v='2' />
-    <tag k='text' v='Denmark' />
+    <tag k='text' v='Danmark' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-3888' action='modify' visible='true'>
@@ -639,7 +639,7 @@
     <nd ref='-3883' />
     <nd ref='-3786' />
     <tag k='size' v='2' />
-    <tag k='text' v='Neaderland' />
+    <tag k='text' v='Nederland' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-3663' action='modify' visible='true'>
@@ -688,7 +688,7 @@
     <nd ref='-3248' />
     <nd ref='-3145' />
     <tag k='size' v='3' />
-    <tag k='text' v='Romania' />
+    <tag k='text' v='România' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-3054' action='modify' visible='true'>
@@ -740,7 +740,7 @@
     <nd ref='-2662' />
     <nd ref='-2540' />
     <tag k='size' v='4' />
-    <tag k='text' v='Espana' />
+    <tag k='text' v='España' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-2418' action='modify' visible='true'>
@@ -777,7 +777,7 @@
     <nd ref='-2350' />
     <nd ref='-2216' />
     <tag k='size' v='1' />
-    <tag k='text' v='Bosna i Hercegowina' />
+    <tag k='text' v='Bosna i Hercegovina' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-2049' action='modify' visible='true'>
@@ -791,7 +791,7 @@
     <nd ref='-5389' />
     <nd ref='-2048' />
     <tag k='size' v='4' />
-    <tag k='text' v='Deutchland' />
+    <tag k='text' v='Deutschland' />
     <tag k='text_path' v='country' />
   </way>
   <way id='-1528' action='modify' visible='true'>
