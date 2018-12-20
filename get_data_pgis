@@ -3,7 +3,7 @@
 
 
 function download {
-    OVERPASS_SERVERS=( "http://overpass-api.de/api"  "http://overpass.osm.rambler.ru/cgi" )
+    OVERPASS_SERVERS=( "https://overpass-api.de/api"  "https://overpass.kumi.systems/api/" )
     OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}
     DB=gis_eu
     LAT_START=30
