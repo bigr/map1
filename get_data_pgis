@@ -82,14 +82,14 @@ function download {
 	    ;;
     esac
         
-    /usr/local/bin/osm2pgsql \
+    osm2pgsql \
 	-d $DB \
-	--style "/home/klinger/mymap/osm2pgsql/$2.style" \
+	--style "osm2pgsql/$2.style" \
 	--create \
 	--slim --cache 30 \
 	--prefix $2 \
 	/tmp/$2.osm.bz2
-    #unlink /tmp/$2.osm.bz2
+    unlink /tmp/$2.osm.bz2
     
     case "$3" in
 
@@ -113,7 +113,7 @@ function download {
 }
 
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[place~\"city|town|village|hamlet|isolated_dwelling|farm|suburb|neighbourhood|locality|island|islet\"]" )
-#download q places point
+download q places point
 
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"peak\"]" )
 download q peaks point
@@ -122,7 +122,7 @@ q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[waterway~\"river|stream|ditch|canal\"];);
 download q waterway line
 
 q=( "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[boundary=\"administrative\"];);(._;way(r););(._;node(w);)" )
-#download q adminboundary polygon
+download q adminboundary polygon
 
 q=(
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[historic]"
@@ -133,8 +133,8 @@ q=(
     "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"cave_entrance\"]"
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;way(r););(._;node(w););(way(%lat1%,%lon1%,%lat2%,%lon2%)[building~\"church|chapel\"];);(._;node(w);)"
 )
-#download q symbol pointex \
-#    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
+download q symbol pointex \
+    "SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,way FROM symbol_point UNION SELECT osm_id,name,int_name,\"name:en\",\"name:de\",\"name:cs\",historic,leisure,man_made,tourism,amenity,ruins,castle_type,building,\"natural\",\"tower:type\",information,place_of_worship,\"place_of_worship:type\",z_order,ST_Centroid(way) AS way FROM symbol_polygon"
 
 
 
@@ -143,4 +143,4 @@ q=(
     "(rel(%lat1%,%lon1%,%lat2%,%lon2%)[route~\"mtb|horse|ski|bicycle|horse|hiking|foot\"];);(._;way(r););(._;node(w);)"
 )
 
-#download q route route
+download q route route
