@@ -6,7 +6,7 @@ from psycopg2 import *
 
 
 
-connection = connect("dbname='" + sys.argv[1] + "' user='klinger' password='' port='5432'")
+connection = connect("dbname='" + sys.argv[1] + "' user='postgres' password='' port='5432'")
 ways = connection.cursor()
 count = connection.cursor()
 ways.execute('''
