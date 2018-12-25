@@ -6,10 +6,10 @@ function download {
     OVERPASS_SERVERS=( "https://overpass-api.de/api"  "https://overpass.kumi.systems/api/" )
     OVERPASS_SERVERS_COUNT=${#OVERPASS_SERVERS[@]}
     DB=gis_eu
-    LAT_START=30
-    LON_START=-20
-    LAT_END=80
-    LON_END=52
+    LAT_START=49 #30
+    LON_START=12
+    LAT_END=51
+    LON_END=18
     LAT_STEP=2
     LON_STEP=6
     i=0
