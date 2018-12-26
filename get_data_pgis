@@ -113,7 +113,7 @@ function download {
 }
 
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[place~\"city|town|village|hamlet|isolated_dwelling|farm|suburb|neighbourhood|locality|island|islet\"]" )
-download q places point
+download q place point
 
 q=( "node(%lat1%,%lon1%,%lat2%,%lon2%)[natural=\"peak\"]" )
 download q peaks point
