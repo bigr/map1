@@ -121,7 +121,7 @@ for xfrac in range(0,fractions):
                 t0_ = time.time()
                 sys.stdout.write("\tRendering 'hillshade'...")
                 sys.stdout.flush()
-                os.system("gdal_translate -q -projwin %(x1)f %(y2)f %(x2)f %(y1)f /home/klinger/mymap/data/tiles/srtm/~%(tileX)s.%(tileY)s.hillshade.tif /tmp/~%(tileX)s.%(tileY)s.hillshade.tif" % {
+                os.system("gdal_translate -q -projwin %(x1)f %(y2)f %(x2)f %(y1)f /root/map1/data/tiles/srtm/~%(tileX)s.%(tileY)s.hillshade.tif /tmp/~%(tileX)s.%(tileY)s.hillshade.tif" % {
                     'x1': bbox.minx,
                     'y1': bbox.miny,
                     'x2': bbox.maxx,

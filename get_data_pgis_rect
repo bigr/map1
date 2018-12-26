@@ -122,7 +122,7 @@ function download {
     
     /usr/local/bin/osm2pgsql \
 	-d $DB \
-	--style "/home/klinger/mymap/osm2pgsql/$2.style" \
+	--style "/root/map1/osm2pgsql/$2.style" \
 	--create \
 	--slim --cache 768 \
 	--prefix $2 \
@@ -147,8 +147,8 @@ function download {
 	    echo "ALTER TABLE $2_polygon RENAME TO $2; DROP TABLE $2_line; DROP TABLE $2_point,$2_nodes,$2_rels,$2_roads,$2_ways;" | psql -d $DB
 	    ;;
     esac
-    if [ -f "/home/klinger/mymap/osm2pgsql/$2.get-sql.php" ]; then
-	php "/home/klinger/mymap/osm2pgsql/$2.get-sql.php" | psql -d $DB
+    if [ -f "/root/map1/osm2pgsql/$2.get-sql.php" ]; then
+	php "/root/map1/osm2pgsql/$2.get-sql.php" | psql -d $DB
     fi
     
 }

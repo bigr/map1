@@ -25,8 +25,8 @@ esac
 
 MAPNIK_MAP_FILES="landcover;hillshade;contour;accessarea;way;building;ferry;route;boundary;fishnet;text"
 LAYER_OPTIONS="{\"1\":{\"colorToAlpha\": [255,255,255,255], \"opacity\": $hillshade_opacity},\"8\":{\"colorToAlpha\": [255,255,255,255], \"opacity\": 0.6}}"
-MAPNIK_MAP_PATH="/home/klinger/mymap/stylesheets/eu/$1.$2/$3"
-TILE_PATH="/home/klinger/mymap/map/tiles"
+MAPNIK_MAP_PATH="/root/map1/stylesheets/eu/$1.$2/$3"
+TILE_PATH="/root/map1/map/tiles"
 
 echo $LAYER_OPTIONS;
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DATA_TILE_DIR="/home/klinger/mymap/data/tiles"
+DATA_TILE_DIR="/root/map1/data/tiles"
 SQLITE_TILE_DIR="$DATA_TILE_DIR/sqlite"
 DEM_TILE_DIR="$DATA_TILE_DIR/srtm"
 
@@ -66,11 +66,11 @@ fi
 
 php stylesheets/general/prepare-db/get-sql-rect.php $LON_START $LAT_START $LON_END $LAT_END $1 $2 | psql -d gis_eu
 
-python /home/klinger/mymap/relations2lines/relations2lines5.py gis_eu_$1_$2 $LON_START $LAT_START $LON_END $LAT_END
+python /root/map1/relations2lines/relations2lines5.py gis_eu_$1_$2 $LON_START $LAT_START $LON_END $LAT_END
 
-python /home/klinger/mymap/generate_osmcsymbols.py gis_eu_$1_$2
+python /root/map1/generate_osmcsymbols.py gis_eu_$1_$2
 
-python /home/klinger/mymap/generate_highway_access.py gis_eu_$1_$2
+python /root/map1/generate_highway_access.py gis_eu_$1_$2
 
 
 

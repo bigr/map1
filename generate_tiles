@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-DIR_MAPNIK="/home/klinger/mymap/mapnik"
-DIR_STYLESHEETS="/home/klinger/mymap/stylesheets"
+DIR_MAPNIK="/root/map1/mapnik"
+DIR_STYLESHEETS="/root/map1/stylesheets"
 
 
 #OUTPUT_LAYERS="landcover gridinfo"

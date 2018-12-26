@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DIR_MAPNIK="/home/klinger/mymap/mapnik"
+DIR_MAPNIK="/root/map1/mapnik"
 
 
 DIR_BACKUP=`pwd`

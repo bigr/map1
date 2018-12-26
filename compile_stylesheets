@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DIR_STYLESHEETS="/home/klinger/mymap/stylesheets"
+DIR_STYLESHEETS="/root/map1/stylesheets"
 STYLESHEET="cz"
 
 

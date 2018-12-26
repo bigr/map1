@@ -7,7 +7,7 @@ echo "DROP INDEX places_point_pkey,places_point_index;" | psql -d gis_eu_1000
 
 /usr/bin/osm2pgsql \
 	-d gis_eu_1000 \
-	--style "/home/klinger/mymap/osm2pgsql/places.style" \
+	--style "/root/map1/osm2pgsql/places.style" \
 	--create \
 	--slim --cache 30 \
 	--prefix places \
@@ -24,7 +24,7 @@ echo "DROP INDEX adminboundary_polygon_pkey,adminboundary_polygon_index;" | psql
 
 /usr/bin/osm2pgsql \
 	-d gis_eu_1000 \
-	--style "/home/klinger/mymap/osm2pgsql/adminboundary.style" \
+	--style "/root/map1/osm2pgsql/adminboundary.style" \
 	--create \
 	--slim --cache 30 \
 	--prefix adminboundary \
@@ -40,7 +40,7 @@ echo "DROP INDEX highway_line_pkey,highway_line_index;" | psql -d gis_eu_1000
 
 /usr/bin/osm2pgsql \
   -d gis_eu_1000 \
-  --style "/home/klinger/mymap/osm2pgsql/highway.style" \
+  --style "/root/map1/osm2pgsql/highway.style" \
   --create \
   --slim --cache 30 \
   --prefix highway \
@@ -59,7 +59,7 @@ echo "DROP INDEX waterway_line_pkey,waterway_line_index;" | psql -d gis_eu_1000
 
 /usr/bin/osm2pgsql \
   -d gis_eu_1000 \
-  --style "/home/klinger/mymap/osm2pgsql/waterway.style" \
+  --style "/root/map1/osm2pgsql/waterway.style" \
   --create \
   --slim --cache 30 \
   --prefix waterway \
@@ -96,7 +96,7 @@ unlink "waterarea1.osm.bz2"; unlink "waterarea2.osm.bz2"; unlink "waterarea1.o5m
 
 /usr/bin/osm2pgsql \
   -d gis_eu_1000 \
-  --style "/home/klinger/mymap/osm2pgsql/waterarea.style" \
+  --style "/root/map1/osm2pgsql/waterarea.style" \
   --create \
   --slim --cache 30 \
   --prefix waterarea \

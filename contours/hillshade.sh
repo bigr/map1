@@ -16,7 +16,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 #gdaldem hillshade -of png -compute_edges -z 4 -az 180 -alt 80 '/tmp/adapted.tif'  '/tmp/hillshade.png'
 
-gdal_translate -of png -projwin "$X1" "$Y1" "$X2" "$Y2" "/home/klinger/mymap/contours/hillshade.eu.900913.tif" "/tmp/hillshade-$nm.png"
+gdal_translate -of png -projwin "$X1" "$Y1" "$X2" "$Y2" "/root/map1/contours/hillshade.eu.900913.tif" "/tmp/hillshade-$nm.png"
 
 #unlink '/tmp/adapted.tif'
 

@@ -3,7 +3,7 @@
 function ds_sqlite($table, $geometry_field = 'way', $key_field = 'osm_id') {
 	global $TILE;
 	return '"Datasource": ' . json_encode(array(
-		'file'              => "/home/klinger/mymap/data/tiles/sqlite/$TILE.db",
+		'file'              => "/root/map1/data/tiles/sqlite/$TILE.db",
 		'table'             => $table,
 		'type'              => 'sqlite',
 		'wkb_format'        => 'spatialite',

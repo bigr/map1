@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-FROM=( "/home/klinger/mymap/map/tiles-cz/$1" "/home/klinger/mymap/map/tiles-sk/$1" "/home/klinger/mymap/map/tiles-at/$1" "/home/klinger/mymap/map/tiles-pl/$1" "/home/klinger/mymap/map/tiles-sl/$1" "/home/klinger/mymap/map/tiles-hu/$1" "/home/klinger/mymap/map/tiles-hr/$1"  )
-TO="/home/klinger/mymap/map/tiles/$1"
+FROM=( "/root/map1/map/tiles-cz/$1" "/root/map1/map/tiles-sk/$1" "/root/map1/map/tiles-at/$1" "/root/map1/map/tiles-pl/$1" "/root/map1/map/tiles-sl/$1" "/root/map1/map/tiles-hu/$1" "/root/map1/map/tiles-hr/$1"  )
+TO="/root/map1/map/tiles/$1"
 
 rm -rf $TO
 mkdir $TO

@@ -5,7 +5,7 @@ unlink czech_republic.osm.bz2
 wget http://download.geofabrik.de/osm/europe/czech_republic.osm.bz2
 
 /usr/bin/osm2pgsql \
-	--style "/home/klinger/mymap/osm2pgsql/default.style" \
+	--style "/root/map1/osm2pgsql/default.style" \
 	--create \
 	--slim --cache 30 \
 	czech_republic.osm.bz2

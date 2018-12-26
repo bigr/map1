@@ -154,7 +154,7 @@ class RenderThread:
                     fromX = render_sizeX * (cc0.x - c0.x) / (c1.x - c0.x)
                     fromY = render_sizeY * (cc1.y - c1.y) / (c0.y - c1.y) 
                                     
-                    tileim = Image.open('/home/klinger/mymap/hillshade/%d/%d.hillshade.jpg' % (lon,lat))                    
+                    tileim = Image.open('/root/map1/hillshade/%d/%d.hillshade.jpg' % (lon,lat))                    
                     tileim = tileim.resize(
                         (int(sizeX),int(sizeY)),
                         Image.ANTIALIAS if sizeX > render_sizeX/(l1[0]-l0[0]) else Image.BILINEAR
