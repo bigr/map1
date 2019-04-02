@@ -884,7 +884,7 @@
     <nd ref='-5560' />
     <nd ref='-273' />
     <tag k='size' v='2' />
-    <tag k='text' v='Česká republika' />
+    <tag k='text' v='Česko' />
     <tag k='text_path' v='country' />
   </way>
 </osm>
